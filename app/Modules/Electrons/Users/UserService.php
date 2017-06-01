@@ -26,22 +26,20 @@ class UserService extends Service
     ];
 
     /**
+     * Attributes that are selectable for query (aside from ID and timestamps).
+     *
+     * @var array
+     */
+    protected $selectable = [
+        'email',
+    ];
+
+    /**
      * Data for creating starter admin user.
      *
      * @var array
      */
     protected $starterAdmin = [
-        'email' => 'muhammaddetaaditya@gmail.com',
-        'password' => 'rahasia',
-        'role' => 1,
-    ];
-
-    /**
-     * Attributes that are selectable for query.
-     *
-     * @var array
-     */
-    protected $selectable = [
         'email' => 'muhammaddetaaditya@gmail.com',
         'password' => 'rahasia',
         'role' => 1,
@@ -55,7 +53,7 @@ class UserService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->evaluate(User::query(), $params);
+        $query = $this->selectQuery(User::query(), $params);
     }
 
     /**
