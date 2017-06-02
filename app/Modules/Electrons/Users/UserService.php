@@ -53,7 +53,7 @@ class UserService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->selectQuery(User::query(), $params);
+        return $this->query(User::query(), $params);
     }
 
     /**
