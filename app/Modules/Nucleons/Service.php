@@ -21,7 +21,6 @@ abstract class Service
             'skip' => 0,
             'take' => 25,
             'random' => false,
-            'count' => false,
         ],
 
         'delimeters' => [
@@ -42,6 +41,7 @@ abstract class Service
         'selectable' => ['id', 'created_at', 'updated_at'],
         'sortable' => ['id', 'created_at', 'updated_at'],
         'comparable' => ['id', 'created_at', 'updated_at'],
+        
     ];
 
     /**
@@ -111,13 +111,15 @@ abstract class Service
     protected function queryRaw(Builder $query, array $params)
     {
         list(
-            $select, $sort, $criteria, $skip, $take
+            $select, $sort, $criteria, $skip, $take, $random
         ) = $this->parseParams($params);
-
 
         $this->processSelectQuery($query, $select);
 
-        $this->processSortQuery($query, $sort);
+        // Sort and random can't exists at the same time
+        $random 
+            ? $this->processRandomQuery($query)
+            : $this->processSortQuery($query, $sort);
 
         $this->processCriteriaQuery($query, $criteria);
 
@@ -152,6 +154,9 @@ abstract class Service
             array_has($params, 'take') 
                 ? $params['take'] 
                 : $this->getDefault('take'),
+            array_has($params, 'random') 
+                ? ($params['random'] === "true") 
+                : $this->getDefault('random'),
         ];
     }
 
@@ -210,22 +215,21 @@ abstract class Service
         
         foreach ($items as $item) {
             
-            list($field, $command, $values, $boolean) = array_pad(
-                explode($this->getDelimeter('criteria.per_value'), $item, 4),
-                4, null
-            );
+            list(
+                $field, $command, $values
+            ) = explode($this->getDelimeter('criteria.per_value'), $item);
 
             if (! array_has($comparable, $field)) {
                 continue;
             }
 
-            $boolean = is_null($boolean) ? '|', '&';
-
             switch ($command) {
 
                 case 'between': case 'notbetween': case 'in': case 'notin':
                 case 'column':
-                    $values = explode($this->getDelimeter('criteria.per_subvalue'), $values);
+                    $values = explode(
+                        $this->getDelimeter('criteria.per_subvalue'), $values
+                    );
                     break;
 
                 case 'is':
@@ -235,9 +239,10 @@ abstract class Service
 
                     $values = null;
                     break;
+
             }
 
-            array_push($arrWhere, [$boolean, $field, $command, $values]);
+            array_push($arrWhere, [$field, $command, $values]);
             
         }
 
@@ -304,6 +309,136 @@ abstract class Service
         return empty($this->comparable) 
             ? $this->config['comparable']
             : array_merge($this->config['comparable'], $this->comparable);
+    }
+
+    /**
+     * Perform a select query.
+     *
+     * @param  Builder  $query
+     * @param  array  $selects
+     * @return void
+     */
+    protected function processSelectQuery(Builder $query, array $selects) 
+    {
+        if (empty($selects)) {
+            return;
+        }
+
+        foreach ($selects as $select) {
+            $query->addSelect($select);
+        }
+    }
+
+    /**
+     * Perform a sort query.
+     *
+     * @param  Builder  $query
+     * @param  array  $sorts
+     * @return void
+     */
+    protected function processSortQuery(Builder $query, array $sorts) 
+    {
+        if (empty($sorts)) {
+            return;
+        }
+
+        foreach ($sorts as $sort => $direction) {
+            $query->orderBy($sort, $direction);
+        }
+    }
+
+    /**
+     * Perform a where query.
+     *
+     * @param  Builder  $query
+     * @param  array  $criterias
+     * @return void
+     */
+    protected function processCriteriaQuery(Builder $query, array $criterias) 
+    {
+        if (empty($criterias)) {
+            return;
+        }
+
+        foreach ($criterias as list($field, $command, $value)) {
+            
+            switch ($command) {
+
+                case 'between':
+                    $query->whereBetween($field, $value);
+                    break;
+                case 'notbewteen':
+                    $query->whereNotBetween($field, $value);
+                    break;
+                case 'wherein':
+                    $query->whereIn($field, $value);
+                    break;
+                case 'wherenotin':
+                    $query->whereNotIn($field, $value);
+                    break;
+                case 'is':
+                    $query->whereNull($field);
+                    break;
+                case 'isnot':
+                    $query->whereNotNull($field);
+                    break;
+                case 'date':
+                    $query->whereDate($field, $value);
+                    break;
+                case 'month':
+                    $query->whereMonth($field, $value);
+                    break;
+                case 'day':
+                    $query->whereDay($field, $value);
+                    break;
+                case 'year':
+                    $query->whereYear($field, $value);
+                    break;
+                case 'column':
+                    $query->whereColumn($field, $value[0], $value[1]);
+                    break;
+                default:
+                    $query->where($field, $command, $value);
+                    break;
+
+            }
+
+        }
+    }
+
+    /**
+     * Perform a skip query.
+     *
+     * @param  Builder  $query
+     * @param  int  $skip
+     * @return void
+     */
+    protected function processSkipQuery(Builder $query, $skip) 
+    {
+        $query->skip($skip);
+    }
+
+    /**
+     * Perform a take query.
+     *
+     * @param  Builder  $query
+     * @param  int  $take
+     * @return void
+     */
+    protected function processTakeQuery(Builder $query, $take) 
+    {
+        $query->take($take);
+    }
+
+    /**
+     * Perform a random query.
+     *
+     * @param  Builder  $query
+     * @return void
+     */
+    protected function processRandomQuery(Builder $query) 
+    {
+        $query->inRandomOrder();
     }
 
     /**
