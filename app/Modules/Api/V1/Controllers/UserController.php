@@ -21,7 +21,7 @@ class UserController extends Controller
      * @param  UserService  $users
      * @return void
      */
-    public function index(UserService $users)
+    public function __construct(UserService $users)
     {
         $this->users = $users;
     }
@@ -34,6 +34,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return response()->json($this->users->getMultiple($request->all()));
+        return response()->json(
+            $this->users->getMultiple($request->all())
+        );
     }
 }

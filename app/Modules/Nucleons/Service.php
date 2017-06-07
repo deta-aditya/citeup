@@ -17,10 +17,12 @@ abstract class Service
         'defaults' => [
             'select' => [],
             'sort' => ['id' => 'asc'],
-            'where' => [],
+            'criteria' => [],
             'skip' => 0,
             'take' => 25,
             'random' => false,
+            'with' => [],
+            'clean' => false,
         ],
 
         'delimeters' => [
@@ -36,11 +38,14 @@ abstract class Service
                 'per_value' => ':',
                 'per_subvalue' => ';',
             ],
+
+            'with' => ',',
         ],
 
         'selectable' => ['id', 'created_at', 'updated_at'],
         'sortable' => ['id', 'created_at', 'updated_at'],
         'comparable' => ['id', 'created_at', 'updated_at'],
+        'loadable' => [],
         
     ];
 
@@ -81,6 +86,15 @@ abstract class Service
     ];
 
     /**
+     * Relationships that are loadable for query.
+     *
+     * @var array
+     */
+    protected $loadable = [
+        //
+    ];
+
+    /**
      * Delimeters applied in the query params.
      * 
      * @var array
@@ -90,15 +104,123 @@ abstract class Service
     ];
 
     /**
-     * Perform a complete selection query.
+     * The main model for the service.
      *
-     * @param  Builder  $query
-     * @param  array    $params
+     * @var string
+     */
+    protected $model = null;
+
+    /**
+     * Get the main model.
+     *
+     * @return string
+     */
+    public function getModel()
+    {
+        return new $this->model;
+    }
+
+    /**
+     * Get the default value of certain query params.
+     *
+     * @param  string  $attr
+     * @return array|int
+     */
+    public function getDefault($attr) 
+    {
+        return array_has($this->defaults, $attr) 
+            ? $this->defaults[$attr]
+            : $this->config['defaults'][$attr];
+    }
+
+    /**
+     * Get the delimeter value of certain query params.
+     *
+     * @param  string  $attr
+     * @return string
+     */
+    public function getDelimeter($attr) 
+    {
+        return array_has($this->delimeters, $attr) 
+            ? array_get($this->delimeters, $attr)
+            : array_get($this->config, 'delimeters.'. $attr);
+    }
+
+    /**
+     * Get the selectable fields.
+     *
      * @return array
      */
-    protected function query(Builder $query, array $params)
+    public function getSelectable() 
     {
-        $query = $this->queryRaw($query, $params);
+        return empty($this->selectable) 
+            ? $this->config['selectable']
+            : array_merge($this->config['selectable'], $this->selectable);
+    }
+
+    /**
+     * Get the sortable fields.
+     *
+     * @return array
+     */
+    public function getSortable() 
+    {
+        return empty($this->sortable) 
+            ? $this->config['sortable']
+            : array_merge($this->config['sortable'], $this->sortable);
+    }
+
+    /**
+     * Get the comparable fields.
+     *
+     * @return array
+     */
+    public function getComparable() 
+    {
+        return empty($this->comparable) 
+            ? $this->config['comparable']
+            : array_merge($this->config['comparable'], $this->comparable);
+    }
+
+    /**
+     * Get the loadable fields.
+     *
+     * @return array
+     */
+    public function getLoadable() 
+    {
+        return empty($this->loadable) 
+            ? $this->config['loadable']
+            : array_merge($this->config['loadable'], $this->loadable);
+    }
+
+    /**
+     * Perform a complete selection query.
+     *
+     * @param  array  $params
+     * @return array
+     */
+    protected function query(array $params)
+    {
+        return $this->queryComplete(
+            $this->queryRaw($this->getModel()->query(), $params)
+        );
+    }
+
+    /**
+     * Complete a query operation.
+     *
+     * @param  Builder  $query
+     * @return array
+     */
+    protected function queryComplete(Builder $query)
+    {
+        return [
+            'status' => 200,
+            'data' => [
+                $this->getModel()->getTable() => $query->get(),
+            ],
+        ];
     }
 
     /**
@@ -111,7 +233,7 @@ abstract class Service
     protected function queryRaw(Builder $query, array $params)
     {
         list(
-            $select, $sort, $criteria, $skip, $take, $random
+            $select, $sort, $criteria, $skip, $take, $random, $with, $clean
         ) = $this->parseParams($params);
 
         $this->processSelectQuery($query, $select);
@@ -126,6 +248,9 @@ abstract class Service
         $this->processSkipQuery($query, $skip);
 
         $this->processTakeQuery($query, $take);
+
+        // Bypass with when clean presents
+        $clean ?: $this->processLoadQuery($query, $with);
 
         return $query;
     }
@@ -157,6 +282,12 @@ abstract class Service
             array_has($params, 'random') 
                 ? ($params['random'] === "true") 
                 : $this->getDefault('random'),
+            array_has($params, 'with') 
+                ? $this->parseLoadParams($params['with']) 
+                : $this->getDefault('with'),
+            array_has($params, 'clean') 
+                ? ($params['clean'] === "true") 
+                : $this->getDefault('clean'),
         ];
     }
 
@@ -166,11 +297,13 @@ abstract class Service
      * @param  string  $select
      * @return array
      */
-    protected function parseSelectParams(string $select) 
+    protected function parseSelectParams($select) 
     {
-        $select = array_only($select, $this->getSelectable());
+        $selects = explode($this->getDelimeter('select'), $select);
 
-        return explode($this->getDelimeter('select'), $select);
+        $selects = array_intersect($selects, $this->getSelectable());
+
+        return array_merge($this->config['sortable'], $selects);
     }
 
     /**
@@ -179,7 +312,7 @@ abstract class Service
      * @param  string  $sort
      * @return array
      */
-    protected function parseSortParams(string $sort) 
+    protected function parseSortParams($sort) 
     {
         $items = explode($this->getDelimeter('sort.per_field'), $sort);
         $sortable = $this->getSortable();
@@ -188,9 +321,10 @@ abstract class Service
         foreach ($items as $item) {
             
             list($field, $direction) = explode(
-                $this->getDelimeter('sort.per_value'), $item);
+                $this->getDelimeter('sort.per_value'), $item
+            );
 
-            if (! array_has($sortable, $field)) {
+            if (! in_array($field, $sortable)) {
                 continue;
             }
 
@@ -207,7 +341,7 @@ abstract class Service
      * @param  string  $criteria
      * @return array
      */
-    protected function parseCriteriaParams(string $criteria) 
+    protected function parseCriteriaParams($criteria) 
     {
         $items = explode($this->getDelimeter('criteria.per_field'), $criteria);
         $comparable = $this->getComparable();
@@ -219,7 +353,7 @@ abstract class Service
                 $field, $command, $values
             ) = explode($this->getDelimeter('criteria.per_value'), $item);
 
-            if (! array_has($comparable, $field)) {
+            if (! in_array($field, $comparable)) {
                 continue;
             }
 
@@ -250,65 +384,18 @@ abstract class Service
     }
 
     /**
-     * Get the default value of certain query params.
+     * Parse a load query params.
      *
-     * @param  string  $attr
-     * @return array|int
-     */
-    protected function getDefault($attr) 
-    {
-        return array_has($this->defaults, $attr) 
-            ? $this->defaults[$attr]
-            : $this->config['defaults'][$attr];
-    }
-
-    /**
-     * Get the delimeter value of certain query params.
-     *
-     * @param  string  $attr
-     * @return string
-     */
-    protected function getDelimeter($attr) 
-    {
-        return array_has($this->delimeters, $attr) 
-            ? array_get($this->delimeters, $attr)
-            : array_get($this->config, 'delimeters.'. $attr);
-    }
-
-    /**
-     * Get the selectable fields.
-     *
+     * @param  string  $with
      * @return array
      */
-    protected function getSelectable() 
+    protected function parseLoadParams($with)
     {
-        return empty($this->selectable) 
-            ? $this->config['selectable']
-            : array_merge($this->config['selectable'], $this->selectable);
-    }
+        $withs = explode($this->getDelimeter('with'), $with);
 
-    /**
-     * Get the sortable fields.
-     *
-     * @return array
-     */
-    protected function getSortable() 
-    {
-        return empty($this->sortable) 
-            ? $this->config['sortable']
-            : array_merge($this->config['sortable'], $this->sortable);
-    }
+        $withs = array_intersect($withs, $this->getLoadable());
 
-    /**
-     * Get the comparable fields.
-     *
-     * @return array
-     */
-    protected function getComparable() 
-    {
-        return empty($this->comparable) 
-            ? $this->config['comparable']
-            : array_merge($this->config['comparable'], $this->comparable);
+        return array_merge($this->config['loadable'], $withs);
     }
 
     /**
@@ -323,6 +410,8 @@ abstract class Service
         if (empty($selects)) {
             return;
         }
+
+        $query->select(array_shift($selects));
 
         foreach ($selects as $select) {
             $query->addSelect($select);
@@ -439,6 +528,24 @@ abstract class Service
     protected function processRandomQuery(Builder $query) 
     {
         $query->inRandomOrder();
+    }
+
+    /**
+     * Perform a load relationship query.
+     *
+     * @param  Builder  $query
+     * @param  array    $with
+     * @return void
+     */
+    protected function processLoadQuery(Builder $query, array $with) 
+    {
+        if (empty($with)) {
+            return;
+        }
+
+        foreach ($with as $relation) {
+            $query->with($relation);
+        }
     }
 
     /**

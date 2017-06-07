@@ -26,12 +26,33 @@ class UserService extends Service
     ];
 
     /**
+     * Default values for query string.
+     * 
+     * @var array
+     */
+    protected $defaults = [
+
+        // By default user data will be fetched with its profile and entry.
+        'with' => ['profile', 'entry'],
+
+    ];
+
+    /**
      * Attributes that are selectable for query (aside from ID and timestamps).
      *
      * @var array
      */
     protected $selectable = [
         'email',
+    ];
+
+    /**
+     * Relationships that are loadable for query.
+     *
+     * @var array
+     */
+    protected $loadable = [
+        'profile', 'entry',
     ];
 
     /**
@@ -46,6 +67,13 @@ class UserService extends Service
     ];
 
     /**
+     * The main model for the service.
+     *
+     * @var string
+     */
+    protected $model = User::class;
+
+    /**
      * Get multiple users with conditions.
      *
      * @param  array  $params
@@ -53,7 +81,15 @@ class UserService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->query(User::query(), $params);
+        $query = $this->queryRaw($this->getModel()->query(), $params);
+
+        // Shortcut to where=role_id:=:xxx
+        if (array_has($params, 'role')) {
+            $query->ofRole((int) $params['role']);
+        }
+
+        return $this->queryComplete($query);
+        
     }
 
     /**
@@ -66,7 +102,7 @@ class UserService extends Service
     {
         $cleaned = $this->cryptPassword($this->clean($data));
 
-        $user = User::create($cleaned);
+        $user = $this->getModel()->fill($cleaned);
 
         $role = Role::find(
             array_has($data, 'role') ? $data['role'] : $this->defaultRole

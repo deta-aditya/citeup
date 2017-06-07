@@ -21,15 +21,39 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        user: null
+        user: null,
+        query: '{}',
+        api: {
+            users: null
+        }
+    },
+
+    filters: {
+
+        stringify: function (v) {
+            return JSON.stringify(v, null, 2);
+        }
+
     },
 
     methods: {
+        
         loadUser: function () {
             var self = this;
             axios.get('/api/user').then(response => {
                 self.user = JSON.stringify(response.data);
             });
-        } 
+        },
+
+        users: function () {
+            var self = this;
+            var params = JSON.parse(self.query);
+            axios.get('/api/v1/users', {
+                params: params
+            }).then(response => {
+                self.api.users = response.data.data.users;
+            });
+        }
+
     }
 });

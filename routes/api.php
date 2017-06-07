@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*
+ * API v1 Namespace Group
+ */
+Route::group([
+    'namespace' => 'App\Modules\Api\V1\Controllers', 'prefix' => '/v1',
+], function () {
+
+    Route::get('/users', 'UserController@index');
+
+});

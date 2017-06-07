@@ -39,12 +39,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 });
 
-/*
- * API v1 Namespace Group
- */
-Route::group(['namespace' => 'App\Modules\Api\V1'], function () {
-});
-
 Route::get('/coba', function () {
     return view('coba');
 });

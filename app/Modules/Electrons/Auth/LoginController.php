@@ -3,7 +3,7 @@
 namespace App\Modules\Electrons\Auth;
 
 use App\User;
-use App\Modules\Electrons\Auth\Electrons\LoginRequest;
+use App\Modules\Electrons\Auth\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 

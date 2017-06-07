@@ -108,5 +108,17 @@ trait User
     {
         return $this->hasMany('App\Modules\Models\Edit');
     }
+
+    /**
+     * Scope a query to only include users of a given role.
+     *
+     * @param  Builder $query
+     * @param  int     $role
+     * @return Builder
+     */
+    public function scopeOfRole($query, $role)
+    {
+        return $query->where('role_id', $role);
+    }
     
 }
