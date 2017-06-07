@@ -4,6 +4,7 @@ namespace App\Modules\Electrons\Users;
 
 use App\User;
 use App\Modules\Models\Role;
+use App\Modules\Models\Profile;
 use App\Modules\Nucleons\Service;
 
 class UserService extends Service
@@ -15,15 +16,6 @@ class UserService extends Service
      * @var array
      */
     protected $defaultRole = 2;
-
-    /**
-     * Eligible attributes for new user data insertion.
-     *
-     * @var array
-     */
-    protected $pure = [
-        'email', 'password',
-    ];
 
     /**
      * Default values for query string.
@@ -88,8 +80,7 @@ class UserService extends Service
             $query->ofRole((int) $params['role']);
         }
 
-        return $this->queryComplete($query);
-        
+        return $query->get();
     }
 
     /**
@@ -109,6 +100,25 @@ class UserService extends Service
         );
 
         return $this->associateRole($user, $role);
+    }
+
+    /**
+     * Create a new user with its profile (and entry if necessary).
+     *
+     * @param  array  $data
+     * @return User
+     */
+    public function createComplete(array $data)
+    {
+        $user = $this->create($data);
+
+        $user = $this->makeProfile($user, $data);
+
+        if (! $user->isEntrant()) {
+            return $user;
+        }
+
+        return $user->makeEntry($user, $data); // todo
     }
 
     /**
@@ -136,6 +146,32 @@ class UserService extends Service
         $user->save();
 
         return $user;
+    }
+
+    /**
+     * Create a profile for the user model.
+     *
+     * @param  User  $user
+     * @param  array $data
+     * @return User
+     */
+    public function makeProfile(User $user, array $data)
+    {
+        $cleaned = array_only($data, $this->getProfileModel()->getFillable());
+
+        $user->profile()->create($cleaned);
+
+        return $user;
+    }
+
+    /**
+     * Get the profile model.
+     *
+     * @return Profile
+     */
+    public function getProfileModel()
+    {
+        return new Profile;
     }
 
     /**

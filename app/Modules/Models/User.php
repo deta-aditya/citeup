@@ -110,6 +110,36 @@ trait User
     }
 
     /**
+     * Check whether this user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role->name === 'Administrator';
+    }
+
+    /**
+     * Check whether this user is a committee.
+     *
+     * @return bool
+     */
+    public function isCommittee()
+    {
+        return $this->role->name === 'Committee';
+    }
+
+    /**
+     * Check whether this user is an entrant.
+     *
+     * @return bool
+     */
+    public function isEntrant()
+    {
+        return $this->role->name === 'Entrant';
+    }
+
+    /**
      * Scope a query to only include users of a given role.
      *
      * @param  Builder $query

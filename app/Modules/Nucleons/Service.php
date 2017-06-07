@@ -113,7 +113,7 @@ abstract class Service
     /**
      * Get the main model.
      *
-     * @return string
+     * @return Model
      */
     public function getModel()
     {
@@ -205,22 +205,6 @@ abstract class Service
         return $this->queryComplete(
             $this->queryRaw($this->getModel()->query(), $params)
         );
-    }
-
-    /**
-     * Complete a query operation.
-     *
-     * @param  Builder  $query
-     * @return array
-     */
-    protected function queryComplete(Builder $query)
-    {
-        return [
-            'status' => 200,
-            'data' => [
-                $this->getModel()->getTable() => $query->get(),
-            ],
-        ];
     }
 
     /**
@@ -556,6 +540,6 @@ abstract class Service
      */
     protected function clean(array $data)
     {
-        return collect($data)->only($this->pure)->all();
+        return collect($data)->only($this->getModel()->getFillable())->all();
     }
 }
