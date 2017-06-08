@@ -114,11 +114,17 @@ class UserService extends Service
 
         $user = $this->makeProfile($user, $data);
 
+        $user->load('profile');
+
         if (! $user->isEntrant()) {
             return $user;
         }
 
-        return $user->makeEntry($user, $data); // todo
+        $user = $this->makeEntry($user, $data);
+
+        $user->load('entry');
+
+        return $user;
     }
 
     /**
@@ -161,6 +167,19 @@ class UserService extends Service
 
         $user->profile()->create($cleaned);
 
+        return $user;
+    }
+
+    /**
+     * Create an entry for the user model.
+     *
+     * @param  User  $user
+     * @param  array $data
+     * @return User
+     */
+    public function makeEntry(User $user, array $data)
+    {
+        // Do it later after the ActivityService done.
         return $user;
     }
 

@@ -26,5 +26,6 @@ Route::group([
 ], function () {
 
     Route::get('/users', 'UserController@index');
+    Route::post('/users', 'UserController@insert');
 
 });

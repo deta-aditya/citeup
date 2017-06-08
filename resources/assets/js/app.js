@@ -17,6 +17,58 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component('api-box', {
+
+    props: ['headerText', 'reqType', 'uri'],
+
+    template: '\
+        <div class="panel panel-default">\
+            <div class="panel-heading">{{ headerText }}</div>\
+            <div class="panel-body">\
+                <div class="form-group">\
+                    <label>Params</label>\
+                    <textarea class="form-control" v-model="params"></textarea>\
+                </div>\
+                <button type="button" class="btn btn-primary" @click="load">\
+                    Load\
+                </button>\
+            </div>\
+            <slot name="result-area" :data="data"></slot>\
+        </div>',
+
+    data: function () {
+        return {
+            params: '{}',
+            data: {}
+        };
+    },
+
+    filters: {
+
+        stringify: function (v) {
+            return JSON.stringify(v, null, 2);
+        }
+
+    },
+
+    methods: {
+
+        load: function () {
+            var self = this;
+            var params = JSON.parse(self.params);
+
+            if (self.reqType === 'get') {
+                params = {params: params};
+            }
+
+            axios[self.reqType](self.uri, params).then(response => {
+                self.data = response.data;
+            });
+
+        }
+    }
+});
+
 const app = new Vue({
     el: '#app',
 

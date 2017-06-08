@@ -540,6 +540,6 @@ abstract class Service
      */
     protected function clean(array $data)
     {
-        return collect($data)->only($this->getModel()->getFillable())->all();
+        return array_only($data, $this->getModel()->getFillable());
     }
 }

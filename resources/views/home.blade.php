@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
@@ -35,6 +34,19 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-4">
+                <api-box
+                    header-text="Post Users Data"
+                    req-type="post"
+                    uri="/api/v1/users"
+                    >
+                    <template slot="result-area" scope="props">
+                        <div class="panel-body" v-if="(! _.isEmpty(props.data))">
+                            <pre>@{{ props.data }}</pre>
+                        </div>
+                    </template>
+                </api-box>
             </div>
         </div>
     </div>
