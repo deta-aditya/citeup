@@ -6,6 +6,7 @@ use App\User;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Electrons\Users\ProfileService;
+use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -102,9 +103,6 @@ class UserController extends Controller
         RoleService $roles, 
         ProfileService $profiles)
     {
-        var_dump($request->all());
-        die;
-        
         $this->users->update($user, $request->all());
 
         $roles->associate($user, $request->input('role', $user->role));
@@ -114,4 +112,20 @@ class UserController extends Controller
         return $this->respondJson(['user' => $user]);
     }
 
+    /**
+     * Delete a user data.
+     *
+     * @param  Request         $request
+     * @param  User            $user
+     * @param  StorageService  $storages
+     * @return Response
+     */
+    public function remove(Request $request, User $user, StorageService $storages)
+    {
+        $this->users->remove($user);
+
+        $storages->destroy('images', $user->id, 'profile');
+
+        return $this->respondJson(['user' => $user]);
+    }
 }

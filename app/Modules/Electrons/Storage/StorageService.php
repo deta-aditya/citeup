@@ -47,6 +47,23 @@ class StorageService extends Service
     }
 
     /**
+     * Destroy a directory of specified mime, id and type.
+     *
+     * @param  string  $mime
+     * @param  int     $objectId
+     * @param  string  $objectType
+     * @return this
+     */
+    public function destroy($mime, $objectId, $objectType)
+    {
+        $this->removeDirectoryFromStorage(
+            $this->makePath($mime, $objectId, $objectType)
+        );
+
+        return $this;
+    }
+
+    /**
      * Put the trailing path to the link.
      *
      * @param  string  $link
@@ -69,6 +86,19 @@ class StorageService extends Service
     }
 
     /**
+     * Returns a storage directory path to the specified mime, id and type. 
+     *
+     * @param  string  $mime
+     * @param  int     $objectId
+     * @param  string  $objectType
+     * @return string
+     */
+    public function makePath($mime, $objectId, $objectType)
+    {
+        return $mime . '/' . str_plural($objectType) . '/' . $objectId;
+    }
+
+    /**
      * Put the file on the storage and return its link.
      *
      * @param  int           $objectId
@@ -78,7 +108,7 @@ class StorageService extends Service
      */
     protected function putOnStorage($objectId, $objectType, UploadedFile $file)
     {
-        $directory = $this->detectMime($file) . '/' . str_plural($objectType) . '/' . $objectId;
+        $directory = $this->makePath($this->detectMime($file), $objectType, $objectId);
 
         if (! Storage::exists($directory)) {
             Storage::makeDirectory($directory);
@@ -101,12 +131,25 @@ class StorageService extends Service
     }
 
     /**
+     * Empty and delete directory under specified path.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function removeDirectoryFromStorage($path)
+    {
+        if (Storage::exists($path)) {
+            Storage::deleteDirectory($path);
+        }
+    }
+
+    /**
      * Get the directory based the mimetype of file.
      *
      * @param  UploadedFile  $file
      * @return string  
      */
-    public function detectMime(UploadedFile $file)
+    protected function detectMime(UploadedFile $file)
     {
         switch (File::mimeType($file->path())) {
             case 'image/jpeg': case 'image/jpg': case 'image/png': case 'image/gif':

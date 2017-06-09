@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-                <div class="panel-body">                    
+                <div class="panel-body">               
                     <p>You are logged in!</p>
                     <button type="button" class="btn btn-primary" v-on:click="loadUser">
                         Click to Load Your Data
@@ -17,17 +17,14 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/storages">
-                    <template slot="header-text">DELETE</template>
+                <api-box req-type="get" uri="/api/v1/users">
+                    <template slot="header-text">GET User</template>
                     <template slot="result-area" scope="props">
-                        <div class="panel-body">
-                            <pre>@{{ props.data.data }}</pre>
-                        </div>
-                        <!-- <ul class="list-group">
+                        <ul class="list-group">
                             <li class="list-group-item" v-for="user in props.data.data.users">
                                 <pre>@{{ user }}</pre>
                             </li>
-                        </ul> -->
+                        </ul>
                     </template>
                 </api-box>
             </div>
@@ -42,11 +39,11 @@
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/storages" multipart="true" file-upload-name="file">
-                    <template slot="header-text">POST storage</template>
+                <api-box req-type="delete" uri="/api/v1/users/8">
+                    <template slot="header-text">Delete User/8</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.link }}</pre>
+                            <pre>@{{ props.data.data.user }}</pre>
                         </div>
                     </template>
                 </api-box>

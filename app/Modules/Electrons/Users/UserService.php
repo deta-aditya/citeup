@@ -106,11 +106,11 @@ class UserService extends Service
     }
 
     /**
-     * Update a user.
+     * Update a user with new data.
      *
      * @param  User   $user
      * @param  array  $data
-     * @return $this
+     * @return this
      */
     public function update(User $user, array $data)
     {
@@ -121,6 +121,19 @@ class UserService extends Service
         }
 
         $user->save();
+
+        return $this;
+    }
+
+    /**
+     * Remove a user from the database.
+     *
+     * @param  User  $user
+     * @return this
+     */
+    public function remove(User $user)
+    {
+        $user->delete();
 
         return $this;
     }
