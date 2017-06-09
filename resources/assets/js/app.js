@@ -46,7 +46,9 @@ Vue.component('api-box', {
         return {
             params: '{}',
             uploads: [],
-            data: {}
+            data: {
+                data: {}
+            }
         };
     },
 
@@ -73,7 +75,7 @@ Vue.component('api-box', {
             var self = this;
             var params = JSON.parse(self.params);
 
-            if (self.reqType === 'get') {
+            if (self.reqType === 'get' || self.reqType === 'delete') {
                 params = {params: params};
             }
 
@@ -88,12 +90,14 @@ Vue.component('api-box', {
             var self = this;
             var params = JSON.parse(self.params);
 
-            if (self.uploads.length > 1) {
-                for (let i = 0; i < self.uploads.length; i++) {
-                    form.append(self.fileUploadName, self.uploads[i]);
+            if (self.uploads.length > 0) {
+                if (self.uploads.length > 1) {
+                    for (let i = 0; i < self.uploads.length; i++) {
+                        form.append(self.fileUploadName, self.uploads[i]);
+                    }
+                } else {
+                    form.append(self.fileUploadName, self.uploads[0]);
                 }
-            } else {
-                form.append(self.fileUploadName, self.uploads[0]);
             }
 
             for (let param in params) {

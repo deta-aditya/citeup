@@ -106,6 +106,43 @@ class UserService extends Service
     }
 
     /**
+     * Update a user.
+     *
+     * @param  User   $user
+     * @param  array  $data
+     * @return $this
+     */
+    public function update(User $user, array $data)
+    {
+        $cleaned = $this->cryptPassword($this->clean($data));
+
+        foreach ($cleaned as $field => $value) {
+            $user->{$field} = $value;
+        }
+
+        $user->save();
+
+        return $this;
+    }
+
+    /**
+     * Load mandatory relationships of the user.
+     *
+     * @param  User  $user
+     * @return this
+     */
+    public function loadRelationships(User $user)
+    {
+        $user->load('role', 'profile');
+
+        if ($user->isEntrant()) {
+            $user->load('entry');
+        }
+
+        return $this;
+    }
+
+    /**
      * Create a new starter admin user and return it.
      * Caution: This method should only be invoked once on a seeder!
      *

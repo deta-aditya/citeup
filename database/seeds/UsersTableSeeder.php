@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
     {
         $roles
             ->createAllRequired()
-            ->associateRole(
+            ->associate(
                 $users->createStarterAdmin(), RoleService::ROLE_ADMINISTRATOR
             );
     }

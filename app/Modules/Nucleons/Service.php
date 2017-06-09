@@ -19,7 +19,7 @@ abstract class Service
     | 
     | 1)    Query string parser
     |       The query string parser handles REST API GET parameters
-    |       under specified standard. The delimeters, defaults, and allowed 
+    |       under specified standard. The delimiters, defaults, and allowed 
     |       fields are configurable for convenience.
     |
     |       SELECTING
@@ -92,7 +92,7 @@ abstract class Service
             'clean' => false,
         ],
 
-        'delimeters' => [
+        'delimiters' => [
             'select' => ',',
             
             'sort' => [
@@ -162,11 +162,11 @@ abstract class Service
     ];
 
     /**
-     * Delimeters applied in the query params.
+     * Delimiters applied in the query params.
      * 
      * @var array
      */
-    protected $delimeters = [
+    protected $delimiters = [
         //
     ];
 
@@ -201,16 +201,16 @@ abstract class Service
     }
 
     /**
-     * Get the delimeter value of certain query params.
+     * Get the delimiter value of certain query params.
      *
      * @param  string  $attr
      * @return string
      */
-    public function getDelimeter($attr) 
+    public function getDelimiter($attr) 
     {
-        return array_has($this->delimeters, $attr) 
-            ? array_get($this->delimeters, $attr)
-            : array_get($this->config, 'delimeters.'. $attr);
+        return array_has($this->delimiters, $attr) 
+            ? array_get($this->delimiters, $attr)
+            : array_get($this->config, 'delimiters.'. $attr);
     }
 
     /**
@@ -350,7 +350,7 @@ abstract class Service
      */
     protected function parseSelectParams($select) 
     {
-        $selects = explode($this->getDelimeter('select'), $select);
+        $selects = explode($this->getDelimiter('select'), $select);
 
         $selects = array_intersect($selects, $this->getSelectable());
 
@@ -365,14 +365,14 @@ abstract class Service
      */
     protected function parseSortParams($sort) 
     {
-        $items = explode($this->getDelimeter('sort.per_field'), $sort);
+        $items = explode($this->getDelimiter('sort.per_field'), $sort);
         $sortable = $this->getSortable();
         $arrSort = [];
         
         foreach ($items as $item) {
             
             list($field, $direction) = explode(
-                $this->getDelimeter('sort.per_value'), $item
+                $this->getDelimiter('sort.per_value'), $item
             );
 
             if (! in_array($field, $sortable)) {
@@ -394,7 +394,7 @@ abstract class Service
      */
     protected function parseCriteriaParams($criteria) 
     {
-        $items = explode($this->getDelimeter('criteria.per_field'), $criteria);
+        $items = explode($this->getDelimiter('criteria.per_field'), $criteria);
         $comparable = $this->getComparable();
         $arrWhere = [];
         
@@ -402,7 +402,7 @@ abstract class Service
             
             list(
                 $field, $command, $values
-            ) = explode($this->getDelimeter('criteria.per_value'), $item);
+            ) = explode($this->getDelimiter('criteria.per_value'), $item);
 
             if (! in_array($field, $comparable)) {
                 continue;
@@ -413,7 +413,7 @@ abstract class Service
                 case 'between': case 'notbetween': case 'in': case 'notin':
                 case 'column':
                     $values = explode(
-                        $this->getDelimeter('criteria.per_subvalue'), $values
+                        $this->getDelimiter('criteria.per_subvalue'), $values
                     );
                     break;
 
@@ -442,7 +442,7 @@ abstract class Service
      */
     protected function parseLoadParams($with)
     {
-        $withs = explode($this->getDelimeter('with'), $with);
+        $withs = explode($this->getDelimiter('with'), $with);
 
         $withs = array_intersect($withs, $this->getLoadable());
 

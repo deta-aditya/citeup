@@ -15,14 +15,7 @@ class ProfileService extends Service
      *
      * @var string
      */
-    protected $defaultPhoto = 'images/default.jpg';
-
-    /**
-     * The path to the profile picture storage.
-     *
-     * @var string
-     */
-    protected $storage = 'images/profiles';
+    protected $defaultPhoto = 'storage/images/default.jpg';
 
     /**
      * The main model for the service.
@@ -32,17 +25,15 @@ class ProfileService extends Service
     protected $model = Profile::class;
 
     /**
-     * Create a profile for the user model.
+     * Create the profile for a user.
      *
      * @param  User   $user
      * @param  array  $data
      * @return this
      */
-    public function makeProfile(User $user, array $data)
+    public function make(User $user, array $data)
     {
         $cleaned = $this->clean($data);
-
-        $cleaned['photo'] = $this->uploadPhoto($user, $cleaned['photo']);
 
         $user->profile()->create($cleaned);
 
@@ -50,24 +41,24 @@ class ProfileService extends Service
     }
 
     /**
-     * Upload the profile picture to the storage and returns the path.
+     * Update the profile of a user.
      *
-     * @param  User          $user
-     * @param  UploadedFile  $photo
-     * @return string
+     * @param  User   $user
+     * @param  array  $data
+     * @return this
      */
-    public function uploadPhoto(User $user, UploadedFile $photo)
+    public function update(User $user, array $data)
     {
-        if (! $photo->isValid()) {
-            return $this->defaultPhoto;
+        $cleaned = $this->clean($data);
+        $profile = $user->profile;
+
+        foreach ($cleaned as $field => $value) {
+            $profile->{$field} = $value;
         }
 
-        $dir = $this->storage . '/' . $user->id;
+        $profile->save();
 
-        if (! Storage::exists($dir)) {
-            Storage::makeDirectory($dir);
-        }
-
-        return $photo->store($dir, 'public');
+        return $this;
     }
+
 }

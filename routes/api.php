@@ -15,7 +15,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    User::getFillable(); 
+    // User::getFillable(); 
 });
 
 /*
@@ -26,6 +26,12 @@ Route::group([
 ], function () {
 
     Route::get('/users', 'UserController@index');
+    Route::get('/users/{user}', 'UserController@show');
     Route::post('/users', 'UserController@insert');
+    Route::put('/users/{user}', 'UserController@update');
+    Route::delete('/users/{user}', 'UserController@remove');
+
+    Route::post('/storages', 'StorageController@insert');
+    Route::delete('/storages', 'StorageController@delete');
 
 });

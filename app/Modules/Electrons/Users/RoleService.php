@@ -57,10 +57,14 @@ class RoleService extends Service
      * @param  Role|int  $role
      * @return this
      */
-    public function associateRole(User $user, $role)
+    public function associate(User $user, $role)
     {
         if (! $role instanceof Role) {
             $role = Role::find($role);
+        }
+
+        if ($role->id === $user->role->id) {
+            return $this;
         }
 
         $user->role()->associate($role);

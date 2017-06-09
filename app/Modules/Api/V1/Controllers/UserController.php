@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Controllers;
 
+use App\User;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Electrons\Users\ProfileService;
@@ -14,14 +15,14 @@ class UserController extends Controller
     use JsonApiController;
 
     /**
-     * A user service instance
+     * A user service instance.
      *
      * @var UserService
      */
     protected $users;
 
     /**
-     * Create a new controller instance
+     * Create a new controller instance.
      *
      * @param  UserService  $users
      * @return void
@@ -32,7 +33,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get an array of users data
+     * Get an array of users data.
      *
      * @param  Request  $request
      * @return Response
@@ -45,7 +46,23 @@ class UserController extends Controller
     }
 
     /**
-     * Insert a new user data
+     * Get a user data.
+     *
+     * @param  Request  $request
+     * @param  User     $user
+     * @return Response
+     */
+    public function show(Request $request, User $user)
+    {
+        $this->users->loadRelationships($user);
+
+        return $this->respondJson(
+            ['user' => $user]
+        );   
+    }
+
+    /**
+     * Insert a new user data.
      *
      * @param  Request         $request
      * @param  RoleService     $roles
@@ -59,13 +76,40 @@ class UserController extends Controller
     {
         $user = $this->users->create($request->all());
 
-        $roles->associateRole($user, $request->input('role'));
+        $roles->associate($user, $request->input('role'));
 
-        $profiles->makeProfile($user, $request->all());
+        $profiles->make($user, $request->all());
 
         if ($user->isEntrant()) {
             //
         }
+
+        return $this->respondJson(['user' => $user]);
+    }
+
+    /**
+     * Update a user data.
+     *
+     * @param  Request         $request
+     * @param  User            $user
+     * @param  RoleService     $roles
+     * @param  ProfileService  $profiles
+     * @return Response
+     */
+    public function update(
+        Request $request, 
+        User $user,
+        RoleService $roles, 
+        ProfileService $profiles)
+    {
+        var_dump($request->all());
+        die;
+        
+        $this->users->update($user, $request->all());
+
+        $roles->associate($user, $request->input('role', $user->role));
+
+        $profiles->update($user, $request->all());
 
         return $this->respondJson(['user' => $user]);
     }
