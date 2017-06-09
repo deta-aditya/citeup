@@ -7,8 +7,75 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class Service
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Base Service Class
+    |--------------------------------------------------------------------------
+    |
+    | This class is responsible for providing interfaces for CRUD over 
+    | available models, handling events, etc. In short, service classes handle 
+    | almost everything related to business process.
+    | There are some convenient features provided by this class:
+    | 
+    | 1)    Query string parser
+    |       The query string parser handles REST API GET parameters
+    |       under specified standard. The delimeters, defaults, and allowed 
+    |       fields are configurable for convenience.
+    |
+    |       SELECTING
+    |       ----------------
+    |       fields: selectable[]       
+    |
+    |       > ?select=field1,field2,...
+    |
+    |       SORTING
+    |       -------
+    |       fields: sortable[]
+    |       directions: asc, desc 
+    |
+    |       > ?sort=field1:direction,field2:direction,...       
+    |
+    |       CRITERIA/CONDITIONS
+    |       -------------------
+    |       fields: comparable[]
+    |       commands: <, <=, =, >=, >, <>, like, between, notbetween,
+    |                 in, notin, is(null, notnull), date, month, day,
+    |                 year, column(<, <=, =, >=, >, <>)
+    |
+    |       > ?criteria=field1:command:value,field2:command:subvalue;subvalue,..
+    |
+    |       SKIP/OFFSET
+    |       -----------
+    |       > ?skip=numofskips
+    |       
+    |       TAKE/LIMIT
+    |       ----------
+    |       > ?take=numoftakes
+    |
+    |       RANDOM ORDER
+    |       ------------
+    |       Should exist without 'sort'.
+    |       boolean: true, false
+    |       
+    |       > ?random=boolean
+    |       
+    |       WITH RELATED DATA
+    |       -----------------
+    |       fields: loadable[]
+    |       
+    |       > ?with=field1,field2,...
+    |
+    |       WITHOUT RELATED DATA
+    |       --------------------
+    |       Should exist without 'with'.
+    |       boolean: true, false
+    |
+    |       > ?clean=boolean
+    |
+    */
+
     /**
-     * Base configurations for select query string parsing.
+     * Base configurations for query string parsing.
      * 
      * @var array
      */
@@ -106,7 +173,7 @@ abstract class Service
     /**
      * The main model for the service.
      *
-     * @var string
+     * @var null
      */
     protected $model = null;
 
@@ -287,7 +354,7 @@ abstract class Service
 
         $selects = array_intersect($selects, $this->getSelectable());
 
-        return array_merge($this->config['sortable'], $selects);
+        return array_merge($this->config['selectable'], $selects);
     }
 
     /**
@@ -440,13 +507,13 @@ abstract class Service
                 case 'between':
                     $query->whereBetween($field, $value);
                     break;
-                case 'notbewteen':
+                case 'notbetween':
                     $query->whereNotBetween($field, $value);
                     break;
-                case 'wherein':
+                case 'in':
                     $query->whereIn($field, $value);
                     break;
-                case 'wherenotin':
+                case 'notin':
                     $query->whereNotIn($field, $value);
                     break;
                 case 'is':

@@ -3,20 +3,10 @@
 namespace App\Modules\Electrons\Users;
 
 use App\User;
-use App\Modules\Models\Role;
-use App\Modules\Models\Profile;
 use App\Modules\Nucleons\Service;
 
 class UserService extends Service
 {
-    /**
-     * The default role ID.
-     * Currently set to "Entrant".
-     *
-     * @var array
-     */
-    protected $defaultRole = 2;
-
     /**
      * Default values for query string.
      * 
@@ -39,6 +29,24 @@ class UserService extends Service
     ];
 
     /**
+     * Attributes that are sortable for query (aside from ID and timestamps).
+     *
+     * @var array
+     */
+    protected $sortable = [
+        'email',
+    ];
+
+    /**
+     * Attributes that are comparable for query (aside from ID and timestamps).
+     *
+     * @var array
+     */
+    protected $comparable = [
+        'email', 'role_id',
+    ];
+
+    /**
      * Relationships that are loadable for query.
      *
      * @var array
@@ -55,13 +63,12 @@ class UserService extends Service
     protected $starterAdmin = [
         'email' => 'muhammaddetaaditya@gmail.com',
         'password' => 'rahasia',
-        'role' => 1,
     ];
 
     /**
      * The main model for the service.
      *
-     * @var string
+     * @var User
      */
     protected $model = User::class;
 
@@ -95,35 +102,6 @@ class UserService extends Service
 
         $user = $this->getModel()->fill($cleaned);
 
-        $role = Role::find(
-            array_has($data, 'role') ? $data['role'] : $this->defaultRole
-        );
-
-        return $this->associateRole($user, $role);
-    }
-
-    /**
-     * Create a new user with its profile (and entry if necessary).
-     *
-     * @param  array  $data
-     * @return User
-     */
-    public function createComplete(array $data)
-    {
-        $user = $this->create($data);
-
-        $user = $this->makeProfile($user, $data);
-
-        $user->load('profile');
-
-        if (! $user->isEntrant()) {
-            return $user;
-        }
-
-        $user = $this->makeEntry($user, $data);
-
-        $user->load('entry');
-
         return $user;
     }
 
@@ -136,61 +114,6 @@ class UserService extends Service
     public function createStarterAdmin()
     {
         return $this->create($this->starterAdmin);
-    }
-
-    /**
-     * Associate role with a user and return the user.
-     *
-     * @param  User  $user
-     * @param  Role  $role
-     * @return User
-     */
-    public function associateRole(User $user, Role $role)
-    {
-        $user->role()->associate($role);
-
-        $user->save();
-
-        return $user;
-    }
-
-    /**
-     * Create a profile for the user model.
-     *
-     * @param  User  $user
-     * @param  array $data
-     * @return User
-     */
-    public function makeProfile(User $user, array $data)
-    {
-        $cleaned = array_only($data, $this->getProfileModel()->getFillable());
-
-        $user->profile()->create($cleaned);
-
-        return $user;
-    }
-
-    /**
-     * Create an entry for the user model.
-     *
-     * @param  User  $user
-     * @param  array $data
-     * @return User
-     */
-    public function makeEntry(User $user, array $data)
-    {
-        // Do it later after the ActivityService done.
-        return $user;
-    }
-
-    /**
-     * Get the profile model.
-     *
-     * @return Profile
-     */
-    public function getProfileModel()
-    {
-        return new Profile;
     }
 
     /**

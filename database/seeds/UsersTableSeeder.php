@@ -15,8 +15,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run(UserService $users, RoleService $roles)
     {
-        $roles->createAllRequired();
-
-        $users->createStarterAdmin();
+        $roles
+            ->createAllRequired()
+            ->associateRole(
+                $users->createStarterAdmin(), RoleService::ROLE_ADMINISTRATOR
+            );
     }
 }

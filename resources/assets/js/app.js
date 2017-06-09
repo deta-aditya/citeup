@@ -19,26 +19,33 @@ Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('api-box', {
 
-    props: ['headerText', 'reqType', 'uri'],
+    props: ['reqType', 'uri', 'multipart', 'fileUploadName'],
 
     template: '\
         <div class="panel panel-default">\
-            <div class="panel-heading">{{ headerText }}</div>\
+            <div class="panel-heading">\
+                <slot name="header-text"></slot>\
+            </div>\
             <div class="panel-body">\
                 <div class="form-group">\
                     <label>Params</label>\
                     <textarea class="form-control" v-model="params"></textarea>\
                 </div>\
+                <div class="form-group" v-show="multipart">\
+                    <label>Uploads ({{ fileUploadName }})</label>\
+                    <input type="file" @change="putFile">\
+                </div>\
                 <button type="button" class="btn btn-primary" @click="load">\
                     Load\
                 </button>\
             </div>\
-            <slot name="result-area" :data="data"></slot>\
+            <slot name="result-area" :data="data" v-if="(! _.isEmpty(data))"></slot>\
         </div>',
 
     data: function () {
         return {
             params: '{}',
+            uploads: [],
             data: {}
         };
     },
@@ -53,7 +60,16 @@ Vue.component('api-box', {
 
     methods: {
 
+        putFile: function (event) {
+            this.uploads = event.target.files;
+        },
+
         load: function () {
+
+            if (this.multipart) {
+                return this.loadMultipart();
+            }
+
             var self = this;
             var params = JSON.parse(self.params);
 
@@ -65,6 +81,28 @@ Vue.component('api-box', {
                 self.data = response.data;
             });
 
+        },
+
+        loadMultipart: function () {
+            var form = new FormData();
+            var self = this;
+            var params = JSON.parse(self.params);
+
+            if (self.uploads.length > 1) {
+                for (let i = 0; i < self.uploads.length; i++) {
+                    form.append(self.fileUploadName, self.uploads[i]);
+                }
+            } else {
+                form.append(self.fileUploadName, self.uploads[0]);
+            }
+
+            for (let param in params) {
+                form.append(param, params[param]);
+            }
+
+            axios[self.reqType](self.uri, form).then(response => {
+                self.data = response.data;
+            });
         }
     }
 });

@@ -3,6 +3,8 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Electrons\Users\UserService;
+use App\Modules\Electrons\Users\RoleService;
+use App\Modules\Electrons\Users\ProfileService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -45,14 +47,27 @@ class UserController extends Controller
     /**
      * Insert a new user data
      *
-     * @param  Request  $request
+     * @param  Request         $request
+     * @param  RoleService     $roles
+     * @param  ProfileService  $profiles
      * @return Response
      */
-    public function insert(Request $request)
+    public function insert(
+        Request $request, 
+        RoleService $roles, 
+        ProfileService $profiles)
     {
-        return $this->respondJson(
-            ['user' => $this->users->createComplete($request->all())]
-        );
+        $user = $this->users->create($request->all());
+
+        $roles->associateRole($user, $request->input('role'));
+
+        $profiles->makeProfile($user, $request->all());
+
+        if ($user->isEntrant()) {
+            //
+        }
+
+        return $this->respondJson(['user' => $user]);
     }
 
 }
