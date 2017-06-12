@@ -3,12 +3,13 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\User;
+use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Electrons\Users\ProfileService;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
-use App\Http\Controllers\Controller;
+use App\Modules\Api\V1\Requests\UserIndexRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -36,10 +37,10 @@ class UserController extends Controller
     /**
      * Get an array of users data.
      *
-     * @param  Request  $request
+     * @param  UserIndexRequest  $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(UserIndexRequest $request)
     {
         return $this->respondJson(
             ['users' => $this->users->getMultiple($request->all())]

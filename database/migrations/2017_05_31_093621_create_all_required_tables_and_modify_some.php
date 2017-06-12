@@ -26,7 +26,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->timestamps();
         });
 
-        Schema::create('key_users', function (Blueprint $table) {
+        Schema::create('key_user', function (Blueprint $table) {
             $table->integer('key_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
@@ -65,7 +65,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->timestamps();
         });
 
-        Schema::create('alert_users', function (Blueprint $table) {
+        Schema::create('alert_user', function (Blueprint $table) {
             $table->integer('alert_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->dateTime('seen_at')->nullable();
@@ -253,10 +253,10 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::dropIfExists('entries');
         Schema::dropIfExists('schedules');
         Schema::dropIfExists('activities');
-        Schema::dropIfExists('alert_users');
+        Schema::dropIfExists('alert_user');
         Schema::dropIfExists('alerts');
         Schema::dropIfExists('profiles');
-        Schema::dropIfExists('key_users');
+        Schema::dropIfExists('key_user');
         Schema::dropIfExists('keys');
         Schema::dropIfExists('roles');
     }

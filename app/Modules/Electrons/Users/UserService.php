@@ -8,54 +8,6 @@ use App\Modules\Nucleons\Service;
 class UserService extends Service
 {
     /**
-     * Default values for query string.
-     * 
-     * @var array
-     */
-    protected $defaults = [
-
-        // By default user data will be fetched with its profile and entry.
-        'with' => ['profile', 'entry'],
-
-    ];
-
-    /**
-     * Attributes that are selectable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $selectable = [
-        'email',
-    ];
-
-    /**
-     * Attributes that are sortable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $sortable = [
-        'email',
-    ];
-
-    /**
-     * Attributes that are comparable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $comparable = [
-        'email', 'role_id',
-    ];
-
-    /**
-     * Relationships that are loadable for query.
-     *
-     * @var array
-     */
-    protected $loadable = [
-        'profile', 'entry',
-    ];
-
-    /**
      * Data for creating starter admin user.
      *
      * @var array
@@ -80,12 +32,33 @@ class UserService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->queryRaw($this->getModel()->query(), $params);
+        $query = $this->parseQueryString($this->getModel()->query(), $params);
 
-        // Shortcut to where=role_id:=:xxx
         if (array_has($params, 'role')) {
             $query->ofRole((int) $params['role']);
         }
+
+        if (array_has($params, 'name')) {
+            $query->ofName($params['name']);
+        } 
+
+        if (array_has($params, 'section')) {
+            $query->ofSection($params['section']);
+        } 
+
+        if (array_has($params, 'activity')) {
+            $query->ofActivity((int) $params['activity']);
+        } 
+
+        if (array_has($params, 'stage')) {
+            $query->ofStage((int) $params['stage']);
+        } 
+
+        if (array_has($params, 'keys')) {
+            $query->hasKeys(explode(config(
+                'queries.users.delimiters.keys'
+            ), $params['keys']));
+        } 
 
         return $query->get();
     }

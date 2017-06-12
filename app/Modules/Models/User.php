@@ -140,15 +140,70 @@ trait User
     }
 
     /**
-     * Scope a query to only include users of a given role.
+     * Scope a query to only include users of the given role.
      *
-     * @param  Builder $query
-     * @param  int     $role
+     * @param  Builder  $query
+     * @param  int      $role
      * @return Builder
      */
     public function scopeOfRole($query, $role)
     {
         return $query->where('role_id', $role);
     }
-    
+
+    /**
+     * Scope a query to only include users with the given name.
+     *
+     * @param  Builder  $query
+     * @param  string   $name
+     * @return Builder
+     */
+    public function scopeOfName($query, $name)
+    {
+        return $query->whereHas('profile', function ($query) use ($name) {
+            $query->where('name', 'like', '%' . $name . '%');
+        });
+    }
+
+    /**
+     * Scope a query to only include users who enter the given activity.
+     *
+     * @param  Builder  $query
+     * @param  int      $activity
+     * @return Builder
+     */
+    public function scopeOfActivity($query, $activity)
+    {
+        return $query->whereHas('entry', function ($query) use ($activity) {
+            $query->where('activity_id', $activity);
+        });
+    }
+
+    /**
+     * Scope a query to only include users of the given stage.
+     *
+     * @param  Builder  $query
+     * @param  int      $stage
+     * @return Builder
+     */
+    public function scopeOfStage($query, $stage)
+    {
+        return $query->whereHas('entry', function ($query) use ($stage) {
+            $query->where('stage', $stage);
+        });
+    }
+
+    /**
+     * Scope a query to only include users who can access the given keys.
+     *
+     * @param  Builder  $query
+     * @param  array    $keys
+     * @return Builder
+     */
+    public function scopeHasKeys($query, $keys)
+    {
+        return $query->whereHas('keys', function ($query) use ($keys) {
+            $query->whereIn('id', $keys);
+        });
+    }
 }

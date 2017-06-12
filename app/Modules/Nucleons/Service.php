@@ -4,6 +4,7 @@ namespace App\Modules\Nucleons;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Modules\Electrons\Shared\Services\QueryConfigurations;
 
 abstract class Service
 {
@@ -74,101 +75,7 @@ abstract class Service
     |
     */
 
-    /**
-     * Base configurations for query string parsing.
-     * 
-     * @var array
-     */
-    protected $config = [
-        
-        'defaults' => [
-            'select' => [],
-            'sort' => ['id' => 'asc'],
-            'criteria' => [],
-            'skip' => 0,
-            'take' => 25,
-            'random' => false,
-            'with' => [],
-            'clean' => false,
-        ],
-
-        'delimiters' => [
-            'select' => ',',
-            
-            'sort' => [
-                'per_field' => ',',
-                'per_value' => ':',
-            ],
-            
-            'criteria' => [
-                'per_field' => ',',
-                'per_value' => ':',
-                'per_subvalue' => ';',
-            ],
-
-            'with' => ',',
-        ],
-
-        'selectable' => ['id', 'created_at', 'updated_at'],
-        'sortable' => ['id', 'created_at', 'updated_at'],
-        'comparable' => ['id', 'created_at', 'updated_at'],
-        'loadable' => [],
-        
-    ];
-
-    /**
-     * Default values for query string.
-     * 
-     * @var array
-     */
-    protected $defaults = [
-        //
-    ];
-
-    /**
-     * Attributes that are selectable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $selectable = [
-        //
-    ];
-
-    /**
-     * Attributes that are sortable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $sortable = [
-        //
-    ];
-
-    /**
-     * Attributes that are comparable for query (aside from ID and timestamps).
-     *
-     * @var array
-     */
-    protected $comparable = [
-        //
-    ];
-
-    /**
-     * Relationships that are loadable for query.
-     *
-     * @var array
-     */
-    protected $loadable = [
-        //
-    ];
-
-    /**
-     * Delimiters applied in the query params.
-     * 
-     * @var array
-     */
-    protected $delimiters = [
-        //
-    ];
+    use QueryConfigurations;
 
     /**
      * The main model for the service.
@@ -178,110 +85,20 @@ abstract class Service
     protected $model = null;
 
     /**
-     * Get the main model.
+     * The table name of the model above.
      *
-     * @return Model
+     * @var string
      */
-    public function getModel()
-    {
-        return new $this->model;
-    }
+    protected $tableName = '';
 
     /**
-     * Get the default value of certain query params.
-     *
-     * @param  string  $attr
-     * @return array|int
-     */
-    public function getDefault($attr) 
-    {
-        return array_has($this->defaults, $attr) 
-            ? $this->defaults[$attr]
-            : $this->config['defaults'][$attr];
-    }
-
-    /**
-     * Get the delimiter value of certain query params.
-     *
-     * @param  string  $attr
-     * @return string
-     */
-    public function getDelimiter($attr) 
-    {
-        return array_has($this->delimiters, $attr) 
-            ? array_get($this->delimiters, $attr)
-            : array_get($this->config, 'delimiters.'. $attr);
-    }
-
-    /**
-     * Get the selectable fields.
-     *
-     * @return array
-     */
-    public function getSelectable() 
-    {
-        return empty($this->selectable) 
-            ? $this->config['selectable']
-            : array_merge($this->config['selectable'], $this->selectable);
-    }
-
-    /**
-     * Get the sortable fields.
-     *
-     * @return array
-     */
-    public function getSortable() 
-    {
-        return empty($this->sortable) 
-            ? $this->config['sortable']
-            : array_merge($this->config['sortable'], $this->sortable);
-    }
-
-    /**
-     * Get the comparable fields.
-     *
-     * @return array
-     */
-    public function getComparable() 
-    {
-        return empty($this->comparable) 
-            ? $this->config['comparable']
-            : array_merge($this->config['comparable'], $this->comparable);
-    }
-
-    /**
-     * Get the loadable fields.
-     *
-     * @return array
-     */
-    public function getLoadable() 
-    {
-        return empty($this->loadable) 
-            ? $this->config['loadable']
-            : array_merge($this->config['loadable'], $this->loadable);
-    }
-
-    /**
-     * Perform a complete selection query.
-     *
-     * @param  array  $params
-     * @return array
-     */
-    protected function query(array $params)
-    {
-        return $this->queryComplete(
-            $this->queryRaw($this->getModel()->query(), $params)
-        );
-    }
-
-    /**
-     * Perform a select query and returns the query builder.
+     * Parse the query string into the query builder and returns it.
      *
      * @param  Builder  $query
      * @param  array    $params
      * @return Builder
      */
-    protected function queryRaw(Builder $query, array $params)
+    protected function parseQueryString(Builder $query, array $params)
     {
         list(
             $select, $sort, $criteria, $skip, $take, $random, $with, $clean
