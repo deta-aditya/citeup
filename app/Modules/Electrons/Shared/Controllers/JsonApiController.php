@@ -12,9 +12,10 @@ trait JsonApiController
      */
     public function respondJson(array $data)
     {
-        return response()->json([
-            'status' => 200,
+        $json = [
             'data' => $data,
-        ]);
+        ];
+
+        return response()->json($json);
     }
 }

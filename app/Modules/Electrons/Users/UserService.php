@@ -73,7 +73,7 @@ class UserService extends Service
     {
         $cleaned = $this->cryptPassword($this->clean($data));
 
-        $user = $this->getModel()->fill($cleaned);
+        $user = User::create($cleaned);
 
         return $user;
     }

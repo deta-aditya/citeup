@@ -84,8 +84,8 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description');
-            $table->string('short_description');
+            $table->text('description')->nullable();
+            $table->string('short_description')->nullable();
             $table->string('icon');
             $table->timestamps();
         });
@@ -106,8 +106,8 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->increments('id');
             $table->integer('activity_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('stage')->unsigned()->nullable();
-            $table->tinyInteger('status')->unsigned();
+            $table->tinyInteger('stage')->unsigned()->default(1);
+            $table->tinyInteger('status')->unsigned()->default(1);
 
             $table->foreign('activity_id')
                 ->references('id')

@@ -42,8 +42,7 @@ return [
     'users' => [
 
         'defaults' => [
-
-            // By default user data will be fetched with its profile and entry.
+        
             'with' => ['profile', 'entry'],
 
         ],

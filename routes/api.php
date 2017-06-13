@@ -31,7 +31,10 @@ Route::group([
     Route::put('/users/{user}', 'UserController@update');
     Route::delete('/users/{user}', 'UserController@remove');
 
-    Route::post('/storages', 'StorageController@insert');
-    Route::delete('/storages', 'StorageController@delete');
+    Route::post('/activities', 'ActivityController@insert');
+    Route::put('/activities/{activity}', 'ActivityController@update');
+
+    Route::post('/storage', 'StorageController@insert');
+    Route::delete('/storage', 'StorageController@delete');
 
 });

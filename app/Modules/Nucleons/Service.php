@@ -85,13 +85,6 @@ abstract class Service
     protected $model = null;
 
     /**
-     * The table name of the model above.
-     *
-     * @var string
-     */
-    protected $tableName = '';
-
-    /**
      * Parse the query string into the query builder and returns it.
      *
      * @param  Builder  $query

@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Electrons\Users\ProfileService;
+use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
-use App\Modules\Api\V1\Requests\UserIndexRequest;
+use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
+use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
+use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -58,23 +61,23 @@ class UserController extends Controller
     {
         $this->users->loadRelationships($user);
 
-        return $this->respondJson(
-            ['user' => $user]
-        );   
+        return $this->respondJson(['user' => $user]);   
     }
 
     /**
      * Insert a new user data.
      *
-     * @param  Request         $request
-     * @param  RoleService     $roles
-     * @param  ProfileService  $profiles
+     * @param  UserInsertRequest  $request
+     * @param  RoleService        $roles
+     * @param  ProfileService     $profiles
+     * @param  EntryService       $entries
      * @return Response
      */
     public function insert(
-        Request $request, 
+        UserInsertRequest $request, 
         RoleService $roles, 
-        ProfileService $profiles)
+        ProfileService $profiles,
+        EntryService $entries)
     {
         $user = $this->users->create($request->all());
 
@@ -83,7 +86,7 @@ class UserController extends Controller
         $profiles->make($user, $request->all());
 
         if ($user->isEntrant()) {
-            //
+            $entries->make($user, $request->input('activity'), $request->all());
         }
 
         return $this->respondJson(['user' => $user]);
@@ -92,14 +95,14 @@ class UserController extends Controller
     /**
      * Update a user data.
      *
-     * @param  Request         $request
-     * @param  User            $user
-     * @param  RoleService     $roles
-     * @param  ProfileService  $profiles
+     * @param  UserUpdateRequest  $request
+     * @param  User               $user
+     * @param  RoleService        $roles
+     * @param  ProfileService     $profiles
      * @return Response
      */
     public function update(
-        Request $request, 
+        UserUpdateRequest $request, 
         User $user,
         RoleService $roles, 
         ProfileService $profiles)

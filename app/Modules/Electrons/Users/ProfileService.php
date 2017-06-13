@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Storage;
 class ProfileService extends Service
 {
     /**
-     * The path to default profile picture.
+     * The URL to the default profile picture.
      *
-     * @var string
+     * @var Profile
      */
     protected $defaultPhoto = 'storage/images/default.jpg';
 
@@ -34,6 +34,10 @@ class ProfileService extends Service
     public function make(User $user, array $data)
     {
         $cleaned = $this->clean($data);
+
+        if (! array_has($cleaned, 'photo')) {
+            $cleaned['photo'] = $this->defaultPhoto;
+        }
 
         $user->profile()->create($cleaned);
 

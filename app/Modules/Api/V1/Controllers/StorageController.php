@@ -5,6 +5,7 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
+use App\Modules\Api\V1\Requests\Storage\StorageInsertRequest;
 use Illuminate\Http\Request;
 
 class StorageController extends Controller
@@ -32,10 +33,10 @@ class StorageController extends Controller
     /**
      * Inserts a new file into the storage
      *
-     * @param  Request  $request
+     * @param  StorageInsertRequest  $request
      * @return Response
      */
-    public function insert(Request $request)
+    public function insert(StorageInsertRequest $request)
     {
         return $this->respondJson(
             ['link' => $this->storages->upload($request->all())]

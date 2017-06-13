@@ -108,7 +108,7 @@ class StorageService extends Service
      */
     protected function putOnStorage($objectId, $objectType, UploadedFile $file)
     {
-        $directory = $this->makePath($this->detectMime($file), $objectType, $objectId);
+        $directory = $this->makePath($this->detectMime($file), $objectId, $objectType);
 
         if (! Storage::exists($directory)) {
             Storage::makeDirectory($directory);

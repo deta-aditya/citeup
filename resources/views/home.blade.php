@@ -17,13 +17,16 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/users">
-                    <template slot="header-text">GET User</template>
+                <api-box req-type="post" uri="/api/v1/storage" multipart="true" file-upload-name="file">
+                    <template slot="header-text">POST Storage</template>
                     <template slot="result-area" scope="props">
+                        <div class="panel-body">
+                            <pre>@{{ props.data.data.link }}</pre>
+                        </div>
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="user in props.data.data.users">
+                            <!-- <li class="list-group-item" v-for="user in props.data.data.users">
                                 <pre>@{{ user }}</pre>
-                            </li>
+                            </li> -->
                         </ul>
                     </template>
                 </api-box>
@@ -39,8 +42,8 @@
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/users/8">
-                    <template slot="header-text">Delete User/8</template>
+                <api-box req-type="put" uri="/api/v1/users/19">
+                    <template slot="header-text">PUT User/19</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
                             <pre>@{{ props.data.data.user }}</pre>

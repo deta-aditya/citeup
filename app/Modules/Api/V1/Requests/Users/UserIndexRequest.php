@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Modules\Api\V1\Requests;
+namespace App\Modules\Api\V1\Requests\Users;
 
 use App\User;
 use App\Modules\Electrons\Keys\KeyService;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\MessageBag;
 
 class UserIndexRequest extends ApiIndexRequest

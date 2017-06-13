@@ -6,30 +6,7 @@ use Illuminate\Support\Facades\Config;
 
 trait QueryConfigurations
 {
-    /**
-     * Get the main model.
-     *
-     * @return Model
-     */
-    public function getModel()
-    {
-        return new $this->model;
-    }
-
-    /**
-     * Get the table name of the model.
-     * The value is cached in the class for performance reason.
-     *
-     * @return string
-     */
-    public function getTableName()
-    {
-        if (empty($this->tableName)) {
-            $this->tableName = $this->getModel()->getTable();
-        }
-
-        return $this->tableName;
-    }
+    use HasMainModel;
 
     /**
      * Get the default value of certain query params.

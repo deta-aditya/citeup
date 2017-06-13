@@ -20,14 +20,6 @@ class ApiIndexRequest extends FormRequest
     protected $model = null;
 
     /**
-     * The table name of the model above.
-     * Leave this empty.
-     *
-     * @var string
-     */
-    protected $tableName = '';
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

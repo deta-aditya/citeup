@@ -63,10 +63,6 @@ class RoleService extends Service
             $role = Role::find($role);
         }
 
-        if ($role->id === $user->role->id) {
-            return $this;
-        }
-
         $user->role()->associate($role);
 
         $user->save();
