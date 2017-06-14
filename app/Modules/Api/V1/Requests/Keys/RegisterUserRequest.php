@@ -25,9 +25,9 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'register' => 'array',
-            'register.*' => 'numeric|exists:users,id',
+            'register.*' => 'int|exists:users,id',
             'unregister' => 'array',
-            'unregister.*' => 'numeric|exists:users,id',
+            'unregister.*' => 'int|exists:users,id',
         ];
     }
 }

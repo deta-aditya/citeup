@@ -12,7 +12,7 @@ class KeyService extends Service
     /**
      * The main model for the service.
      *
-     * @var User
+     * @var Key
      */
     protected $model = Key::class;
 
@@ -39,7 +39,7 @@ class KeyService extends Service
      * Create a new key and return it.
      *
      * @param  array  $data
-     * @return User
+     * @return Key
      */
     public function create(array $data)
     {
@@ -99,6 +99,13 @@ class KeyService extends Service
     public function grant(User $user, array $keys)
     {
         if (! empty($keys)) {
+
+            $user->load('keys');
+
+            $keys = collect($keys)->reject(function ($key) use ($user) {
+                return $user->keys->contains($key);
+            });
+
             $user->keys()->attach($keys);
         }
 
@@ -114,8 +121,10 @@ class KeyService extends Service
      */
     public function grantMultiple(array $users, array $keys)
     {
+        $users = User::find($users);
+
         foreach ($users as $user) {
-            $this->grant(User::find($user), $keys);
+            $this->grant($user, $keys);
         }
 
         return $this;
@@ -131,6 +140,13 @@ class KeyService extends Service
     public function ungrant(User $user, array $keys)
     {
         if (! empty($keys)) {
+
+            $user->load('keys');
+
+            $keys = collect($keys)->reject(function ($key) use ($user) {
+                return ! $user->keys->contains($key);
+            });
+
             $user->keys()->detach($keys);
         }
 
@@ -146,8 +162,10 @@ class KeyService extends Service
      */
     public function ungrantMultiple(array $users, array $keys)
     {
+        $users = User::find($users);
+
         foreach ($users as $user) {
-            $this->ungrant(User::find($user), $keys);
+            $this->ungrant($user, $keys);
         }
 
         return $this;

@@ -10,7 +10,7 @@ class ActivityService extends Service
     /**
      * The URL to the default icon.
      *
-     * @var Profile
+     * @var string
      */
     protected $defaultIcon = 'storage/images/default.jpg';
 

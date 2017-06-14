@@ -218,4 +218,18 @@ trait User
             $slug ? $query->whereIn('slug', $keys) : $query->whereIn('id', $keys);
         });
     }
+
+    /**
+     * Scope a query to only include users who were announced the given alert.
+     *
+     * @param  Builder  $query
+     * @param  int      $alert
+     * @return Builder
+     */
+    public function scopeOfAlert($query, $alert)
+    {
+        return $query->whereHas('alerts', function ($query) use ($alert) {
+            $query->where('alert_id', $alert);
+        });
+    }
 }

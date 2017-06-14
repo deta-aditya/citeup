@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\User;
 
 /*
@@ -15,7 +16,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    // User::getFillable(); 
+    //
 });
 
 /*
@@ -32,6 +33,8 @@ Route::group([
     Route::delete('/users/{user}', 'UserController@remove');
     Route::get('/users/{user}/keys', 'UserController@keys');
     Route::post('/users/{user}/keys', 'UserController@grantKeys');
+    Route::get('/users/{user}/alerts', 'UserController@alerts'); // todo
+    Route::post('/users/{user}/alerts', 'UserController@seeAlerts'); // todo
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
@@ -40,6 +43,14 @@ Route::group([
     Route::delete('/keys/{key}', 'KeyController@remove');
     Route::get('/keys/{key}/users', 'KeyController@users');
     Route::post('/keys/{key}/users', 'KeyController@registerUsers');
+
+    Route::get('/alerts', 'AlertController@index');
+    Route::post('/alerts', 'AlertController@insert');
+    Route::get('/alerts/{alert}', 'AlertController@show');
+    Route::put('/alerts/{alert}', 'AlertController@update');
+    Route::delete('/alerts/{alert}', 'AlertController@remove');
+    Route::get('/alerts/{alert}/users', 'AlertController@users'); // todo
+    Route::post('/alerts/{alert}/users', 'AlertController@announceUsers'); // todo
 
     Route::post('/activities', 'ActivityController@insert');
     Route::put('/activities/{activity}', 'ActivityController@update');

@@ -59,6 +59,7 @@ class UserIndexRequest extends ApiIndexRequest
             'activity' => 'exists:activities,id',
             'stage' => 'int|between:0,4',
             'keys' => 'string',
+            'alert' => 'exists:alerts,id',
         ];
     }
 

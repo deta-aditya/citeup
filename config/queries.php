@@ -64,7 +64,7 @@ return [
         ],
 
         'loadable' => [
-            'profile', 'entry', 'keys',
+            'profile', 'entry', 'keys', 'alerts',
         ],
 
     ],
@@ -81,6 +81,30 @@ return [
 
         'comparable' => [
             'name', 'slug',
+        ],
+
+        'loadable' => [
+            'users',
+        ],
+
+    ],
+
+    'alerts' => [
+
+        'delimiters' => [
+            'users' => ',',
+        ],
+
+        'selectable' => [
+            'title', 'content',
+        ],
+
+        'sortable' => [
+            'title'
+        ],
+
+        'comparable' => [
+            'title', 'content',
         ],
 
         'loadable' => [

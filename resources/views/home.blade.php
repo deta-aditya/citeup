@@ -17,40 +17,42 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/keys/2/users" >
-                    <template slot="header-text">POST Key/2/User</template>
+                <api-box req-type="post" uri="/api/v1/alerts" >
+                    <template slot="header-text">POST Alerts</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data }}</pre>
+                            <pre>@{{ props.data.data.alert }}</pre>
                         </div>
                         <!-- multipart="true" file-upload-name="file" -->
                         <!-- <ul class="list-group">
                             <li class="list-group-item" v-for="user in props.data.data.users">
                                 <pre>@{{ user }}</pre>
                             </li>
-                         --></ul>
+                         </ul>-->
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/keys/2/users">
-                    <template slot="header-text">GET Key/2/User</template>
+                <api-box req-type="get" uri="/api/v1/alerts">
+                    <template slot="header-text">GET Alerts</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="user in props.data.data.users">
-                                <pre>@{{ user }}</pre>
+                            <li class="list-group-item" v-for="alert in props.data.data.alerts">
+                                <pre>@{{ alert }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/keys/1">
-                    <template slot="header-text">DELETE Key/1</template>
+                <api-box req-type="post" uri="/api/v1/users/19/alerts">
+                    <template slot="header-text">POST Users/19/Alerts</template>
                     <template slot="result-area" scope="props">
-                        <div class="panel-body">
-                            <pre>@{{ props.data.data.key }}</pre>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="alert in props.data.data.alerts">
+                                <pre>@{{ alert }}</pre>
+                            </li>
+                        </ul>
                     </template>
                 </api-box>
             </div>

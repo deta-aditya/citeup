@@ -10,12 +10,15 @@ use App\Modules\Electrons\Users\ProfileService;
 use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Keys\KeyService;
+use App\Modules\Electrons\Alerts\AlertService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
 use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
 use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
+use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
+use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -170,6 +173,43 @@ class UserController extends Controller
 
         return $this->respondJson(
             ['keys' => $keys->getMultiple(['users' => $user->id])]
+        );
+    }
+
+    /**
+     * Get alerts announced to the given user.
+     *
+     * @param  AlertIndexRequest  $request
+     * @param  User               $user
+     * @param  AlertService       $alerts
+     * @return Response
+     */
+    public function alerts(AlertIndexRequest $request, User $user, AlertService $alerts)
+    {
+        $queries = $request->all();
+
+        $queries['users'] = $user->id;
+
+        return $this->respondJson(
+            ['alerts' => $alerts->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * See or unsee alerts by the given user.
+     *
+     * @param  SeeAlertRequest  $request
+     * @param  User             $user
+     * @param  AlertService     $alerts
+     * @return Response
+     */
+    public function seeAlerts(SeeAlertRequest $request, User $user, AlertService $alerts)
+    {
+        $alerts->see($user, $request->input('see', []))
+             ->unsee($user, $request->input('unsee', []));
+
+        return $this->respondJson(
+            ['alerts' => $alerts->getMultiple(['users' => $user->id])]
         );
     }
 }

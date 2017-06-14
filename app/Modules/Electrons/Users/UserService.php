@@ -4,6 +4,7 @@ namespace App\Modules\Electrons\Users;
 
 use App\User;
 use App\Modules\Nucleons\Service;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserService extends Service
 {
@@ -58,6 +59,10 @@ class UserService extends Service
             $query->hasKeys(explode(config(
                 'queries.users.delimiters.keys'
             ), $params['keys']));
+        } 
+
+        if (array_has($params, 'alert')) {
+            $query->ofAlert((int) $params['alert']);
         } 
 
         return $query->get();

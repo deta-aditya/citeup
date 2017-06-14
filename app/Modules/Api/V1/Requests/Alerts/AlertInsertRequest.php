@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Api\V1\Requests\Users;
+namespace App\Modules\Api\V1\Requests\Alerts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GrantKeysRequest extends FormRequest
+class AlertInsertRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class GrantKeysRequest extends FormRequest
     public function rules()
     {
         return [
-            'grant' => 'array',
-            'grant.*' => 'int|exists:keys,id',
-            'ungrant' => 'array',
-            'ungrant.*' => 'int|exists:keys,id',
+            'title' => 'required|string|max:191',
+            'content' => 'required|string|max:191',
+            'users' => 'array',
+            'users.*' => 'int|exists:users,id',
         ];
     }
 }
