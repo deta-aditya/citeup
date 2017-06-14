@@ -129,6 +129,23 @@ class UserService extends Service
     }
 
     /**
+     * Determine whether any of the given values is an invalid ID.
+     * 
+     * @param  array  $ids
+     * @return bool 
+     */
+    public function areInvalidId(array $ids)
+    {
+        try {
+            $this->getModel()->query()->findOrFail($ids);
+        } catch (ModelNotFoundException $e) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Create a new starter admin user and return it.
      * Caution: This method should only be invoked once on a seeder!
      *

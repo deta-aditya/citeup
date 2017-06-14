@@ -64,7 +64,27 @@ return [
         ],
 
         'loadable' => [
-            'profile', 'entry',
+            'profile', 'entry', 'keys',
+        ],
+
+    ],
+
+    'keys' => [
+
+        'selectable' => [
+            'name', 'slug',
+        ],
+
+        'sortable' => [
+            'name', 'slug',
+        ],
+
+        'comparable' => [
+            'name', 'slug',
+        ],
+
+        'loadable' => [
+            'users',
         ],
 
     ],

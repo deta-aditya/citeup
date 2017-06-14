@@ -71,6 +71,17 @@ trait QueryConfigurations
     }
 
     /**
+     * Get the base configuration of specified type.
+     *
+     * @param  string  $type
+     * @return mixed
+     */
+    public function getBase($type)
+    {
+        return config($this->getBaseConfigRoot($type));
+    }
+
+    /**
      * Get the config root string for base configuratuon.
      *
      * @param  string  $parent

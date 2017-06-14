@@ -140,6 +140,17 @@ trait User
     }
 
     /**
+     * Check whether this user can access the given key.
+     *
+     * @param  string|int  $key
+     * @return bool
+     */
+    public function hasKey($key)
+    {
+        return (bool) $this->keys()->where('id', $key)->orWhere('slug', $key)->count();
+    }
+
+    /**
      * Scope a query to only include users of the given role.
      *
      * @param  Builder  $query
@@ -198,12 +209,13 @@ trait User
      *
      * @param  Builder  $query
      * @param  array    $keys
+     * @param  bool     $slug
      * @return Builder
      */
-    public function scopeHasKeys($query, $keys)
+    public function scopeHasKeys($query, $keys, $slug = false)
     {
-        return $query->whereHas('keys', function ($query) use ($keys) {
-            $query->whereIn('id', $keys);
+        return $query->whereHas('keys', function ($query) use ($keys, $slug) {
+            $slug ? $query->whereIn('slug', $keys) : $query->whereIn('id', $keys);
         });
     }
 }

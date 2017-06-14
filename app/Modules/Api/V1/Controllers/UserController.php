@@ -9,10 +9,13 @@ use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Electrons\Users\ProfileService;
 use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Storage\StorageService;
+use App\Modules\Electrons\Keys\KeyService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
 use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
+use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
+use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -131,5 +134,42 @@ class UserController extends Controller
         $storages->destroy('images', $user->id, 'profile');
 
         return $this->respondJson(['user' => $user]);
+    }
+
+    /**
+     * Get keys owned by the given user.
+     *
+     * @param  KeyIndexRequest  $request
+     * @param  User              $user
+     * @param  KeyService        $keys
+     * @return Response
+     */
+    public function keys(KeyIndexRequest $request, User $user, KeyService $keys)
+    {
+        $queries = $request->all();
+
+        $queries['users'] = $user->id;
+
+        return $this->respondJson(
+            ['keys' => $keys->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * Modify keys ownership to the given user.
+     *
+     * @param  GrantKeysRequest  $request
+     * @param  User              $user
+     * @param  KeyService        $keys
+     * @return Response
+     */
+    public function grantKeys(GrantKeysRequest $request, User $user, KeyService $keys)
+    {
+        $keys->grant($user, $request->input('grant', []))
+             ->ungrant($user, $request->input('ungrant', []));
+
+        return $this->respondJson(
+            ['keys' => $keys->getMultiple(['users' => $user->id])]
+        );
     }
 }

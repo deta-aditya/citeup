@@ -164,7 +164,7 @@ abstract class Service
 
         $selects = array_intersect($selects, $this->getSelectable());
 
-        return array_merge($this->config['selectable'], $selects);
+        return array_merge($this->getBase('selectable'), $selects);
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class Service
 
         $withs = array_intersect($withs, $this->getLoadable());
 
-        return array_merge($this->config['loadable'], $withs);
+        return array_merge($this->getBase('loadable'), $withs);
     }
 
     /**

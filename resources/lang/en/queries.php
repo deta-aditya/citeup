@@ -11,5 +11,7 @@ return [
         'day' => 'The value on "day" command should be between 1 and 31.',
         'column' => 'The first subvalue on "column" command should be either one of these: (<, <=, =, >=, >, <>).',
     ],
-    'keys' => 'The key values contain invalid ID(s).',
+
+    'ids' => 'The following field contains invalid ID(s).',
+    'slugs' => 'The following keys contain invalid slugs(s).',
 ];

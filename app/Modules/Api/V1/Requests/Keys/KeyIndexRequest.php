@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Modules\Api\V1\Requests\Users;
+namespace App\Modules\Api\V1\Requests\Keys;
 
-use App\User;
+use App\Modules\Models\Key;
 use App\Modules\Electrons\Keys\KeyService;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\MessageBag;
 
-class UserIndexRequest extends ApiIndexRequest
+class KeyIndexRequest extends ApiIndexRequest
 {
     /**
      * The main model for the request.
      *
-     * @var User
+     * @var Key
      */
-    protected $model = User::class;
+    protected $model = Key::class;
 
     /**
      * A key service instance.
@@ -53,12 +53,7 @@ class UserIndexRequest extends ApiIndexRequest
     protected function additional()
     {
         return [
-            'role' => 'exists:roles,id',
-            'name' => 'string',
-            'section' => 'string',
-            'activity' => 'exists:activities,id',
-            'stage' => 'int|between:0,4',
-            'keys' => 'string',
+            'users' => 'string',
         ];
     }
 
@@ -73,25 +68,25 @@ class UserIndexRequest extends ApiIndexRequest
     {
         $errors = $validator->errors();
 
-        $this->evaluateKeys($errors);
+        $this->evaluateUsers($errors);
     }
 
     /**
-     * Evaluate the keys parameter.
+     * Evaluate the users parameter.
      *
      * @param  MessageBag  $errors
      * @return this
      */
-    protected function evaluateKeys(MessageBag $errors) 
+    protected function evaluateUsers(MessageBag $errors) 
     {
-        if (! $this->has('keys')) {
+        if (! $this->has('users')) {
             return $this;
         }
 
-        $keys = explode(config('queries.users.delimiters.keys'), $this->input('keys'));
+        $users = explode(config('queries.users.delimiters.keys'), $this->input('users'));
 
-        if ($this->keys->areInvalidId($keys)) {
-            $errors->add('keys', trans('queries.ids'));
+        if ($this->users->areInvalidId($users)) {
+            $errors->add('users', trans('queries.ids'));
         }
 
         return $this;
