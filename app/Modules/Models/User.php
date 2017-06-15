@@ -202,6 +202,20 @@ trait User
     }
 
     /**
+     * Scope a query to only include users who enter the given activities.
+     *
+     * @param  Builder  $query
+     * @param  array    $activities
+     * @return Builder
+     */
+    public function scopeOfActivities($query, $activities)
+    {
+        return $query->whereHas('activity', function ($query) use ($activities) {
+            $query->whereIn('id', $activities);
+        });
+    }
+
+    /**
      * Scope a query to only include users of the given stage.
      *
      * @param  Builder  $query

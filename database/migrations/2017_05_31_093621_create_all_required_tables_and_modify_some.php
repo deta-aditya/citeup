@@ -123,7 +123,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('entry_id')->unsigned();
-            $table->string('picture');
+            $table->string('file');
             $table->tinyInteger('type')->unsigned();
             $table->timestamps();
 

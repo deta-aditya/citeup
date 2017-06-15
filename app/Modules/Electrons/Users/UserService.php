@@ -51,6 +51,10 @@ class UserService extends Service
             $query->ofActivity((int) $params['activity']);
         } 
 
+        if (array_has($params, 'activities')) {
+            $query->ofActivities(explode($this->getDelimiter('activities'), $params['activities']));
+        } 
+
         if (array_has($params, 'stage')) {
             $query->ofStage((int) $params['stage']);
         } 

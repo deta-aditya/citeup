@@ -49,6 +49,7 @@ return [
 
         'delimiters' => [
             'keys' => ',',
+            'activities' => ',',
         ],
 
         'selectable' => [
@@ -145,6 +146,54 @@ return [
 
         'loadable' => [
             'activity',
+        ],
+
+    ],
+
+    'submissions' => [
+
+        'selectable' => [
+            'description', 'picture',
+        ],
+
+        'comparable' => [
+            'description', 'picture',
+        ],
+
+        'loadable' => [
+            'entry',
+        ],
+
+    ],
+
+    'documents' => [
+
+        'selectable' => [
+            'file', 'type',
+        ],
+
+        'comparable' => [
+            'file', 'type',
+        ],
+
+        'loadable' => [
+            'entry',
+        ],
+
+    ],
+
+    'testimonials' => [
+
+        'selectable' => [
+            'content', 'rating',
+        ],
+
+        'comparable' => [
+            'content', 'rating',
+        ],
+
+        'loadable' => [
+            'entry',
         ],
 
     ],

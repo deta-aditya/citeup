@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class StorageService extends Service
 {
+    /*
+     | STORAGE SERVICE
+     | ===========================
+     | Types:   Profile => /profiles
+     |          Activity => /activities
+     |          Submission => /subs
+     |          Document => /docs
+     |
+     */
+
     /**
      * The trailing path to the storage.
      *
@@ -154,6 +164,8 @@ class StorageService extends Service
         switch (File::mimeType($file->path())) {
             case 'image/jpeg': case 'image/jpg': case 'image/png': case 'image/gif':
                 return 'images';
+            default:
+                return 'others';
         }
     }
 }

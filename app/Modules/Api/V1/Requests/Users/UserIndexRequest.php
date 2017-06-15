@@ -4,6 +4,7 @@ namespace App\Modules\Api\V1\Requests\Users;
 
 use App\User;
 use App\Modules\Electrons\Keys\KeyService;
+use App\Modules\Electrons\Activities\ActivityService;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\MessageBag;
@@ -25,14 +26,23 @@ class UserIndexRequest extends ApiIndexRequest
     protected $keys;
 
     /**
+     * A activity service instance.
+     *
+     * @var ActivityService
+     */
+    protected $activities;
+
+    /**
      * Create a new request instance
      * 
-     * @param  KeyService  $keys
+     * @param  KeyService       $keys
+     * @param  ActivityService  $activities
      * @return void
      */
-    public function __construct(KeyService $keys)
+    public function __construct(KeyService $keys, ActivityService $activities)
     {
         $this->keys = $keys;
+        $this->activities = $activities;
     }
 
     /**
@@ -57,6 +67,7 @@ class UserIndexRequest extends ApiIndexRequest
             'name' => 'string',
             'section' => 'string',
             'activity' => 'exists:activities,id',
+            'activities' => 'string',
             'stage' => 'int|between:0,5',
             'keys' => 'string',
             'alert' => 'exists:alerts,id',
@@ -74,7 +85,8 @@ class UserIndexRequest extends ApiIndexRequest
     {
         $errors = $validator->errors();
 
-        $this->evaluateKeys($errors);
+        $this->evaluateKeys($errors)
+             ->evaluateActivities($errors);
     }
 
     /**
@@ -93,6 +105,27 @@ class UserIndexRequest extends ApiIndexRequest
 
         if ($this->keys->areInvalidId($keys)) {
             $errors->add('keys', trans('queries.ids'));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Evaluate the activities parameter.
+     *
+     * @param  MessageBag  $errors
+     * @return this
+     */
+    protected function evaluateActivities(MessageBag $errors) 
+    {
+        if (! $this->has('activities')) {
+            return $this;
+        }
+
+        $activities = explode($this->getDelimiter('activities'), $this->input('activities'));
+
+        if ($this->activities->areInvalidId($activities)) {
+            $errors->add('activities', trans('queries.ids'));
         }
 
         return $this;

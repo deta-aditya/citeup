@@ -2,7 +2,6 @@
 
 namespace App\Modules\Api\V1\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Modules\Models\Alert;
 use App\Modules\Electrons\Alerts\AlertService;
 use App\Modules\Electrons\Users\UserService;
@@ -12,6 +11,7 @@ use App\Modules\Api\V1\Requests\Alerts\AlertInsertRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertUpdateRequest;
 use App\Modules\Api\V1\Requests\Alerts\AnnounceAlertRequest;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AlertController extends Controller

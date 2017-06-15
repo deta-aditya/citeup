@@ -98,4 +98,21 @@ class ActivityService extends Service
 
         return $this;
     }
+
+    /**
+     * Determine whether any of the given values is an invalid ID.
+     * 
+     * @param  array  $ids
+     * @return bool 
+     */
+    public function areInvalidId(array $ids)
+    {
+        try {
+            $this->getModel()->query()->findOrFail($ids);
+        } catch (ModelNotFoundException $e) {
+            return true;
+        }
+
+        return false;
+    }
 }

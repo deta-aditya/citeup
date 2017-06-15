@@ -69,6 +69,30 @@ Route::group([
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
 
     Route::post('/entries/{entry}', 'EntryController@modify');
+    Route::get('/entries/{entry}/submissions', 'EntryController@submissions');
+    Route::post('/entries/{entry}/submissions', 'EntryController@addSubmission');
+    Route::get('/entries/{entry}/documents', 'EntryController@documents');
+    Route::post('/entries/{entry}/documents', 'EntryController@addDocument');
+    Route::get('/entries/{entry}/testimonials', 'EntryController@testimonials');
+    Route::post('/entries/{entry}/testimonials', 'EntryController@addTestimonial');
+
+    Route::get('/submissions', 'SubmissionController@index');
+    Route::post('/submissions', 'SubmissionController@insert');
+    Route::get('/submissions/{submission}', 'SubmissionController@show');
+    Route::put('/submissions/{submission}', 'SubmissionController@update');
+    Route::delete('/submissions/{submission}', 'SubmissionController@remove');
+
+    Route::get('/documents', 'DocumentController@index');
+    Route::post('/documents', 'DocumentController@insert');
+    Route::get('/documents/{document}', 'DocumentController@show');
+    Route::put('/documents/{document}', 'DocumentController@update');
+    Route::delete('/documents/{document}', 'DocumentController@remove');
+
+    Route::get('/testimonials', 'TestimonialController@index');
+    Route::post('/testimonials', 'TestimonialController@insert');
+    Route::get('/testimonials/{testimonial}', 'TestimonialController@show');
+    Route::put('/testimonials/{testimonial}', 'TestimonialController@update');
+    Route::delete('/testimonials/{testimonial}', 'TestimonialController@remove');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');
