@@ -3,10 +3,16 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Activity;
+use App\Modules\Electrons\Users\UserService;
+use App\Modules\Electrons\Activities\ScheduleService;
 use App\Modules\Electrons\Activities\ActivityService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
+use App\Modules\Api\V1\Requests\Activities\ActivityIndexRequest;
 use App\Modules\Api\V1\Requests\Activities\ActivityInsertRequest;
 use App\Modules\Api\V1\Requests\Activities\ActivityUpdateRequest;
+use App\Modules\Api\V1\Requests\Activities\MakeScheduleRequest;
+use App\Modules\Api\V1\Requests\Schedules\ScheduleIndexRequest;
+use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -35,10 +41,10 @@ class ActivityController extends Controller
     /**
      * Get an array of activities data.
      *
-     * @param  Request  $request
+     * @param  ActivityIndexRequest  $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(ActivityIndexRequest $request)
     {
         return $this->respondJson(
             ['activities' => $this->activities->getMultiple($request->all())]
@@ -46,7 +52,7 @@ class ActivityController extends Controller
     }
 
     /**
-     * Get a activity data.
+     * Get an activity data.
      *
      * @param  Request   $request
      * @param  Activity  $activity
@@ -84,5 +90,76 @@ class ActivityController extends Controller
         $this->activities->update($activity, $request->all());
 
         return $this->respondJson(['activity' => $activity]);
+    }
+
+    /**
+     * Delete an activity data.
+     *
+     * @param  Request   $request
+     * @param  Activity  $activity
+     * @return Response
+     */
+    public function remove(Request $request, Activity $activity)
+    {
+        $this->activities->remove($activity);
+
+        return $this->respondJson(['activity' => $activity]);
+    }
+
+    /**
+     * Get the users who entered the given activity.
+     * 
+     * @param  UserIndexRequest  $request
+     * @param  Activity          $activity
+     * @param  UserService       $users
+     * @param  Response
+     */
+    public function users(UserIndexRequest $request, Activity $activity, UserService $users)
+    {
+        $queries = $request->all();
+
+        $queries['activity'] = $activity->id;
+
+        return $this->respondJson(
+            ['users' => $users->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * Get the schedules of given activity.
+     * 
+     * @param  ScheduleIndexRequest  $request
+     * @param  Activity              $activity
+     * @param  ScheduleService       $schedules
+     * @param  Response
+     */
+    public function schedules(ScheduleIndexRequest $request, Activity $activity, ScheduleService $schedules)
+    {
+        $queries = $request->all();
+
+        $queries['activity'] = $activity->id;
+
+        return $this->respondJson(
+            ['schedules' => $schedules->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * Insert a new schedule for the given activity.
+     *
+     * @param  MakeScheduleRequest   $request
+     * @param  Activity              $activity
+     * @param  ScheduleService       $schedules
+     * @return Response
+     */
+    public function makeSchedule(MakeScheduleRequest $request, Activity $activity, ScheduleService $schedules)
+    {
+        $data = $request->all();
+
+        $data['activity'] = $activity->id;
+
+        $schedule = $schedules->create($data);
+
+        return $this->respondJson(['schedule' => $schedule]);
     }
 }

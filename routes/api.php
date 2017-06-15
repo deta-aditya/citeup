@@ -16,7 +16,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    //
+    return User::find(19)->activity->first();
 });
 
 /*
@@ -33,8 +33,8 @@ Route::group([
     Route::delete('/users/{user}', 'UserController@remove');
     Route::get('/users/{user}/keys', 'UserController@keys');
     Route::post('/users/{user}/keys', 'UserController@grantKeys');
-    Route::get('/users/{user}/alerts', 'UserController@alerts'); // todo
-    Route::post('/users/{user}/alerts', 'UserController@seeAlerts'); // todo
+    Route::get('/users/{user}/alerts', 'UserController@alerts');
+    Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
@@ -49,11 +49,23 @@ Route::group([
     Route::get('/alerts/{alert}', 'AlertController@show');
     Route::put('/alerts/{alert}', 'AlertController@update');
     Route::delete('/alerts/{alert}', 'AlertController@remove');
-    Route::get('/alerts/{alert}/users', 'AlertController@users'); // todo
-    Route::post('/alerts/{alert}/users', 'AlertController@announceUsers'); // todo
+    Route::get('/alerts/{alert}/users', 'AlertController@users');
+    Route::post('/alerts/{alert}/users', 'AlertController@announceUsers');
 
+    Route::get('/activities', 'ActivityController@index');
     Route::post('/activities', 'ActivityController@insert');
+    Route::get('/activities/{activity}', 'ActivityController@show');
     Route::put('/activities/{activity}', 'ActivityController@update');
+    Route::delete('/activities/{activity}', 'ActivityController@remove');
+    Route::get('/activities/{activity}/users', 'ActivityController@users');
+    Route::get('/activities/{activity}/schedules', 'ActivityController@schedules');
+    Route::post('/activities/{activity}/schedules', 'ActivityController@makeSchedule');
+
+    Route::get('/schedules', 'ScheduleController@index');
+    Route::post('/schedules', 'ScheduleController@insert');
+    Route::get('/schedules/{schedule}', 'ScheduleController@show');
+    Route::put('/schedules/{schedule}', 'ScheduleController@update');
+    Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');

@@ -45,6 +45,17 @@ trait User
     }
 
     /**
+     * Get the activity that the user is entering.
+     *
+     * @return BelongsToMany
+     */
+    public function activity()
+    {
+        return $this->belongsToMany('App\Modules\Models\Activity', 'entries')
+                    ->withPivot('id', 'stage', 'status');
+    }
+
+    /**
      * Get the documents of the user.
      *
      * @return HasManyThrough

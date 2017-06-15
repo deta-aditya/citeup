@@ -29,6 +29,9 @@ class ActivityService extends Service
      */
     public function getMultiple(array $params)
     {
+        $query = $this->parseQueryString($this->getModel()->query(), $params);
+
+        return $query->get();
     }
 
     /**
@@ -58,10 +61,13 @@ class ActivityService extends Service
      */
     public function loadRelationships(Activity $activity)
     {
+        $activity->load('schedules');
+
+        return $this;
     }
 
     /**
-     * Update a activity with new data.
+     * Update an activity with new data.
      *
      * @param  Activity   $activity
      * @param  array      $data
@@ -76,6 +82,19 @@ class ActivityService extends Service
         }
 
         $activity->save();
+
+        return $this;
+    }
+
+    /**
+     * Remove an activity from the database.
+     *
+     * @param  Activity  $activity
+     * @return this
+     */
+    public function remove(Activity $activity)
+    {
+        $activity->delete();
 
         return $this;
     }

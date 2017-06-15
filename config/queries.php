@@ -64,7 +64,7 @@ return [
         ],
 
         'loadable' => [
-            'profile', 'entry', 'keys', 'alerts',
+            'profile', 'entry', 'keys', 'alerts', 'activity'
         ],
 
     ],
@@ -109,6 +109,42 @@ return [
 
         'loadable' => [
             'users',
+        ],
+
+    ],
+
+    'activities' => [
+
+        'selectable' => [
+            'name', 'description', 'short_description', 'icon',
+        ],
+
+        'sortable' => [
+            'name',
+        ],
+
+        'comparable' => [
+            'name', 'description', 'short_description',
+        ],
+
+        'loadable' => [
+            'entries', 'users', 'schedules', 'testimonials', 'edits',
+        ],
+
+    ],
+
+    'schedules' => [
+
+        'selectable' => [
+            'description', 'held_at',
+        ],
+
+        'comparable' => [
+            'description', 'held_at',
+        ],
+
+        'loadable' => [
+            'activity',
         ],
 
     ],

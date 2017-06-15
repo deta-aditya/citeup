@@ -13,7 +13,7 @@ class Schedule extends Model implements Editable
      * @var array
      */
     protected $fillable = [
-        'held_at', 'description',
+        'activity_id', 'held_at', 'description',
     ];
 
     /**
@@ -36,4 +36,15 @@ class Schedule extends Model implements Editable
         return $this->morphMany('App\Modules\Models\Edit', 'editable');
     }
 
+    /**
+     * Scope a query to only include schedules of the given activity.
+     *
+     * @param  Builder  $query
+     * @param  int      $activity
+     * @return Builder
+     */
+    public function scopeOfActivity($query, $activity)
+    {
+        return $query->where('activity_id', $activity);
+    }
 }

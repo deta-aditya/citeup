@@ -27,6 +27,17 @@ class Activity extends Model implements Editable
     }
 
     /**
+     * Get the users that are entering the activity.
+     *
+     * @return BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'entries')
+                    ->withPivot('id', 'stage', 'status');
+    }
+
+    /**
      * Get the schedules of the activity.
      *
      * @return HasMany
