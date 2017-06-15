@@ -57,7 +57,7 @@ class UserIndexRequest extends ApiIndexRequest
             'name' => 'string',
             'section' => 'string',
             'activity' => 'exists:activities,id',
-            'stage' => 'int|between:0,4',
+            'stage' => 'int|between:0,5',
             'keys' => 'string',
             'alert' => 'exists:alerts,id',
         ];

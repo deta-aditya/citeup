@@ -16,7 +16,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return User::find(19)->activity->first();
+    return User::find(19)->entry;
 });
 
 /*
@@ -35,6 +35,7 @@ Route::group([
     Route::post('/users/{user}/keys', 'UserController@grantKeys');
     Route::get('/users/{user}/alerts', 'UserController@alerts');
     Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
+    Route::post('/users/{user}/entries', 'UserController@modifyEntry');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
@@ -66,6 +67,8 @@ Route::group([
     Route::get('/schedules/{schedule}', 'ScheduleController@show');
     Route::put('/schedules/{schedule}', 'ScheduleController@update');
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
+
+    Route::post('/entries/{entry}', 'EntryController@modify');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');

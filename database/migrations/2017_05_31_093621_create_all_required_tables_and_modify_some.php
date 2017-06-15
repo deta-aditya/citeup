@@ -106,7 +106,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->increments('id');
             $table->integer('activity_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('stage')->unsigned()->default(1);
+            $table->tinyInteger('stage')->unsigned()->default(0);
             $table->tinyInteger('status')->unsigned()->default(1);
 
             $table->foreign('activity_id')

@@ -29,21 +29,21 @@
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/schedules/2">
-                    <template slot="header-text">DELETE Schedules/2</template>
+                <api-box req-type="get" uri="/api/v1/users/19">
+                    <template slot="header-text">GET Users/19</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.schedule }}</pre>
+                            <pre>@{{ props.data.data.user }}</pre>
                         </div>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/activities/1/schedules">
-                    <template slot="header-text">POST Activities/1/Schedules</template>
+                <api-box req-type="post" uri="/api/v1/users/19/entries">
+                    <template slot="header-text">POST Users/19/Entry</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.schedule }}</pre>
+                            <pre>@{{ props.data.data.entry }}</pre>
                         </div>
                     </template>
                 </api-box>

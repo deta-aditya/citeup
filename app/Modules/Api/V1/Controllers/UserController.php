@@ -19,6 +19,7 @@ use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
 use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
+use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -211,5 +212,23 @@ class UserController extends Controller
         return $this->respondJson(
             ['alerts' => $alerts->getMultiple(['users' => $user->id])]
         );
+    }
+
+    /**
+     * Modify the entry of the given user.
+     *
+     * @param  EntryModifyRequest  $request
+     * @param  User                $user
+     * @param  EntryService        $entries
+     * @return Response
+     */
+    public function modifyEntry(EntryModifyRequest $request, User $user, EntryService $entries)
+    {
+        $entry = $user->entry;
+
+        $entries->modifyStage($entry, $request->input('stage', null))
+                ->modifyStatus($entry, $request->input('status', null));
+
+        return $this->respondJson(['entry' => $entry]);
     }
 }
