@@ -109,14 +109,14 @@ Route::group([
     Route::get('/questions/{question}', 'QuestionController@show');
     Route::put('/questions/{question}', 'QuestionController@update');
     Route::delete('/questions/{question}', 'QuestionController@remove');
-    Route::get('/questions/{question}/choices', 'QuestionController@questions'); //
+    Route::get('/questions/{question}/choices', 'QuestionController@choices');
     Route::get('/questions/{question}/answers', 'QuestionController@answers'); //
 
-    Route::get('/choices', 'ChoiceController@index'); //
-    Route::post('/choices', 'ChoiceController@insert'); //
-    Route::get('/choices/{choice}', 'ChoiceController@show'); //
-    Route::put('/choices/{choice}', 'ChoiceController@update'); //
-    Route::delete('/choices/{choice}', 'ChoiceController@remove'); //
+    Route::get('/choices', 'ChoiceController@index');
+    Route::post('/choices', 'ChoiceController@insert');
+    Route::get('/choices/{choice}', 'ChoiceController@show');
+    Route::put('/choices/{choice}', 'ChoiceController@update');
+    Route::delete('/choices/{choice}', 'ChoiceController@remove');
 
     Route::get('/answers', 'AnswerController@index'); //
     Route::post('/answers', 'AnswerController@insert'); //

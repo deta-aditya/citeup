@@ -238,4 +238,20 @@ return [
 
     ],
 
+    'choices' => [
+
+        'selectable' => [
+            'content', 'picture',
+        ],
+
+        'comparable' => [
+            'content', 'picture',
+        ],
+
+        'loadable' => [
+            'question', 'answers',
+        ],
+
+    ],
+
 ];

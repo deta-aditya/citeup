@@ -4,9 +4,11 @@ namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Question;
 use App\Modules\Electrons\Questions\QuestionService;
+use App\Modules\Electrons\Questions\ChoiceService;
 use App\Modules\Api\V1\Requests\Questions\QuestionIndexRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionInsertRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionUpdateRequest;
+use App\Modules\Api\V1\Requests\Choices\ChoiceIndexRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -97,5 +99,24 @@ class QuestionController extends Controller
         $this->questions->remove($question);
 
         return $this->respondJson(['question' => $question]);
+    }
+
+    /**
+     * Get the choices of given question.
+     * 
+     * @param  ChoiceIndexRequest  $request
+     * @param  Question            $question
+     * @param  ChoiceService       $choices
+     * @param  Response
+     */
+    public function choices(ChoiceIndexRequest $request, Question $question, ChoiceService $choices)
+    {
+        $queries = $request->all();
+
+        $queries['question'] = $question->id;
+
+        return $this->respondJson(
+            ['choices' => $choices->getMultiple($queries)]
+        );
     }
 }
