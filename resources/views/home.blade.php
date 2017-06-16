@@ -17,35 +17,33 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/questions/2/answers">
-                    <template slot="header-text">GET Questions/2/Answers</template>
+                <api-box req-type="get" uri="/api/v1/galleries">
+                    <template slot="header-text">GET Galleries</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="answer in props.data.data.answers">
-                                <pre>@{{ answer }}</pre>
+                            <li class="list-group-item" v-for="gallery in props.data.data.galleries">
+                                <pre>@{{ gallery }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/attempts/2/answers">
-                    <template slot="header-text">GET Attempts/2/Answers</template>
-                    <template slot="result-area" scope="props">
-                        <ul class="list-group">
-                            <li class="list-group-item" v-for="answer in props.data.data.answers">
-                                <pre>@{{ answer }}</pre>
-                            </li>
-                        </ul>
-                    </template>
-                </api-box>
-            </div>
-            <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/answers/1">
-                    <template slot="header-text">DELETE Answers/1</template>
+                <api-box req-type="put" uri="/api/v1/galleries/1">
+                    <template slot="header-text">PUT Galleries/1</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.answer }}</pre>
+                            <pre>@{{ props.data.data.gallery }}</pre>
+                        </div>
+                    </template>
+                </api-box>
+            </div>
+            <div class="col-md-4">
+                <api-box req-type="delete" uri="/api/v1/galleries/1">
+                    <template slot="header-text">DELETE Galleries/1</template>
+                    <template slot="result-area" scope="props">
+                        <div class="panel-body">
+                            <pre>@{{ props.data.data.gallery }}</pre>
                         </div>
                     </template>
                 </api-box>

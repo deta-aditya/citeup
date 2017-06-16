@@ -123,6 +123,18 @@ Route::group([
     Route::get('/answers/{answer}', 'AnswerController@show');
     Route::delete('/answers/{answer}', 'AnswerController@remove');
 
+    Route::get('/galleries', 'GalleryController@index');
+    Route::post('/galleries', 'GalleryController@insert');
+    Route::get('/galleries/{gallery}', 'GalleryController@show');
+    Route::put('/galleries/{gallery}', 'GalleryController@update');
+    Route::delete('/galleries/{gallery}', 'GalleryController@remove');
+
+    Route::get('/news', 'NewsController@index'); //
+    Route::post('/news', 'NewsController@insert'); //
+    Route::get('/news/{news}', 'NewsController@show'); //
+    Route::put('/news/{news}', 'NewsController@update'); //
+    Route::delete('/news/{news}', 'NewsController@remove'); //
+
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');
 

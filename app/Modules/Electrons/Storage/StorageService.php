@@ -18,6 +18,8 @@ class StorageService extends Service
      |          Document    =>      /documents
      |          Question    =>      /questions
      |          Choice      =>      /choices
+     |          Gallery     =>      /galleries
+     |          News        =>      /news
      |
      */
 

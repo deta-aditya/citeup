@@ -266,4 +266,20 @@ return [
 
     ],
 
+    'galleries' => [
+
+        'selectable' => [
+            'caption', 'picture',
+        ],
+
+        'comparable' => [
+            'caption', 'picture',
+        ],
+
+        'loadable' => [
+            //
+        ],
+
+    ],
+
 ];
