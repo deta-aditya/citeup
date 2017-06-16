@@ -39,7 +39,11 @@ class EditService extends Service
         }
 
         if (array_has($params, 'gallery')) {
-            $query->ofGallery($params['activity']);
+            $query->ofGallery($params['gallery']);
+        }
+
+        if (array_has($params, 'user')) {
+            $query->ofUser($params['user']);
         }
 
         return $query->get();

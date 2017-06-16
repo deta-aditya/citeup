@@ -98,4 +98,23 @@ class GalleryController extends Controller
 
         return $this->respondJson(['gallery' => $gallery]);
     }
+
+    /**
+     * Get edits of the given gallery.
+     *
+     * @param  EditIndexRequest   $request
+     * @param  Gallery            $gallery
+     * @param  EditService        $edits
+     * @return Response
+     */
+    public function edits(EditIndexRequest $request, Gallery $gallery, EditService $edits)
+    {
+        $queries = $request->all();
+
+        $queries['gallery'] = $gallery->id;
+
+        return $this->respondJson(
+            ['edits' => $edits->getMultiple($queries)]
+        );
+    }
 }

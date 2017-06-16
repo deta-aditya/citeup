@@ -98,4 +98,16 @@ class Edit extends Model
             ['editable_id', '=', $gallery],
         ]);
     }
+    
+    /**
+     * Scope a query to only include edits by the given user ID.
+     *
+     * @param  Builder  $query
+     * @param  int      $user
+     * @return Builder
+     */
+    public function scopeOfUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
 }

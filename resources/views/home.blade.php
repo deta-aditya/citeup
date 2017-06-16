@@ -17,8 +17,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/edits">
-                    <template slot="header-text">GET Edits</template>
+                <api-box req-type="get" uri="/api/v1/activities/6/edits">
+                    <template slot="header-text">GET Activities/6/Edits</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
                             <li class="list-group-item" v-for="edit in props.data.data.edits">

@@ -36,6 +36,7 @@ Route::group([
     Route::get('/users/{user}/alerts', 'UserController@alerts');
     Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
     Route::post('/users/{user}/entries', 'UserController@modifyEntry');
+    Route::get('/users/{user}/edits', 'UserController@edits');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
@@ -61,12 +62,14 @@ Route::group([
     Route::get('/activities/{activity}/users', 'ActivityController@users');
     Route::get('/activities/{activity}/schedules', 'ActivityController@schedules');
     Route::post('/activities/{activity}/schedules', 'ActivityController@makeSchedule');
+    Route::get('/activities/{activity}/edits', 'ActivityController@edits');
 
     Route::get('/schedules', 'ScheduleController@index');
     Route::post('/schedules', 'ScheduleController@insert');
     Route::get('/schedules/{schedule}', 'ScheduleController@show');
     Route::put('/schedules/{schedule}', 'ScheduleController@update');
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
+    Route::get('/schedules/{schedule}/edits', 'ScheduleController@edits');
 
     Route::get('/entries/{entry}', 'EntryController@show');
     Route::post('/entries/{entry}', 'EntryController@modify');
@@ -128,12 +131,14 @@ Route::group([
     Route::get('/galleries/{gallery}', 'GalleryController@show');
     Route::put('/galleries/{gallery}', 'GalleryController@update');
     Route::delete('/galleries/{gallery}', 'GalleryController@remove');
+    Route::get('/galleries/{gallery}/edits', 'GalleryController@edits');
 
     Route::get('/news', 'NewsController@index');
     Route::post('/news', 'NewsController@insert');
     Route::get('/news/{news}', 'NewsController@show');
     Route::put('/news/{news}', 'NewsController@update');
     Route::delete('/news/{news}', 'NewsController@remove');
+    Route::get('/news/{news}/edits', 'NewsController@edits');
     
     Route::get('/edits', 'EditController@index');
 

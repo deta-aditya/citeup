@@ -3,7 +3,9 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Schedule;
+use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Activities\ScheduleService;
+use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleIndexRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleInsertRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleUpdateRequest;
@@ -97,5 +99,24 @@ class ScheduleController extends Controller
         $this->schedules->remove($schedule);
 
         return $this->respondJson(['schedule' => $schedule]);
+    }
+
+    /**
+     * Get edits of the given schedule.
+     *
+     * @param  EditIndexRequest   $request
+     * @param  Schedule           $schedule
+     * @param  EditService        $edits
+     * @return Response
+     */
+    public function edits(EditIndexRequest $request, Schedule $schedule, EditService $edits)
+    {
+        $queries = $request->all();
+
+        $queries['schedule'] = $schedule->id;
+
+        return $this->respondJson(
+            ['edits' => $edits->getMultiple($queries)]
+        );
     }
 }

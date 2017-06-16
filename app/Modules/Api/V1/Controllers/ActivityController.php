@@ -3,6 +3,7 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Activity;
+use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Activities\ScheduleService;
 use App\Modules\Electrons\Activities\ActivityService;
@@ -12,6 +13,7 @@ use App\Modules\Api\V1\Requests\Activities\ActivityInsertRequest;
 use App\Modules\Api\V1\Requests\Activities\ActivityUpdateRequest;
 use App\Modules\Api\V1\Requests\Activities\MakeScheduleRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleIndexRequest;
+use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -161,5 +163,24 @@ class ActivityController extends Controller
         $schedule = $schedules->create($data);
 
         return $this->respondJson(['schedule' => $schedule]);
+    }
+
+    /**
+     * Get edits of the given activity.
+     *
+     * @param  EditIndexRequest   $request
+     * @param  Activity           $activity
+     * @param  EditService        $edits
+     * @return Response
+     */
+    public function edits(EditIndexRequest $request, Activity $activity, EditService $edits)
+    {
+        $queries = $request->all();
+
+        $queries['activity'] = $activity->id;
+
+        return $this->respondJson(
+            ['edits' => $edits->getMultiple($queries)]
+        );
     }
 }

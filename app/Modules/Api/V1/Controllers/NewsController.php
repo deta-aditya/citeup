@@ -4,9 +4,11 @@ namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\News;
 use App\Modules\Electrons\News\NewsService;
+use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Api\V1\Requests\News\NewsIndexRequest;
 use App\Modules\Api\V1\Requests\News\NewsInsertRequest;
 use App\Modules\Api\V1\Requests\News\NewsUpdateRequest;
+use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -97,5 +99,24 @@ class NewsController extends Controller
         $this->news->remove($news);
 
         return $this->respondJson(['news' => $news]);
+    }
+
+    /**
+     * Get edits of the given news.
+     *
+     * @param  EditIndexRequest   $request
+     * @param  News               $news
+     * @param  EditService        $edits
+     * @return Response
+     */
+    public function edits(EditIndexRequest $request, News $news, EditService $edits)
+    {
+        $queries = $request->all();
+
+        $queries['news'] = $news->id;
+
+        return $this->respondJson(
+            ['edits' => $edits->getMultiple($queries)]
+        );
     }
 }

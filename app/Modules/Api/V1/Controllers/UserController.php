@@ -11,6 +11,7 @@ use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Keys\KeyService;
 use App\Modules\Electrons\Alerts\AlertService;
+use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
@@ -20,6 +21,7 @@ use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
+use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -230,5 +232,24 @@ class UserController extends Controller
                 ->modifyStatus($entry, $request->input('status', null));
 
         return $this->respondJson(['entry' => $entry]);
+    }
+
+    /**
+     * Get edits performed by the given user.
+     *
+     * @param  EditIndexRequest   $request
+     * @param  User               $user
+     * @param  EditService        $edits
+     * @return Response
+     */
+    public function edits(EditIndexRequest $request, User $user, EditService $alerts)
+    {
+        $queries = $request->all();
+
+        $queries['user'] = $user->id;
+
+        return $this->respondJson(
+            ['edits' => $edits->getMultiple($queries)]
+        );
     }
 }
