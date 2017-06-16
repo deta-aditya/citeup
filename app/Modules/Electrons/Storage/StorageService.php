@@ -11,11 +11,13 @@ class StorageService extends Service
 {
     /*
      | STORAGE SERVICE
-     | ===========================
-     | Types:   Profile => /profiles
-     |          Activity => /activities
-     |          Submission => /subs
-     |          Document => /docs
+     | ========================================
+     | Types:   Profile     =>      /profiles
+     |          Activity    =>      /activities
+     |          Submission  =>      /submits
+     |          Document    =>      /documents
+     |          Question    =>      /questions
+     |          Choice      =>      /choices
      |
      */
 

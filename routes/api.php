@@ -102,6 +102,27 @@ Route::group([
     Route::get('/attempts/{attempt}', 'AttemptController@show');
     Route::put('/attempts/{attempt}', 'AttemptController@finish');
     Route::delete('/attempts/{attempt}', 'AttemptController@remove');
+    Route::get('/attempts/{attempt}/answers', 'AttemptController@answers'); //
+
+    Route::get('/questions', 'QuestionController@index');
+    Route::post('/questions', 'QuestionController@insert');
+    Route::get('/questions/{question}', 'QuestionController@show');
+    Route::put('/questions/{question}', 'QuestionController@update');
+    Route::delete('/questions/{question}', 'QuestionController@remove');
+    Route::get('/questions/{question}/choices', 'QuestionController@questions'); //
+    Route::get('/questions/{question}/answers', 'QuestionController@answers'); //
+
+    Route::get('/choices', 'ChoiceController@index'); //
+    Route::post('/choices', 'ChoiceController@insert'); //
+    Route::get('/choices/{choice}', 'ChoiceController@show'); //
+    Route::put('/choices/{choice}', 'ChoiceController@update'); //
+    Route::delete('/choices/{choice}', 'ChoiceController@remove'); //
+
+    Route::get('/answers', 'AnswerController@index'); //
+    Route::post('/answers', 'AnswerController@insert'); //
+    Route::get('/answers/{answer}', 'AnswerController@show'); //
+    Route::put('/answers/{answer}', 'AnswerController@update'); //
+    Route::delete('/answers/{answer}', 'AnswerController@remove'); //
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');

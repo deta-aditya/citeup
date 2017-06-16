@@ -17,33 +17,33 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/entries/1/attempts">
-                    <template slot="header-text">GET Attempts</template>
+                <api-box req-type="get" uri="/api/v1/questions">
+                    <template slot="header-text">GET Questions</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="attempt in props.data.data.attempts">
-                                <pre>@{{ attempt }}</pre>
+                            <li class="list-group-item" v-for="question in props.data.data.questions">
+                                <pre>@{{ question }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/entries/1/attempts">
-                    <template slot="header-text">POST Entries/1/Attempts</template>
+                <api-box req-type="put" uri="/api/v1/questions/1">
+                    <template slot="header-text">PUT Questions/1</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.attempt }}</pre>
+                            <pre>@{{ props.data.data.question }}</pre>
                         </div>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/entries/1">
-                    <template slot="header-text">GET Entries/1</template>
+                <api-box req-type="delete" uri="/api/v1/questions/1">
+                    <template slot="header-text">DELETE Questions/1</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.entry }}</pre>
+                            <pre>@{{ props.data.data.question }}</pre>
                         </div>
                     </template>
                 </api-box>
