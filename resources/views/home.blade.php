@@ -17,23 +17,23 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/news">
-                    <template slot="header-text">GET News</template>
+                <api-box req-type="get" uri="/api/v1/edits">
+                    <template slot="header-text">GET Edits</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="item in props.data.data.news">
-                                <pre>@{{ item }}</pre>
+                            <li class="list-group-item" v-for="edit in props.data.data.edits">
+                                <pre>@{{ edit }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="put" uri="/api/v1/news/1">
-                    <template slot="header-text">PUT News/1</template>
+                <api-box req-type="post" uri="/api/v1/activities">
+                    <template slot="header-text">POST Activities</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.news }}</pre>
+                            <pre>@{{ props.data.data.activity }}</pre>
                         </div>
                     </template>
                 </api-box>

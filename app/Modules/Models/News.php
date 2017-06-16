@@ -4,9 +4,20 @@ namespace App\Modules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Contracts\Models\Editable;
+use App\Modules\Events\EditWasMade;
 
 class News extends Model implements Editable
 {
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $events = [
+        'saved' => EditWasMade::class,
+        'updated' => EditWasMade::class,
+    ];
+    
     /**
      * The attributes that are mass assignable.
      *

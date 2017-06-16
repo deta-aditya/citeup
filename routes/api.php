@@ -16,7 +16,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return User::find(19)->entry->attempts;
+    return auth()->guard('api')->user();
 });
 
 /*
@@ -134,6 +134,8 @@ Route::group([
     Route::get('/news/{news}', 'NewsController@show');
     Route::put('/news/{news}', 'NewsController@update');
     Route::delete('/news/{news}', 'NewsController@remove');
+    
+    Route::get('/edits', 'EditController@index');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');
