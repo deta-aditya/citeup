@@ -140,6 +140,10 @@ return [
             'description', 'held_at',
         ],
 
+        'sortable' => [
+            'held_at',
+        ],
+
         'comparable' => [
             'description', 'held_at',
         ],
@@ -194,6 +198,26 @@ return [
 
         'loadable' => [
             'entry',
+        ],
+
+    ],
+
+    'attempts' => [
+
+        'selectable' => [
+            'started_at', 'finished_at',
+        ],
+
+        'sortable' => [
+            'started_at', 'finished_at',
+        ],
+
+        'comparable' => [
+            'started_at', 'finished_at',
+        ],
+
+        'loadable' => [
+            'entry', 'answers',
         ],
 
     ],

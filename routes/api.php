@@ -68,6 +68,7 @@ Route::group([
     Route::put('/schedules/{schedule}', 'ScheduleController@update');
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
 
+    Route::get('/entries/{entry}', 'EntryController@show');
     Route::post('/entries/{entry}', 'EntryController@modify');
     Route::get('/entries/{entry}/submissions', 'EntryController@submissions');
     Route::post('/entries/{entry}/submissions', 'EntryController@addSubmission');
@@ -75,6 +76,8 @@ Route::group([
     Route::post('/entries/{entry}/documents', 'EntryController@addDocument');
     Route::get('/entries/{entry}/testimonials', 'EntryController@testimonials');
     Route::post('/entries/{entry}/testimonials', 'EntryController@addTestimonial');
+    Route::get('/entries/{entry}/attempts', 'EntryController@attempts');
+    Route::post('/entries/{entry}/attempts', 'EntryController@startAttempt');
 
     Route::get('/submissions', 'SubmissionController@index');
     Route::post('/submissions', 'SubmissionController@insert');
@@ -93,6 +96,12 @@ Route::group([
     Route::get('/testimonials/{testimonial}', 'TestimonialController@show');
     Route::put('/testimonials/{testimonial}', 'TestimonialController@update');
     Route::delete('/testimonials/{testimonial}', 'TestimonialController@remove');
+
+    Route::get('/attempts', 'AttemptController@index');
+    Route::post('/attempts', 'AttemptController@start');
+    Route::get('/attempts/{attempt}', 'AttemptController@show');
+    Route::put('/attempts/{attempt}', 'AttemptController@finish');
+    Route::delete('/attempts/{attempt}', 'AttemptController@remove');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');

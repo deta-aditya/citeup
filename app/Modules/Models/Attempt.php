@@ -12,7 +12,7 @@ class Attempt extends Model
      * @var array
      */
     protected $fillable = [
-        'started_at',
+        'entry_id', 'started_at',
     ];
 
     /**
@@ -33,5 +33,41 @@ class Attempt extends Model
     public function answers()
     {
         return $this->hasMany('App\Modules\Models\Answer');
+    }
+
+    /**
+     * Scope a query to only include attempts of the given entry.
+     *
+     * @param  Builder  $query
+     * @param  int      $entry
+     * @return Builder
+     */
+    public function scopeOfEntry($query, $entry)
+    {
+        return $query->whereHas('entry', function ($query) use ($entry) {
+            $query->where('entry_id', $entry);
+        });
+    }
+
+    /**
+     * Scope a query to only include finished attempts.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeFinished($query)
+    {
+        return $query->whereNotNull('finished_at');
+    }
+
+    /**
+     * Scope a query to only include unfinished attempts.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeUnfinished($query)
+    {
+        return $query->whereNull('finished_at');
     }
 }

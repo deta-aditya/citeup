@@ -57,6 +57,19 @@ class EntryService extends Service
     protected $model = Entry::class;
 
     /**
+     * Load mandatory relationships of the entry.
+     *
+     * @param  Entry  $entry
+     * @return this
+     */
+    public function loadRelationships(Entry $entry)
+    {
+        $entry->load('submissions', 'documents', 'attempts', 'testimonials');
+
+        return $this;
+    }
+
+    /**
      * Create the entry for a user.
      *
      * @param  User          $user

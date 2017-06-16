@@ -7,14 +7,17 @@ use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Submissions\SubmissionService;
 use App\Modules\Electrons\Documents\DocumentService;
 use App\Modules\Electrons\Testimonials\TestimonialService;
+use App\Modules\Electrons\Attempts\AttemptService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
 use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
 use App\Modules\Api\V1\Requests\Entries\AddTestimonialRequest;
+use App\Modules\Api\V1\Requests\Entries\StartAttemptRequest;
 use App\Modules\Api\V1\Requests\Submissions\SubmissionIndexRequest;
 use App\Modules\Api\V1\Requests\Documents\DocumentIndexRequest;
 use App\Modules\Api\V1\Requests\Testimonials\TestimonialIndexRequest;
+use App\Modules\Api\V1\Requests\Attempts\AttemptIndexRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -41,6 +44,20 @@ class EntryController extends Controller
     }
 
     /**
+     * Get an entry data.
+     *
+     * @param  Request   $request
+     * @param  Entry     $entry
+     * @return Response
+     */
+    public function show(Request $request, Entry $entry)
+    {
+        $this->entries->loadRelationships($entry);
+
+        return $this->respondJson(['entry' => $entry]);   
+    }
+
+    /**
      * Modify stage and status of an entry data.
      *
      * @param  EntryModifyRequest  $request
@@ -59,7 +76,7 @@ class EntryController extends Controller
      * Get the submissions of a given entry.
      *
      * @param  SubmissionIndexRequest  $request
-     * @param  Entry                   $Entry
+     * @param  Entry                   $entry
      * @param  SubmissionService       $submissions
      * @return Response
      */
@@ -78,7 +95,7 @@ class EntryController extends Controller
      * Add a new submission to a given entry.
      *
      * @param  AddSubmissionRequest    $request
-     * @param  Entry                   $Entry
+     * @param  Entry                   $entry
      * @param  SubmissionService       $submissions
      * @return Response
      */
@@ -97,7 +114,7 @@ class EntryController extends Controller
      * Get the documents of a given entry.
      *
      * @param  DocumentIndexRequest  $request
-     * @param  Entry                   $Entry
+     * @param  Entry                 $entry
      * @param  DocumentService       $documents
      * @return Response
      */
@@ -116,7 +133,7 @@ class EntryController extends Controller
      * Add a new document to a given entry.
      *
      * @param  AddDocumentRequest    $request
-     * @param  Entry                   $Entry
+     * @param  Entry                 $entry
      * @param  DocumentService       $documents
      * @return Response
      */
@@ -135,7 +152,7 @@ class EntryController extends Controller
      * Get the testimonials of a given entry.
      *
      * @param  TestimonialIndexRequest  $request
-     * @param  Entry                   $Entry
+     * @param  Entry                    $entry
      * @param  TestimonialService       $testimonials
      * @return Response
      */
@@ -154,7 +171,7 @@ class EntryController extends Controller
      * Add a new testimonial to a given entry.
      *
      * @param  AddTestimonialRequest    $request
-     * @param  Entry                   $Entry
+     * @param  Entry                    $entry
      * @param  TestimonialService       $testimonials
      * @return Response
      */
@@ -167,5 +184,39 @@ class EntryController extends Controller
         $testimonial = $testimonials->create($data);
 
         return $this->respondJson(['testimonial' => $testimonial]);
+    }
+
+    /**
+     * Get the attempts of a given entry.
+     *
+     * @param  AttemptIndexRequest  $request
+     * @param  Entry                $entry
+     * @param  AttemptService       $attempts
+     * @return Response
+     */
+    public function attempts(AttemptIndexRequest $request, Entry $entry, AttemptService $attempts)
+    {
+        $queries = $request->all();
+
+        $queries['entry'] = $entry->id;
+
+        return $this->respondJson(
+            ['attempts' => $attempts->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * Start a new attempt to a given entry.
+     *
+     * @param  StartAttemptRequest  $request
+     * @param  Entry                $entry
+     * @param  AttemptService       $attempts
+     * @return Response
+     */
+    public function startAttempt(StartAttemptRequest $request, Entry $entry, AttemptService $attempts)
+    {
+        $attempt = $attempts->start($entry->id, $request->input('started_at'));
+
+        return $this->respondJson(['attempt' => $attempt]);
     }
 }
