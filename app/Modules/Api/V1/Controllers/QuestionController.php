@@ -5,10 +5,12 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Question;
 use App\Modules\Electrons\Questions\QuestionService;
 use App\Modules\Electrons\Questions\ChoiceService;
+use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Api\V1\Requests\Questions\QuestionIndexRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionInsertRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionUpdateRequest;
 use App\Modules\Api\V1\Requests\Choices\ChoiceIndexRequest;
+use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -117,6 +119,25 @@ class QuestionController extends Controller
 
         return $this->respondJson(
             ['choices' => $choices->getMultiple($queries)]
+        );
+    }
+
+    /**
+     * Get the answers of given question.
+     * 
+     * @param  AnswerIndexRequest  $request
+     * @param  Question            $question
+     * @param  AnswerService       $answers
+     * @param  Response
+     */
+    public function answers(AnswerIndexRequest $request, Question $question, AnswerService $answers)
+    {
+        $queries = $request->all();
+
+        $queries['question'] = $question->id;
+
+        return $this->respondJson(
+            ['answers' => $answers->getMultiple($queries)]
         );
     }
 }

@@ -4,10 +4,12 @@ namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Attempt;
 use App\Modules\Electrons\Attempts\AttemptService;
+use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Attempts\AttemptIndexRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptStartRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptFinishRequest;
+use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -99,5 +101,24 @@ class AttemptController extends Controller
         $this->attempts->remove($attempt);
 
         return $this->respondJson(['attempt' => $attempt]);
+    }
+
+    /**
+     * Get the answers of given attempt.
+     * 
+     * @param  AnswerIndexRequest  $request
+     * @param  Attempt             $attempt
+     * @param  AnswerService       $answers
+     * @param  Response
+     */
+    public function answers(AnswerIndexRequest $request, Attempt $attempt, AnswerService $answers)
+    {
+        $queries = $request->all();
+
+        $queries['attempt'] = $attempt->id;
+
+        return $this->respondJson(
+            ['answers' => $answers->getMultiple($queries)]
+        );
     }
 }

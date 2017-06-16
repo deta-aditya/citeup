@@ -3,10 +3,7 @@
 namespace App\Modules\Api\V1\Requests\Choices;
 
 use App\Modules\Models\Choice;
-use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\MessageBag;
 
 class ChoiceIndexRequest extends ApiIndexRequest
 {

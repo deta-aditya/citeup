@@ -145,7 +145,7 @@ return [
         ],
 
         'comparable' => [
-            'description', 'held_at',
+            'description', 'held_at', 'activity_id',
         ],
 
         'loadable' => [
@@ -161,7 +161,7 @@ return [
         ],
 
         'comparable' => [
-            'description', 'picture',
+            'description', 'picture', 'entry_id',
         ],
 
         'loadable' => [
@@ -177,7 +177,7 @@ return [
         ],
 
         'comparable' => [
-            'file', 'type',
+            'file', 'type', 'entry_id',
         ],
 
         'loadable' => [
@@ -193,7 +193,7 @@ return [
         ],
 
         'comparable' => [
-            'content', 'rating',
+            'content', 'rating', 'entry_id',
         ],
 
         'loadable' => [
@@ -213,7 +213,7 @@ return [
         ],
 
         'comparable' => [
-            'started_at', 'finished_at',
+            'started_at', 'finished_at', 'entry_id',
         ],
 
         'loadable' => [
@@ -245,11 +245,23 @@ return [
         ],
 
         'comparable' => [
-            'content', 'picture',
+            'content', 'picture', 'question_id',
         ],
 
         'loadable' => [
             'question', 'answers',
+        ],
+
+    ],
+
+    'answers' => [
+
+        'comparable' => [
+            'attempt_id', 'choice_id',
+        ],
+
+        'loadable' => [
+            'attempt', 'choice',
         ],
 
     ],

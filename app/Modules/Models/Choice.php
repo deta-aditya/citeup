@@ -36,7 +36,7 @@ class Choice extends Model
     }
 
     /**
-     * Scope a query to only include schedules of the given question.
+     * Scope a query to only include choices of the given question.
      *
      * @param  Builder  $query
      * @param  int      $question

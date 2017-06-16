@@ -17,33 +17,35 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/questions/2/choices">
-                    <template slot="header-text">GET Questions/2/Choices</template>
+                <api-box req-type="get" uri="/api/v1/questions/2/answers">
+                    <template slot="header-text">GET Questions/2/Answers</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="choice in props.data.data.choices">
-                                <pre>@{{ choice }}</pre>
+                            <li class="list-group-item" v-for="answer in props.data.data.answers">
+                                <pre>@{{ answer }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="put" uri="/api/v1/choices/1">
-                    <template slot="header-text">PUT Choices/1</template>
+                <api-box req-type="get" uri="/api/v1/attempts/2/answers">
+                    <template slot="header-text">GET Attempts/2/Answers</template>
                     <template slot="result-area" scope="props">
-                        <div class="panel-body">
-                            <pre>@{{ props.data.data.choice }}</pre>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="answer in props.data.data.answers">
+                                <pre>@{{ answer }}</pre>
+                            </li>
+                        </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/choices/1">
-                    <template slot="header-text">DELETE Choices/1</template>
+                <api-box req-type="delete" uri="/api/v1/answers/1">
+                    <template slot="header-text">DELETE Answers/1</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.choice }}</pre>
+                            <pre>@{{ props.data.data.answer }}</pre>
                         </div>
                     </template>
                 </api-box>

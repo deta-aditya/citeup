@@ -16,7 +16,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return User::find(19)->entry;
+    return User::find(19)->entry->attempts;
 });
 
 /*
@@ -102,7 +102,7 @@ Route::group([
     Route::get('/attempts/{attempt}', 'AttemptController@show');
     Route::put('/attempts/{attempt}', 'AttemptController@finish');
     Route::delete('/attempts/{attempt}', 'AttemptController@remove');
-    Route::get('/attempts/{attempt}/answers', 'AttemptController@answers'); //
+    Route::get('/attempts/{attempt}/answers', 'AttemptController@answers');
 
     Route::get('/questions', 'QuestionController@index');
     Route::post('/questions', 'QuestionController@insert');
@@ -110,7 +110,7 @@ Route::group([
     Route::put('/questions/{question}', 'QuestionController@update');
     Route::delete('/questions/{question}', 'QuestionController@remove');
     Route::get('/questions/{question}/choices', 'QuestionController@choices');
-    Route::get('/questions/{question}/answers', 'QuestionController@answers'); //
+    Route::get('/questions/{question}/answers', 'QuestionController@answers');
 
     Route::get('/choices', 'ChoiceController@index');
     Route::post('/choices', 'ChoiceController@insert');
@@ -118,11 +118,10 @@ Route::group([
     Route::put('/choices/{choice}', 'ChoiceController@update');
     Route::delete('/choices/{choice}', 'ChoiceController@remove');
 
-    Route::get('/answers', 'AnswerController@index'); //
-    Route::post('/answers', 'AnswerController@insert'); //
-    Route::get('/answers/{answer}', 'AnswerController@show'); //
-    Route::put('/answers/{answer}', 'AnswerController@update'); //
-    Route::delete('/answers/{answer}', 'AnswerController@remove'); //
+    Route::get('/answers', 'AnswerController@index');
+    Route::post('/answers', 'AnswerController@insert');
+    Route::get('/answers/{answer}', 'AnswerController@show');
+    Route::delete('/answers/{answer}', 'AnswerController@remove');
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');

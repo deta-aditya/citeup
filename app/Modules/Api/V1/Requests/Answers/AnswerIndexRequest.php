@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Modules\Api\V1\Requests\Schedules;
+namespace App\Modules\Api\V1\Requests\Answers;
 
-use App\Modules\Models\Schedule;
+use App\Modules\Models\Answer;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
 
-class ScheduleIndexRequest extends ApiIndexRequest
+class AnswerIndexRequest extends ApiIndexRequest
 {
     /**
      * The main model for the request.
      *
-     * @var Schedule
+     * @var Answer
      */
-    protected $model = Schedule::class;
+    protected $model = Answer::class;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,9 @@ class ScheduleIndexRequest extends ApiIndexRequest
     protected function additional()
     {
         return [
-            'activity' => 'int|exists:activities,id',
+            'question' => 'int|exists:questions,id',
+            'choice' => 'int|exists:choices,id',
+            'attempt' => 'int|exists:attempts,id',
         ];
     }
 }
