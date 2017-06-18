@@ -9,6 +9,7 @@ use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Api\V1\Requests\Questions\QuestionIndexRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionInsertRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionUpdateRequest;
+use App\Modules\Api\V1\Requests\Questions\AddChoicesRequest;
 use App\Modules\Api\V1\Requests\Choices\ChoiceIndexRequest;
 use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
@@ -120,6 +121,23 @@ class QuestionController extends Controller
         return $this->respondJson(
             ['choices' => $choices->getMultiple($queries)]
         );
+    }
+
+    /**
+     * Add multiple choices to the given question.
+     *
+     * @param  AddChoicesRequest  $request
+     * @param  Question           $question
+     * @param  ChoiceService      $choices
+     * @return Response
+     */
+    public function addChoices(AddChoicesRequest $request, Question $question, ChoiceService $choices)
+    {
+        $choices = $choices->createMultiple(
+            $question->id, $request->input('choices')
+        );
+
+        return $this->respondJson(['choices' => $choices]);
     }
 
     /**

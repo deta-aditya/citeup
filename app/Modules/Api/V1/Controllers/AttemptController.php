@@ -9,6 +9,7 @@ use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Attempts\AttemptIndexRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptStartRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptFinishRequest;
+use App\Modules\Api\V1\Requests\Attempts\AddAnswersRequest;
 use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -120,5 +121,22 @@ class AttemptController extends Controller
         return $this->respondJson(
             ['answers' => $answers->getMultiple($queries)]
         );
+    }
+
+    /**
+     * Add multiple answers to the given attempt.
+     *
+     * @param  AddAnswersRequest  $request
+     * @param  Attempt            $attempt
+     * @param  AnswerService      $answers
+     * @return Response
+     */
+    public function addAnswers(AddAnswersRequest $request, Attempt $attempt, AnswerService $answers)
+    {
+        $answers = $answers->createMultiple(
+            $attempt->id, $request->input('answers')
+        );
+
+        return $this->respondJson(['answers' => $answers]);
     }
 }

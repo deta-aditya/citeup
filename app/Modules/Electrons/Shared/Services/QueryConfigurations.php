@@ -126,7 +126,7 @@ trait QueryConfigurations
     protected function getConfig($type)
     {
         return ! Config::has($this->getConfigRoot($type))
-            ? config($this->getConfigRoot($type))
+            ? config($this->getBaseConfigRoot($type))
             : array_merge(
                 config($this->getBaseConfigRoot($type)),
                 config($this->getConfigRoot($type))

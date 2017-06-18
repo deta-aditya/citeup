@@ -1,5 +1,6 @@
 <?php
 
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
@@ -16,7 +17,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return auth()->guard('api')->user();
+    return User::find(19)->entry->attempts->load('answers');
 });
 
 /*
@@ -106,13 +107,15 @@ Route::group([
     Route::put('/attempts/{attempt}', 'AttemptController@finish');
     Route::delete('/attempts/{attempt}', 'AttemptController@remove');
     Route::get('/attempts/{attempt}/answers', 'AttemptController@answers');
-
+    Route::post('/attempts/{attempt}/answers', 'AttemptController@addAnswers');
+    
     Route::get('/questions', 'QuestionController@index');
     Route::post('/questions', 'QuestionController@insert');
     Route::get('/questions/{question}', 'QuestionController@show');
     Route::put('/questions/{question}', 'QuestionController@update');
     Route::delete('/questions/{question}', 'QuestionController@remove');
     Route::get('/questions/{question}/choices', 'QuestionController@choices');
+    Route::post('/questions/{question}/choices', 'QuestionController@addChoices');
     Route::get('/questions/{question}/answers', 'QuestionController@answers');
 
     Route::get('/choices', 'ChoiceController@index');
@@ -144,5 +147,13 @@ Route::group([
 
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');
+
+    Route::post('/import', 'IEController@import'); //
+    Route::post('/export', 'IEController@export'); //
+
+    
+    /**
+     * Convenience Sources
+     */
 
 });

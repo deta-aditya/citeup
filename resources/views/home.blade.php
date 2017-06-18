@@ -17,34 +17,38 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/activities/6/edits">
-                    <template slot="header-text">GET Activities/6/Edits</template>
+                <api-box req-type="get" uri="/api/v1/questions">
+                    <template slot="header-text">GET Question</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="edit in props.data.data.edits">
-                                <pre>@{{ edit }}</pre>
+                            <li class="list-group-item" v-for="question in props.data.data.questions">
+                                <pre>@{{ question }}</pre>
                             </li>
                         </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/activities">
-                    <template slot="header-text">POST Activities</template>
+                <api-box req-type="post" uri="/api/v1/attempts/2/answers">
+                    <template slot="header-text">POST Attempts/2/Answers</template>
                     <template slot="result-area" scope="props">
-                        <div class="panel-body">
-                            <pre>@{{ props.data.data.activity }}</pre>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="answer in props.data.data.answers">
+                                <pre>@{{ answer }}</pre>
+                            </li>
+                        </ul>
                     </template>
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/news/1">
-                    <template slot="header-text">DELETE News/1</template>
+                <api-box req-type="post" uri="/api/v1/export">
+                    <template slot="header-text">POST Export</template>
                     <template slot="result-area" scope="props">
-                        <div class="panel-body">
-                            <pre>@{{ props.data.data.news }}</pre>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="path in props.data.data.paths">
+                                <pre>@{{ path }}</pre>
+                            </li>
+                        </ul>
                     </template>
                 </api-box>
             </div>

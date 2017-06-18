@@ -57,6 +57,24 @@ class AnswerService extends Service
     }
 
     /**
+     * Create multiple answers and return them.
+     *
+     * @param  int    $attemptId
+     * @param  array  $answers
+     * @return array
+     */
+    public function createMultiple($attemptId, array $answers)
+    {
+        $final = [];
+
+        foreach ($answers as $choice) {
+            array_push($final, $this->create($attemptId, $choice));
+        }
+
+        return $final;
+    }
+
+    /**
      * Remove a answer from the database.
      *
      * @param  Answer  $answer

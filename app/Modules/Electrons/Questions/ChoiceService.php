@@ -49,6 +49,27 @@ class ChoiceService extends Service
     }
 
     /**
+     * Create multiple choices and return them.
+     *
+     * @param  int    $questionId
+     * @param  array  $choices
+     * @return array
+     */
+    public function createMultiple($questionId, array $choices)
+    {
+        $final = [];
+
+        foreach ($choices as $choice) {
+
+            $choice['question'] = $questionId;
+
+            array_push($final, $this->create($choice));
+        }
+
+        return $final;
+    }
+
+    /**
      * Update a choice with new data.
      *
      * @param  Choice  $choice
