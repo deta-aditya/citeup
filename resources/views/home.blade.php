@@ -41,14 +41,12 @@
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="post" uri="/api/v1/export">
-                    <template slot="header-text">POST Export</template>
+                <api-box req-type="post" uri="/api/v1/import" multipart="true" file-upload-name="file">
+                    <template slot="header-text">POST Import</template>
                     <template slot="result-area" scope="props">
-                        <ul class="list-group">
-                            <li class="list-group-item" v-for="path in props.data.data.paths">
-                                <pre>@{{ path }}</pre>
-                            </li>
-                        </ul>
+                        <div class="panel-body">
+                            <pre>@{{ props.data.data }}</pre>
+                        </div>
                     </template>
                 </api-box>
             </div>

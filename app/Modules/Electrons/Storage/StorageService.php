@@ -21,6 +21,7 @@ class StorageService extends Service
      |          Gallery     =>      /galleries
      |          News        =>      /news
      |          Imports     =>      /imports
+     |          Imports     =>      /exports
      |
      */
 

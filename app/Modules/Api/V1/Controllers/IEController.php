@@ -2,7 +2,6 @@
 
 namespace App\Modules\Api\V1\Controllers;
 
-use App\Modules\Electrons\Import\Import;
 use App\Modules\Electrons\Import\ImportService;
 use App\Modules\Electrons\Export\ExportService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
@@ -22,9 +21,9 @@ class IEController extends Controller
      * @param  ImportService  $service
      * @return Response
      */
-    public function import(Import $import, ImportService $service)
+    public function import(ImportRequest $request, ImportService $service)
     {
-        $service->importData($import->get(), $import->request->input('type'));
+        // $service->importData($request->file('file'), $request->input('type'));
 
         return $this->respondJson([]);
     }

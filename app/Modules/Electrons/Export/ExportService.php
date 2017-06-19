@@ -2,9 +2,9 @@
 
 namespace App\Modules\Electrons\Export;
 
-use Maatwebsite\Excel\Facades\Excel;
 use App\Modules\Nucleons\Service;
 use App\Modules\Models\Answer;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExportService extends Service
 {

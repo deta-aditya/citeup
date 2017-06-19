@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Modules\Electrons\Galleries;
+namespace App\Modules\Electrons\Import;
 
 use App\Modules\Electrons\Storage\StorageService;
+use App\Modules\Api\V1\Requests\IE\ImportRequest;
 use Maatwebsite\Excel\Files\ExcelFile;
 use Carbon\Carbon;
 
@@ -43,6 +44,9 @@ class Import extends ExcelFile
     public function getFile()
     {
         $path = $this->upload();
+
+        var_dump(storage_path($path));
+        die;
 
         return storage_path($path);
     }
