@@ -17,7 +17,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return User::find(19)->entry->attempts->load('answers');
+    return $request->user();
 });
 
 /*
