@@ -20,8 +20,9 @@ class StorageService extends Service
      |          Choice      =>      /choices
      |          Gallery     =>      /galleries
      |          News        =>      /news
+     |          Sponsor     =>      /sponsors
      |          Imports     =>      /imports
-     |          Imports     =>      /exports
+     |          Exports     =>      /exports
      |
      */
 

@@ -42,6 +42,10 @@ class EditService extends Service
             $query->ofGallery($params['gallery']);
         }
 
+        if (array_has($params, 'sponsor')) {
+            $query->ofSponsor($params['sponsor']);
+        }
+
         if (array_has($params, 'user')) {
             $query->ofUser($params['user']);
         }

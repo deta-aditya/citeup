@@ -27,6 +27,9 @@ Route::group([
     'namespace' => 'App\Modules\Api\V1\Controllers', 'prefix' => '/v1',
 ], function () {
 
+    /*
+     * Resource Routes 
+     */
     Route::get('/users', 'UserController@index');
     Route::post('/users', 'UserController@insert');
     Route::get('/users/{user}', 'UserController@show');
@@ -142,18 +145,31 @@ Route::group([
     Route::put('/news/{news}', 'NewsController@update');
     Route::delete('/news/{news}', 'NewsController@remove');
     Route::get('/news/{news}/edits', 'NewsController@edits');
+
+    Route::get('/sponsors', 'SponsorController@index');
+    Route::post('/sponsors', 'SponsorController@insert');
+    Route::get('/sponsors/{sponsor}', 'SponsorController@show');
+    Route::put('/sponsors/{sponsor}', 'SponsorController@update');
+    Route::delete('/sponsors/{sponsor}', 'SponsorController@remove');
+    Route::get('/sponsors/{sponsor}/edits', 'SponsorController@edits');
     
     Route::get('/edits', 'EditController@index');
-
+    
+    /*
+     * Storage Routes
+     */
     Route::post('/storage', 'StorageController@insert');
     Route::delete('/storage', 'StorageController@delete');
 
-    Route::post('/import', 'IEController@import'); //
-    Route::post('/export', 'IEController@export'); //
-
-    
-    /**
-     * Convenience Sources
+    /*
+     * Import/Export Routes 
      */
+    Route::post('/import', 'IEController@import');
+    Route::post('/export', 'IEController@export');
+
+    /*
+     * Bulk Routes
+     */
+
 
 });

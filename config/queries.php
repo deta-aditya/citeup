@@ -302,6 +302,26 @@ return [
 
     ],
 
+    'sponsors' => [
+
+        'selectable' => [
+            'name', 'picture',
+        ],
+
+        'sortable' => [
+            'name',
+        ],
+
+        'comparable' => [
+            'name', 'picture',
+        ],
+
+        'loadable' => [
+            'edits',
+        ],
+
+    ],
+
     'edits' => [
 
         'sortable' => [

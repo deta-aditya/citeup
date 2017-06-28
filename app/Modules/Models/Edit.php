@@ -100,6 +100,21 @@ class Edit extends Model
     }
     
     /**
+     * Scope a query to only include edits of the given sponsor ID.
+     *
+     * @param  Builder  $query
+     * @param  int      $sponsor
+     * @return Builder
+     */
+    public function scopeOfSponsor($query, $sponsor)
+    {
+        return $query->where([
+            ['editable_type', '=', Sponsor::class],
+            ['editable_id', '=', $sponsor],
+        ]);
+    }
+    
+    /**
      * Scope a query to only include edits by the given user ID.
      *
      * @param  Builder  $query

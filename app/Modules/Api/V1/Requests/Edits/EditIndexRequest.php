@@ -36,6 +36,7 @@ class EditIndexRequest extends ApiIndexRequest
             'schedule' => 'int|exists:schedules,id',
             'news' => 'int|exists:news,id',
             'gallery' => 'int|exists:galleries,id',
+            'sponsor' => 'int|exists:sponsors,id',
             'user' => 'int|exists:users,id',
         ];
     }
