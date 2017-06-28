@@ -65,7 +65,7 @@ return [
         ],
 
         'loadable' => [
-            'profile', 'entry', 'keys', 'alerts', 'activity'
+            'profile', 'entry', 'keys', 'alerts', 'activity', 'edits',
         ],
 
     ],
@@ -149,7 +149,7 @@ return [
         ],
 
         'loadable' => [
-            'activity',
+            'activity', 'edits',
         ],
 
     ],
@@ -277,7 +277,43 @@ return [
         ],
 
         'loadable' => [
-            //
+            'edits',
+        ],
+
+    ],
+
+    'news' => [
+
+        'selectable' => [
+            'title', 'content', 'picture',
+        ],
+
+        'sortable' => [
+            'title',
+        ],
+
+        'comparable' => [
+            'title', 'content', 'picture',
+        ],
+
+        'loadable' => [
+            'edits',
+        ],
+
+    ],
+
+    'edits' => [
+
+        'sortable' => [
+            'editable_id', 'editable_type'
+        ],
+
+        'comparable' => [
+            'editable_id', 'editable_type'
+        ],
+
+        'loadable' => [
+            'editable', 'user',
         ],
 
     ],
