@@ -6,6 +6,7 @@ use App\User;
 use App\Modules\Models\Key;
 use App\Modules\Nucleons\Service;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Carbon\Carbon;
 
 class KeyService extends Service
 {
@@ -15,6 +16,104 @@ class KeyService extends Service
      * @var Key
      */
     protected $model = Key::class;
+
+    /**
+     * The application access keys.
+     * Caution: Do not modify!
+     *
+     * @var key
+     */
+    protected $keys = [
+
+        // "Users" Keys
+        'Get Users', 'View Users', 'Post Users', 'Put Users', 'Delete Users', 
+        'Post Users Keys', 'Post Users Alerts', 'Post Users Entries',
+
+        // "Alerts" Keys
+        'Get Alerts', 'View Alerts', 'Post Alerts', 
+        'Put Alerts', 'Delete Alerts', 'Post Alerts Users', 
+
+        // "Activities" Keys
+        'Get Activities', 'View Activities', 'Post Activities', 
+        'Put Activities', 'Delete Activities', 'Post Activities Schedules', 
+
+        // "Schedules" Keys
+        'Get Schedules', 'View Schedules', 'Post Schedules', 
+        'Put Schedules', 'Delete Schedules', 
+
+        // "Entries" Keys
+        'Get Entries', 'Post Entries', 'Post Entries Submissions', 
+        'Post Entries Documents', 'Post Entries Testimonials',
+        'Post Entries Attempts', 
+
+        // "Submissions" Keys
+        'Get Submissions', 'View Submissions', 'Post Submissions', 
+        'Put Submissions', 'Delete Submissions',
+
+        // "Documents" Keys
+        'Get Documents', 'View Documents', 'Post Documents', 
+        'Put Documents', 'Delete Documents',
+
+        // "Testimonials" Keys
+        'Get Testimonials', 'View Testimonials', 'Post Testimonials', 
+        'Put Testimonials', 'Delete Testimonials',
+
+        // "Attempts" Keys
+        'Get Attempts', 'View Attempts', 'Post Attempts', 
+        'Put Attempts', 'Delete Attempts', 'Post Attempts Answers',
+
+        // "Questions" Keys
+        'Get Questions', 'View Questions', 'Post Questions', 
+        'Put Questions', 'Delete Questions', 'Post Questions Choices',
+
+        // "Choices" Keys
+        'Get Choices', 'View Choices', 'Post Choices', 
+        'Put Choices', 'Delete Choices',
+
+        // "Answers" Keys
+        'Get Answers', 'View Answers', 'Post Answers', 'Delete Answers',
+
+        // "Galleries" Keys
+        'Get Galleries', 'View Galleries', 'Post Galleries', 
+        'Put Galleries', 'Delete Galleries',
+
+        // "News" Keys
+        'Get News', 'View News', 'Post News', 
+        'Put News', 'Delete News',
+
+        // "Sponsors" Keys
+        'Get Sponsors', 'View Sponsors', 'Post Sponsors', 
+        'Put Sponsors', 'Delete Sponsors',
+
+        // "Edits" Keys
+        'Get Edits',
+        
+    ];
+
+    /**
+     * Create all required keys.
+     * Caution: This method should only be invoked once on a seeder!
+     *
+     * @return this
+     */
+    public function createAllRequired()
+    {
+        $now = Carbon::now()->toDateTimeString();
+
+        $insertables = [];
+
+        foreach ($this->keys as $key) {
+            $insertables[] = [
+                'name' => $key, 
+                'slug' => $this->slugify($key),
+                'created_at' => $now,
+            ];
+        }
+
+        Key::insert($insertables);
+
+        return $this;
+    }
 
     /**
      * Get multiple keys with conditions.
