@@ -13,7 +13,7 @@ class AddDocumentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return  $this->user()->can('docuemnts', $this->route('entry'));
     }
 
     /**

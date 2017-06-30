@@ -21,6 +21,6 @@ class QuestionIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('get', Question::class);
     }
 }

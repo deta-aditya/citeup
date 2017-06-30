@@ -57,6 +57,8 @@ class NewsController extends Controller
      */
     public function show(Request $request, News $news)
     {
+        $this->authorize('view', $news);
+
         return $this->respondJson(['news' => $news]);   
     }
 
@@ -96,6 +98,8 @@ class NewsController extends Controller
      */
     public function remove(Request $request, News $news)
     {
+        $this->authorize('delete', $news);
+
         $this->news->remove($news);
 
         return $this->respondJson(['news' => $news]);

@@ -71,7 +71,7 @@ class Alert extends Model
     public function scopeSeenBy($query, array $users)
     {
         return $query->whereHas('users', function ($query) use ($users) {
-            $query->whereIn('user_id', $users)->where('seen_at', '<>', null);
+            $query->where('user_id', $users)->where('seen_at', '<>', null);
         });
     }
 
@@ -85,7 +85,7 @@ class Alert extends Model
     public function scopeUnseenBy($query, array $users)
     {
         return $query->whereHas('users', function ($query) use ($users) {
-            $query->whereIn('user_id', $users)->where('seen_at', null);
+            $query->where('user_id', $users)->where('seen_at', null);
         });
     }
 }

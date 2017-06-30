@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Galleries;
 
+use App\Modules\Models\Gallery;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GalleryInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class GalleryInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Gallery::class);
     }
 
     /**

@@ -58,6 +58,8 @@ class KeyController extends Controller
      */
     public function show(Request $request, Key $key)
     {
+        $this->authorize('view', $key);
+
         return $this->respondJson(['key' => $key]);   
     }
 
@@ -97,6 +99,8 @@ class KeyController extends Controller
      */
     public function remove(Request $request, Key $key)
     {
+        $this->authorize('delete', $key);
+
         $this->keys->remove($key);
 
         return $this->respondJson(['key' => $key]);

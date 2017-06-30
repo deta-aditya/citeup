@@ -17,12 +17,12 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <api-box req-type="get" uri="/api/v1/sponsors">
-                    <template slot="header-text">GET Sponsors</template>
+                <api-box req-type="get" uri="/api/v1/users">
+                    <template slot="header-text">GET User</template>
                     <template slot="result-area" scope="props">
                         <ul class="list-group">
-                            <li class="list-group-item" v-for="sponsor in props.data.data.sponsors">
-                                <pre>@{{ sponsor }}</pre>
+                            <li class="list-group-item" v-for="user in props.data.data.users">
+                                <pre>@{{ user }}</pre>
                             </li>
                         </ul>
                     </template>

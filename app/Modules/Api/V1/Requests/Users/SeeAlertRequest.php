@@ -13,7 +13,7 @@ class SeeAlertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('alerts',  $this->route('user'));
     }
 
     /**

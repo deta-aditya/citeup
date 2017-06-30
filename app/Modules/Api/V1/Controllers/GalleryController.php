@@ -55,6 +55,8 @@ class GalleryController extends Controller
      */
     public function show(Request $request, Gallery $gallery)
     {
+        $this->authorize('view', $gallery);
+        
         return $this->respondJson(['gallery' => $gallery]);   
     }
 
@@ -94,6 +96,8 @@ class GalleryController extends Controller
      */
     public function remove(Request $request, Gallery $gallery)
     {
+        $this->authorize('delete', $gallery);
+
         $this->galleries->remove($gallery);
 
         return $this->respondJson(['gallery' => $gallery]);

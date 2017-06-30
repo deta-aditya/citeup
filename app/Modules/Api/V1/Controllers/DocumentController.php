@@ -55,6 +55,8 @@ class DocumentController extends Controller
      */
     public function show(Request $request, Document $document)
     {
+        $this->authorize('view', $document);
+
         return $this->respondJson(['document' => $document]);   
     }
 
@@ -94,6 +96,8 @@ class DocumentController extends Controller
      */
     public function remove(Request $request, Document $document)
     {
+        $this->authorize('delete', $document);
+
         $this->documents->remove($document);
 
         return $this->respondJson(['document' => $document]);

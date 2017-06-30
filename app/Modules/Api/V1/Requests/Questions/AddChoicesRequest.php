@@ -13,7 +13,7 @@ class AddChoicesRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('choices', $this->route('question'));
     }
 
     /**

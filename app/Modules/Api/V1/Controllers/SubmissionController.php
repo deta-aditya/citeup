@@ -55,6 +55,8 @@ class SubmissionController extends Controller
      */
     public function show(Request $request, Submission $submission)
     {
+        $this->authorize('view', $submission);
+
         return $this->respondJson(['submission' => $submission]);   
     }
 
@@ -94,6 +96,8 @@ class SubmissionController extends Controller
      */
     public function remove(Request $request, Submission $submission)
     {
+        $this->authorize('delete', $submission);
+
         $this->submissions->remove($submission);
 
         return $this->respondJson(['submission' => $submission]);

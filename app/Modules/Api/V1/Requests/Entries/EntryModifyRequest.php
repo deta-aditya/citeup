@@ -13,7 +13,9 @@ class EntryModifyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->is('entries/*') ? 
+            $this->user()->can('post', $this->route('entry'))
+            $this->user()->can('entries',  $this->route('user'));
     }
 
     /**

@@ -13,7 +13,7 @@ class MakeScheduleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('schedules', $this->route('activity'));
     }
 
     /**

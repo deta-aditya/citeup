@@ -58,6 +58,8 @@ class AttemptController extends Controller
      */
     public function show(Request $request, Attempt $attempt)
     {
+        $this->authorize('view', $attempt);
+
         return $this->respondJson(['attempt' => $attempt]);   
     }
 
@@ -99,6 +101,8 @@ class AttemptController extends Controller
      */
     public function remove(Request $request, Attempt $attempt)
     {
+        $this->authorize('delete', $attempt);
+
         $this->attempts->remove($attempt);
 
         return $this->respondJson(['attempt' => $attempt]);

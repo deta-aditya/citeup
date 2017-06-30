@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Testimonials;
 
+use App\Modules\Models\Testimonial;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TestimonialInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class TestimonialInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Testimonial::class);
     }
 
     /**

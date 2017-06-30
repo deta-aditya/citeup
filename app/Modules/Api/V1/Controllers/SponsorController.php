@@ -57,6 +57,8 @@ class SponsorController extends Controller
      */
     public function show(Request $request, Sponsor $sponsor)
     {
+        $this->authorize('view', $sponsor);
+
         return $this->respondJson(['sponsor' => $sponsor]);   
     }
 
@@ -96,6 +98,8 @@ class SponsorController extends Controller
      */
     public function remove(Request $request, Sponsor $sponsor)
     {
+        $this->authorize('delete', $sponsor);
+        
         $this->sponsors->remove($sponsor);
 
         return $this->respondJson(['sponsor' => $sponsor]);

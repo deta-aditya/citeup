@@ -52,6 +52,8 @@ class EntryController extends Controller
      */
     public function show(Request $request, Entry $entry)
     {
+        $this->authorize('view', $entry);
+
         $this->entries->loadRelationships($entry);
 
         return $this->respondJson(['entry' => $entry]);   

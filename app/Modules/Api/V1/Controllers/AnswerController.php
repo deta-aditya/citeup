@@ -54,6 +54,8 @@ class AnswerController extends Controller
      */
     public function show(Request $request, Answer $answer)
     {
+        $this->authorize('view', $answer);
+        
         return $this->respondJson(['answer' => $answer]);   
     }
 
@@ -81,6 +83,8 @@ class AnswerController extends Controller
      */
     public function remove(Request $request, Answer $answer)
     {
+        $this->authorize('delete', $answer);
+
         $this->answers->remove($answer);
 
         return $this->respondJson(['answer' => $answer]);

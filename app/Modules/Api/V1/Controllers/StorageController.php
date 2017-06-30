@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Storage\StorageInsertRequest;
+use App\Modules\Api\V1\Requests\Storage\StorageDeleteRequest;
 use Illuminate\Http\Request;
 
 class StorageController extends Controller
@@ -46,10 +47,10 @@ class StorageController extends Controller
     /**
      * Delete a file from the storage
      *
-     * @param  Request  $request
+     * @param  StorageDeleteRequest  $request
      * @return Response
      */
-    public function delete(Request $request)
+    public function delete(StorageDeleteRequest $request)
     {
         $this->storages->remove($request->input('link'));
 

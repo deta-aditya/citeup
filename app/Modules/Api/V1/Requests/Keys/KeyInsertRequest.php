@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Keys;
 
+use App\Modules\Models\Key;
 use Illuminate\Foundation\Http\FormRequest;
 
 class KeyInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class KeyInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Key::class);
     }
 
     /**

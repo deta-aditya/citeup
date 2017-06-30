@@ -55,6 +55,8 @@ class TestimonialController extends Controller
      */
     public function show(Request $request, Testimonial $testimonial)
     {
+        $this->authorize('view', $testimonial);
+
         return $this->respondJson(['testimonial' => $testimonial]);   
     }
 
@@ -94,6 +96,8 @@ class TestimonialController extends Controller
      */
     public function remove(Request $request, Testimonial $testimonial)
     {
+        $this->authorize('delete', $testimonial);
+
         $this->testimonials->remove($testimonial);
 
         return $this->respondJson(['testimonial' => $testimonial]);

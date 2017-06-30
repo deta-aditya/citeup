@@ -13,7 +13,7 @@ class NewsUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('put', $this->route('news'));
     }
 
     /**

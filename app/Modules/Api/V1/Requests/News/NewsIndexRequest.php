@@ -21,6 +21,6 @@ class NewsIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('get', News::class);
     }
 }

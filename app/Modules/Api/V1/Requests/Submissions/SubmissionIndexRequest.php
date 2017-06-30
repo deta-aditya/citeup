@@ -21,7 +21,7 @@ class SubmissionIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('get', Submission::class);
     }
 
     /**

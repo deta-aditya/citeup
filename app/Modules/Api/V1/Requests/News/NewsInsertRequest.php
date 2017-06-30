@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\News;
 
+use App\Modules\Models\News;
 use Illuminate\Foundation\Http\FormRequest;
 
 class NewsInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class NewsInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', News::class);
     }
 
     /**

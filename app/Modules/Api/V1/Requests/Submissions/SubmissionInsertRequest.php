@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Submissions;
 
+use App\Modules\Models\Submission;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubmissionInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class SubmissionInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Submission::class);
     }
 
     /**

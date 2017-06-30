@@ -55,6 +55,8 @@ class ChoiceController extends Controller
      */
     public function show(Request $request, Choice $choice)
     {
+        $this->authorize('view', $choice);
+
         return $this->respondJson(['choice' => $choice]);   
     }
 
@@ -94,6 +96,8 @@ class ChoiceController extends Controller
      */
     public function remove(Request $request, Choice $choice)
     {
+        $this->authorize('delete', $choice);
+
         $this->choices->remove($choice);
 
         return $this->respondJson(['choice' => $choice]);

@@ -60,6 +60,8 @@ class QuestionController extends Controller
      */
     public function show(Request $request, Question $question)
     {
+        $this->authorize('view', $question);
+
         return $this->respondJson(['question' => $question]);   
     }
 
@@ -99,6 +101,8 @@ class QuestionController extends Controller
      */
     public function remove(Request $request, Question $question)
     {
+        $this->authorize('delete', $question);
+
         $this->questions->remove($question);
 
         return $this->respondJson(['question' => $question]);

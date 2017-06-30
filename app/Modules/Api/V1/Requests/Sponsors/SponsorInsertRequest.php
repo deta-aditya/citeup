@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Sponsors;
 
+use App\Modules\Models\Sponsor;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SponsorInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class SponsorInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Sponsor::class);
     }
 
     /**

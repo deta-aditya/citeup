@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Attempts;
 
+use App\Modules\Models\Attempt;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AttemptStartRequest extends FormRequest
@@ -13,7 +14,7 @@ class AttemptStartRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Attempt::class);
     }
 
     /**

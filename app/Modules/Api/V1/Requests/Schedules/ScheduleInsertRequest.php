@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Schedules;
 
+use App\Modules\Models\Schedule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ScheduleInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class ScheduleInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Schedule::class);
     }
 
     /**

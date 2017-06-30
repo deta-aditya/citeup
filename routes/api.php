@@ -1,8 +1,6 @@
 <?php
 
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\User;
 
 /*
@@ -17,7 +15,7 @@ use App\User;
 */
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    
 });
 
 /*
@@ -170,6 +168,7 @@ Route::group([
     /*
      * Bulk Routes
      */
-
+    // Route::get('/bulk', 'BulkController@get');
+    // Route::post('/bulk', 'BulkController@post');
 
 });

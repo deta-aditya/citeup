@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Choices;
 
+use App\Modules\Models\Choice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChoiceInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class ChoiceInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Choice::class);
     }
 
     /**

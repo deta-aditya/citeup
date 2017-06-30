@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Questions;
 
+use App\Modules\Models\Question;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuestionInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class QuestionInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Question::class);
     }
 
     /**

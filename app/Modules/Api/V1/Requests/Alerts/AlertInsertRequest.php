@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Alerts;
 
+use App\Modules\Models\Alert;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AlertInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class AlertInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Alert::class);
     }
 
     /**

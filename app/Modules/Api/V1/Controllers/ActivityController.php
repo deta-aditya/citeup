@@ -62,6 +62,8 @@ class ActivityController extends Controller
      */
     public function show(Request $request, Activity $activity)
     {
+        $this->authorize('view', $activity);
+        
         $this->activities->loadRelationships($activity);
 
         return $this->respondJson(['activity' => $activity]);   
@@ -103,6 +105,8 @@ class ActivityController extends Controller
      */
     public function remove(Request $request, Activity $activity)
     {
+        $this->authorize('delete', $activity);
+
         $this->activities->remove($activity);
 
         return $this->respondJson(['activity' => $activity]);

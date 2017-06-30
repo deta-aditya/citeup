@@ -58,6 +58,8 @@ class AlertController extends Controller
      */
     public function show(Request $request, Alert $alert)
     {
+        $this->authorize('view', $alert);
+
         return $this->respondJson(['alert' => $alert]);   
     }
 
@@ -99,6 +101,8 @@ class AlertController extends Controller
      */
     public function remove(Request $request, Alert $alert)
     {
+        $this->authorize('delete', $alert);
+
         $this->alerts->remove($alert);
 
         return $this->respondJson(['alert' => $alert]);

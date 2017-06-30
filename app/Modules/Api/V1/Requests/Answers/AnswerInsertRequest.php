@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Answers;
 
+use App\Modules\Models\Answer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AnswerInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class AnswerInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Answer::class);
     }
 
     /**

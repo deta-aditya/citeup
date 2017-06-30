@@ -39,11 +39,11 @@ class AlertService extends Service
         }
 
         if (array_has($params, 'seenby')) {
-            $query->seenBy(explode($this->getDelimiter('users'), $params['seenby']));
+            $query->seenBy($params['seenby']);
         }
 
         if (array_has($params, 'unseenby')) {
-            $query->unseenBy(explode($this->getDelimiter('users'), $params['unseenby']));
+            $query->unseenBy($params['unseenby']);
         }
 
         return $query->get();

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Activities;
 
+use App\Modules\Models\Activity;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ActivityInsertRequest extends FormRequest
@@ -13,7 +14,7 @@ class ActivityInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('post', Activity::class);
     }
 
     /**

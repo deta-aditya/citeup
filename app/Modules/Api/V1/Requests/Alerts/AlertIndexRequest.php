@@ -42,7 +42,7 @@ class AlertIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('get', Alert::class);
     }
 
     /**
@@ -56,8 +56,8 @@ class AlertIndexRequest extends ApiIndexRequest
             'announced' => 'string|in:true,false',
             'unannounced' => 'string|in:true,false',
             'users' => 'string',
-            'seenby' => 'string',
-            'unseenby' => 'string',
+            'seenby' => 'int|exists:alerts,id',
+            'unseenby' => 'int|exists:alerts,id',
         ];
     }
 
@@ -72,9 +72,7 @@ class AlertIndexRequest extends ApiIndexRequest
     {
         $errors = $validator->errors();
 
-        $this->evaluateUsers($errors, 'users')
-             ->evaluateUsers($errors, 'seenby')
-             ->evaluateUsers($errors, 'unseenby');
+        $this->evaluateUsers($errors, 'users');
     }
 
     /**

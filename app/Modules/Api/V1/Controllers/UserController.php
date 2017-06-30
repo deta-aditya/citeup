@@ -68,6 +68,8 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
+        $this->authorize('view', $user);
+
         $this->users->loadRelationships($user);
 
         return $this->respondJson(['user' => $user]);   
@@ -135,6 +137,8 @@ class UserController extends Controller
      */
     public function remove(Request $request, User $user, StorageService $storages)
     {
+        $this->authorize('delete', $user);
+
         $this->users->remove($user);
 
         $storages->destroy('images', $user->id, 'profile');

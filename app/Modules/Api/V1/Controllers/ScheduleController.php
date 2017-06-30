@@ -57,6 +57,8 @@ class ScheduleController extends Controller
      */
     public function show(Request $request, Schedule $schedule)
     {
+        $this->authorize('view', $schedule);
+
         return $this->respondJson(['schedule' => $schedule]);   
     }
 
@@ -96,6 +98,8 @@ class ScheduleController extends Controller
      */
     public function remove(Request $request, Schedule $schedule)
     {
+        $this->authorize('delete', $schedule);
+
         $this->schedules->remove($schedule);
 
         return $this->respondJson(['schedule' => $schedule]);

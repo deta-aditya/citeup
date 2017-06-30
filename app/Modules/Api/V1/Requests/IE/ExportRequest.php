@@ -13,7 +13,7 @@ class ExportRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->isAdmin() || $this->user()->hasKey('post-export');
     }
 
     /**
