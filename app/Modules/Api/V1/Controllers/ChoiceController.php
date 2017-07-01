@@ -5,8 +5,10 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Choice;
 use App\Modules\Electrons\Questions\ChoiceService;
 use App\Modules\Api\V1\Requests\Choices\ChoiceIndexRequest;
+use App\Modules\Api\V1\Requests\Choices\ChoiceShowRequest;
 use App\Modules\Api\V1\Requests\Choices\ChoiceInsertRequest;
 use App\Modules\Api\V1\Requests\Choices\ChoiceUpdateRequest;
+use App\Modules\Api\V1\Requests\Choices\ChoiceDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,14 +51,12 @@ class ChoiceController extends Controller
     /**
      * Get a choice data.
      *
-     * @param  Request   $request
+     * @param  ChoiceShowRequest   $request
      * @param  Choice  $choice
      * @return Response
      */
-    public function show(Request $request, Choice $choice)
+    public function show(ChoiceShowRequest $request, Choice $choice)
     {
-        $this->authorize('view', $choice);
-
         return $this->respondJson(['choice' => $choice]);   
     }
 
@@ -90,14 +90,13 @@ class ChoiceController extends Controller
     /**
      * Delete a choice data.
      *
-     * @param  Request   $request
+     * @param  ChoiceDeleteRequest   $request
      * @param  Choice  $choice
      * @return Response
      */
-    public function remove(Request $request, Choice $choice)
+    public function remove(ChoiceDeleteRequest $request, Choice $choice)
     {
-        $this->authorize('delete', $choice);
-
+    
         $this->choices->remove($choice);
 
         return $this->respondJson(['choice' => $choice]);

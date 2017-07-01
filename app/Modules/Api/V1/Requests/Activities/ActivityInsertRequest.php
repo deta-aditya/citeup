@@ -14,7 +14,9 @@ class ActivityInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Activity::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-activities');
     }
 
     /**

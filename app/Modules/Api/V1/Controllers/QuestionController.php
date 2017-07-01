@@ -7,8 +7,10 @@ use App\Modules\Electrons\Questions\QuestionService;
 use App\Modules\Electrons\Questions\ChoiceService;
 use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Api\V1\Requests\Questions\QuestionIndexRequest;
+use App\Modules\Api\V1\Requests\Questions\QuestionShowRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionInsertRequest;
 use App\Modules\Api\V1\Requests\Questions\QuestionUpdateRequest;
+use App\Modules\Api\V1\Requests\Questions\QuestionDeleteRequest;
 use App\Modules\Api\V1\Requests\Questions\AddChoicesRequest;
 use App\Modules\Api\V1\Requests\Choices\ChoiceIndexRequest;
 use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
@@ -54,14 +56,12 @@ class QuestionController extends Controller
     /**
      * Get a question data.
      *
-     * @param  Request   $request
+     * @param  QuestionShowRequest   $request
      * @param  Question  $question
      * @return Response
      */
-    public function show(Request $request, Question $question)
+    public function show(QuestionShowRequest $request, Question $question)
     {
-        $this->authorize('view', $question);
-
         return $this->respondJson(['question' => $question]);   
     }
 
@@ -95,14 +95,12 @@ class QuestionController extends Controller
     /**
      * Delete a question data.
      *
-     * @param  Request   $request
+     * @param  QuestionDeleteRequest   $request
      * @param  Question  $question
      * @return Response
      */
-    public function remove(Request $request, Question $question)
+    public function remove(QuestionDeleteRequest $request, Question $question)
     {
-        $this->authorize('delete', $question);
-
         $this->questions->remove($question);
 
         return $this->respondJson(['question' => $question]);

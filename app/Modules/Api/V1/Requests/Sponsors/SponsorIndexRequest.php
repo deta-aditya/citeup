@@ -21,6 +21,6 @@ class SponsorIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Sponsor::class);
+        return true;
     }
 }

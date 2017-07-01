@@ -14,8 +14,10 @@ use App\Modules\Electrons\Alerts\AlertService;
 use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
+use App\Modules\Api\V1\Requests\Users\UserShowRequest;
 use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
 use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
+use App\Modules\Api\V1\Requests\Users\UserDeleteRequest;
 use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
 use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
@@ -62,14 +64,12 @@ class UserController extends Controller
     /**
      * Get a user data.
      *
-     * @param  Request  $request
-     * @param  User     $user
+     * @param  UserShowRequest  $request
+     * @param  User             $user
      * @return Response
      */
-    public function show(Request $request, User $user)
+    public function show(UserShowRequest $request, User $user)
     {
-        $this->authorize('view', $user);
-
         $this->users->loadRelationships($user);
 
         return $this->respondJson(['user' => $user]);   
@@ -130,15 +130,16 @@ class UserController extends Controller
     /**
      * Delete a user data.
      *
-     * @param  Request         $request
-     * @param  User            $user
-     * @param  StorageService  $storages
+     * @param  UserDeleteRequest  $request
+     * @param  User               $user
+     * @param  StorageService     $storages
      * @return Response
      */
-    public function remove(Request $request, User $user, StorageService $storages)
+    public function remove(
+        UserDeleteRequest $request, 
+        User $user, 
+        StorageService $storages)
     {
-        $this->authorize('delete', $user);
-
         $this->users->remove($user);
 
         $storages->destroy('images', $user->id, 'profile');

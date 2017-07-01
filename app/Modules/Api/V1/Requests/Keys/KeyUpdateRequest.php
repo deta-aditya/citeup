@@ -13,7 +13,9 @@ class KeyUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('key'));
+        $user = $this->user();
+
+        return $user->isAdmin();
     }
 
     /**

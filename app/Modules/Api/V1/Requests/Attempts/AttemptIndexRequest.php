@@ -21,7 +21,14 @@ class AttemptIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Attempt::class);
+        $user = $this->user();
+
+        $entry = $this->is('entry/*') ?
+            $this->route('entry')->id :
+            $this->input('entry', $user->entry->id);
+
+        return $user->isAdmin() || $user->hasKey('get-attempts') || 
+            $user->entry->id == $entry;
     }
 
     /**

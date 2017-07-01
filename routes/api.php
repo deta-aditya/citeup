@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Modules\Electrons\Keys\KeyService;
 use App\User;
 
 /*
@@ -14,8 +15,9 @@ use App\User;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    
+Route::get('/user', function (Request $request, KeyService $keys) {
+    $user = User::find(3);
+    return [$user->hasKey('get-users')];
 });
 
 /*

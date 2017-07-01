@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Modules\Api\V1\Requests\Galleries;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class GalleryShowRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+}

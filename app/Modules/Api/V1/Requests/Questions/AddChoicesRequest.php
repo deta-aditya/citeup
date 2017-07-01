@@ -13,7 +13,9 @@ class AddChoicesRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('choices', $this->route('question'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-questions-choices');
     }
 
     /**

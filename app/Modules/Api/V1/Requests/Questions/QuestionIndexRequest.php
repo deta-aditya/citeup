@@ -21,6 +21,8 @@ class QuestionIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Question::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('get-questions') || $user->isEntrant();
     }
 }

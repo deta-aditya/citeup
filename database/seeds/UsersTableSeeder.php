@@ -19,6 +19,10 @@ class UsersTableSeeder extends Seeder
             ->createAllRequired()
             ->associate(
                 $users->createStarterAdmin(), RoleService::ROLE_ADMINISTRATOR
+            )->associate(
+                $users->createExampleEntrant(), RoleService::ROLE_ENTRANT
+            )->associate(
+                $users->createExampleCommittee(), RoleService::ROLE_COMMITTEE
             );
     }
 }

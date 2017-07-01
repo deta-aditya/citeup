@@ -9,8 +9,10 @@ use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
+use App\Modules\Api\V1\Requests\Keys\KeyShowRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyInsertRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyUpdateRequest;
+use App\Modules\Api\V1\Requests\Keys\KeyDeleteRequest;
 use App\Modules\Api\V1\Requests\Keys\RegisterUserRequest;
 use Illuminate\Http\Request;
 
@@ -52,11 +54,11 @@ class KeyController extends Controller
     /**
      * Get a key data.
      *
-     * @param  Request  $request
+     * @param  KeyShowRequest  $request
      * @param  Key      $key
      * @return Response
      */
-    public function show(Request $request, Key $key)
+    public function show(KeyShowRequest $request, Key $key)
     {
         $this->authorize('view', $key);
 
@@ -93,11 +95,11 @@ class KeyController extends Controller
     /**
      * Delete a key data.
      *
-     * @param  Request  $request
+     * @param  KeyDeleteRequest  $request
      * @param  Key      $key
      * @return Response
      */
-    public function remove(Request $request, Key $key)
+    public function remove(KeyDeleteRequest $request, Key $key)
     {
         $this->authorize('delete', $key);
 

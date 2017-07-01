@@ -13,7 +13,9 @@ class RegisterUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('users', $this->route('key'));
+        $user = $this->user();
+
+        return $user->isAdmin();
     }
 
     /**

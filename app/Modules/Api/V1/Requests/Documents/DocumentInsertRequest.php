@@ -14,7 +14,9 @@ class DocumentInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Submission::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-documents') || $user->isEntrant();
     }
 
     /**

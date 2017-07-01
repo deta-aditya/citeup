@@ -7,8 +7,10 @@ use App\Modules\Electrons\Alerts\AlertService;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
+use App\Modules\Api\V1\Requests\Alerts\AlertShowRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertInsertRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertUpdateRequest;
+use App\Modules\Api\V1\Requests\Alerts\AlertDeleteRequest;
 use App\Modules\Api\V1\Requests\Alerts\AnnounceAlertRequest;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Http\Controllers\Controller;
@@ -52,14 +54,12 @@ class AlertController extends Controller
     /**
      * Get an alert data.
      *
-     * @param  Request  $request
+     * @param  AlertShowRequest  $request
      * @param  Alert    $alert
      * @return Response
      */
-    public function show(Request $request, Alert $alert)
+    public function show(AlertShowRequest $request, Alert $alert)
     {
-        $this->authorize('view', $alert);
-
         return $this->respondJson(['alert' => $alert]);   
     }
 
@@ -95,14 +95,12 @@ class AlertController extends Controller
     /**
      * Delete an alert data.
      *
-     * @param  Request  $request
+     * @param  AlertDeleteRequest  $request
      * @param  Alert    $alert
      * @return Response
      */
-    public function remove(Request $request, Alert $alert)
+    public function remove(AlertDeleteRequest $request, Alert $alert)
     {
-        $this->authorize('delete', $alert);
-
         $this->alerts->remove($alert);
 
         return $this->respondJson(['alert' => $alert]);

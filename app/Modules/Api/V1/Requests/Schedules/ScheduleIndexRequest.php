@@ -21,7 +21,7 @@ class ScheduleIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Schedule::class);
+        return true;
     }
 
     /**

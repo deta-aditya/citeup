@@ -7,8 +7,10 @@ use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Sponsors\SponsorService;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Api\V1\Requests\Sponsors\SponsorIndexRequest;
+use App\Modules\Api\V1\Requests\Sponsors\SponsorShowRequest;
 use App\Modules\Api\V1\Requests\Sponsors\SponsorInsertRequest;
 use App\Modules\Api\V1\Requests\Sponsors\SponsorUpdateRequest;
+use App\Modules\Api\V1\Requests\Sponsors\SponsorDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -51,14 +53,12 @@ class SponsorController extends Controller
     /**
      * Get a sponsor data.
      *
-     * @param  Request   $request
+     * @param  SponsorShowRequest   $request
      * @param  Sponsor   $sponsor
      * @return Response
      */
-    public function show(Request $request, Sponsor $sponsor)
+    public function show(SponsorShowRequest $request, Sponsor $sponsor)
     {
-        $this->authorize('view', $sponsor);
-
         return $this->respondJson(['sponsor' => $sponsor]);   
     }
 
@@ -92,14 +92,12 @@ class SponsorController extends Controller
     /**
      * Delete a sponsor data.
      *
-     * @param  Request   $request
+     * @param  SponsorDeleteRequest   $request
      * @param  Sponsor   $sponsor
      * @return Response
      */
-    public function remove(Request $request, Sponsor $sponsor)
-    {
-        $this->authorize('delete', $sponsor);
-        
+    public function remove(SponsorDeleteRequest $request, Sponsor $sponsor)
+    {   
         $this->sponsors->remove($sponsor);
 
         return $this->respondJson(['sponsor' => $sponsor]);

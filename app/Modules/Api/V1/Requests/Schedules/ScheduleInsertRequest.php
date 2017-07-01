@@ -14,7 +14,9 @@ class ScheduleInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Schedule::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-schedules');
     }
 
     /**

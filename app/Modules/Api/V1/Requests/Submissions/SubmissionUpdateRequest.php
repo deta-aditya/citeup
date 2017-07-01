@@ -13,7 +13,13 @@ class SubmissionUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('submission'));
+        $user = $this->user();
+        $submission = $this->route('submission');
+
+        return $user->isAdmin() || $user->hasKey('put-submissions') || (
+                $user->isEntrant() && 
+                ($user->entry->id === $submission->entry->id)
+            );
     }
 
     /**

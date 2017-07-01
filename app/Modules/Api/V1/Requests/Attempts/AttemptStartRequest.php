@@ -14,7 +14,9 @@ class AttemptStartRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Attempt::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-attempts') || $user->isEntrant();
     }
 
     /**

@@ -14,7 +14,9 @@ class ChoiceInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Choice::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-choices');
     }
 
     /**

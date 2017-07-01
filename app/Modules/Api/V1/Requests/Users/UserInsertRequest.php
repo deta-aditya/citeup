@@ -2,7 +2,6 @@
 
 namespace App\Modules\Api\V1\Requests\Users;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserInsertRequest extends FormRequest
@@ -14,7 +13,9 @@ class UserInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', User::class);
+        $accessor = $this->user();
+
+        return $accessor->isAdmin() || $accessor->hasKey('post-users');
     }
 
     /**

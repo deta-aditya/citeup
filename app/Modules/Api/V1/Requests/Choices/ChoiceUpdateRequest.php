@@ -13,7 +13,9 @@ class ChoiceUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('choice'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-choices');
     }
 
     /**

@@ -24,6 +24,6 @@ class ActivityIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Activity::class);
+        return true;
     }
 }

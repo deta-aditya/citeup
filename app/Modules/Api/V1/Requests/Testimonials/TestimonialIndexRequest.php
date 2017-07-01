@@ -21,7 +21,7 @@ class TestimonialIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Testimonial::class);
+        return true;
     }
 
     /**

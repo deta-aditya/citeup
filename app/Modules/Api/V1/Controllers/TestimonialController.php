@@ -5,8 +5,10 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Testimonial;
 use App\Modules\Electrons\Testimonials\TestimonialService;
 use App\Modules\Api\V1\Requests\Testimonials\TestimonialIndexRequest;
+use App\Modules\Api\V1\Requests\Testimonials\TestimonialShowRequest;
 use App\Modules\Api\V1\Requests\Testimonials\TestimonialInsertRequest;
 use App\Modules\Api\V1\Requests\Testimonials\TestimonialUpdateRequest;
+use App\Modules\Api\V1\Requests\Testimonials\TestimonialDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,14 +51,12 @@ class TestimonialController extends Controller
     /**
      * Get a testimonial data.
      *
-     * @param  Request   $request
+     * @param  TestimonialShowRequest   $request
      * @param  Testimonial  $testimonial
      * @return Response
      */
-    public function show(Request $request, Testimonial $testimonial)
+    public function show(TestimonialShowRequest $request, Testimonial $testimonial)
     {
-        $this->authorize('view', $testimonial);
-
         return $this->respondJson(['testimonial' => $testimonial]);   
     }
 
@@ -90,14 +90,12 @@ class TestimonialController extends Controller
     /**
      * Delete a testimonial data.
      *
-     * @param  Request   $request
+     * @param  TestimonialDeleteRequest   $request
      * @param  Testimonial  $testimonial
      * @return Response
      */
-    public function remove(Request $request, Testimonial $testimonial)
+    public function remove(TestimonialDeleteRequest $request, Testimonial $testimonial)
     {
-        $this->authorize('delete', $testimonial);
-
         $this->testimonials->remove($testimonial);
 
         return $this->respondJson(['testimonial' => $testimonial]);

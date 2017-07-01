@@ -9,6 +9,7 @@ use App\Modules\Electrons\Documents\DocumentService;
 use App\Modules\Electrons\Testimonials\TestimonialService;
 use App\Modules\Electrons\Attempts\AttemptService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
+use App\Modules\Api\V1\Requests\Entries\EntryShowRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
 use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
@@ -46,14 +47,12 @@ class EntryController extends Controller
     /**
      * Get an entry data.
      *
-     * @param  Request   $request
+     * @param  EntryShowRequest   $request
      * @param  Entry     $entry
      * @return Response
      */
-    public function show(Request $request, Entry $entry)
+    public function show(EntryShowRequest $request, Entry $entry)
     {
-        $this->authorize('view', $entry);
-
         $this->entries->loadRelationships($entry);
 
         return $this->respondJson(['entry' => $entry]);   

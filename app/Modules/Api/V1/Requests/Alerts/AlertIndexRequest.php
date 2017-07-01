@@ -42,7 +42,16 @@ class AlertIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Alert::class);
+        $user = $this->user();
+
+        $other = $this->is('users/*') ? 
+            $this->route('user') == $user->id :
+            ! $this->has('users'); 
+
+        return $user->isAdmin() || $user->hasKey('get-alerts') || (
+            $other && 
+            $this->input('seenby', $user->id) == $user->id &&
+            $this->input('unseenby', $user->id) == $user->id);
     }
 
     /**

@@ -21,7 +21,9 @@ class ChoiceIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Choice::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('get-choices') || $user->isEntrant();
     }
 
     /**

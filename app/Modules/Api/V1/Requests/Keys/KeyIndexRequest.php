@@ -42,7 +42,9 @@ class KeyIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Key::class);
+        $user = $this->user();
+
+        return $user->isAdmin();
     }
 
     /**

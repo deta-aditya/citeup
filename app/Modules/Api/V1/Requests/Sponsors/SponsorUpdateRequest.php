@@ -13,7 +13,9 @@ class SponsorUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('sponsor'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-sponsors');
     }
 
     /**

@@ -5,7 +5,9 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Answer;
 use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
+use App\Modules\Api\V1\Requests\Answers\AnswerShowRequest;
 use App\Modules\Api\V1\Requests\Answers\AnswerInsertRequest;
+use App\Modules\Api\V1\Requests\Answers\AnswerDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -48,14 +50,12 @@ class AnswerController extends Controller
     /**
      * Get a answer data.
      *
-     * @param  Request   $request
+     * @param  AnswerShowRequest   $request
      * @param  Answer    $answer
      * @return Response
      */
-    public function show(Request $request, Answer $answer)
-    {
-        $this->authorize('view', $answer);
-        
+    public function show(AnswerShowRequest $request, Answer $answer)
+    {        
         return $this->respondJson(['answer' => $answer]);   
     }
 
@@ -77,14 +77,12 @@ class AnswerController extends Controller
     /**
      * Delete a answer data.
      *
-     * @param  Request   $request
+     * @param  AnswerDeleteRequest   $request
      * @param  Answer    $answer
      * @return Response
      */
-    public function remove(Request $request, Answer $answer)
+    public function remove(AnswerDeleteRequest $request, Answer $answer)
     {
-        $this->authorize('delete', $answer);
-
         $this->answers->remove($answer);
 
         return $this->respondJson(['answer' => $answer]);

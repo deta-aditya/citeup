@@ -13,7 +13,9 @@ class GalleryUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('gallery'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-galleries');
     }
 
     /**

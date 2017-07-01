@@ -13,7 +13,9 @@ class AddAnswersRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('answers', $this->route('attempt'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-attempts-answers') || $user->isEntrant();
     }
 
     /**

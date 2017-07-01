@@ -13,7 +13,11 @@ class SeeAlertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('alerts',  $this->route('user'));
+        $accessor = $this->user();
+        $user = $this->route('user');
+
+        return $accessor->isAdmin() || $accessor->hasKey('post-users-alerts') ||
+            $accessor->id === $user->id;
     }
 
     /**

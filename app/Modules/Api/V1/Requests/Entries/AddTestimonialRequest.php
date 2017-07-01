@@ -13,7 +13,11 @@ class AddTestimonialRequest extends FormRequest
      */
     public function authorize()
     {
-        return  $this->user()->can('testimonials', $this->route('entry'));
+        $user = $this->user();
+        $entry = $this->route('entry');
+
+        return $user->isAdmin() || $user->hasKey('post-entries-testimonials') ||
+            $user->entry->id === $entry->id;
     }
 
     /**

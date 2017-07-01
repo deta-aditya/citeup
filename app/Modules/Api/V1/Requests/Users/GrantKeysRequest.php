@@ -13,7 +13,9 @@ class GrantKeysRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('keys', $this->route('user'));
+        $accessor = $this->user();
+
+        return $accessor->isAdmin() || $accessor->hasKey('post-users-keys');
     }
 
     /**

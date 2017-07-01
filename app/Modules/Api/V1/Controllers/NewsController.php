@@ -6,8 +6,10 @@ use App\Modules\Models\News;
 use App\Modules\Electrons\News\NewsService;
 use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Api\V1\Requests\News\NewsIndexRequest;
+use App\Modules\Api\V1\Requests\News\NewsShowRequest;
 use App\Modules\Api\V1\Requests\News\NewsInsertRequest;
 use App\Modules\Api\V1\Requests\News\NewsUpdateRequest;
+use App\Modules\Api\V1\Requests\News\NewsDeleteRequest;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
@@ -51,14 +53,12 @@ class NewsController extends Controller
     /**
      * Get a news data.
      *
-     * @param  Request   $request
+     * @param  NewsShowRequest   $request
      * @param  News      $news
      * @return Response
      */
-    public function show(Request $request, News $news)
+    public function show(NewsShowRequest $request, News $news)
     {
-        $this->authorize('view', $news);
-
         return $this->respondJson(['news' => $news]);   
     }
 
@@ -92,14 +92,12 @@ class NewsController extends Controller
     /**
      * Delete a news data.
      *
-     * @param  Request   $request
+     * @param  NewsDeleteRequest   $request
      * @param  News  $news
      * @return Response
      */
-    public function remove(Request $request, News $news)
+    public function remove(NewsDeleteRequest $request, News $news)
     {
-        $this->authorize('delete', $news);
-
         $this->news->remove($news);
 
         return $this->respondJson(['news' => $news]);

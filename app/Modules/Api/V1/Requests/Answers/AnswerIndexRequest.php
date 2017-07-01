@@ -21,7 +21,12 @@ class AnswerIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Answer::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('get-answers') || 
+            ($user->isEntrant() && $user->attempts->search(function ($item, $key) {
+                return $item->id == $this->input('attempt', null);
+            }) !== false);
     }
 
     /**

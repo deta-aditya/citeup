@@ -14,7 +14,9 @@ class AnswerInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Answer::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-answers') || $user->isEntrant();
     }
 
     /**

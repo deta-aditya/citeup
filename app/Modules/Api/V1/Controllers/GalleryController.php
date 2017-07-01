@@ -5,8 +5,10 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Gallery;
 use App\Modules\Electrons\Galleries\GalleryService;
 use App\Modules\Api\V1\Requests\Galleries\GalleryIndexRequest;
+use App\Modules\Api\V1\Requests\Galleries\GalleryShowRequest;
 use App\Modules\Api\V1\Requests\Galleries\GalleryInsertRequest;
 use App\Modules\Api\V1\Requests\Galleries\GalleryUpdateRequest;
+use App\Modules\Api\V1\Requests\Galleries\GalleryDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,14 +51,12 @@ class GalleryController extends Controller
     /**
      * Get a gallery data.
      *
-     * @param  Request   $request
+     * @param  GalleryShowRequest   $request
      * @param  Gallery  $gallery
      * @return Response
      */
-    public function show(Request $request, Gallery $gallery)
-    {
-        $this->authorize('view', $gallery);
-        
+    public function show(GalleryShowRequest $request, Gallery $gallery)
+    {        
         return $this->respondJson(['gallery' => $gallery]);   
     }
 
@@ -90,14 +90,12 @@ class GalleryController extends Controller
     /**
      * Delete a gallery data.
      *
-     * @param  Request   $request
+     * @param  GalleryDeleteRequest   $request
      * @param  Gallery  $gallery
      * @return Response
      */
-    public function remove(Request $request, Gallery $gallery)
+    public function remove(GalleryDeleteRequest $request, Gallery $gallery)
     {
-        $this->authorize('delete', $gallery);
-
         $this->galleries->remove($gallery);
 
         return $this->respondJson(['gallery' => $gallery]);

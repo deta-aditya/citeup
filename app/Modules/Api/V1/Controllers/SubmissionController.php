@@ -6,8 +6,10 @@ use App\Modules\Models\Submission;
 use App\Modules\Electrons\Submissions\SubmissionService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Submissions\SubmissionIndexRequest;
+use App\Modules\Api\V1\Requests\Submissions\SubmissionShowRequest;
 use App\Modules\Api\V1\Requests\Submissions\SubmissionInsertRequest;
 use App\Modules\Api\V1\Requests\Submissions\SubmissionUpdateRequest;
+use App\Modules\Api\V1\Requests\Submissions\SubmissionDeleteRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -49,14 +51,12 @@ class SubmissionController extends Controller
     /**
      * Get an submission data.
      *
-     * @param  Request     $request
+     * @param  SubmissionShowRequest     $request
      * @param  Submission  $submission
      * @return Response
      */
-    public function show(Request $request, Submission $submission)
+    public function show(SubmissionShowRequest $request, Submission $submission)
     {
-        $this->authorize('view', $submission);
-
         return $this->respondJson(['submission' => $submission]);   
     }
 
@@ -90,14 +90,12 @@ class SubmissionController extends Controller
     /**
      * Delete a submission data.
      *
-     * @param  Request  $request
+     * @param  SubmissionDeleteRequest  $request
      * @param  Submission    $submission
      * @return Response
      */
-    public function remove(Request $request, Submission $submission)
+    public function remove(SubmissionDeleteRequest $request, Submission $submission)
     {
-        $this->authorize('delete', $submission);
-
         $this->submissions->remove($submission);
 
         return $this->respondJson(['submission' => $submission]);

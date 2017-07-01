@@ -7,8 +7,10 @@ use App\Modules\Electrons\Attempts\AttemptService;
 use App\Modules\Electrons\Questions\AnswerService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Attempts\AttemptIndexRequest;
+use App\Modules\Api\V1\Requests\Attempts\AttemptShowRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptStartRequest;
 use App\Modules\Api\V1\Requests\Attempts\AttemptFinishRequest;
+use App\Modules\Api\V1\Requests\Attempts\AttemptDeleteRequest;
 use App\Modules\Api\V1\Requests\Attempts\AddAnswersRequest;
 use App\Modules\Api\V1\Requests\Answers\AnswerIndexRequest;
 use App\Http\Controllers\Controller;
@@ -52,14 +54,12 @@ class AttemptController extends Controller
     /**
      * Get an attempt data.
      *
-     * @param  Request  $request
+     * @param  AttemptShowRequest  $request
      * @param  Attempt  $attempt
      * @return Response
      */
-    public function show(Request $request, Attempt $attempt)
+    public function show(AttemptShowRequest $request, Attempt $attempt)
     {
-        $this->authorize('view', $attempt);
-
         return $this->respondJson(['attempt' => $attempt]);   
     }
 
@@ -95,14 +95,12 @@ class AttemptController extends Controller
     /**
      * Delete an attempt data.
      *
-     * @param  Request  $request
+     * @param  AttemptDeleteRequest  $request
      * @param  Attempt  $attempt
      * @return Response
      */
-    public function remove(Request $request, Attempt $attempt)
+    public function remove(AttemptDeleteRequest $request, Attempt $attempt)
     {
-        $this->authorize('delete', $attempt);
-
         $this->attempts->remove($attempt);
 
         return $this->respondJson(['attempt' => $attempt]);

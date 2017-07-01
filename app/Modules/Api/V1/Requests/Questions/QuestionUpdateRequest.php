@@ -13,7 +13,9 @@ class QuestionUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('question'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-questions');
     }
 
     /**

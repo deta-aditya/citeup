@@ -13,7 +13,13 @@ class DocumentUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('document'));
+        $user = $this->user();
+        $document = $this->route('document');
+
+        return $user->isAdmin() || $user->hasKey('put-documents') || (
+                $user->isEntrant() && 
+                ($user->entry->id === $document->entry->id)
+            );
     }
 
     /**

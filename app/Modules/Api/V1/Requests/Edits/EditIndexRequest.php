@@ -21,7 +21,14 @@ class EditIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return true;
+        $user = $this->user();
+
+        $userCondition = $this->is('users/*') ?
+            $this->route('user') == $user->id :
+            $this->input('user', $user->id) == $user->id;
+
+        return $user->isAdmin() || $user->hasKey('get-edits') || 
+            ($user->isCommittee() && $userCondition);
     }
 
     /**

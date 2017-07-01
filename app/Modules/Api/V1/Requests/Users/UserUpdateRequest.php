@@ -13,7 +13,12 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('user'));
+        $accessor = $this->user();
+        $user = $this->route('user');
+
+        return $accessor->isAdmin() || 
+            $accessor->hasKey('put-users') || 
+            $accessor->id === $user->id;
     }
 
     /**

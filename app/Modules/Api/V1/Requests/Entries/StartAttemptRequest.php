@@ -13,7 +13,11 @@ class StartAttemptRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('attempts', $this->route('entry'));
+        $user = $this->user();
+        $entry = $this->route('entry');
+
+        return $user->isAdmin() || $user->hasKey('post-entries-attempts') ||
+            $user->entry->id === $entry->id;
     }
 
     /**

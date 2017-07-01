@@ -5,8 +5,10 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Document;
 use App\Modules\Electrons\Documents\DocumentService;
 use App\Modules\Api\V1\Requests\Documents\DocumentIndexRequest;
+use App\Modules\Api\V1\Requests\Documents\DocumentShowRequest;
 use App\Modules\Api\V1\Requests\Documents\DocumentInsertRequest;
 use App\Modules\Api\V1\Requests\Documents\DocumentUpdateRequest;
+use App\Modules\Api\V1\Requests\Documents\DocumentDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,14 +51,12 @@ class DocumentController extends Controller
     /**
      * Get a document data.
      *
-     * @param  Request   $request
+     * @param  DocumentShowRequest   $request
      * @param  Document  $document
      * @return Response
      */
-    public function show(Request $request, Document $document)
+    public function show(DocumentShowRequest $request, Document $document)
     {
-        $this->authorize('view', $document);
-
         return $this->respondJson(['document' => $document]);   
     }
 
@@ -90,14 +90,12 @@ class DocumentController extends Controller
     /**
      * Delete a document data.
      *
-     * @param  Request   $request
+     * @param  DocumentDeleteRequest   $request
      * @param  Document  $document
      * @return Response
      */
-    public function remove(Request $request, Document $document)
+    public function remove(DocumentDeleteRequest $request, Document $document)
     {
-        $this->authorize('delete', $document);
-
         $this->documents->remove($document);
 
         return $this->respondJson(['document' => $document]);

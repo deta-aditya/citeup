@@ -52,7 +52,9 @@ class UserIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', User::class);
+        $accessor = $this->user();
+
+        return $accessor->isAdmin() || $accessor->hasKey('get-users');
     }
 
     /**

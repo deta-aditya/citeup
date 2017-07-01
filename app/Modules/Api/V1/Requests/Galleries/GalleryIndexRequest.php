@@ -21,6 +21,6 @@ class GalleryIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Gallery::class);
+        return true;
     }
 }

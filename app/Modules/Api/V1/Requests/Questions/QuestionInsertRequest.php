@@ -14,7 +14,9 @@ class QuestionInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Question::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('view-questions') || $user->isEntrant();
     }
 
     /**

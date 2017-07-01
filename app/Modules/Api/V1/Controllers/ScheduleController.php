@@ -7,8 +7,10 @@ use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Activities\ScheduleService;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleIndexRequest;
+use App\Modules\Api\V1\Requests\Schedules\ScheduleShowRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleInsertRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleUpdateRequest;
+use App\Modules\Api\V1\Requests\Schedules\ScheduleDeleteRequest;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -51,14 +53,12 @@ class ScheduleController extends Controller
     /**
      * Get a schedule data.
      *
-     * @param  Request   $request
+     * @param  ScheduleShowRequest   $request
      * @param  Schedule  $schedule
      * @return Response
      */
-    public function show(Request $request, Schedule $schedule)
+    public function show(ScheduleShowRequest $request, Schedule $schedule)
     {
-        $this->authorize('view', $schedule);
-
         return $this->respondJson(['schedule' => $schedule]);   
     }
 
@@ -92,14 +92,12 @@ class ScheduleController extends Controller
     /**
      * Delete a schedule data.
      *
-     * @param  Request   $request
+     * @param  ScheduleDeleteRequest   $request
      * @param  Schedule  $schedule
      * @return Response
      */
-    public function remove(Request $request, Schedule $schedule)
+    public function remove(ScheduleDeleteRequest $request, Schedule $schedule)
     {
-        $this->authorize('delete', $schedule);
-
         $this->schedules->remove($schedule);
 
         return $this->respondJson(['schedule' => $schedule]);

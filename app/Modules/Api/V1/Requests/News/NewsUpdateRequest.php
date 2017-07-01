@@ -13,7 +13,9 @@ class NewsUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('news'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-news');
     }
 
     /**

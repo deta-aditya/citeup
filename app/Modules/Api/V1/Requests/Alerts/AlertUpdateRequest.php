@@ -13,7 +13,9 @@ class AlertUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('alert'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-alerts');
     }
 
     /**

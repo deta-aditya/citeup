@@ -13,7 +13,9 @@ class AnnounceAlertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('users', $this->route('alert'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-alerts-users');
     }
 
     /**

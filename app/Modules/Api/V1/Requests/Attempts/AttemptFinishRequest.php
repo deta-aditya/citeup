@@ -13,7 +13,13 @@ class AttemptFinishRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('attempt'));
+        $user = $this->user();
+        $attempt = $this->route('attempt');
+
+        return $user->isAdmin() || $user->hasKey('put-attempts') || (
+                $user->isEntrant() && 
+                ($user->entry->id === $attempt->entry->id)
+            );
     }
 
     /**

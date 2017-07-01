@@ -19,6 +19,26 @@ class UserService extends Service
     ];
 
     /**
+     * Data for creating example entrant user.
+     *
+     * @var array
+     */
+    protected $exampleEntrant = [
+        'email' => 'exampleentrant@citeup.com',
+        'password' => 'rahasia',
+    ];
+
+    /**
+     * Data for creating example committee user.
+     *
+     * @var array
+     */
+    protected $exampleCommittee = [
+        'email' => 'examplecommittee@citeup.com',
+        'password' => 'rahasia',
+    ];
+
+    /**
      * The main model for the service.
      *
      * @var User
@@ -163,6 +183,26 @@ class UserService extends Service
     public function createStarterAdmin()
     {
         return $this->create($this->starterAdmin);
+    }
+
+    /**
+     * Create an example entrant user.
+     *
+     * @return User
+     */
+    public function createExampleEntrant()
+    {
+        return $this->create($this->exampleEntrant);
+    }
+
+    /**
+     * Create an example committee user.
+     *
+     * @return User
+     */
+    public function createExampleCommittee()
+    {
+        return $this->create($this->exampleCommittee);
     }
 
     /**

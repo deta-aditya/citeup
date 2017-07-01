@@ -14,7 +14,9 @@ class AlertInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('post', Alert::class);
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('post-alerts');
     }
 
     /**

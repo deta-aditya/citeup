@@ -9,8 +9,10 @@ use App\Modules\Electrons\Activities\ScheduleService;
 use App\Modules\Electrons\Activities\ActivityService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Activities\ActivityIndexRequest;
+use App\Modules\Api\V1\Requests\Activities\ActivityShowRequest;
 use App\Modules\Api\V1\Requests\Activities\ActivityInsertRequest;
 use App\Modules\Api\V1\Requests\Activities\ActivityUpdateRequest;
+use App\Modules\Api\V1\Requests\Activities\ActivityDeleteRequest;
 use App\Modules\Api\V1\Requests\Activities\MakeScheduleRequest;
 use App\Modules\Api\V1\Requests\Schedules\ScheduleIndexRequest;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
@@ -56,14 +58,12 @@ class ActivityController extends Controller
     /**
      * Get an activity data.
      *
-     * @param  Request   $request
+     * @param  ActivityShowRequest   $request
      * @param  Activity  $activity
      * @return Response
      */
-    public function show(Request $request, Activity $activity)
-    {
-        $this->authorize('view', $activity);
-        
+    public function show(ActivityShowRequest $request, Activity $activity)
+    {        
         $this->activities->loadRelationships($activity);
 
         return $this->respondJson(['activity' => $activity]);   
@@ -99,14 +99,12 @@ class ActivityController extends Controller
     /**
      * Delete an activity data.
      *
-     * @param  Request   $request
+     * @param  ActivityDeleteRequest   $request
      * @param  Activity  $activity
      * @return Response
      */
-    public function remove(Request $request, Activity $activity)
+    public function remove(ActivityDeleteRequest $request, Activity $activity)
     {
-        $this->authorize('delete', $activity);
-
         $this->activities->remove($activity);
 
         return $this->respondJson(['activity' => $activity]);

@@ -13,7 +13,9 @@ class ScheduleUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('put', $this->route('schedule'));
+        $user = $this->user();
+
+        return $user->isAdmin() || $user->hasKey('put-schedules');
     }
 
     /**

@@ -13,9 +13,13 @@ class EntryModifyRequest extends FormRequest
      */
     public function authorize()
     {
+        $accessor = $this->user();
+
+        $isAdmin = $accessor->isAdmin();
+
         return $this->is('entries/*') ? 
-            $this->user()->can('post', $this->route('entry'))
-            $this->user()->can('entries',  $this->route('user'));
+            $isAdmin || $accessor->hasKey('post-entries');
+            $isAdmin || $accessor->hasKey('post-users-entries');
     }
 
     /**

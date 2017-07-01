@@ -158,7 +158,11 @@ trait User
      */
     public function hasKey($key)
     {
-        return (bool) $this->keys()->where('id', $key)->orWhere('slug', $key)->count();
+        $query = $this->keys();
+
+        is_int($key) ? $query->where('id', $key) : $query->where('slug', $key);
+
+        return $query->count() > 0;
     }
 
     /**

@@ -21,7 +21,14 @@ class SubmissionIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Submission::class);
+        $user = $this->user();
+
+        $entry = $this->is('entry/*') ?
+            $this->route('entry')->id :
+            $this->input('entry', $user->entry->id);
+
+        return $user->isAdmin() || $user->hasKey('get-submissions') || 
+            $user->entry->id == $entry;
     }
 
     /**

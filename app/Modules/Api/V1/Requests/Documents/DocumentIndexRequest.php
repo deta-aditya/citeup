@@ -21,7 +21,14 @@ class DocumentIndexRequest extends ApiIndexRequest
      */
     public function authorize()
     {
-        return $this->user()->can('get', Document::class);
+        $user = $this->user();
+
+        $entry = $this->is('entry/*') ?
+            $this->route('entry')->id :
+            $this->input('entry', $user->entry->id);
+
+        return $user->isAdmin() || $user->hasKey('get-documents') || 
+            $user->entry->id == $entry;
     }
 
     /**
