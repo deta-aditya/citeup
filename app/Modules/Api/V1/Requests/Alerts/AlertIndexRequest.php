@@ -44,14 +44,17 @@ class AlertIndexRequest extends ApiIndexRequest
     {
         $user = $this->user();
 
-        $other = $this->is('users/*') ? 
-            $this->route('user') == $user->id :
-            ! $this->has('users'); 
+        if (strpos($this->url(), 'users/') !== false) {
+            $other = $this->route('user')->id === $user->id;
+        } else {
+            $other = ! $this->has('users'); 
+        }
 
         return $user->isAdmin() || $user->hasKey('get-alerts') || (
             $other && 
             $this->input('seenby', $user->id) == $user->id &&
-            $this->input('unseenby', $user->id) == $user->id);
+            $this->input('unseenby', $user->id) == $user->id
+        );
     }
 
     /**
@@ -65,8 +68,8 @@ class AlertIndexRequest extends ApiIndexRequest
             'announced' => 'string|in:true,false',
             'unannounced' => 'string|in:true,false',
             'users' => 'string',
-            'seenby' => 'int|exists:alerts,id',
-            'unseenby' => 'int|exists:alerts,id',
+            'seenby' => 'int|exists:users,id',
+            'unseenby' => 'int|exists:users,id',
         ];
     }
 

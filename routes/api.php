@@ -15,7 +15,7 @@ use App\User;
 |
 */
 
-Route::get('/user', function (Request $request, KeyService $keys) {
+Route::get('/user', function (Request $request) {
     $user = User::find(3);
     return [$user->hasKey('get-users')];
 });
@@ -111,7 +111,7 @@ Route::group([
     Route::delete('/attempts/{attempt}', 'AttemptController@remove');
     Route::get('/attempts/{attempt}/answers', 'AttemptController@answers');
     Route::post('/attempts/{attempt}/answers', 'AttemptController@addAnswers');
-    
+
     Route::get('/questions', 'QuestionController@index');
     Route::post('/questions', 'QuestionController@insert');
     Route::get('/questions/{question}', 'QuestionController@show');

@@ -16,7 +16,9 @@ class DocumentInsertRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('post-documents') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-documents') || (
+            $user->isEntrant() && $user->entry->id == $this->input('entry', null)
+        );
     }
 
     /**

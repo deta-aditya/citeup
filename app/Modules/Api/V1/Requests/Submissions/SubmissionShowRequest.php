@@ -16,6 +16,20 @@ class SubmissionShowRequest extends FormRequest
         $user = $this->user();
         $submission = $this->route('submission');
 
-        return $user->isAdmin() || $user->hasKey('view-submissions') || $user->entry->id === $submission->entry->id;
+        return $user->isAdmin() || $user->hasKey('view-submissions') || (
+            $user->isEntrant() && $user->entry->id === $submission->entry->id
+        );
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
     }
 }

@@ -15,7 +15,7 @@ class GrantKeysRequest extends FormRequest
     {
         $accessor = $this->user();
 
-        return $accessor->isAdmin() || $accessor->hasKey('post-users-keys');
+        return $accessor->isAdmin();
     }
 
     /**

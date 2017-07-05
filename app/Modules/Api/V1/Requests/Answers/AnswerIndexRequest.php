@@ -23,9 +23,14 @@ class AnswerIndexRequest extends ApiIndexRequest
     {
         $user = $this->user();
 
+        $attempt = strpos($this->url(), 'attempts/') !== false ? 
+            $this->route('attempt')->id :
+            $this->input('attempt', null);
+
+
         return $user->isAdmin() || $user->hasKey('get-answers') || 
-            ($user->isEntrant() && $user->attempts->search(function ($item, $key) {
-                return $item->id == $this->input('attempt', null);
+            ($user->isEntrant() && $user->attempts->search(function ($item, $key) use ($attempt) {
+                return $item->id == $attempt;
             }) !== false);
     }
 

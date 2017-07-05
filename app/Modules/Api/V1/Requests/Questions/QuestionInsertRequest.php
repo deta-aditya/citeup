@@ -16,7 +16,7 @@ class QuestionInsertRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('view-questions') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-questions');
     }
 
     /**

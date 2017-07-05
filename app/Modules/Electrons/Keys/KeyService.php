@@ -27,7 +27,7 @@ class KeyService extends Service
 
         // "Users" Keys
         'Get Users', 'View Users', 'Post Users', 'Put Users', 'Delete Users', 
-        'Post Users Keys', 'Post Users Alerts', 'Post Users Entries',
+        'Post Users Alerts', 'Post Users Entries',
 
         // "Alerts" Keys
         'Get Alerts', 'View Alerts', 'Post Alerts', 

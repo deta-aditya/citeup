@@ -20,4 +20,16 @@ class UserDeleteRequest extends FormRequest
         return ($accessor->isAdmin() || $accessor->hasKey('delete-users')) && 
             $accessor->id !== $user->id;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
 }

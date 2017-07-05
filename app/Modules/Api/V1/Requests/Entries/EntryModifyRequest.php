@@ -17,8 +17,8 @@ class EntryModifyRequest extends FormRequest
 
         $isAdmin = $accessor->isAdmin();
 
-        return $this->is('entries/*') ? 
-            $isAdmin || $accessor->hasKey('post-entries');
+        return strpos($this->url(), 'entries/') !== false ? 
+            $isAdmin || $accessor->hasKey('post-entries') :
             $isAdmin || $accessor->hasKey('post-users-entries');
     }
 

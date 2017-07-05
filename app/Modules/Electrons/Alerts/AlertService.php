@@ -36,6 +36,8 @@ class AlertService extends Service
 
         if (array_has($params, 'users')) {
             $query->forUsers(explode($this->getDelimiter('users'), $params['users']));
+        } else if (! auth('api')->user()->isAdmin() || ! auth('api')->user()->hasKey('get-alerts')) {
+            $query->forUsers(array_wrap(auth('api')->user()->id));
         }
 
         if (array_has($params, 'seenby')) {

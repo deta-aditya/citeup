@@ -16,7 +16,9 @@ class TestimonialInsertRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('post-testimonials') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-testimonials') || (
+            $user->isEntrant() && $user->entry->id == $this->input('entry', null)
+        );
     }
 
     /**

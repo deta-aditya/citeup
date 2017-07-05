@@ -15,9 +15,23 @@ class AlertShowRequest extends FormRequest
     {
         $user = $this->user();
 
+        $alert = $this->route('alert');
+
         return $user->isAdmin() || $user->hasKey('view-alerts') || 
-            $alert->users->search(function ($item, $key) use ($user)) {
+            $alert->users->search(function ($item, $key) use ($user) {
                 return $item->id === $user->id;
             }) !== false;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
     }
 }

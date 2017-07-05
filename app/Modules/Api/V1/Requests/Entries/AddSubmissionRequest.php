@@ -17,7 +17,7 @@ class AddSubmissionRequest extends FormRequest
         $entry = $this->route('entry');
 
         return $user->isAdmin() || $user->hasKey('post-entries-submissions') || 
-            $user->entry->id === $entry->id;
+            ($user->isEntrant() && $user->entry->id == $entry->id);
     }
 
     /**

@@ -3,24 +3,20 @@
 namespace Tests\Feature\Api\Policy\Users;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Modules\Electrons\Users\RoleService;
-use App\User;
+use App\Modules\Testing\TestAssistant;
 
 class GetUsersTest extends TestCase
 {
+    use TestAssistant;
+
     /**
-     * Testing a successful attempt.
+     * Testing a successful attempt on admin.
      *
      * @return void
      */
-    public function testSuccessful()
+    public function test200Admin()
     {
-        $response = $this->actingAs(
-            User::ofRole(RoleService::ROLE_ADMINISTRATOR)->get()->random(), 'api'
-        )->json('GET', '/api/v1/users');
+        $response = $this->requestToApi($this->randomAdmin(), 'GET', '/users');
 
         $response->assertStatus(200);
     }
@@ -30,17 +26,13 @@ class GetUsersTest extends TestCase
      *
      * @return void
      */
-    public function testSuccessfulKeyed()
+    public function test200Keyed()
     {
-        $user = User::ofRole(RoleService::ROLE_COMMITTEE)->get()->random();
+        $user = $this->randomCommittee();
 
-        $keys = resolve('App\Modules\Electrons\Keys\KeyService');
+        $this->grant($user, 'get-users');
 
-        $keys->grant($user, $keys->slugsToId(['get-users']));
-
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/v1/users');
-
-        $keys->ungrant($user, $keys->slugsToId(['get-users']));
+        $response = $this->requestToApi($user, 'GET', '/users');
 
         $response->assertStatus(200);
     }
@@ -50,11 +42,9 @@ class GetUsersTest extends TestCase
      *
      * @return void
      */
-    public function testForbidden()
+    public function test403()
     {
-        $response = $this->actingAs(
-            User::ofRole(RoleService::ROLE_ENTRANT)->get()->random(), 'api'
-        )->json('GET', '/api/v1/users');
+        $response = $this->requestToApi($this->randomEntrant(), 'GET', '/users');
 
         $response->assertStatus(403);
     }

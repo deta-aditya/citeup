@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Users;
 
+use App\Modules\Electrons\Users\RoleService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserInsertRequest extends FormRequest
@@ -15,7 +16,7 @@ class UserInsertRequest extends FormRequest
     {
         $accessor = $this->user();
 
-        return $accessor->isAdmin() || $accessor->hasKey('post-users');
+        return $accessor->isAdmin() || $accessor->hasKey('post-users');;
     }
 
     /**
@@ -29,7 +30,7 @@ class UserInsertRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|string|confirmed',
             'role' => 'required|int|exists:roles,id',
-            'activity' => 'required|int|exists:activities,id',
+            'activity' => 'required_if:role,'. RoleService::ROLE_ENTRANT .'|int|exists:activities,id',
             'name' => 'required|string|max:191',
             'address' => 'string',
             'school' => 'string|max:191',

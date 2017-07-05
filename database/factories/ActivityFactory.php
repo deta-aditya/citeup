@@ -14,6 +14,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Modules\Models\Activity::class, function (Faker\Generator $faker) {
     return [
-        //
+        'name' => $faker->words(2, true),
+        'description' => $faker->paragraph(),
+        'short_description' => $faker->text(191),
+        'icon' => 'storage/images/default.jpg',
     ];
 });

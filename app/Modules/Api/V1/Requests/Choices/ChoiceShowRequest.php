@@ -17,4 +17,16 @@ class ChoiceShowRequest extends FormRequest
 
         return $user->isAdmin() || $user->hasKey('view-choices') || $user->isEntrant();
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
 }

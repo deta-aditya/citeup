@@ -18,4 +18,16 @@ class KeyDeleteRequest extends FormRequest
 
         return $user->isAdmin();
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
 }

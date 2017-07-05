@@ -3,7 +3,9 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Gallery;
+use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Galleries\GalleryService;
+use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
 use App\Modules\Api\V1\Requests\Galleries\GalleryIndexRequest;
 use App\Modules\Api\V1\Requests\Galleries\GalleryShowRequest;
 use App\Modules\Api\V1\Requests\Galleries\GalleryInsertRequest;

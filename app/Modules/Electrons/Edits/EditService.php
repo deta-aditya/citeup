@@ -56,12 +56,16 @@ class EditService extends Service
     /**
      * Log a new edit.
      *
-     * @param  Editable  $editable
-     * @param  User      $performer
-     * @return Edit
+     * @param  Editable   $editable
+     * @param  User|null  $performer
+     * @return mixed
      */
-    public function log(Editable $editable, User $performer)
+    public function log(Editable $editable, $performer)
     {
+        if (is_null($performer)) {
+            $performer = User::find(1);
+        }
+
         $edit = $this->getModel();
 
         $edit->user_id = $performer->id;

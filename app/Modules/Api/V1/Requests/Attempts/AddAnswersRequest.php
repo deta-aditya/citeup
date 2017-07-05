@@ -15,7 +15,10 @@ class AddAnswersRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('post-attempts-answers') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-attempts-answers') || 
+            ($user->isEntrant() && $user->attempts->search(function ($item, $key) {
+                return $item->id === $this->route('attempt')->id;
+            }) !== false);
     }
 
     /**

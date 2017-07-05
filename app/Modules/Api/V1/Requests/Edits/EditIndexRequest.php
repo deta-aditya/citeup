@@ -23,8 +23,8 @@ class EditIndexRequest extends ApiIndexRequest
     {
         $user = $this->user();
 
-        $userCondition = $this->is('users/*') ?
-            $this->route('user') == $user->id :
+        $userCondition = strpos($this->url(), 'users/') !== false ?
+            $this->route('user')->id === $user->id :
             $this->input('user', $user->id) == $user->id;
 
         return $user->isAdmin() || $user->hasKey('get-edits') || 

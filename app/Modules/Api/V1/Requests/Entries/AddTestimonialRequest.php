@@ -17,7 +17,7 @@ class AddTestimonialRequest extends FormRequest
         $entry = $this->route('entry');
 
         return $user->isAdmin() || $user->hasKey('post-entries-testimonials') ||
-            $user->entry->id === $entry->id;
+            ($user->isEntrant() && $user->entry->id == $entry->id);
     }
 
     /**

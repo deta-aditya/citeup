@@ -16,7 +16,10 @@ class AnswerInsertRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('post-answers') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-answers') || 
+            ($user->isEntrant() && $user->attempts->search(function ($item, $key) {
+                return $item->id == $this->input('attempt');
+            }) !== false);
     }
 
     /**

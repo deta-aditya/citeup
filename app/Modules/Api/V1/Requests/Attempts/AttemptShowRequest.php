@@ -16,6 +16,20 @@ class AttemptShowRequest extends FormRequest
         $user = $this->user();
         $attempt = $this->route('attempt');
 
-        return $user->isAdmin() || $user->hasKey('view-attempts') || $user->entry->id === $attempt->entry->id;
+        return $user->isAdmin() || $user->hasKey('view-attempts') || (
+            $user->isEntrant() && $user->entry->id === $attempt->entry->id
+        );
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
     }
 }

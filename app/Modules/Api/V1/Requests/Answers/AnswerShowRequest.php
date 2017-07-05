@@ -15,11 +15,22 @@ class AnswerShowRequest extends FormRequest
     public function authorize()
     {
         $user = $this->user();
-        $answer = $this->route('answer');
 
         return $user->isAdmin() || $user->hasKey('view-answers') || 
             ($user->isEntrant() && $user->attempts->search(function ($item, $key) {
-                return $item->id === $answer->attempt->id;
+                return $item->id === $this->route('answer')->attempt->id;
             }) !== false);
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
     }
 }

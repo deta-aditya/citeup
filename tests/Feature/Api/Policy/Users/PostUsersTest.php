@@ -3,19 +3,55 @@
 namespace Tests\Feature\Api\Policy\Users;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Modules\Testing\TestAssistant;
 
 class PostUsersTest extends TestCase
 {
+    use TestAssistant;
+
     /**
-     * A basic test example.
+     * Testing a successful attempt from admin.
      *
      * @return void
      */
-    public function testExample()
+    public function test200Admin()
     {
-        $this->assertTrue(true);
+        $response = $this->requestToApi(
+            $this->randomAdmin(), 'POST', '/users', $this->randomUserData()
+        );
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testing a successful attempt using key.
+     *
+     * @return void
+     */
+    public function test200Keyed()
+    {
+        $user = $this->randomCommittee();
+
+        $this->grant($user, 'post-users');
+
+        $response = $this->requestToApi(
+            $user, 'POST', '/users', $this->randomUserData()
+        );
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testing a forbidden attempt.
+     *
+     * @return void
+     */
+    public function test403()
+    {
+        $response = $this->requestToApi(
+            $this->randomEntrant(), 'POST', '/users', $this->randomUserData()
+        );
+
+        $response->assertStatus(403);
     }
 }

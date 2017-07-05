@@ -54,7 +54,10 @@ class UserIndexRequest extends ApiIndexRequest
     {
         $accessor = $this->user();
 
-        return $accessor->isAdmin() || $accessor->hasKey('get-users');
+        return $accessor->isAdmin() || (
+                strpos($this->url(), 'keys/') === false &&
+                $accessor->hasKey('get-users')
+            );
     }
 
     /**

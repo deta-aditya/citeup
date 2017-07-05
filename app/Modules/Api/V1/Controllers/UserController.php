@@ -247,7 +247,7 @@ class UserController extends Controller
      * @param  EditService        $edits
      * @return Response
      */
-    public function edits(EditIndexRequest $request, User $user, EditService $alerts)
+    public function edits(EditIndexRequest $request, User $user, EditService $edits)
     {
         $queries = $request->all();
 

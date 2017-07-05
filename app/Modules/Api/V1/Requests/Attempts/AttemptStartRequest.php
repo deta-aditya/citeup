@@ -16,7 +16,9 @@ class AttemptStartRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user->isAdmin() || $user->hasKey('post-attempts') || $user->isEntrant();
+        return $user->isAdmin() || $user->hasKey('post-attempts') || (
+            $user->isEntrant() && $user->entry->id == $this->input('entry', null)
+        );
     }
 
     /**
