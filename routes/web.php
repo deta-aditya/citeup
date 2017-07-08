@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
  * Original Namespace Group
  */
@@ -36,6 +32,22 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     
     Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+/*
+ * Web Group 
+ */
+Route::group(['namespace' => 'App\Web'], function () {
+
+    /*
+     * Front Subapp 
+     */
+    Route::group(['namespace' => 'Front\Controllers'], function () {
+
+        Route::get('/', 'FrontController@root')->name('root');
+
+    });
 
 });
 

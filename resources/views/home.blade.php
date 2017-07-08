@@ -29,11 +29,11 @@
                 </api-box>
             </div>
             <div class="col-md-4">
-                <api-box req-type="delete" uri="/api/v1/sponsors/3">
-                    <template slot="header-text">DELETE Sponsor/3</template>
+                <api-box req-type="post" uri="/api/v1/storage" multipart="true" file-upload-name="file">
+                    <template slot="header-text">POST Storage</template>
                     <template slot="result-area" scope="props">
                         <div class="panel-body">
-                            <pre>@{{ props.data.data.sponsor }}</pre>
+                            <pre>@{{ props.data.data }}</pre>
                         </div>
                     </template>
                 </api-box>
