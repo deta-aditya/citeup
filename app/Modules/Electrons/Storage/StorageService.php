@@ -24,6 +24,8 @@ class StorageService extends Service
      |          Imports     =>      /imports
      |          Exports     =>      /exports
      |
+     | Webdata: Slides      =>      /slides
+     |
      */
 
     /**

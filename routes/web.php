@@ -23,7 +23,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/login', 'LoginController@showLoginForm')->name('login');
         Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
         Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-        Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
         Route::post('/login', 'LoginController@login');
         Route::post('/logout', 'LoginController@logout')->name('logout');
         Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -49,8 +48,17 @@ Route::group(['namespace' => 'App\Web'], function () {
 
     });
 
+    /*
+     * Auth Subapp 
+     */
+    Route::group(['namespace' => 'Auth\Controllers'], function () {
+
+        Route::get('/', 'FrontController@root')->name('root');
+
+    });
+
 });
 
 Route::get('/coba', function () {
-    return view('coba');
+    // return view('coba');
 });

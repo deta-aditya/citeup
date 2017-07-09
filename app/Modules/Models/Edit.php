@@ -115,6 +115,21 @@ class Edit extends Model
     }
     
     /**
+     * Scope a query to only include edits of the given faq ID.
+     *
+     * @param  Builder  $query
+     * @param  int      $faq
+     * @return Builder
+     */
+    public function scopeOfFaq($query, $faq)
+    {
+        return $query->where([
+            ['editable_type', '=', Faq::class],
+            ['editable_id', '=', $faq],
+        ]);
+    }
+    
+    /**
      * Scope a query to only include edits by the given user ID.
      *
      * @param  Builder  $query

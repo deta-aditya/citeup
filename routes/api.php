@@ -152,6 +152,13 @@ Route::group([
     Route::put('/sponsors/{sponsor}', 'SponsorController@update');
     Route::delete('/sponsors/{sponsor}', 'SponsorController@remove');
     Route::get('/sponsors/{sponsor}/edits', 'SponsorController@edits');
+
+    Route::get('/faqs', 'FaqController@index');
+    Route::post('/faqs', 'FaqController@insert');
+    Route::get('/faqs/{faq}', 'FaqController@show');
+    Route::put('/faqs/{faq}', 'FaqController@update');
+    Route::delete('/faqs/{faq}', 'FaqController@remove');
+    Route::get('/faqs/{faq}/edits', 'FaqController@edits');
     
     Route::get('/edits', 'EditController@index');
     

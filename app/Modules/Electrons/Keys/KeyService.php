@@ -21,7 +21,7 @@ class KeyService extends Service
      * The application access keys.
      * Caution: Do not modify!
      *
-     * @var key
+     * @var array
      */
     protected $keys = [
 
@@ -84,6 +84,10 @@ class KeyService extends Service
         // "Sponsors" Keys
         'Get Sponsors', 'View Sponsors', 'Post Sponsors', 
         'Put Sponsors', 'Delete Sponsors',
+
+        // "Faqs" Keys
+        'Get Faqs', 'View Faqs', 'Post Faqs', 
+        'Put Faqs', 'Delete Faqs',
 
         // "Edits" Keys
         'Get Edits',

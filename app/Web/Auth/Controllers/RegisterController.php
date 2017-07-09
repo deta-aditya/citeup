@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Web\Front\Controllers;
+namespace App\Web\Auth\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 
-class FrontController extends Controller
+class RegisterController extends Controller
 {
     /**
-     * Show the landing page.
+     * Show the registration form page.
      *
      * @param  Activities  $activities
      * @return Response
      */
-    public function root(Activities $activities)
+    public function form(Activities $activities)
     {
         $data = [
             'activities' => $activities->getMultiple([])
         ];
 
-        return view('landing', $data);
+        return view('auth.register', $data);
     }
 }

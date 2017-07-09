@@ -2,6 +2,7 @@
 
 namespace App\Modules\Electrons\Activities;
 
+use Carbon\Carbon;
 use App\Modules\Models\Activity;
 use App\Modules\Nucleons\Service;
 
@@ -20,6 +21,35 @@ class ActivityService extends Service
      * @var Activity
      */
     protected $model = Activity::class;
+
+    /**
+     * The default activities for application.
+     *
+     * @var array
+     */
+    protected $default = [
+        'Lomba Logika', 'Lomba Desain Grafis', 'Seminar IT',
+    ];
+
+    /**
+     * Create all required activities.
+     *
+     * @return this
+     */
+    public function createAllRequired()
+    {
+        $now = Carbon::now()->toDateTimeString();
+
+        $insertables = [];
+
+        foreach ($this->default as $activity) {
+            factory(Activity::class)->create([
+                'name' => $activity
+            ]);
+        }
+
+        return $this;
+    }
 
     /**
      * Get multiple activities with conditions.

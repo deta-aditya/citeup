@@ -37,32 +37,16 @@
         <h2 class="text-center">Daftar Acara</h2>
         <div class="row" style="margin-top:40px">
 
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <img class="img-circle" src="{{ asset('storage/images/default.jpg') }}">
-                    <h3>Lomba Logika</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <a class="btn btn-link" href="#">Rincian &raquo;</a>
+            @foreach ($activities as $activity)
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <img class="img-circle" src="{{ asset($activity->icon) }}">
+                        <h3>{{ $activity->name }}</h3>
+                        <p>{{ $activity->short_description }}</p>
+                        <a class="btn btn-link" href="#">Rincian &raquo;</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <img class="img-circle" src="{{ asset('storage/images/default.jpg') }}">
-                    <h3>Lomba Desain Grafis</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <a class="btn btn-link" href="#">Rincian &raquo;</a>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <img class="img-circle" src="{{ asset('storage/images/default.jpg') }}">
-                    <h3>Seminar IT</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <a class="btn btn-link" href="#">Rincian &raquo;</a>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>

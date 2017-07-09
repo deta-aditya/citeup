@@ -46,6 +46,10 @@ class EditService extends Service
             $query->ofSponsor($params['sponsor']);
         }
 
+        if (array_has($params, 'faq')) {
+            $query->ofFaq($params['faq']);
+        }
+
         if (array_has($params, 'user')) {
             $query->ofUser($params['user']);
         }
