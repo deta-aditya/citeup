@@ -2,6 +2,7 @@
 
 namespace App\Modules\Electrons\Storage;
 
+use Carbon\Carbon;
 use App\Modules\Nucleons\Service;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -105,6 +106,19 @@ class StorageService extends Service
     }
 
     /**
+     * Returns an ideal file name determined by the specified id and type. 
+     *
+     * @param  int     $objectId
+     * @param  string  $objectType
+     * @param  string  $extension
+     * @return string
+     */
+    public function makeName($objectId, $objectType, $extension)
+    {
+        return Carbon::now()->timestamp . '-' . $objectId . '-' . $objectType . '.' . $extension;
+    }
+
+    /**
      * Returns a storage directory path to the specified mime, id and type. 
      *
      * @param  string  $mime
@@ -133,7 +147,7 @@ class StorageService extends Service
             Storage::makeDirectory($directory);
         }
 
-        return $file->store($directory, 'public');
+        return $file->storeAs($directory, $this->makeName($objectId, $objectType, $file->extension()), 'public');
     }
 
     /**

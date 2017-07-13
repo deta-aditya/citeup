@@ -5,6 +5,26 @@ namespace App\Modules\Models;
 trait User
 {
     /**
+     * Get the user's name.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->profile()->first()->name;
+    }
+
+    /**
+     * Get the user's role.
+     *
+     * @return string
+     */
+    public function getRolenameAttribute()
+    {
+        return $this->role()->first()->name;
+    }
+
+    /**
      * Get the role of the user.
      *
      * @return BelongsTo
@@ -127,7 +147,7 @@ trait User
      */
     public function isAdmin()
     {
-        return $this->role->name === 'Administrator';
+        return $this->rolename === 'Administrator';
     }
 
     /**
@@ -137,7 +157,7 @@ trait User
      */
     public function isCommittee()
     {
-        return $this->role->name === 'Committee';
+        return $this->rolename === 'Committee';
     }
 
     /**
@@ -147,7 +167,7 @@ trait User
      */
     public function isEntrant()
     {
-        return $this->role->name === 'Entrant';
+        return $this->rolename === 'Entrant';
     }
 
     /**

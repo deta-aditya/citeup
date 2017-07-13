@@ -15,9 +15,11 @@ class StorageDeleteRequest extends FormRequest
     {
         $user = $this->user();
         
-        list($trail, $mime, $objType, (int)$objId, $filename) = explode('/', $this->input('link'));
+        list($trail, $mime, $objType, $objId, $filename) = explode('/', $this->input('link'));
 
-        return 
+        $objId = intval($objId);
+
+        return
             ($objType === 'profiles' && $objId === $user->id) ||
             ($user->isCommittee() && (
                 ($objType === 'profiles' && ($user->hasKey('delete-users') || $user->hasKey('put-users'))) ||

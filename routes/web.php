@@ -20,14 +20,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      * Authentication Routes
      */    
     Route::group(['namespace' => 'Auth'], function () {
-        Route::get('/login', 'LoginController@showLoginForm')->name('login');
         Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
         Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-        Route::post('/login', 'LoginController@login');
         Route::post('/logout', 'LoginController@logout')->name('logout');
         Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
         Route::post('/password/reset', 'ResetPasswordController@reset');
-        Route::post('/register', 'RegisterController@register');
     });
     
     Route::get('/home', 'HomeController@index')->name('home');
@@ -53,8 +50,20 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Auth\Controllers'], function () {
 
-        Route::get('/', 'FrontController@root')->name('root');
+        Route::get('/login', 'LoginController@form')->name('login.form');
+        Route::post('/login', 'LoginController@login')->name('login');
+        Route::get('/register', 'RegisterController@form')->name('register.form');
+        Route::post('/register', 'RegisterController@register')->name('register');
 
+    });
+
+    /*
+     * Dashboard Subapp 
+     */
+    Route::group(['namespace' => 'Dashboard\Controllers'], function () {
+        
+        Route::get('/app/{vue?}', 'DashboardController@index')->name('dashboard')->where('vue', '[\/\w\.-]*');
+        
     });
 
 });

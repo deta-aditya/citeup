@@ -65,31 +65,18 @@
                                 <div class="form-group">
                                     <label for="name" class="control-label">Acara yang akan diikuti</label>
 
-                                    <radio-vertical-lg 
-                                        name="activity"
-                                        :radios="[
-                                            {
-                                                id: 1,
-                                                value: 1,
-                                                text: 'Lorem ipsum dolor sit amet.',
-                                                header: 'Lomba Logika',
-                                                img: '{{ asset('storage/images/default.jpg') }}'
-                                            },
-                                            {
-                                                id: 2,
-                                                value: 2,
-                                                text: 'Lorem ipsum dolor sit amet.',
-                                                header: 'Lomba Desain Grafis',
-                                                img: '{{ asset('storage/images/default.jpg') }}'
-                                            },
-                                            {
-                                                id: 3,
-                                                value: 3,
-                                                text: 'Lorem ipsum dolor sit amet.',
-                                                header: 'Seminar IT',
-                                                img: '{{ asset('storage/images/default.jpg') }}'
-                                            }
-                                        ]">
+                                    <radio-vertical-lg name="activity">
+
+                                        @foreach ($activities as $activity)
+                                            <radio-button
+                                                :key="{{ $activity->id }}" 
+                                                :value="{{ $activity->id }}" 
+                                                img="{{ asset($activity->icon) }}">
+                                                <template slot="header">{{ $activity->name }}</template>
+                                                <template slot="text">{{ substr($activity->short_description, 0, 25) }}...</template>
+                                            </radio-button>
+                                        @endforeach
+
                                     </radio-vertical-lg>
                                 </div>
                             </div>

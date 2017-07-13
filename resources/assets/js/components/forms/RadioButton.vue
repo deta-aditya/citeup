@@ -29,7 +29,7 @@ The button item used on fancy radio buttons components.
 <template>
     <a href="#"
         ref="wrapper"
-        @click.prevent="check" 
+        @click.prevent="check"
         :class="[defaultClasses]">
         <div class="side-img visible-lg-block pull-left">
             <img :src="img">
@@ -55,26 +55,10 @@ The button item used on fancy radio buttons components.
         props: {
 
             /**
-             * The input's name.
-             */
-            name: {
-                type: String,
-                required: true
-            },
-
-            /**
              * The input's initial value.
              */
             value: {
                 type: [String, Number],
-                required: true
-            },
-
-            /**
-             * The input's parent container.
-             */
-            container: {
-                type: String,
                 required: true
             },
 
@@ -101,9 +85,11 @@ The button item used on fancy radio buttons components.
          */
         data() {
             return {
+                name: '',
+                container: '',
                 checked: false,
-                defaultClasses: 'clearfix list-group-item radio-button-item-' + this.name,
-                selectedClass: 'active'
+                selectedClass: 'active',
+                defaultClasses: 'clearfix list-group-item'
             };
         },
 
@@ -128,19 +114,26 @@ The button item used on fancy radio buttons components.
             prepareComponent() {
                 
                 var self = this;
-                // This one listens to other radio using jQuery
-                // Yeah. It's not beautiful. But for god's sake these are just 
-                // simple radio buttons, so no need for complexity.
-                $('.radio-button-item-' + this.name).on('click', function (e) {
+                var parent = this.$parent;
 
-                    var radioValue = this.getElementsByClassName('real-radio')[0].value;
+                let identifierClass = 'radio-button-item-' + parent.name;
+
+                self.name = parent.name;
+
+                // Attach an identifier class to the wrapper element.
+                self.$refs.wrapper.classList.add(identifierClass);
+
+                // Listens to other radios input under the parent's scope.
+                parent.$on('radio-checked', function (value) {
+
+                    var radioValue = self.$refs.realRadio.value;
 
                     // If the checked radio is not this, uncheck this.
                     // Difference determined by its value.
-                    if (Number(radioValue) !== self.value) {
+                    if (Number(radioValue) !== value) {
                         self.uncheck();
                     }
-                })
+                });
             },
 
             /**
@@ -148,13 +141,17 @@ The button item used on fancy radio buttons components.
              */
             check() {
 
+                // Check the real radio button.
                 this.$refs.realRadio.checked = true;
 
+                // Add .selected class.
                 this.$refs.wrapper.classList.add(this.selectedClass);
 
+                // Change the checked state.
                 this.checked = true;
 
-                this.$emit('input', this.value);
+                // Emit parent component's radio-checked event.
+                this.$parent.$emit('radio-checked', this.value);
             },
 
             /**
@@ -163,12 +160,14 @@ The button item used on fancy radio buttons components.
             uncheck() {
 
                 // We don't need to set false on 'checked' manually since it 
-                // will automaticaly uncheck when other radio button is checked.
+                // will automaticaly uncheck itself.
 
+                // Change the checked state.
                 this.checked = false;
 
+                // Remove .selected class.
                 this.$refs.wrapper.classList.remove(this.selectedClass);
-            }
+            },
         }
     }
 </script>

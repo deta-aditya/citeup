@@ -22,6 +22,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['Accept'] = 'application/json';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -36,6 +37,18 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+/**
+ * Set the axios-retry. Since Laravel is suck at 401, this is necessary
+ * so the user won't be logged out automatically.
+ */
+var axiosRetry = require('axios-retry');
+
+axiosRetry(window.axios, {
+    retryCondition: (error) => {
+        return error.response.status === 401 || error.response.status >= 500
+    }
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

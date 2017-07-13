@@ -13,6 +13,7 @@ window.Vue = require('vue');
  * Components to be available in this application.
  */
 import RadioVerticalLg from './components/forms/RadioVerticalLg.vue';
+import RadioButton from './components/forms/RadioButton.vue';
 
 
 /**
@@ -25,6 +26,9 @@ const frontViewModel = new Vue({
     components: {
 
         // The radio-vertical-lg for radio button eyecandy on some forms.
-        'radio-vertical-lg': RadioVerticalLg
+        'radio-vertical-lg': RadioVerticalLg,
+
+        // The radio-button for radio button item.
+        'radio-button': RadioButton
     }
 });

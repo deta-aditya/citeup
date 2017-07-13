@@ -175,6 +175,23 @@ class UserService extends Service
     }
 
     /**
+     * Determine whether the email belongs to a registered user.
+     * 
+     * @param  string  $email
+     * @return bool 
+     */
+    public function isAlreadyRegistered($email)
+    {
+        try {
+            $this->getModel()->query()->where('email', $email)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Create a new starter admin user and return it.
      * Caution: This method should only be invoked once on a seeder!
      *

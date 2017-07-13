@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>.cloak { position:absolute;width:100%;height:100vh;color:#fff;z-index:999; }</style>
 </head>
 <body>
     <div id="app-front">
