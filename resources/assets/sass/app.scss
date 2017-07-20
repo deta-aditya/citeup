@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 
 // Font Awesome
 @import "node_modules/font-awesome/scss/font-awesome";
@@ -13,6 +13,10 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Quill Text Editor
+@import "node_modules/quill/dist/quill.core";
+@import "node_modules/quill/dist/quill.snow";
 
 // App's Stylesheet
 @import "citeup/index";

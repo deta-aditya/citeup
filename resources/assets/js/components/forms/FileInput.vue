@@ -340,11 +340,6 @@
                 if (this.acceptIsImage && this.crop) {
                     this.openCropper();
                 }
-                
-
-                if (this.storeImmediately) {
-                    this.upload();
-                }
 
             },
 
@@ -378,6 +373,11 @@
                 $('#image-cropper').modal('hide');
 
                 this.preview();
+
+                if (this.storeImmediately) {
+                    this.upload();
+                }
+                
             },
 
             preview() {

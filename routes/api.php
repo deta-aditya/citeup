@@ -175,6 +175,12 @@ Route::group([
     Route::post('/export', 'IEController@export');
 
     /*
+     * Config Routes
+     */
+    Route::get('/config', 'ConfigController@index');
+    Route::post('/config', 'ConfigController@insert');
+
+    /*
      * Bulk Routes
      */
     // Route::get('/bulk', 'BulkController@get');

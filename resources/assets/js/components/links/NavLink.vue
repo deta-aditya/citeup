@@ -1,6 +1,6 @@
 
 <template>
-    <router-link tag="li" :to="to">
+    <router-link tag="li" active-class="active" :to="to">
         <a><slot></slot></a>
     </router-link>
 </template>

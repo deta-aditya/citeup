@@ -11,6 +11,13 @@ Citeup.appPath = document.head.querySelector('meta[name="app-path"]').content;
 
 Citeup.apiPath = Citeup.appPath + '/api/v1';
 
+Citeup.defaultImage = Citeup.appPath + '/storage/images/default.jpg';
+
+Citeup.defaultTableParams = {
+    skip: 0,
+    take: 15,
+}
+
 Citeup._api = function(resource, method, params) {
     return axios[method](Citeup.apiPath + resource, params);
 }

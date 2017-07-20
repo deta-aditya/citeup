@@ -42,6 +42,7 @@ Route::group(['namespace' => 'App\Web'], function () {
     Route::group(['namespace' => 'Front\Controllers'], function () {
 
         Route::get('/', 'FrontController@root')->name('root');
+        // Route::get('/test', 'FrontController@test');
 
     });
 

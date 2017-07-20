@@ -196,10 +196,8 @@ class UserController extends Controller
     {
         $queries = $request->all();
 
-        $queries['users'] = $user->id;
-
         return $this->respondJson(
-            ['alerts' => $alerts->getMultiple($queries)]
+            ['alerts' => $alerts->getMultipleCustomQuery($user->alerts()->getQuery(), $queries)]
         );
     }
 

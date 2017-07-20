@@ -20,8 +20,10 @@ Vue.use(VueRouter);
  * Components to be available in the root application.
  */
 import AppInfo from './components/partials/AppInfo.vue';
-import AppNavbar from './components/partials/AppNavbar.vue';
-import NavbarLink from './components/links/NavbarLink.vue';
+import AppTopbar from './components/partials/AppTopbar.vue';
+import AppSidebar from './components/partials/AppSidebar.vue';
+import NavLink from './components/links/NavLink.vue';
+import Spacer from './components/misc/Spacer.vue';
 
 /**
  * Import the store and router here.
@@ -36,13 +38,10 @@ const store = new Vuex.Store(storeData);
  */
 router.beforeEach((to, from, next) => {
 
-    // A boolean variable to determine the show value.
-    let show = store.state.noNav.indexOf(to.name) < 0;
-
     store.commit({
-        type: 'toggleNavbar',
-        value: show
-    });
+        type: 'updateRoute',
+        name: to.name
+    })
 
     next();
 });
@@ -57,18 +56,42 @@ const dashboardViewModel = new Vue({
     
     router: router,
 
-    computed: Vuex.mapState([
-        'showNavbar'
-    ]),
+    computed: _.merge(Vuex.mapState([
+        
+        'topbarHeight'
+
+    ]), Vuex.mapGetters({
+
+        hasNav: 'routeHasNav',
+        userUpdatable: 'routeWantsUserUpdation',
+
+    })),
+
+    watch: {
+
+        userUpdatable(yes) {
+            
+            if (yes) {
+                this.updateUserFromApi();
+            }
+            
+        }
+    },
 
     components: {
 
         'app-info': AppInfo,
 
-        'app-navbar': AppNavbar,
+        'app-topbar': AppTopbar,
 
-        'navbar-link': NavbarLink,
+        'app-sidebar': AppSidebar,
+            
+        'spacer': Spacer,
         
+    },
+
+    created() {
+        this.updateConfigFromApi()
     },
 
     /**
@@ -80,19 +103,26 @@ const dashboardViewModel = new Vue({
 
     },
 
-    methods: _.merge({
+    methods: _.merge(Vuex.mapMutations([
+
+        'updateUser'
+
+    ]), Vuex.mapActions([
+
+        'updateUserFromApi',
+        'updateConfigFromApi',
+
+    ]), {
 
         /**
          * Store the user information from server.
          */
         storeUserInfo() {
             
-            this.changeUser(this.$refs.info.user);
+            this.updateUser(this.$refs.info);
 
         },
 
-    }, Vuex.mapMutations([
-        'changeUser'
-    ]))
+    })
 
 }).$mount('#app-dashboard');

@@ -22,7 +22,7 @@ class Alert extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('seen_at');
+        return $this->belongsToMany('App\User')->withPivot('seen_at', 'announced_at');
     }
 
     /**
@@ -58,6 +58,34 @@ class Alert extends Model
     {
         return $query->whereHas('users', function ($query) use ($users) {
             $query->whereIn('user_id', $users);
+        });
+    }
+
+    /**
+     * Scope a query to sort the result by seen_at pivot field.
+     *
+     * @param  Builder  $query
+     * @param  string   $direction
+     * @return Builder
+     */
+    public function scopeSortBySeenAt($query, $direction)
+    {
+        return $query->whereHas('users', function ($query) use ($direction) {
+            $query->orderBy('seen_at', $direction);
+        });
+    }
+
+    /**
+     * Scope a query to sort the result by announced_at pivot field.
+     *
+     * @param  Builder  $query
+     * @param  string   $direction
+     * @return Builder
+     */
+    public function scopeSortByAnnouncedAt($query, $direction)
+    {
+        return $query->whereHas('users', function ($query) use ($direction) {
+            $query->orderBy('announced_at', $direction);
         });
     }
 

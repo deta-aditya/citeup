@@ -6,6 +6,10 @@
             return createElement(
                 'div',
                 {
+                    'class': [
+                        'spacer'
+                    ],
+
                     style: {
                         paddingTop: this.vertical + 'px',
                         paddingLeft: this.horizontal + 'px'

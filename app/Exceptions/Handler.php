@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             
             if (auth('web')->check()) {
                 return redirect('app/error/404');

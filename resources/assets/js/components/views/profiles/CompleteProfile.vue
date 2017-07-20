@@ -64,7 +64,7 @@
                                 <text-input name="phone" v-model="localUser.phone">
                                     Nomor Telepon
                                 </text-input>
-                                <file-input name="photo" :object-id="user.id" object-type="profile" accept="image/*" :store-immediately="false" v-model="localUser.photo">
+                                <file-input name="photo" :object-id="user.id" object-type="profile" accept="image/*" :store-immediately="true" v-model="localUser.photo">
                                     Unggah Foto Diri
                                 </file-input>
 
@@ -92,7 +92,7 @@
 <script>
 
     import _ from 'lodash';
-    import { mapMutations, mapState } from 'vuex';
+    import { mapActions, mapMutations, mapState } from 'vuex';
 
     import ApiForm from '../../forms/ApiForm.vue';
     import TextInput from '../../forms/TextInput.vue';
@@ -139,7 +139,9 @@
             }
         },
 
-        methods: {
+        methods: _.merge(mapActions([
+            'updateUserFromApi'
+        ]), {
             
             prepareComponent() {
 
@@ -176,7 +178,7 @@
                 }
             }
 
-        },
+        }),
 
         components: {
             'api-form': ApiForm,

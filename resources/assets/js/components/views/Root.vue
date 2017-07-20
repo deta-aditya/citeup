@@ -1,14 +1,30 @@
 
 <template>
     <div>
-        Hello! You are entering the world of SPA.
+        Halo!
     </div>
 </template>
 
 <script>
 
+    import { mapState } from 'vuex'
+
+    const STATES = [
+        'config'
+    ]
+
     export default {
         
+        computed: mapState(STATES),
+
+        watch: {
+
+            config(newVal) {
+                console.log(newVal)
+            }
+
+        }
+
     }
 
 </script>

@@ -293,6 +293,11 @@ abstract class Service
         }
 
         foreach ($sorts as $sort => $direction) {
+
+            if (strpos($sort, 'pivot') !== false) {
+                continue;
+            }
+
             $query->orderBy($sort, $direction);
         }
     }

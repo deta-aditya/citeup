@@ -11,7 +11,7 @@ trait User
      */
     public function getNameAttribute()
     {
-        return $this->profile()->first()->name;
+        return $this->profile ? $this->profile()->first()->name : 'Pengguna';
     }
 
     /**
@@ -127,7 +127,7 @@ trait User
     public function alerts()
     {
         return $this->belongsToMany('App\Modules\Models\Alert')
-            ->withPivot('seen_at');
+            ->withPivot('seen_at', 'announced_at');
     }
 
     /**

@@ -118,10 +118,8 @@ class AlertController extends Controller
     {
         $queries = $request->all();
 
-        $queries['alert'] = $alert->id;
-
         return $this->respondJson(
-            ['users' => $users->getMultiple($queries)]
+            ['users' => $users->getMultipleCustomQuery($alert->users()->getQuery(), $queries)]
         );
     }
 

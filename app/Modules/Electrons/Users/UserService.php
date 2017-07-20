@@ -53,7 +53,19 @@ class UserService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->parseQueryString($this->getModel()->query(), $params);
+        return $this->getMultipleCustomQuery($this->getModel()->query(), $params);
+    }
+
+    /**
+     * Get multiple users with custom query and conditions.
+     *
+     * @param  Builder  $query
+     * @param  array    $params
+     * @return array
+     */
+    public function getMultipleCustomQuery($query, array $params)
+    {
+        $query = $this->parseQueryString($query, $params);
 
         if (array_has($params, 'role')) {
             $query->ofRole((int) $params['role']);
@@ -151,7 +163,7 @@ class UserService extends Service
         $user->load('role', 'profile');
 
         if ($user->isEntrant()) {
-            $user->load('entry');
+            $user->load('entry', 'activity', 'alerts');
         }
 
         return $this;

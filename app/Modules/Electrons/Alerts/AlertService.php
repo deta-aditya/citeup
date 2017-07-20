@@ -24,7 +24,23 @@ class AlertService extends Service
      */
     public function getMultiple(array $params)
     {
-        $query = $this->parseQueryString($this->getModel()->query(), $params);
+        return $this->getMultipleCustomQuery($this->getModel()->query(), $params);
+    }
+
+    /**
+     * Get multiple alerts with custom query and conditions.
+     *
+     * @param  Builder  $query
+     * @param  array    $params
+     * @return array
+     */
+    public function getMultipleCustomQuery($query, array $params)
+    {
+        $query = $this->parseQueryString($query, $params);
+
+        if (array_has($params, 'sort')) {
+            $this->additionalSort($query, $params['sort']);
+        }
 
         if (array_has($params, 'announced') && $params['announced'] === 'true') {
             $query->announced();
@@ -35,9 +51,15 @@ class AlertService extends Service
         }
 
         if (array_has($params, 'users')) {
+            
             $query->forUsers(explode($this->getDelimiter('users'), $params['users']));
-        } else if (! auth('api')->user()->isAdmin() || ! auth('api')->user()->hasKey('get-alerts')) {
-            $query->forUsers(array_wrap(auth('api')->user()->id));
+
+        } else {
+
+            if (! (auth('api')->user()->isAdmin() || auth('api')->user()->hasKey('get-alerts'))) {
+                $query->forUsers(array_wrap(auth('api')->user()->id));
+            } 
+
         }
 
         if (array_has($params, 'seenby')) {
@@ -100,6 +122,28 @@ class AlertService extends Service
     }
 
     /**
+     * Perform an additional sort on the given query.
+     *
+     * @param  Builder  $query
+     * @param  string   $sort
+     * @return this
+     */
+    public function additionalSort($query, $sort)
+    {
+        $sorts = $this->parseSortParams($sort);
+
+        if (array_has($sorts, 'pivot_seen_at')) {
+            $query->sortBySeenAt($sorts['pivot_seen_at']);
+        }
+
+        if (array_has($sorts, 'pivot_announced_at')) {
+            $query->sortByAnnouncedAt($sorts['pivot_announced_at']);
+        }
+
+        return $this;
+    }
+
+    /**
      * Announce the alerts to the given user.
      *
      * @param  User   $user
@@ -116,7 +160,7 @@ class AlertService extends Service
                 return $user->alerts->contains($alert);
             });
 
-            $user->alerts()->attach($alerts);
+            $user->alerts()->attach($alerts, ['announced_at' => Carbon::now()]);
         }
 
         return $this;

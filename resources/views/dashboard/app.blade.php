@@ -19,16 +19,20 @@
 <body>
     <div id="app-dashboard">
 
-        <app-navbar v-if="showNavbar">
-            <template slot="brand">{{ config('app.name', 'CiteUP') }}</template>
-            <template slot="left-side">
-                <navbar-link to="/example">Example</navbar-link>
-            </template>
-        </app-navbar>
-
         <app-info ref="info" :user="{{ $user->toJson() }}"></app-info>
 
-        <router-view></router-view>
+        <app-topbar v-if="hasNav">
+            <template slot="brand">{{ config('app.name', 'CiteUP') }}</template>
+        </app-topbar>
+
+        <div id="app-main">
+
+            <spacer :vertical="topbarHeight"></spacer>
+
+            <app-sidebar v-if="hasNav"></app-sidebar>
+
+            <router-view class="app-view"></router-view>
+        </div>
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/dashboard.js') }}"></script>

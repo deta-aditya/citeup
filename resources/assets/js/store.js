@@ -13,36 +13,90 @@ export default {
             id: 0,
             profile: {},
             entry: {},
-            role: {}
+            role: {},
+            alerts: [],
         },
 
-        showNavbar: true,
+        config: {},
+
+        topbarHeight: 0,
+
+        route: '',
 
         noNav: [
             'finishing'
-        ]
+        ],
+
+        requiresUserUpdation: [
+            'root'
+        ],
+
+        loading: false
+
+    },
+
+    getters: {
+
+        routeHasNav(state) {
+            return state.noNav.indexOf(state.route) < 0;
+        },
+
+        routeWantsUserUpdation(state) {
+            return state.requiresUserUpdation.indexOf(state.route) >= 0;
+        },
+
+        alerts(state) {
+            return state.user.alerts;
+        }
 
     },
 
     mutations: {
-        
-        changeUser(state, payload) {
-            state.user = payload;
+
+        updateUser(state, payload) {
+
+            let user = payload.user;
+            
+            user.admin = user.rolename === 'Administrator';
+            user.committee = user.rolename === 'Committee';
+            user.entrant = user.rolename === 'Entrant';
+
+            state.user = user;
+            
+        },
+
+        updateConfig(state, payload) {
+            state.config = payload;
         },
 
         toggleNavbar(state, payload) {
-            state.showNavbar = payload.value;
-        }
+            state.showTopbar = payload.value;
+            state.showSidebar = payload.value;
+        },
+
+        updateRoute(state, payload) {
+            state.route = payload.name;
+        },
+
+        setTopbarHeight(state, payload) {
+            state.topbarHeight = payload;
+        },
 
     },
 
     actions: {
 
-        updateLocalUser(context) {
+        updateUserFromApi(context) {
             Citeup.get('/users/' + context.state.user.id).then((response) => {
-                context.commit('changeUser', response.data.data.user)
+                context.commit('updateUser', response.data.data)
             })
-        }
+        },
+
+        updateConfigFromApi(context) {
+            Citeup.get('/config').then(response => {
+                context.commit('updateConfig', response.data.data.config)
+            })
+        },
 
     }
 };

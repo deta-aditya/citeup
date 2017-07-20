@@ -101,7 +101,7 @@ return [
         ],
 
         'sortable' => [
-            'title'
+            'title', 'pivot_seen_at', 'pivot_announced_at',
         ],
 
         'comparable' => [
