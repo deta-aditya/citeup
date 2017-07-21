@@ -28,7 +28,7 @@ export default {
         ],
 
         requiresUserUpdation: [
-            'root'
+            //
         ],
 
         loading: false

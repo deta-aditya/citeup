@@ -68,7 +68,6 @@
                 <h1 class="panel-title"><i class="fa fa-bell"></i> Tambah Notifikasi</h1>
             </div>
             <div class="panel-body">
-
                 <api-form ref="form" method="post" action="/alerts" :model="alert">
                     <text-input name="title" :required="true" :autofocus="true" :maxlength="191" v-model="alert.title">
                         Judul Notifikasi
@@ -77,12 +76,11 @@
                         Konten Notifikasi
                     </text-input>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-lg btn-primary">
+                        <button type="submit" class="btn btn-primary">
                             Selesai
                         </button>
                     </div>
                 </api-form>
-
             </div>
         </div>
     </div>

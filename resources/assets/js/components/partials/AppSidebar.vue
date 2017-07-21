@@ -91,8 +91,12 @@
                     Dasbor
                 </router-link>
                 <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('alerts') >= 0 }" :to="{ name: 'alerts' }">
-                    <i class="fa fa-fw fa-bell-o"></i>
+                    <i class="fa fa-fw fa-bell"></i>
                     Notifikasi
+                </router-link>
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('config') >= 0 }" :to="{ name: 'config' }">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    Konfigurasi
                 </router-link>
             </div>
         </div>
@@ -100,6 +104,7 @@
 </template>
 
 <script>
+
     import _ from 'lodash'
     import { mapState } from 'vuex'
     import Citeup from '../../citeup'
@@ -155,4 +160,5 @@
         },
 
     }
+    
 </script>

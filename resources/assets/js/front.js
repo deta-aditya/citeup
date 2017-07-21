@@ -12,9 +12,9 @@ window.Vue = require('vue');
 /**
  * Components to be available in this application.
  */
-import RadioVerticalLg from './components/forms/RadioVerticalLg.vue';
-import RadioButton from './components/forms/RadioButton.vue';
-
+import RadioVerticalLg from './components/forms/RadioVerticalLg.vue'
+import RadioButton from './components/forms/RadioButton.vue'
+import Countdown from './components/misc/Countdown.vue'
 
 /**
  * This application script runs on the front page.
@@ -29,6 +29,8 @@ const frontViewModel = new Vue({
         'radio-vertical-lg': RadioVerticalLg,
 
         // The radio-button for radio button item.
-        'radio-button': RadioButton
+        'radio-button': RadioButton,
+
+        'countdown': Countdown
     }
 });

@@ -33,8 +33,6 @@ class FrontController extends Controller
      */
     public function test(Config $config)
     {
-        $config->set(['countdown' => ['active' => true, 'off' => '2017-08-22 12:00:00']]);
-
-        return $config->all();
+        //       
     }
 }

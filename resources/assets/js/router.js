@@ -6,6 +6,7 @@
 import VueRouter from 'vue-router';
 
 import Root from './components/views/Root.vue';
+import Config from './components/views/Config.vue';
 import AlertsIndex from './components/views/alerts/AlertsIndex.vue';
 import AlertsCreate from './components/views/alerts/AlertsCreate.vue';
 import AlertsUpdate from './components/views/alerts/AlertsUpdate.vue';
@@ -18,6 +19,7 @@ const router = new VueRouter({
     base: '/app/',
     routes: [
         { path: '/', name: 'root', component: Root },
+        { path: '/config', name: 'config', component: Config },
         { path: '/alerts', name: 'alerts', component: AlertsIndex },
         { path: '/alerts/create', name: 'alerts.create', component: AlertsCreate },
         { path: '/alerts/:id/update', name: 'alerts.update', component: AlertsUpdate, props: true },

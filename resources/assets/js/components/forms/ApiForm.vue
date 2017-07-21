@@ -1,4 +1,28 @@
 
+<style lang="scss" scoped>
+
+    .form-async {
+
+        fieldset {
+
+            // border-bottom: 1px solid #ddd;
+            // margin-bottom: 20px;
+
+            legend {
+                // color: #aaa;
+                // margin-bottom: 5px;
+                // font-weight: 600;
+                // font-size: 11pt;
+                // border-bottom: none;
+                // text-transform: uppercase;
+            }
+
+        }
+
+    }
+
+</style>
+
 <template>
     <form @submit.prevent="requestToApi" ref="realForm" class="form-async" role="form" :method="method" :action="action">
         <csrf-input></csrf-input>

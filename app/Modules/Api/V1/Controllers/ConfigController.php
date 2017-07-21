@@ -55,8 +55,8 @@ class ConfigController extends Controller
     public function insert(ConfigInsertRequest $request)
     {
         $this->config->set(
-            $this->config->decode($request->input('value')
-        ));
+            $this->config->decode($request->input('value'))
+        );
 
         return $this->respondJson([]);
     }

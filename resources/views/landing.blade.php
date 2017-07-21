@@ -3,18 +3,17 @@
 @section('content')
 
 <!-- Welcome Carousel -->
-<div id="welcome-carousel" class="carousel slide" data-ride="carousel" style="height:525px">
+<div id="welcome-carousel" class="carousel slide" data-ride="carousel">
 
     <!-- Cover -->
-    <div class="carousel-cover" style="position:absolute;z-index:99;width:100%;">
+    <div class="carousel-cover">
         <div class="container">
-            <h1 style="padding-top:100px;font-size:48pt">CITE UP</h1>
-            <p style="font-size:24pt">Celebrating The Golden Era of Technology</p>
-            <p class="lead">
-                Hi there! The landing page is currently under construction. Sorry
-                for the inconvenience. Enjoy the trippiness of a half baked
-                page below instead!
-            </p>
+            <h1 class="title">CITE UP</h1>
+            <p class="subtitle">Celebrating The Golden Era of Technology</p>
+            @if ($config['countdown']['active'])
+                <p class="registration-notice">Pendaftaran akan dibuka dalam:</p>
+                <countdown done="{{ $config['countdown']['off'] }}"></countdown>
+            @endif
         </div>
     </div>
 

@@ -150,6 +150,7 @@
 
                 form.$on('submitting', () => { this.isLoading = true })
                 form.$on('submitted', (response) => {
+                    self.updateUserFromApi()
                     self.$router.push({ name: 'root' })
                 })
             },

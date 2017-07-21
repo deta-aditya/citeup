@@ -25,9 +25,6 @@
             :maxlength="maxlength"
             @input="input($event.target.value)" 
             >
-        <template v-else-if="rich">
-            <div :id="name" class="rich-editor"></div>
-        </template>
         <textarea 
             v-else
             class="form-control rich-editor"
@@ -44,15 +41,7 @@
 
 <script>
 
-    import Quill from 'quill'
-
     export default {
-
-        data() {
-            return {
-                editor: {}
-            }
-        },
 
         props: {
 
@@ -91,11 +80,6 @@
                 default: 255
             },
 
-            rich: {
-                type: Boolean,
-                default: false
-            },
-
             value: {
                 type: String
             }
@@ -110,50 +94,14 @@
 
         },
 
-        watch: {
-
-            value() {
-                
-                if (this.rich && this.value) {
-                    this.editor.setText(this.value)
-                }
-
-            }
-
-        },
-
-        mounted() {
-
-            if (this.rich) {
-                this.initRichEditor()
-            }
-
-        },
-
         methods: {
 
             input(value) {
                 this.$emit('input', value)
             },
 
-            initRichEditor() {
-
-                var self = this
-
-                this.editor = new Quill('#' + this.name, {
-                    theme: 'snow'
-                })
-
-                this.editor.on('text-change', () => {
-
-                    if (self.editor.getLength() > self.maxlength) {
-                        self.editor.deleteText(self.maxlength, 1)
-                    }
-
-                    self.input(self.editor.getContents().ops[0].insert)
-                })
-
-            },
         }
+
     }
+
 </script>

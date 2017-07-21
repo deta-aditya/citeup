@@ -14,6 +14,12 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Bootstrap Switch
+@import "node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch";
+
+// Eonasdan Bootstrap DateTime Picker
+@import "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker";
+
 // Quill Text Editor
 @import "node_modules/quill/dist/quill.core";
 @import "node_modules/quill/dist/quill.snow";

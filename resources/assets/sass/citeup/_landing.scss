@@ -1,0 +1,46 @@
+
+#welcome-carousel {
+
+    height: 550px;
+
+    .carousel-cover {
+
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        z-index: 99;
+
+        .title {
+            padding-top: 100px;
+            font-size: 48pt;
+        }
+
+        .subtitle {
+            font-size: 24pt;
+            font-weight: 300;
+        }
+
+        .registration-notice {
+            margin-top: 25px;
+            font-size: 14pt;
+        }
+
+    }
+
+    .countdown {
+
+        .unit-item {
+            margin: 0 15px;
+        }
+
+        .unit-number {
+            font-size: 40pt;
+        }
+
+        .unit-info {
+            font-size: 14pt;
+        }
+
+    }
+
+}

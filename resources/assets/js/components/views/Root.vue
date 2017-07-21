@@ -17,14 +17,6 @@
         
         computed: mapState(STATES),
 
-        watch: {
-
-            config(newVal) {
-                console.log(newVal)
-            }
-
-        }
-
     }
 
 </script>

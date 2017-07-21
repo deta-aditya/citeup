@@ -8,9 +8,9 @@
 
     .panel-heading {
         border-radius: 0;
-
+        
         .fa {
-            color: #fff;
+            color: #333;
         }
     }
 
@@ -19,11 +19,8 @@
         padding: 5px 0;
 
         & > .fa {
-            background: #fff;
-            border-radius: 50%;
             padding: 5px;
             margin-right: 3px;
-            color: #337ab7;
         }
 
     }
@@ -48,36 +45,45 @@
         }
     }
 
+    .limiter {
+        width: 500px;
+    }
+
 </style>
 
 <template>
-    <div id="alerts-update">
-        <div ref="panel" class="panel panel-primary">
+    <div id="config-page">
+        <div ref="panel" class="panel panel-default">
             <div ref="cover" class="panel-cover" v-show="isLoading">
                 <div class="panel-cover-content text-center">
                     <i class="fa fa-spinner fa-4x fa-pulse"></i> 
                     <p class="lead">Memuat...</p>
                 </div>
             </div>
-            <div class="panel-heading">
+            <div class="panel-heading clearfix">
                 <div class="pull-right">
-                    <router-link :to="{ name: 'alerts' }" class="btn btn-link">
-                        <i class="fa fa-chevron-left"></i>
-                    </router-link>
+                    <a class="btn btn-link" href="#" @click.prevent>
+                        <i class="fa fa-refresh"></i>
+                    </a>
                 </div>
-                <h1 class="panel-title"><i class="fa fa-bell"></i> Sunting Notifikasi / {{ id }}</h1>
+                <h1 class="panel-title"><i class="fa fa-cogs"></i> Konfigurasi Aplikasi</h1>
             </div>
             <div class="panel-body">
-                <api-form ref="form" method="put" :action="'/alerts/' + id" :model="alert">
-                    <text-input name="title" :required="true" :autofocus="true" :maxlength="191" v-model="alert.title">
-                        Judul Notifikasi
-                    </text-input>
-                    <text-input name="content" :required="true" :multiline="true" :maxlength="191" v-model="alert.content">
-                        Konten Notifikasi
-                    </text-input>
-                    <div class="form-group">
+                <api-form ref="form" method="post" action="/config" :model="formModel">
+                    <fieldset>
+                        <div class="limiter">
+                            <legend><i>Countdown</i> Pendaftaran</legend>
+                            <switch-button name="countdown_active" value="active" v-model="value.countdown.active">
+                                Status
+                            </switch-button>
+                            <date-time-input name="countdown_off" v-model="value.countdown.off">
+                                Waktu Pendaftaran Dibuka
+                            </date-time-input>
+                        </div>
+                    </fieldset>
+                    <div class="form-group text-right">
                         <button type="submit" class="btn btn-primary">
-                            Selesai
+                            Simpan Perubahan
                         </button>
                     </div>
                 </api-form>
@@ -88,72 +94,67 @@
 
 <script>
 
-    import Citeup from '../../../citeup'
-    import ApiForm from '../../forms/ApiForm.vue'
-    import TextInput from '../../forms/TextInput.vue'
+    import _ from 'lodash'
+    import { mapState } from 'vuex'
+    import ApiForm from '../forms/ApiForm.vue'
+    import SwitchButton from '../forms/SwitchButton.vue'
+    import DateTimeInput from '../forms/DateTimeInput.vue'
+
+    const STATES = [
+        'config'
+    ]
 
     export default {
 
-        props: {
-
-            id: {
-                type: [Number, String],
-                required: true
-            }
-
-        },
-
         data() {
+            
             return {
-                isLoading: true,
-                alert: {
-                    title: '',
-                    content: '',
-                }
+                
+                value: {
+                    countdown: {}
+                },
+
+                isLoading: false,
             }
+
         },
+
+        computed: _.merge(mapState(STATES), {
+
+            formModel() {
+                return { value: JSON.stringify(this.value) }
+            }
+
+        }),
 
         watch: {
 
-            isLoading(newVal) {
-
-                if (newVal) {
-                    this.setCoverHeight()
-                }
-
-            },
+            config(newVal) {
+                this.value = newVal
+            }
 
         },
 
         created() {
-            this.loadAlert()
+            if (! _.isEmpty(this.config)) {
+                this.value = this.config
+            }
         },
 
         mounted() {
             this.prepareComponent()
             this.setCoverHeight()
         },
-
+ 
         methods: {
 
-            loadAlert() {
-                
-                Citeup.get('/alerts/' + this.id).then(response => {
-                    this.alert = response.data.data.alert
-                    this.isLoading = false
-                })
-
-            },
-
             prepareComponent() {
-
+                
                 let form = this.$refs.form
                 var self = this
 
                 form.$on('submitting', () => { this.isLoading = true })
-                form.$on('submitted', (response) => {
-                    self.$router.push({ name: 'alerts' })
-                })
+                form.$on('submitted', () => { this.isLoading = false })
 
             },
 
@@ -175,8 +176,9 @@
 
         components: {
             'api-form': ApiForm,
-            'text-input': TextInput,
-        }
+            'switch-button': SwitchButton,
+            'date-time-input': DateTimeInput,
+        },
 
     }
 
