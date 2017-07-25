@@ -75,7 +75,7 @@
                                     <button type="reset" class="btn btn-lg btn-default">
                                         Hapus
                                     </button>
-                                    <router-link :to="{ name: 'root' }" class="btn btn-lg btn-link pull-right">
+                                    <router-link :to="{ name: 'Dasbor' }" class="btn btn-lg btn-link pull-right">
                                         Lewati
                                     </router-link>
                                 </div>
@@ -151,7 +151,7 @@
                 form.$on('submitting', () => { this.isLoading = true })
                 form.$on('submitted', (response) => {
                     self.updateUserFromApi()
-                    self.$router.push({ name: 'root' })
+                    self.$router.push({ name: 'Dasbor' })
                 })
             },
 

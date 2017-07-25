@@ -1,20 +1,7 @@
 
-<style lang="scss" scoped>
-    
-    #app-topbar {
-
-        .user-signature {
-            height: 20px;
-            margin: 0 5px;
-        }
-
-    }
-    
-</style>
-
 <template>
     <div id="app-topbar">
-        <nav ref="navbar" class="navbar navbar-default navbar-fixed-top">
+        <nav ref="navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
             <div class="container-fluid">
                 <div ref="navbarHeader" class="navbar-header">
 
@@ -27,7 +14,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <router-link class="navbar-brand" :to="{ name: 'root' }">
+                    <router-link class="navbar-brand" :to="{ name: 'Dasbor' }">
                         <slot name="brand"></slot>
                     </router-link>
                 </div>
@@ -35,6 +22,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+
+                        <li v-for="(crumb, index) in crumbs">
+                            <router-link v-if="index < crumbs.length - 1" :to="{ name: crumb }" class="crumbs">/ {{ crumb }}</router-link>
+                            <a class="crumbs" v-else>/ {{ crumb }}</a>
+                        </li>
 
                         <!-- Main Links -->
                         <slot name="left-side"></slot>
@@ -46,12 +38,16 @@
                         <!-- Secondary Links -->
                         <slot name="right-side"></slot>
 
+                        <li>
+                            <a href="/"><i class="fa fa-lg fa-home" title="Halaman Depan"></i></a>
+                        </li>
+
                         <nav-alert-list v-if="user.entrant">
                         </nav-alert-list>
 
                         <dropdown type="nav" :caret="false" align="right">
                             
-                            <i class="fa fa-lg fa-cog"></i>
+                            <i class="fa fa-lg fa-cog" title="Pengaturan"></i>
                             <span class="visible-xs-inline">Pengaruran</span>
 
                             <template slot="menu">
@@ -59,7 +55,7 @@
                                 <!-- Dropdown Links -->
                                 <slot name="dropdown-side"></slot>
 
-                                <router-link tag="li" :to="{ name: 'logout' }">
+                                <router-link tag="li" :to="{ name: 'Logout' }">
                                     <a>Logout</a>
                                 </router-link>
                             </template>
@@ -69,59 +65,106 @@
                 </div>
             </div>
         </nav>
+        <div v-show="isLoading" ref="loadingBar" class="progress loading-bar">
+            <div ref="loadingBarProgress" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                <span class="sr-only">{{ loading }} Complete</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+
     import _ from 'lodash';
-    import { mapState, mapMutations } from 'vuex';
+    import { mapState, mapGetters, mapMutations } from 'vuex';
     import NavAlertList from './NavAlertList.vue';
     import Dropdown from '../kits/Dropdown.vue';
     import Citeup from '../../citeup';
 
+    const STATES = [
+        'user', 'loading', 'route', 'topbarHeight'
+    ]
+
+    const GETTERS = [
+        'isLoading',
+    ]
+
+    const MUTATIONS = [
+        'setTopbarHeight', 'loadSomething',
+    ]
+
     export default {
+
+        data() {
+            return {
+                crumbs: [],
+            }
+        },
     
-        computed: _.merge(mapState([
-
-            'user'
-
-        ]), {
+        computed: _.merge(mapState(STATES), mapGetters(GETTERS), {
 
             userSignature() {
                 return this.user.profile ? 
                     Citeup.appPath + '/' + this.user.profile.photo :
                     Citeup.defaultImage 
-            }
+            },
 
         }),
+
+        watch: {
+
+            loading(newVal) {
+                
+                if (this.isLoading) {
+                    this.$refs.loadingBarProgress.style.width = this.loading + '%'
+                }
+
+            },
+
+            route(newVal) {
+                this.makeCrumbs(newVal)
+            },
+
+        },
+
+        created() {
+            this.makeCrumbs(this.route)
+        },
 
         mounted() {
             this.prepareComponent()
         },
 
-        methods: _.merge(mapMutations([
-
-            'setTopbarHeight'
-
-        ]), {
+        methods: _.merge(mapMutations(MUTATIONS), {
 
             prepareComponent() {
-
-                let navbar = this.$refs.navbar;
-                let navbarHeader = this.$refs.navbarHeader;
                 
-                this.setTopbarHeight(navbar.offsetHeight);
+                this.setTopbarHeight(this.$refs.navbar.offsetHeight);
+                this.$refs.loadingBar.style.marginTop = this.topbarHeight + 'px'
 
-                navbarHeader.style.marginTop = ((navbar.clientHeight - navbarHeader.offsetHeight) / 2) + 'px';
+            },
 
-            }
+            makeCrumbs(raw) {
+                
+                if (raw.length === 0) {
+                    return
+                }
+
+                if (raw.indexOf('.') >= 0) {
+                    this.crumbs = raw.split('.')
+                } else {
+                    this.crumbs = [raw]
+                }
+
+            },
 
         }),
 
         components: {
             'nav-alert-list': NavAlertList,
-            'dropdown': Dropdown
+            'dropdown': Dropdown,
         }
 
     }
+
 </script>

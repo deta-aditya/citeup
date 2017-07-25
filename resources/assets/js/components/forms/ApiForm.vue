@@ -24,7 +24,7 @@
 </style>
 
 <template>
-    <form @submit.prevent="requestToApi" ref="realForm" class="form-async" role="form" :method="method" :action="action">
+    <form @submit.prevent="submit" ref="realForm" class="form-async" role="form" :method="method" :action="action">
         <csrf-input></csrf-input>
         <slot></slot>
     </form>
@@ -81,7 +81,7 @@
                 }
             },
 
-            requestToApi() {
+            submit() {
                 this.$emit('submitting', this.model)
 
                 Citeup[this.method](this.action, this.model).then((response) => {

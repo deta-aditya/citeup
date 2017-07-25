@@ -59,7 +59,7 @@
 
 <template>
     <dropdown ref="dropdown" type="nav" :caret="false" align="right">
-        <i class="fa fa-lg fa-bell-o" title="Notifikasi"></i>
+        <i class="fa fa-lg fa-bell" title="Notifikasi"></i>
         <span v-if="showLabel" class="label label-primary">{{ unseenAlerts.length }}</span>
         <span class="visible-xs-inline">Notifikasi</span>
         <template slot="menu">
@@ -82,7 +82,7 @@
                     <p class="no-alerts lead text-center">Tidak Ada Notifikasi</p>
                 </a>
             </li>
-            <nav-link to="/alerts" class="text-center see-all">Lihat Semua</nav-link>
+            <nav-link :to="{ name: 'Notifikasi' }" class="text-center see-all">Lihat Semua</nav-link>
         </template>
     </dropdown>
 </template>

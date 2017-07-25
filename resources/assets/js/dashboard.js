@@ -92,6 +92,7 @@ const dashboardViewModel = new Vue({
 
     created() {
         this.updateConfigFromApi()
+        this.updateRoute(this.$route)
     },
 
     /**
@@ -105,7 +106,8 @@ const dashboardViewModel = new Vue({
 
     methods: _.merge(Vuex.mapMutations([
 
-        'updateUser'
+        'updateUser',
+        'updateRoute',
 
     ]), Vuex.mapActions([
 

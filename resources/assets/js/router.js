@@ -18,14 +18,14 @@ const router = new VueRouter({
     mode: 'history',
     base: '/app/',
     routes: [
-        { path: '/', name: 'root', component: Root },
-        { path: '/config', name: 'config', component: Config },
-        { path: '/alerts', name: 'alerts', component: AlertsIndex },
-        { path: '/alerts/create', name: 'alerts.create', component: AlertsCreate },
-        { path: '/alerts/:id/update', name: 'alerts.update', component: AlertsUpdate, props: true },
-        { path: '/error/:status', name: 'error', component: ErrorPage, props: true },
-        { path: '/finishing', name: 'finishing', component: CompleteProfile },
-        { path: '/logout', name: 'logout', component: Logout },
+        { path: '/', name: 'Dasbor', component: Root },
+        { path: '/config', name: 'Konfigurasi', component: Config },
+        { path: '/alerts', name: 'Notifikasi', component: AlertsIndex },
+        { path: '/alerts/create', name: 'Notifikasi.Buat', component: AlertsCreate },
+        { path: '/alerts/:id/update', name: 'Notifikasi.Sunting', component: AlertsUpdate, props: true },
+        { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
+        { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
+        { path: '/logout', name: 'Logout', component: Logout },
         { path: '*', component: ErrorPage, props: {status: 404}}
     ]
 });

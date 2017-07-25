@@ -26,12 +26,11 @@
         </app-topbar>
 
         <div id="app-main">
-
-            <spacer :vertical="topbarHeight"></spacer>
-
             <app-sidebar v-if="hasNav"></app-sidebar>
-
-            <router-view class="app-view"></router-view>
+            <div id="app-page">
+                <spacer :vertical="topbarHeight"></spacer>
+                <router-view class="app-view"></router-view>
+            </div>
         </div>
     </div>
     <!-- Scripts -->

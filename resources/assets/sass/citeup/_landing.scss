@@ -1,46 +1,415 @@
 
-#welcome-carousel {
+@font-face {
+    font-family: 'Rounded Elegance';
+    src: url('fonts/Rounded_Elegance.ttf');
+}
 
-    height: 550px;
+$title-font-family: 'Rounded Elegance', Open Sans, sans-serif;
 
-    .carousel-cover {
+$signature-lighter: #ffc533;
+$signature-light: #f49e26;
+$signature-dark: #dd7322;
 
-        width: 100%;
-        position: absolute;
-        text-align: center;
-        z-index: 99;
+$light-text-color: #eeeedd;
 
-        .title {
-            padding-top: 100px;
-            font-size: 48pt;
+.short-middle-bar {
+    width: 400px;
+    border-color: #ddd;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#app-front {
+    background: #fff;
+
+    a {
+        color: $signature-light;
+    }
+}
+
+#front-nav {
+
+    $front-nav-bg: $signature-dark;
+
+    background: $front-nav-bg;
+    color: $light-text-color;
+    border-bottom: 1px solid darken($front-nav-bg, 10%);
+
+    .navbar-brand img {
+        width: 100px;
+    }
+
+    .navbar-nav {
+
+        li {
+            padding: 7.5px 2px;
         }
 
-        .subtitle {
-            font-size: 24pt;
-            font-weight: 300;
+        li.active a, li.dropdown.open > a {
+            background-color: darken($front-nav-bg, 8%);
         }
 
-        .registration-notice {
-            margin-top: 25px;
-            font-size: 14pt;
+        .dropdown-menu > li {
+            padding: 0;
+
+            & > a {
+                color: $front-nav-bg;
+            }
         }
 
+        a {
+            padding: 7px 12px;
+            color: $light-text-color;
+            border-radius: 2px;
+            transition: 0.05s;
+
+            &:hover {
+                background: #fff;
+                color: $front-nav-bg;
+            }
+        }
+
+    }
+
+}
+
+#front-welcometron {
+
+    $welcometron-bg: #0f0f0f;
+    $welcometron-color: $light-text-color;
+
+    height: 619px;
+    background-color: $welcometron-bg;
+    background-image: url(../storage/images/web/bg_outline.png);
+    background-position: 0% 70%;
+    background-repeat: repeat-x;
+
+    color: $welcometron-color;
+
+    .title {
+        margin-top: 140px;
+        width: 500px;
+    }
+
+    .notice {
+        margin-top: 50px;
+        margin-bottom: 0; 
+        font-size: 14pt;
     }
 
     .countdown {
 
         .unit-item {
-            margin: 0 15px;
+            margin: 0 10px;
         }
 
         .unit-number {
-            font-size: 40pt;
+            font-size: 58pt;
+            font-weight: 300;
         }
 
         .unit-info {
-            font-size: 14pt;
+            font-size: 12pt;
         }
 
     }
 
+}
+
+#front-about {
+    background-color: $signature-light;
+    color: $light-text-color;
+    padding: 50px 0 70px;
+
+    p {
+        // font-family: $title-font-family;
+        font-size: 24pt;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}
+
+#front-activities {
+
+    $icon-bg: #b1b1b1;
+
+    background: $signature-lighter;
+    background-image: url(../storage/images/web/bg_about.png);
+    background-repeat: repeat-x;
+    background-size: 500px;
+    padding: 20px 0 70px;
+    height: 375px;
+
+    .row {
+        margin-top: 40px;
+        width: 1100px;
+    }
+
+    .activity-item {
+        position: absolute;
+        border: none;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+        height: 450px;
+        margin: 0 25px;
+        top: -100px;
+        z-index: 100;
+    }
+
+    .activity-title {
+        margin-top: 10px;
+    }
+
+    .img-holder {
+        border-radius: 4px 4px 0 0;
+        padding: 0;
+        background: $icon-bg;
+    }
+}
+
+#front-map {
+    height: 500px;
+    background: #efdfbf;
+
+    .map-info {
+        position: relative;
+        z-index: 99;
+        width: 400px;
+        top: 150px;
+        left: 50px;
+        background: $signature-dark;
+        color: $light-text-color;
+        border: 1px solid darken($signature-dark, 4%);
+        border-radius: 4px;
+    }
+
+    h2 {
+        margin: 0;
+        padding: 20px;
+        font-size: 18pt;
+        font-weight: normal;
+        border-bottom: 1px solid darken($signature-dark, 4%);
+    }
+
+    address {
+        font-size: 14pt;
+        padding: 10px 20px;
+    }
+
+    .go-to-location {
+        color: $light-text-color;
+    }
+}
+
+#front-faq {
+
+    padding: 60px 0 90px;
+    text-align: center;
+
+    h2 {
+        font-weight: 300;
+    }
+
+    #faq-list {
+        width: 900px;
+        margin: 50px auto;
+
+        .panel {
+            border-color: darken($signature-light, 5%);
+        }
+
+        .panel-heading {
+            background-color: $signature-light;
+            color: #fff;
+            transition: 0.15s;
+
+            &:hover {
+                background-color: $signature-lighter;
+            }
+        }
+
+        .panel-title {
+            padding: 7px 15px;
+            font-weight: bold;
+            font-size: 16pt;
+        }
+
+        .panel-body {
+            font-size: 12pt;
+        }
+    }
+
+    .see-all {
+        font-size: 14pt;
+    }
+
+}
+
+#front-news {
+
+    padding: 60px 0 90px;
+
+    h2 {
+        font-weight: 300;
+    }
+
+    #news-list {
+        width: 900px;
+        margin: 50px auto;
+
+        h3 {
+            font-weight: bold;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 142px;
+            margin-bottom: 10px;
+            display: block;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .news-first {
+            
+            margin-bottom: 25px;
+
+            .img-placeholder {
+                height: 300px;
+                margin: 0;
+            }
+        }
+
+        .editor-placeholder {
+
+            img {
+                width: 40px;
+                margin-right: 10px;
+            }
+
+        }
+    }
+
+    .see-all {
+        font-size: 14pt;
+        text-align: center;
+    }
+}
+
+#front-contact-us {
+
+    padding: 50px 0 60px;
+    background-color: $signature-lighter;
+    background-image: url(../storage/images/web/bg_contact.png);
+    background-repeat: repeat-x;
+    background-size: 1150px;
+
+    .form-container {
+        width: 700px;
+        margin: 0 auto;
+
+        .panel {
+            margin: 0;
+            border: none;
+            border-top: 5px solid $signature-light;
+            box-shadow: 0px 5px 10px 1px rgba(221,115,34,0.5);
+        }
+
+        .panel-body {
+            border-bottom: 1px solid #ddd;
+            padding: 25px 30px;
+
+            &:last-child {
+                border-bottom: none;
+
+                div {
+                    margin-top: 12px;
+                }
+            }
+        }
+
+        .form-body {
+            padding: 30px;
+        }
+
+        h2 {
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .control-label {
+            font-weight: normal;
+        }
+
+        .form-control {
+            border-color: #ccc;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            border-color: $signature-light;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 
+                        0 0 8px transparentize($signature-light, 0.6);
+        }
+
+        .btn-primary {
+            background-color: $signature-light;
+            border-color: darken($signature-light, 3%);
+
+            &:hover {
+                background-color: lighten($signature-light, 3%);
+            }
+        }
+
+    }
+
+}
+
+#front-sponsors {
+    padding: 50px;
+    background-color: #fff;
+
+    h2 {
+        font-size: 15pt;
+    }
+
+    .sponsors-list {
+        margin-top: 50px;
+    }
+
+    .sponsor-item {
+        height: 75px;
+        margin: 10px;
+        display: inline-block;
+        background-color: $signature-light;
+    }
+
+}
+
+#front-footer {
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+
+    .upper-yard {
+        padding: 20px 0;
+
+        & > :first-child {
+            margin-top: 21px;
+        }
+    }
+
+    .lower-yard {
+        padding-bottom: 10px 0;
+    }
+
+    .footer-img {
+        width: 175px;
+        margin-bottom: 20px;
+    }
+
+    .footer-subtitle {
+        text-decoration: uppercase;
+    }
 }

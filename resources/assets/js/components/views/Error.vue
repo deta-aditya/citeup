@@ -22,8 +22,8 @@
         <h1>{{ errorText }}</h1>
         <p class="lead detailed-text" v-html="detailedText"></p>
         <p>
-            <router-link :to="{ name: 'root' }" class="btn btn-lg btn-primary">
-                Beranda
+            <router-link :to="{ name: 'Dasbor' }" class="btn btn-lg btn-primary">
+                Dasbor
             </router-link>
         </p>
     </div>
@@ -37,9 +37,7 @@
     }
 
     const DETAILED_TEXTS = {
-        404: 'Anda mengakses halaman yang tidak tersedia di web ini.\
-            Biasanya kasus ini terjadi ketika pengguna <b>mengubah URL dengan sembarangan.</b>\
-            Silahkan menuju beranda atau kembali ke halaman sebelumnya.'
+        404: 'Waduh! Anda mencoba mengakses halaman yang tidak tersedia di web ini.'
     }
 
     export default {
@@ -68,7 +66,7 @@
         methods: {
 
             back() {
-                this.$router.go(-1);
+                this.$router.back();
             }
 
         }

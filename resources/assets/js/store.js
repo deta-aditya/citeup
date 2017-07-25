@@ -24,14 +24,14 @@ export default {
         route: '',
 
         noNav: [
-            'finishing'
+            'Pelengkapan Profil'
         ],
 
         requiresUserUpdation: [
             //
         ],
 
-        loading: false
+        loading: 100
 
     },
 
@@ -47,7 +47,11 @@ export default {
 
         alerts(state) {
             return state.user.alerts;
-        }
+        },
+
+        isLoading(state) {
+            return state.loading < 100
+        },
 
     },
 
@@ -80,6 +84,10 @@ export default {
 
         setTopbarHeight(state, payload) {
             state.topbarHeight = payload;
+        },
+
+        loadSomething(state, payload) {
+            state.loading = payload
         },
 
     },

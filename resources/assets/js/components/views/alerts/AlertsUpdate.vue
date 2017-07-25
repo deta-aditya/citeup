@@ -1,96 +1,36 @@
 
-<style lang="scss" scoped>
-
-    .panel {
-        border-radius: 0;
-        border: none;
-    }
-
-    .panel-heading {
-        border-radius: 0;
-
-        .fa {
-            color: #fff;
-        }
-    }
-
-    .panel-title {
-
-        padding: 5px 0;
-
-        & > .fa {
-            background: #fff;
-            border-radius: 50%;
-            padding: 5px;
-            margin-right: 3px;
-            color: #337ab7;
-        }
-
-    }
-
-    .panel-body {
-        border-radius: 0;    
-        padding: 25px
-    }
-
-    .panel-cover {
-        position: absolute;
-        background: rgba(255,255,255,0.7);
-        z-index: 10;
-
-        .panel-cover-content {
-            display: table-cell;
-            vertical-align: middle;
-
-            i.fa {
-                margin-bottom: 10px;
-            }
-        }
-    }
-
-</style>
-
 <template>
-    <div id="alerts-update">
-        <div ref="panel" class="panel panel-primary">
-            <div ref="cover" class="panel-cover" v-show="isLoading">
-                <div class="panel-cover-content text-center">
-                    <i class="fa fa-spinner fa-4x fa-pulse"></i> 
-                    <p class="lead">Memuat...</p>
+    <div id="alerts-edit">
+        <form-panel ref="formPanel" method="put" :action="'/alerts/' + id" :model="alert" :horizontal="true">
+            <template slot="title">Ubah Notifikasi</template>
+            <template slot="header-control">
+                <router-link :to="{ name: 'Notifikasi' }" class="btn btn-default">Kembali</router-link>
+            </template>
+
+            <text-input name="ititle" :required="true" :label-width="2" :control-width="10" v-model="alert.title">
+                Judul
+            </text-input>
+            <multiline-input name="icontent" :required="true" :label-width="2" :control-width="10" v-model="alert.content">
+                Konten
+            </multiline-input>
+
+            <template slot="footer-control">
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" @click="submit">
+                        Selesai
+                    </button>
                 </div>
-            </div>
-            <div class="panel-heading">
-                <div class="pull-right">
-                    <router-link :to="{ name: 'alerts' }" class="btn btn-link">
-                        <i class="fa fa-chevron-left"></i>
-                    </router-link>
-                </div>
-                <h1 class="panel-title"><i class="fa fa-bell"></i> Sunting Notifikasi / {{ id }}</h1>
-            </div>
-            <div class="panel-body">
-                <api-form ref="form" method="put" :action="'/alerts/' + id" :model="alert">
-                    <text-input name="title" :required="true" :autofocus="true" :maxlength="191" v-model="alert.title">
-                        Judul Notifikasi
-                    </text-input>
-                    <text-input name="content" :required="true" :multiline="true" :maxlength="191" v-model="alert.content">
-                        Konten Notifikasi
-                    </text-input>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                            Selesai
-                        </button>
-                    </div>
-                </api-form>
-            </div>
-        </div>
+            </template>
+        </form-panel>
     </div>
 </template>
 
 <script>
 
     import Citeup from '../../../citeup'
-    import ApiForm from '../../forms/ApiForm.vue'
-    import TextInput from '../../forms/TextInput.vue'
+    import FormPanel from '../../kits/FormPanel/FormPanel.vue'
+    import TextInput from '../../kits/FormPanel/TextInput.vue'
+    import MultilineInput from '../../kits/FormPanel/MultilineInput.vue'
 
     export default {
 
@@ -105,7 +45,7 @@
 
         data() {
             return {
-                isLoading: true,
+                formPanel: null,
                 alert: {
                     title: '',
                     content: '',
@@ -113,69 +53,41 @@
             }
         },
 
-        watch: {
-
-            isLoading(newVal) {
-
-                if (newVal) {
-                    this.setCoverHeight()
-                }
-
-            },
-
-        },
-
         created() {
-            this.loadAlert()
+            this.getAlert()
         },
 
         mounted() {
             this.prepareComponent()
-            this.setCoverHeight()
+            this.registerEvents()
         },
 
         methods: {
 
-            loadAlert() {
-                
+            getAlert() {
                 Citeup.get('/alerts/' + this.id).then(response => {
                     this.alert = response.data.data.alert
-                    this.isLoading = false
                 })
-
             },
 
             prepareComponent() {
-
-                let form = this.$refs.form
-                var self = this
-
-                form.$on('submitting', () => { this.isLoading = true })
-                form.$on('submitted', (response) => {
-                    self.$router.push({ name: 'alerts' })
-                })
-
+                this.formPanel = this.$refs.formPanel
             },
 
-            setCoverHeight() {
-                let panel = this.$refs.panel;
-                let cover = this.$refs.cover;
-                let coverContent = cover.querySelector('.panel-cover-content');
-
-                this.setDimension(cover, panel);
-                this.setDimension(coverContent, panel);
+            registerEvents() {
+                this.formPanel.$on('submitted', payload => this.$router.push({ name: 'Notifikasi' }))
             },
 
-            setDimension(thisOne, likeThisOne) {
-                thisOne.style.width = likeThisOne.offsetWidth + 'px';
-                thisOne.style.height = likeThisOne.offsetHeight + 'px';
+            submit() {
+                this.formPanel.submit()
             },
 
         },
 
         components: {
-            'api-form': ApiForm,
+            'form-panel': FormPanel,
             'text-input': TextInput,
+            'multiline-input': MultilineInput,
         }
 
     }

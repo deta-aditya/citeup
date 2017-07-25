@@ -1,45 +1,132 @@
 
-<style lang="scss" scoped>
-    
-</style>
-
 <template>
     <div id="alerts-index">
-        <tabulation ref="tabulation" title="Notifikasi" :data="alerts" :data-detail="announcedUsers" :options="alertTabulationOpts">
-            <template slot="title">
-                <i class="fa fa-bell"></i> 
-                Tabel Notifikasi
-            </template>
-        </tabulation>
-        <div :id="announceToModalId" class="modal fade" tabindex="-1" role="dialog" v-if="user.admin">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Umumkan Notifikasi ke...</h4>
+
+        <data-panel
+            ref="dataPanel"  
+            v-model="alerts"
+            :checkable="true" 
+            :expandable="true"
+            :deletable="authorized">
+            Daftar Notifikasi
+            
+            <data-panel-addon 
+                slot="control" 
+                source="/alerts"
+                :refreshable="true"
+                :create="authorized ? { name: 'Notifikasi.Buat' } : null"></data-panel-addon>
+            
+            <template slot="list" scope="props">
+                
+                <data-panel-list-item v-if="authorized"
+                    :id="props.data.id"
+                    :update="{ name: 'Notifikasi.Sunting', params: { id: props.data.id }}" 
+                    :delete="'/alerts/' + props.data.id">
+                    <template slot="title">{{ props.data.title }}</template>
+
+                    <div>{{ props.data.content }}</div>
+                    <p>
+                        <small class="text-muted">
+                            Dibuat pada {{ props.data.created_at | normalize }}. Terakhir disunting pada {{ props.data.updated_at | normalize }}
+                        </small>
+                    </p>
+
+                    <div v-show="props.data.id === details.id">
+                        <p class="text-muted">Pengguna yang Diumumkan:</p>
+
+                        <data-panel v-model="details.users" :headed="false">
+                            <template slot="list" scope="props">
+                                <data-panel-list-item :id="props.data.id" :controls="false" size="small">
+                                    <template slot="title">
+                                        <img :src="props.data.profile | signature" class="img-circle user-img">
+                                        {{ props.data.name }}
+                                        <div class="pull-right">
+                                            <small class="text-muted">
+                                                Diumumkan pada {{ props.data.announced_at | normalize }}. 
+                                                <template v-if="props.data.seen_at === null">
+                                                    Belum dilihat.
+                                                </template>
+                                                <template v-else>
+                                                    Dilihat pada {{ props.data.seen_at | normalize }}.
+                                                </template>
+                                            </small>
+                                            <button type="button" class="btn btn-link btn-sm" @click="see(props.data.id)">Lihat/Tak Lihat</button>&middot;
+                                            <button type="button" class="btn btn-link btn-sm" @click="unannounce(props.data.id)">Lepaskan</button>
+                                        </div>
+                                    </template>
+                                </data-panel-list-item>
+                            </template>
+                        </data-panel>
+
                     </div>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Foto</th>
-                                <th>Nama</th>
-                                <th>Peran</th>
-                            </tr>
-                            <tr v-for="user in announceable" is="tabulation-row" :identifier="user.id" :key="user.id" @check="check">
-                                <td>{{ user.id }}</td>
-                                <td><img :src="user.profile.photo" class="img-circle user-img"></td>
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.rolename | translateRole }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" @click="announce">Umumkan</button>
+
+                    <template slot="actions">
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" @click.prevent="toggleDetails(props.data.id)">Pengguna...</a></li>
+                        <li><a href="#" @click.prevent="doAnnounce(props.data.id)">Umumkan...</a></li>
+                    </template>
+
+                </data-panel-list-item>
+
+                <data-panel-list-item v-else
+                    :id="props.data.id"
+                    :controls="props.data.seen_at === null">
+                    <template slot="title">{{ props.data.title }}</template>
+
+                    <div>{{ props.data.content }}</div>
+                    <p>
+                        <small class="text-muted">
+                            Diumumkan pada {{ props.data.announced_at | normalize }}. 
+                            <template v-if="props.data.seen_at === null">
+                                Belum dilihat.
+                            </template>
+                            <template v-else>
+                                Dilihat pada {{ props.data.seen_at | normalize }}.
+                            </template>
+                        </small>
+                    </p>
+
+                    <template slot="actions" v-if="props.data.seen_at === null">
+                        <li><a href="#" @click.prevent="entrantSee(props.data.id)">Lihat</a></li>
+                    </template>
+
+                </data-panel-list-item>
+
+            </template>
+
+            <template slot="delete-preview" scope="props">
+                <div class="panel panel-default delete-preview">
+                    <div class="panel-body">
+                        <h4><small>#{{ props.data.id }}</small> {{ props.data.title }}</h4>
+                        <div>{{ props.data.content }}</div>
+                        <div><small class="text-muted">Dibuat pada {{ props.data.created_at | normalize }}. Terakhir disunting pada {{ props.data.updated_at | normalize }}</small></div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </template>
+        </data-panel>
+
+        <message-box ref="announceMessageBox" name="alerts-announce" backdrop="static" :dismissable="false" v-show="authorized">
+            <template slot="title">Umumkan</template>
+
+            <p class="text-muted">Silahkan pilih pengguna yang akan diumumkan.</p>
+            <data-panel ref="announceDataPanel" v-model="announce.users" :headed="false" :checkable="true">
+                <template slot="list" scope="props">
+                    <data-panel-list-item :id="props.data.id" :controls="false" size="small">
+                        <template slot="title">
+                            <img :src="props.data.profile | signature" class="img-circle user-img">
+                            {{ props.data.name }}, 
+                            <small>{{ props.data.rolename | translateRole }}</small>
+                        </template>
+                    </data-panel-list-item>
+                </template>
+            </data-panel>
+
+            <template slot="buttons">
+                <button type="button" class="btn btn-default" @click="cancelAnnounce">Batal</button>
+                <button type="button" class="btn btn-primary" @click="confirmAnnounce">Umumkan</button>
+            </template>
+        </message-box>
+
     </div>
 </template>
 
@@ -49,413 +136,191 @@
     import moment from 'moment'
     import { mapState } from 'vuex'
     import Citeup from '../../../citeup'
-    import Tabulation from '../../kits/Tabulation.vue'
-    import TabulationRow from '../../kits/TabulationRow.vue'
+    import DataPanel from '../../kits/DataPanel/DataPanel.vue'
+    import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
+    import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
+    import MessageBox from '../../kits/MessageBox.vue'
+    import Dropdown from '../../kits/Dropdown.vue'
 
     const STATES = [
         'user'
-    ]
-
-    const PICKED_ANNOUNCEABLE_FIELDS = [
-        'id', 'profile', 'name', 'rolename',
-    ]
-
-    const ALERT_TABOPS_ADMIN = {
-        features: {
-            create: true,
-            update: true,
-            remove: true,
-            detail: true
-        },
-        forms: {
-            create: { name: 'alerts.create' },
-            update: '/alerts/?/update',
-        },
-        columns: ['ID', 'Judul', 'Konten', 'Dibuat pada', 'Disunting pada'],
-        actions: {
-            individual: [
-                {
-                    name: 'Umumkan ke...',
-                    action: 'announce-to',
-                }
-            ],
-            checked: [
-                {
-                    name: 'Umumkan Tertanda ke...',
-                    action: 'announce-checked-to',
-                }
-            ],
-        },
-        detail: {
-            columns: ['ID', 'Foto', 'Nama', 'Diumumkan pada', 'Dilihat pada'],
-            actions: [
-                {
-                    name: 'Lihat',
-                    action: 'see',
-                },
-                {
-                    name: 'Tidak Lihat',
-                    action: 'unsee',
-                },
-                {
-                    name: 'Lepaskan',
-                    action: 'unannounce'
-                }
-            ]
-        },
-        take: 15,
-        hideId: false,
-        isLoading: true
-    }
-
-    const ALERT_TABOPS_NORMAL = {
-        features: {
-            create: false,
-            update: false,
-            remove: false,
-            detail: false,
-        },
-        columns: ['Judul', 'Konten', 'Diumumkan Pada', 'Dilihat pada'],
-        actions: {
-            individual: [
-                {
-                    name: 'Lihat',
-                    action: 'see-individual',
-                },
-            ],
-            checked: [
-                {
-                    name: 'Lihat Tertanda',
-                    action: 'see-checked',
-                }
-            ],
-        },
-        take: 15,
-        hideId: true,
-        isLoading: true
-    }    
+    ] 
 
     export default {
 
         data() {
             return {
+                dataPanel: null,
                 alerts: [],
-                tabulation: {},
-                alertToAnnounce: 0,
-                announceable: [],
-                announcedUsers: [],
-                checked: [],
-                announceToModalId: 'modal-announce-to',
-                alertTabulationOpts: ALERT_TABOPS_NORMAL
+                details: {
+                    id: 0,
+                    users: [],
+                    component: null,
+                },
+                announce: {
+                    id: 0,
+                    users: [],
+                    messageBox: null,
+                    dataPanel: null,
+                },
             }
         },
 
         computed: _.merge(mapState(STATES), {
-            //
+            
+            authorized() {
+                return this.user.admin
+            },
+
         }),
-
-        watch: {
-
-            user(newUser) {
-                if (newUser.admin) {
-                    this.toAdminMode()
-                }
-            }
-
-        },
 
         filters: {
 
             translateRole(value) {
-
                 switch (value) {
                     case 'Committee': return 'Panitia'; break
                     case 'Entrant': return 'Peserta'; break
                     default: return value
                 }
-
             },
 
+            signature(value) {
+                return value === null ? Citeup.defaultImage : Citeup.appPath + '/' + value.photo
+            },
+
+            normalize(value) {
+                return moment(value).format('DD MMM, HH:mm')
+            }
+
         },
-        
-        beforeRouteEnter(to, from, next) {
-            next(vm => vm.getAlerts())
+
+        watch: {
+            user() {
+                this.getAlerts()
+            }
         },
 
         created() {
-            if (this.user.admin) {
-                this.toAdminMode()
+            if (this.user.id > 0) {
+                this.getAlerts()
             }
         },
 
         mounted() {
             this.prepareComponent()
-            this.prepareEvents()
         },
 
         methods: {
 
             getAlerts() {
-
-                let uri = '/alerts'
-                let user = this.user
-                let self = this
-                let params = { take: 15 }
-
-                if (user.entrant) {
-                    uri = '/users/' + user.id + uri
-                }
-                
-                this.alerts = []
-
-                Citeup.get(uri, params).then(response => {
-                    self.mapAlerts(response.data.data.alerts)
-                    self.tabulation.isLoading = false
-                })
-
-            },
-
-            mapAlerts(alerts) {
-
-                alerts.forEach(alert => {
-
-                    let toBeStored = {
-                        id: alert.id,
-                        title: alert.title,
-                        content: alert.content,
-                    }
-
-                    if (this.user.admin) {
-                        toBeStored.created_at = moment(alert.created_at).format('DD MMM, HH:mm')
-                        toBeStored.updated_at = moment(alert.updated_at).format('DD MMM, HH:mm')
-                    } else {
-                        toBeStored.announced_at = moment(alert.announced_at).format('DD MMM, HH:mm')
-                        toBeStored.seen_at = alert.seen_at === null ? 'N/A' : moment(alert.seen_at).format('DD MMM, HH:mm')
-                    }
-
-                    this.alerts.push(toBeStored)
-
-                }, this)
-
+                Citeup.get(this.user.admin ? '/alerts' : '/users/' + this.user.id + '/alerts', { 
+                    take: 15 
+                }).then(response => this.alerts = response.data.data.alerts)
             },
 
             prepareComponent() {
-                this.tabulation = this.$refs.tabulation
+                this.dataPanel = this.$refs.dataPanel
+                this.announce.dataPanel = this.$refs.announceDataPanel
+                this.announce.messageBox = this.$refs.announceMessageBox
             },
 
-            prepareEvents() {
+            toggleDetails(id) {
 
-                let announceToModal = $('#' + this.announceToModalId)
-
-                announceToModal.on('hidden.bs.modal', () => this.announceable = [])
-
-                this.tabulation.$on('remove', this.removeAlerts)
-                this.tabulation.$on('announce-to', this.prepareAnnounce)
-                this.tabulation.$on('detail-shown', this.loadAnnouncedUsers)
-                this.tabulation.$on('unannounce', this.unannounce)
-                this.tabulation.$on('see', this.see)
-                this.tabulation.$on('unsee', this.unsee)
-                this.tabulation.$on('see-individual', this.seeIndividual)
-
-            },
-
-            toAdminMode() {
-                this.alertTabulationOpts = ALERT_TABOPS_ADMIN
-            },
-
-            removeAlerts(alerts) {
-
-                let self = this
-                let done = []
-
-                this.tabulation.isLoading = true
-
-                for (let alert of alerts) {
-
-                    Citeup.delete('/alerts/' + alert.id).then(response => {
-                        
-                        self.alerts.splice(
-                            self.alerts.findIndex(el => el.id === alert.id)
-                        , 1)
-
-                        done.push(alert.id)
-
-                        if (done.length === alerts.length) {
-                            this.tabulation.isLoading = false
-                        }
-
-                    })
-
+                if (this.details.component !== null && 
+                    this.details.component.expandable && 
+                    this.details.component.expanded) {
+                    this.details.component.expand()
                 }
 
-            },
-
-            check(row) {
-
-                let id = row.identifier
-                let index = this.checked.indexOf(id)
-
-                if (index < 0) {
-                    this.checked.push(id)
-                } else {
-                    this.checked.splice(index, 1)
+                if (this.details.id === id) {
+                    return this.hideDetails()
                 }
 
+                this.showDetails(id)
+
             },
 
-            prepareAnnounce(target) {
+            showDetails(id) {
+                Citeup.get('/alerts/' + id + '/users').then(response => {
+                    this.details.id = id
+                    this.details.users = response.data.data.users
+                    this.details.component = this.dataPanel.listItem(id)
 
-                let self = this
-
-                this.alertToAnnounce = target
-                this.tabulation.isLoading = true
-
-                Citeup.get('/users').then(response => {
-
-                    $('#' + self.announceToModalId).modal('show')
-
-                    self.tabulation.isLoading = false
-
-                    self.mapAnnounceable(response.data.data.users)
+                    if (this.details.component.expandable && ! this.details.component.expanded) {
+                        this.details.component.expand()
+                    }
                 })
-
             },
 
-            announce() {
-
-                let params = {
-                    announce: this.checked
-                }
-
-                this.tabulation.isLoading = true
-
-                Citeup.post('/alerts/' + this.alertToAnnounce + '/users', params).then(this.postAnnounce)
-
+            hideDetails() {
+                this.details.id = 0
+                this.details.users = []
+                this.details.component = null
             },
 
-            unannounce(alertId, id) {
-
-                let params = {
-                    unannounce: [id]
-                }
-
-                this.tabulation.isLoading = true
-
-                Citeup.post('/alerts/' + alertId + '/users', params).then(
-                    response => this.loadAnnouncedUsers(alertId)
-                )
-
+            doAnnounce(id) {
+                Citeup.get('/users').then(response => {
+                    this.announce.id = id
+                    this.announce.users = response.data.data.users
+                    this.announce.messageBox.open()
+                })
             },
 
-            see(alertId, id) {
-
-                let params = {
-                    see: [alertId]
-                }
-
-                this.tabulation.isLoading = true
-
-                Citeup.post('/users/' + id + '/alerts', params).then(
-                    response => this.loadAnnouncedUsers(alertId)
-                )
-
+            cancelAnnounce() {
+                this.announce.messageBox.close()
+                this.announce.id = 0
+                this.announce.users = []
             },
 
-            seeIndividual(id) {
+            confirmAnnounce() {
+                Citeup.post('/alerts/' + this.announce.id + '/users', { 
+                    announce: this.announce.dataPanel.checked
+                }).then(response => {
 
-                let params = {
-                    see: [id]
-                }
-
-                this.tabulation.isLoading = true
-
-                Citeup.post('/users/' + this.user.id + '/alerts', params).then(
-                    response => this.getAlerts()
-                )
-
-            },
-
-            unsee(alertId, id) {
-
-                let params = {
-                    unsee: [alertId]
-                }
-
-                this.tabulation.isLoading = true
-
-                Citeup.post('/users/' + id + '/alerts', params).then(
-                    response => this.loadAnnouncedUsers(alertId)
-                )
-
-            },
-
-            postAnnounce() {
-
-                $('#' + this.announceToModalId).modal('hide')
-
-                if (! this.tabulation.detailIsShown) {
-                    this.tabulation.showDetail(this.alertToAnnounce)
-                }
-
-                this.announceable = this.checked = []
-                this.alertToAnnounce = 0
-
-            },
-
-            mapAnnounceable(users) {
-                
-                users.forEach(user => {
-
-                    let announceable = _.pick(user, PICKED_ANNOUNCEABLE_FIELDS)
-
-                    if (announceable.profile === null) {
-                        announceable.profile = {
-                            photo: Citeup.defaultImage
-                        }
+                    if (this.details.id === this.announce.id) {
+                        this.showDetails(this.announce.id)
                     } else {
-                        announceable.profile.photo = Citeup.appPath + '/' + announceable.profile.photo
+                        this.toggleDetails(this.announce.id)
                     }
 
-                    this.announceable.push(announceable)
-
-                }, this)
-
-            },
-
-            loadAnnouncedUsers(target) {
-
-                this.tabulation.isLoading = true
-
-                Citeup.get('/alerts/' + target + '/users').then(response => {
-                    this.mapAnnouncedUsers(response.data.data.users)
-                    this.tabulation.isLoading = false
+                    this.cancelAnnounce()
                 })
+            },
+
+            see(id) {
+                
+                let params = {}
+
+                if (this.details.users.find(user => user.id === id).seen_at === null) {
+                    params.see = [this.details.id]
+                } else {
+                    params.unsee = [this.details.id]
+                }
+
+                Citeup.post('/users/' + id + '/alerts', params).then(response => this.showDetails(this.details.id))
 
             },
 
-            mapAnnouncedUsers(users) {
+            entrantSee(id) {
+                Citeup.post('/users/' + this.user.id + '/alerts', { see: [id] }).then(
+                    response => this.getAlerts()
+                )
+            },
 
-                this.announcedUsers = []
-
-                users.forEach(user => {
-
-                    this.announcedUsers.push({
-                        id: user.id,
-                        photo: user.profile === null ? 'img:' + Citeup.defaultImage : 'img:' + Citeup.appPath + '/' + user.profile.photo,
-                        name: user.name,
-                        announced_at: moment(user.announced_at).format('DD MMM, HH:mm'),
-                        seen_at: user.seen_at === null ? 'N/A' : moment(user.seen_at).format('DD MMM, HH:mm')
-                    })
-
-                }, this)
-
+            unannounce(id) {
+                Citeup.post('/alerts/' + this.details.id + '/users', {
+                    unannounce: [id]
+                }).then(response => this.showDetails(this.details.id))
             },
 
         },
 
         components: {
-            'tabulation': Tabulation,
-            'tabulation-row': TabulationRow
+            'data-panel': DataPanel,
+            'data-panel-addon': DataPanelAddon,
+            'data-panel-list-item': DataPanelListItem,
+            'message-box': MessageBox,
+            'dropdown': Dropdown,
         }
 
     }
