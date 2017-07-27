@@ -5,23 +5,29 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="text" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                :maxlength="maxlength"
-                @input="input($event.target.value)">
-            <slot name="help-block"></slot>
+            <div ref="datetimepicker" class="input-group date">
+                <input
+                    type="text" 
+                    class="form-control"
+                    :id="name"
+                    :name="name" 
+                    :value="value" 
+                    :required="required"
+                    :disabled="disabled"
+                    :autofocus="autofocus">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+
+    import moment from 'moment'
+
+    const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
     export default {
 
@@ -57,11 +63,6 @@
                 default: true
             },
 
-            maxlength: {
-                type: Number,
-                default: 191
-            },
-
             labelWidth: {
                 type: Number,
                 default: 0,
@@ -73,7 +74,7 @@
             },
 
             value: {
-                type: String
+                type: String,
             },
 
         },
@@ -101,11 +102,14 @@
         methods: {
 
             prepareComponent() {
-                //
+                this.datetimepicker = $(this.$refs.datetimepicker).datetimepicker({
+                    format: DEFAULT_FORMAT
+                })
+                this.datetimepicker.on('dp.change', this.input)
             },
 
-            input(value) {
-                this.$emit('input', value)
+            input(e) {
+                this.$emit('input', e.date.format(DEFAULT_FORMAT))
             },
 
         },

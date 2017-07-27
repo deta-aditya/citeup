@@ -2,11 +2,11 @@
 <template>
     <a 
         ref="listElement" 
-        :class="['list-group-item', 'data-panel-list-item', checkableClass, sizeClass]" 
+        :class="['list-group-item', 'data-panel-list-item', 'clearfix', checkableClass, sizeClass]" 
         @click="check">
         <div class="pull-right item-control" v-if="controls">
             <dropdown align="right" variant="link" :caret="false">
-                <span class="glyphicon glyphicon-option-vertical"></span>
+                <i class="fa fa-lg fa-ellipsis-h"></i>
                 <template slot="menu">
                     <li v-if="updatable">
                         <router-link :to="update">Sunting</router-link>

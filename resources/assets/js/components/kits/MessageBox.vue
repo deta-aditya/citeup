@@ -80,12 +80,17 @@
 
         mounted() {
             this.prepareComponent()
+            this.registerEvents()
         },
 
         methods: {
 
             prepareComponent() {
                 this.modalElement = $('#' + this.boxId).modal(this.modalOptions)
+            },
+
+            registerEvents() {
+                $(this.modalElement).on('shown.bs.modal', e => this.$emit('shown', e))
             },
 
             open() {

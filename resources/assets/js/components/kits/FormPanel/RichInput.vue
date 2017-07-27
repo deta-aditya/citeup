@@ -5,23 +5,20 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="text" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                :maxlength="maxlength"
-                @input="input($event.target.value)">
+            <wysiwyg v-model="privateValue"></wysiwyg>
             <slot name="help-block"></slot>
         </div>
     </div>
 </template>
 
 <script>
+
+    import wysiwyg from 'vue-wysiwyg'
+    import Vue from 'vue'
+
+    Vue.use(wysiwyg, {
+        hideModules: { image: true }
+    })
 
     export default {
 
@@ -38,16 +35,6 @@
             },
 
             required: {
-                type: Boolean,
-                default: false
-            },
-
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-
-            disabled: {
                 type: Boolean,
                 default: false
             },
@@ -92,6 +79,16 @@
                 return this.controlWidth > 0 ? 'col-sm-' + this.controlWidth : ''
             },
 
+            privateValue: {
+                get() {
+                    return this.value
+                },
+
+                set(newVal) {
+                    this.$emit('input', newVal)
+                }
+            },
+
         },
 
         mounted() {
@@ -102,10 +99,6 @@
 
             prepareComponent() {
                 //
-            },
-
-            input(value) {
-                this.$emit('input', value)
             },
 
         },

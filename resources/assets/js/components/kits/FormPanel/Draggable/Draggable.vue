@@ -5,23 +5,17 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="text" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                :maxlength="maxlength"
-                @input="input($event.target.value)">
+            <draggable :id="name" :list="value" :options="options" class="list-group draggable-list">
+                <slot name="list"></slot>
+            </draggable>
             <slot name="help-block"></slot>
         </div>
     </div>
 </template>
 
 <script>
+
+    import Draggable from 'vuedraggable'
 
     export default {
 
@@ -37,29 +31,9 @@
                 default: true,
             },
 
-            required: {
-                type: Boolean,
-                default: false
-            },
-
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-
             labeled: {
                 type: Boolean,
                 default: true
-            },
-
-            maxlength: {
-                type: Number,
-                default: 191
             },
 
             labelWidth: {
@@ -73,9 +47,15 @@
             },
 
             value: {
-                type: String
+                type: Array
             },
 
+        },
+
+        data() {
+            return {
+                options: { draggable: '.draggable-list-item' }
+            }
         },
 
         computed: {
@@ -104,11 +84,11 @@
                 //
             },
 
-            input(value) {
-                this.$emit('input', value)
-            },
-
         },
+
+        components: {
+            'draggable': Draggable,
+        }
 
     }
 

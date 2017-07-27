@@ -104,6 +104,12 @@
             },
 
             registerEvents() {
+                
+                if (this.formless) {
+                    return
+                }
+
+                this.apiForm.$on('submitting', payload => this.$emit('submitting', payload))
                 this.apiForm.$on('submitted', payload => this.$emit('submitted', payload))
             },
 

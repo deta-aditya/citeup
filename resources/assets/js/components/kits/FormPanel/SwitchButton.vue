@@ -5,18 +5,17 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="text" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                :maxlength="maxlength"
-                @input="input($event.target.value)">
-            <slot name="help-block"></slot>
+            <div class="checkbox">
+                <input 
+                    class="switch-button" 
+                    ref="switch" 
+                    type="checkbox" 
+                    :id="name" 
+                    :name="name" 
+                    :value="value" 
+                    :checked="checked" 
+                    :disabled="disabled">
+            </div>
         </div>
     </div>
 </template>
@@ -37,16 +36,6 @@
                 default: true,
             },
 
-            required: {
-                type: Boolean,
-                default: false
-            },
-
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-
             disabled: {
                 type: Boolean,
                 default: false
@@ -57,9 +46,9 @@
                 default: true
             },
 
-            maxlength: {
-                type: Number,
-                default: 191
+            checked: {
+                type: Boolean,
+                default: false
             },
 
             labelWidth: {
@@ -73,9 +62,21 @@
             },
 
             value: {
-                type: String
+                type: String,
+                required: true
             },
 
+        },
+
+        model: {
+            prop: 'checked',
+        },
+
+        data() {
+            return {
+                invoked: false,
+                switch: null,
+            }
         },
 
         computed: {
@@ -94,6 +95,18 @@
 
         },
 
+        watch: {
+            checked(newVal) {
+
+                if (this.invoked) {
+                    return
+                }
+
+                this.invoked = true
+                this.switch.bootstrapSwitch('toggleState', newVal)
+            },
+        },
+
         mounted() {
             this.prepareComponent()
         },
@@ -101,11 +114,12 @@
         methods: {
 
             prepareComponent() {
-                //
+                this.switch = $(this.$refs.switch).bootstrapSwitch()
+                this.switch.on('switchChange.bootstrapSwitch', this.check)
             },
 
-            input(value) {
-                this.$emit('input', value)
+            check(e, state) {
+                this.$emit('input', state)
             },
 
         },

@@ -20,6 +20,10 @@
                     <i class="fa fa-fw fa-bell"></i>
                     Notifikasi
                 </router-link>
+                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
+                    <i class="fa fa-fw fa-bullhorn"></i>
+                    Acara
+                </router-link>
                 <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
                     <i class="fa fa-fw fa-cogs"></i>
                     Konfigurasi

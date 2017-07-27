@@ -1,129 +1,239 @@
 
-<style lang="scss" scoped>
-
-    .panel {
-        border-radius: 0;
-        border: none;
-    }
-
-    .panel-heading {
-        border-radius: 0;
-        
-        .fa {
-            color: #333;
-        }
-    }
-
-    .panel-title {
-
-        padding: 5px 0;
-
-        & > .fa {
-            padding: 5px;
-            margin-right: 3px;
-        }
-
-    }
-
-    .panel-body {
-        border-radius: 0;    
-        padding: 25px
-    }
-
-    .panel-cover {
-        position: absolute;
-        background: rgba(255,255,255,0.7);
-        z-index: 10;
-
-        .panel-cover-content {
-            display: table-cell;
-            vertical-align: middle;
-
-            i.fa {
-                margin-bottom: 10px;
-            }
-        }
-    }
-
-    .limiter {
-        width: 500px;
-    }
-
-</style>
-
 <template>
     <div id="config-page">
-        <div ref="panel" class="panel panel-default">
-            <div ref="cover" class="panel-cover" v-show="isLoading">
-                <div class="panel-cover-content text-center">
-                    <i class="fa fa-spinner fa-4x fa-pulse"></i> 
-                    <p class="lead">Memuat...</p>
-                </div>
+        <message-box ref="successMessageBox" name="success">
+            <span slot="title">Penyimpanan Berhasil</span>
+            Konfigurasi telah berhasil disimpan.
+            <div slot="buttons" class="text-right">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </div>
-            <div class="panel-heading clearfix">
-                <div class="pull-right">
-                    <a class="btn btn-link" href="#" @click.prevent>
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </div>
-                <h1 class="panel-title"><i class="fa fa-cogs"></i> Konfigurasi Aplikasi</h1>
-            </div>
-            <div class="panel-body">
-                <api-form ref="form" method="post" action="/config" :model="formModel">
-                    <fieldset>
-                        <div class="limiter">
-                            <legend><i>Countdown</i> Pendaftaran</legend>
-                            <switch-button name="countdown_active" value="active" v-model="value.countdown.active">
-                                Status
-                            </switch-button>
-                            <date-time-input name="countdown_off" v-model="value.countdown.off">
-                                Waktu Pendaftaran Dibuka
-                            </date-time-input>
-                        </div>
-                    </fieldset>
-                    <div class="form-group text-right">
-                        <button type="submit" class="btn btn-primary">
-                            Simpan Perubahan
-                        </button>
+        </message-box>
+        <div class="form-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default">Segarkan</button>
                     </div>
-                </api-form>
+                    <h1 class="page-title">Konfigurasi</h1>
+                </div>
             </div>
         </div>
+        <api-form method="post" action="/config" :model="formModel" @submitting="beforeSubmit" @submitted="afterSubmit">
+            <div class="row">
+                <div class="col-sm-6">
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Halaman Depan</h2>
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="subtitle text-muted">Penghitung Mundur</h3>
+                            <switch-button name="landing-countdown-active" :label-width="4" :control-width="8" value="active" v-model="value.landing.countdown.active">
+                                Status
+                            </switch-button>
+                            <date-time-input name="landing-countdown-off" :label-width="4" :control-width="8" v-model="value.landing.countdown.off">
+                                Hitung Hingga
+                            </date-time-input>
+                            <text-input name="landing-countdown-text" :label-width="4" :control-width="8" v-model="value.landing.countdown.text">
+                                Teks
+                                <p class="help-block" slot="help-block">Teks in akan ditampilkan di atas penghitung mundur.</p>
+                            </text-input>
+                            <h2 class="subtitle text-muted">Urutan Acara</h2>
+                            <draggable name="landing-activities-order" :control-width="12" :labeled="false" v-model="value.landing.activities.order">
+                                <draggable-item slot="list" v-for="(activity, index) in value.landing.activities.order" :key="index">
+                                    <small class="text-muted">#{{ activity.id }}</small>{{ activity.name }}
+                                </draggable-item>
+                                <p class="help-block" slot="help-block">Drag untuk mengubah urutan. Urutan teratas akan tampil di paling kiri dan seterusnya.</p>
+                            </draggable>
+                            <h2 class="subtitle text-muted">Bagian yang Ditampilkan</h2>
+                            <check-list name="landing-show" :control-width="12" :labeled="false" v-model="value.landing.show">
+                                <template slot="list" scope="props">
+                                    {{ props.data.name }}
+                                </template>
+                            </check-list>
+                        </div>
+                    </form-panel>
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Penghadiahan</h2>
+                        </div>
+                        <div class="panel-body" v-for="(prize, index) in value.prizes" :key="index">
+                            <static-input :name="'prizes-' + prize.id + '-name'" :label-width="4" :control-width="8" v-model="value.prizes[index].name">
+                                Acara
+                            </static-input>
+                            <currency-input :name="'prizes-' + prize.id + '-first'" :label-width="4" :control-width="8" v-model="value.prizes[index].first">
+                                Juara 1
+                            </currency-input>
+                            <currency-input :name="'prizes-' + prize.id + '-second'" :label-width="4" :control-width="8" v-model="value.prizes[index].second">
+                                Juara 2
+                            </currency-input>
+                            <currency-input :name="'prizes-' + prize.id + '-third'" :label-width="4" :control-width="8" v-model="value.prizes[index].third">
+                                Juara 3
+                            </currency-input>
+                        </div>
+                    </form-panel>
+                </div>
+                <div class="col-sm-6">
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Lokasi Perlombaan</h2>
+                        </div>
+                        <gmap-map class="panel-body" :center="value.address.location" :zoom="15" :style="{ 'height': '400px' }" @click="changeLocation">
+                            <gmap-marker :position="value.address.location"></gmap-marker>
+                        </gmap-map>
+                        <div class="panel-body text-muted">
+                            Klik pada lokasi baru untuk mengubah lokasi perlombaan.
+                        </div>
+                    </form-panel>
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Kontak</h2>
+                        </div>
+                        <div class="panel-body">
+                            <text-input name="contact-email" :label-width="4" :control-width="8" v-model="value.contact.email">
+                                Email
+                                <p class="help-block" slot="help-block">Pesan dari formulir "Kontak Kami" akan dikirimkan ke alamat di atas.</p>
+                            </text-input>
+                            <text-input name="contact-facebook" :label-width="4" :control-width="8" v-model="value.contact.facebook">
+                                Akun Facebook
+                            </text-input>
+                            <text-input name="contact-twitter" :label-width="4" :control-width="8" v-model="value.contact.twitter">
+                                Akun Twitter
+                            </text-input>
+                            <text-input name="contact-line" :label-width="4" :control-width="8" v-model="value.contact.line">
+                                Akun LINE
+                            </text-input>
+                            <text-input name="contact-instagram" :label-width="4" :control-width="8" v-model="value.contact.instagram">
+                                Akun Instagram
+                            </text-input>
+                            <multiline-input name="contact-phone" :label-width="4" :control-width="8" v-model="phones">
+                                <i>Contact Person</i>
+                                <p class="help-block" slot="help-block">Pisah nama dan nomor dengan ":" (titik dua) dan setiap pasangan dengan "," (koma). Untuk menghapus pasangan nama dan nomor, block pasangan hingga bertemu koma, lalu hapus.</p>
+                            </multiline-input>
+                        </div>
+                    </form-panel>
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Tahap Aplikasi</h2>
+                        </div>
+                        <div class="panel-body text-muted">
+                            Bagian ini menentukan kapan tahapan pada aplikasi akan berlangsung. Tahapan-tahapan tersebut bertanggungjawab atas aktifitas-aktifitas yang ada pada aplikasi. Suntinglah dengan hati-hati!
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-group" id="stages-list" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" v-for="(stage, index) in value.stages" :key="index">
+                                    <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#stages-list" :data-target="'#collapsible-stage-' + index">
+                                        <h4 class="panel-title">{{ stage.name }}</h4>
+                                    </div>
+                                    <div :id="'collapsible-stage-' + index" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <date-time-input :name="'stage-' + index + '-end'" :label-width="4" :control-width="8" v-model="value.stages[index].end">
+                                                Berlangsung Hingga
+                                            </date-time-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form-panel>
+                </div>
+            </div>
+            <button ref="btnSubmit" type="submit" class="btn btn-lg btn-primary pull-right" style="margin-bottom:25px">{{ btnText }}</button>
+        </api-form>
     </div>
 </template>
 
 <script>
 
     import _ from 'lodash'
+    import Vue from 'vue'
+    import Citeup from '../../citeup'
     import { mapState } from 'vuex'
+    import * as VueGoogleMaps from 'vue2-google-maps' 
     import ApiForm from '../forms/ApiForm.vue'
-    import SwitchButton from '../forms/SwitchButton.vue'
-    import DateTimeInput from '../forms/DateTimeInput.vue'
+    import FormPanel from '../kits/FormPanel/FormPanel.vue'
+    import SwitchButton from '../kits/FormPanel/SwitchButton.vue'
+    import DateTimeInput from '../kits/FormPanel/DateTimeInput.vue'
+    import TextInput from '../kits/FormPanel/TextInput.vue'
+    import Draggable from '../kits/FormPanel/Draggable/Draggable.vue'
+    import DraggableItem from '../kits/FormPanel/Draggable/DraggableItem.vue'
+    import CheckList from '../kits/FormPanel/CheckList/CheckList.vue'
+    import StaticInput from '../kits/FormPanel/StaticInput.vue'
+    import CurrencyInput from '../kits/FormPanel/CurrencyInput.vue'
+    import MultilineInput from '../kits/FormPanel/MultilineInput.vue'
+    import MessageBox from '../kits/MessageBox.vue'
 
     const STATES = [
         'config'
     ]
 
+    Vue.use(VueGoogleMaps, {
+        load: {
+            key: Citeup.gmapKey,
+        }
+    })
+
     export default {
 
         data() {
-            
             return {
-                
+                successMessageBox: null,
+                btnSubmit: null,
+                btnText: 'Simpan Perubahan',
                 value: {
-                    countdown: {}
+                    landing: {
+                        countdown: {},
+                        activities: {},
+                    },
+                    address: {
+                        location: {lat: 0, lng: 0},
+                    },
+                    contact: {
+                        phones: {},
+                    }
                 },
-
-                isLoading: false,
             }
-
         },
 
         computed: _.merge(mapState(STATES), {
 
             formModel() {
                 return { value: JSON.stringify(this.value) }
-            }
+            },
+
+            phones: {
+                get() {
+
+                    var intended = []
+
+                    for (let name in this.value.contact.phones) {
+                        intended.push(name + ': ' +  this.value.contact.phones[name])
+                    }
+
+                    return intended.join(', ')
+                },
+
+                set(newVal) {
+
+                    var intended = {}
+
+                    for (var phone of newVal.split(',')) {
+                        var phone = phone.trim()
+                        var items = phone.split(':')
+
+                        for (let i = 0; i < items.length; i++) {
+                            items[i] = items[i].trim()
+                        }
+
+                        if (items[1] === undefined) {
+                            items[1] = ''
+                        }
+
+                        intended[items[0]] = items[1]
+                    }
+
+                    this.value.contact.phones = intended
+                },
+            },
 
         }),
 
@@ -131,7 +241,7 @@
 
             config(newVal) {
                 this.value = newVal
-            }
+            },
 
         },
 
@@ -143,41 +253,45 @@
 
         mounted() {
             this.prepareComponent()
-            this.setCoverHeight()
         },
  
         methods: {
 
             prepareComponent() {
-                
-                let form = this.$refs.form
-                var self = this
-
-                form.$on('submitting', () => { this.isLoading = true })
-                form.$on('submitted', () => { this.isLoading = false })
-
+                this.btnSubmit = this.$refs.btnSubmit
+                this.successMessageBox = this.$refs.successMessageBox
             },
 
-            setCoverHeight() {
-                let panel = this.$refs.panel;
-                let cover = this.$refs.cover;
-                let coverContent = cover.querySelector('.panel-cover-content');
-
-                this.setDimension(cover, panel);
-                this.setDimension(coverContent, panel);
+            changeLocation($event) {
+                this.value.address.location = $event.latLng.toJSON()
             },
 
-            setDimension(thisOne, likeThisOne) {
-                thisOne.style.width = likeThisOne.offsetWidth + 'px';
-                thisOne.style.height = likeThisOne.offsetHeight + 'px';
+            beforeSubmit() {
+                this.btnSubmit.disabled = true
+                this.btnText = 'Menyimpan...'
+            },
+
+            afterSubmit() {
+                this.btnSubmit.disabled = false
+                this.btnText = 'Simpan Perubahan'
+                this.successMessageBox.open()
             },
 
         },
 
         components: {
             'api-form': ApiForm,
+            'form-panel': FormPanel,
             'switch-button': SwitchButton,
             'date-time-input': DateTimeInput,
+            'text-input': TextInput,
+            'draggable': Draggable,
+            'draggable-item': DraggableItem,
+            'check-list': CheckList,
+            'static-input': StaticInput,
+            'currency-input': CurrencyInput,
+            'multiline-input': MultilineInput,
+            'message-box': MessageBox,
         },
 
     }

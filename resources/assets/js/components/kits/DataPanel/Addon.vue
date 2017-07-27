@@ -12,7 +12,7 @@
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-default" v-if="expandable" @click="expand">{{ expandBtnText }}</button>
-            <button type="button" class="btn btn-default" v-if="refreshable" @click="refresh">Segarkan</button>
+            <button type="button" class="btn btn-default" v-if="refresh" @click="refresh">Segarkan</button>
         </div>
         <router-link class="btn btn-primary" :to="create" v-if="create !== null">Buat</router-link>
     </div>
@@ -49,8 +49,8 @@
                 default: false,
             },
 
-            refreshable: {
-                type: Boolean,
+            refresh: {
+                type: [Function, Boolean],
                 default: false,
             },
 
@@ -94,10 +94,6 @@
 
             expand() {
                 this.dataPanel.expand()
-            },
-
-            refresh() {
-
             },
 
         },

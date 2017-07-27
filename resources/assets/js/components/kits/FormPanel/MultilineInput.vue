@@ -16,6 +16,7 @@
                 :autofocus="autofocus"
                 :maxlength="maxlength"
                 @input="input($event.target.value)"></textarea>
+            <slot name="help-block"></slot>
         </div>
     </div>
 </template>

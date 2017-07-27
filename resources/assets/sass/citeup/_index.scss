@@ -227,6 +227,11 @@
         margin: 0;
     }
 
+    .user-img {
+        width: 35px;
+        margin: 0 5px;
+    }
+
     .data-panel-list-item {
         cursor: pointer;
         padding: 8px 18px;
@@ -254,11 +259,6 @@
             small {
                 margin-right: 5px;
             }
-        }
-
-        .user-img {
-            width: 40px;
-            margin-left: 5px;
         }
 
         .expandable-content {
@@ -314,11 +314,34 @@
         margin: 0;
     }
 
+    .small-title {
+        font-size: 14pt;
+    }
+
+    .subtitle {
+        font-size: 12pt;
+        margin: 12px 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #dddddd;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
     .control-label {
         font-weight: normal;
     }
 
+    .panel-group {
+        margin-bottom: 0;
+    }
+
     .form-control {
+        @extend %no-border-radius;
+    }
+
+    .input-group-addon {
         @extend %no-border-radius;
     }
 
@@ -365,6 +388,80 @@
 
     .unit-info {
         font-size: 14pt;
+    }
+
+}
+
+.draggable-list {
+    @extend %no-border-radius;
+
+    .draggable-list-item {
+        @extend %no-border-radius;
+
+        small {
+            margin-right: 5px;
+        }
+    }
+}
+
+.check-list {
+    @extend %no-border-radius;
+    margin-bottom: 0;
+
+    .check-list-item {
+        @extend %no-border-radius;
+    }
+}
+
+.file-uploader-group {
+
+    $container-height: 100px;
+
+    .file-uploader {
+        
+        @extend %no-border-radius;
+        overflow-x: hidden;
+    
+        & > div {
+            display: table-cell;    
+        }
+
+        .uploaded-container {
+            height: $container-height;
+            padding-right: 15px;
+
+            .cover {
+                position: absolute;
+                background: rgba(255,255,255,0.5);
+                height: $container-height;
+                z-index: 10;
+
+                .cover-container {
+                    height: $container-height;
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .button-container {
+            vertical-align: middle;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hypens: auto;
+        }
+
+    }
+
+    .crop-container {
+        
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .btn-browse {
+        margin-right: 10px;
     }
 
 }

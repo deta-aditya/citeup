@@ -5,17 +5,7 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="text" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                :maxlength="maxlength"
-                @input="input($event.target.value)">
+            <p class="form-control-static">{{ value }}</p>
             <slot name="help-block"></slot>
         </div>
     </div>
@@ -37,29 +27,9 @@
                 default: true,
             },
 
-            required: {
-                type: Boolean,
-                default: false
-            },
-
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-
             labeled: {
                 type: Boolean,
                 default: true
-            },
-
-            maxlength: {
-                type: Number,
-                default: 191
             },
 
             labelWidth: {
@@ -102,10 +72,6 @@
 
             prepareComponent() {
                 //
-            },
-
-            input(value) {
-                this.$emit('input', value)
             },
 
         },

@@ -8,6 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- The App Root Path -->
+    <meta name="app-path" content="{{ url('/') }}">
+
     <title>{{ config('app.name', 'CiteUP') }}</title>
 
     <!-- Styles -->

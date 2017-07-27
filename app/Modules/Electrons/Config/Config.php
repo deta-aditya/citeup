@@ -15,18 +15,64 @@ class Config
     | serves as the main configuration for the application. No, I'm not storing
     | them in database anymore. Anyway here is the available keys list:
     |
-    | > countdown : Object
-    |   This key stores information for the countdown element in the landing
-    |   page.
-    |
-    |   {
-    |     > active : Boolean
-    |       Determines whether the countdown is active or not.
-    |
-    |     > off : String
-    |       A datetime string with 'Y-m-d H:i:s' format which is the deadline of 
-    |       the countdown.
-    |   } 
+    */
+
+    /* 
+        Config.php architecture:
+
+        landing : {
+            countdown : {
+                active : Boolean
+                off : String (DateTime)
+                text : String
+            }
+            activities : {
+                order : [{
+                    id : Number
+                    name : String
+                }]
+            }
+            show : {
+                name : Boolean
+            }
+        }
+
+        prizes : [{
+            id : Number
+            name: String
+            first : Number
+            second : Number
+            third : Number
+        }]
+        
+        address : {
+            location : {
+                lat : Number
+                lng : Number
+            }
+        }
+
+        stage: { // Current stage
+            name : String
+            end : String (DateTime)
+        }
+
+        stages : [{
+            name : String
+            end : String (DateTime)
+        }]
+
+        contact: {
+            email : String (Email) 
+            facebook : String
+            twitter : String
+            instagram : String
+            line : String
+            phones : {
+                name : Number
+            }
+        }
+
     */
 
     /**

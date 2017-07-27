@@ -2,19 +2,23 @@
 
 @section('content')
 
+@if ($config['landing']['show']['welcometron'])
 <!-- Welcome Carousel -->
 <div id="front-welcometron">
 
     <div class="container text-center">
         <img class="title" src="{{ asset('storage/images/web/logo_lg.png') }}">
-        @if ($config['countdown']['active'])
-            <p class="notice">Pendaftaran akan dibuka dalam:</p>
-            <countdown done="{{ $config['countdown']['off'] }}"></countdown>
+        @if ($config['landing']['countdown']['active'])
+            <p class="notice">{{ $config['landing']['countdown']['text'] }}</p>
+            <countdown done="{{ $config['landing']['countdown']['off'] }}"></countdown>
         @endif
     </div>
 
 </div>
+@endif
 
+@if ($config['landing']['show']['activities'])
+<!-- About Div -->
 <div id="front-about" class="text-center">
     <div class="container">
         <p>"Celebrating The Golden Era Of Technology"</p>
@@ -26,16 +30,19 @@
     <div class="container">
         <div class="row center-block">
 
-            @foreach ($activities as $activity)
+            @foreach ($config['landing']['activities']['order'] as $activity)
+                @php 
+                    $realActivity = $activities->where('id', $activity['id'])->first();
+                @endphp
                 <div class="col-sm-4">
                     <div class="panel panel-default text-center activity-item">
-                        <div class="panel-body img-holder">
-                            <img src="{{ asset($activity->icon) }}">
+                        <div class="panel-body icon-holder">
+                            <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
                         </div>
                         <div class="panel-body content-holder">
-                            <h3 class="activity-title">{{ $activity->name }}</h3>
-                            <p>{{ $activity->short_description }}</p>
-                            <a class="btn btn-link" href="#">Rincian &raquo;</a>
+                            <h3 class="activity-title">{{ $realActivity->name }}</h3>
+                            <p>{{ $realActivity->short_description }}</p>
+                            <a class="btn btn-primary" href="#">Rincian &raquo;</a>
                         </div>
                     </div>
                 </div>
@@ -44,9 +51,11 @@
         </div>
     </div>
 </div>
+@endif
 
+@if ($config['landing']['show']['prizes'])
 <!-- Prizes Div -->
-<div class="background" style="background-color:#fff;display:none">
+<div class="background" style="background-color:#fff">
     <div class="container">
         <div id="prizes" class="text-center">
             <h2 style="padding-top:20px">Total Hadiah</h2>
@@ -94,19 +103,25 @@
         </div>
     </div>
 </div>
+@endif
 
+@if ($config['landing']['show']['map'])
 <!-- Map Div -->
 <div id="front-map">
-    
+
     <!-- Cover -->
+    <div class="map-cover">
+    </div>
+
+    <!-- Google Map -->
+    <gmap-map class="map-content" :center="{{ json_encode($config['address']['location']) }}" :zoom="16" :options="gmapOptions">
+        <gmap-marker :position="{{ json_encode($config['address']['location']) }}"></gmap-marker>
+    </gmap-map>
+
+    <!-- Info -->
     <div class="map-info">
         <div class="info-body">
             <h2>
-                <div class="pull-right">
-                    <a href="#" class="go-to-location">
-                        <i class="fa fa-lg fa-map-marker"></i>
-                    </a>
-                </div>
                 Lokasi Perlombaan
             </h2>
             <address>
@@ -122,7 +137,9 @@
     </div>
 
 </div>
+@endif
 
+@if ($config['landing']['show']['faqs'])
 <!-- FAQ Div -->
 <div id="front-faq">
     <div class="container">
@@ -168,7 +185,9 @@
 
     </div>
 </div>
+@endif
 
+@if ($config['landing']['show']['news'])
 <hr class="short-middle-bar center-block">
 
 <!-- News Div -->
@@ -241,9 +260,11 @@
 
     </div>
 </div>
+@endif
 
+@if ($config['landing']['show']['galleries'])
 <!-- Galleries Div -->
-<div id="front-galleries" style="margin:20px 0 40px;display:none">
+<div id="front-galleries" style="margin:20px 0 40px;">
     <div class="container">
         <h2 class="text-center">Galeri</h2>
         <div class="text-center" style="margin-top:40px">
@@ -260,97 +281,89 @@
         </div>
     </div>
 </div>
+@endif
 
+@if ($config['landing']['show']['contact'])
 <div id="front-contact-us">
     
-    <div class="form-container">
-        <form class="panel panel-default" method="post">
-            <div class="panel-body">
-                <h2 class="text-center">Hubungi Kami</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">  
+                <form class="panel panel-default panel-contact-form" method="post">
+                    <div class="panel-body">
+                        <h2 class="text-center">Hubungi Kami</h2>
+                    </div>
+                    <div class="panel-body form-body">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Nama</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Alamat E-mail</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Judul</label>
+                            <input type="text" class="form-control" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Pesan</label>
+                            <textarea class="form-control" name="subject"></textarea>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <button type="submit" class="btn btn-lg btn-primary pull-right">
+                            Kirim Pesan
+                        </button>
+                        <div>Balasan akan kami kirim ke alamat e-mail yang Anda tulis di atas.</div>
+                    </div>
+                </form>
             </div>
-            <div class="panel-body form-body">
-                <div class="form-group">
-                    <label for="name" class="control-label">Nama</label>
-                    <input type="text" class="form-control" name="name">
+            <div class="col-sm-6">
+                <div class="panel panel-social panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center">Media Sosial</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a href="http://facebook.com/{{ $config['contact']['facebook'] }}"><i class="fa fa-5x fa-facebook-square"></i></a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="http://twitter.com/{{ $config['contact']['twitter'] }}"><i class="fa fa-5x fa-twitter-square"></i></a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="http://instagram.com/{{ $config['contact']['instagram'] }}"><i class="fa fa-5x fa-instagram"></i></a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="line" href="http://line.me/ti/p/~{{ $config['contact']['line'] }}">LINE</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="name" class="control-label">Alamat E-mail</label>
-                    <input type="email" class="form-control" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="name" class="control-label">Judul</label>
-                    <input type="text" class="form-control" name="subject">
-                </div>
-                <div class="form-group">
-                    <label for="name" class="control-label">Pesan</label>
-                    <textarea class="form-control" name="subject"></textarea>
+                <div class="panel panel-default panel-contact-person">
+                    <div class="panel-body">
+                        <h2 class="text-center">Contact Person</h2>
+                    </div>
+                    <div class="panel-body">
+                        @foreach ($config['contact']['phones'] as $name => $number)
+                        <div class="contact-person-item row">
+                            <div class="col-xs-5 text-right">
+                                <strong>{{ $name }}</strong> :
+                            </div> 
+                            <div class="col-xs-7">{{ $number }}</div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-            <div class="panel-body">
-                <button type="submit" class="btn btn-lg btn-primary pull-right">
-                    Kirim Pesan
-                </button>
-                <div>Balasan akan kami kirim ke alamat e-mail yang Anda tulis di atas.</div>
-            </div>
-        </form>
+        </div>
     </div>
 
-    {{-- <div class="row" style="padding:40px 0">
-        <div class="col-sm-6">
-            <form id="form-contact">
-                <div class="form-group">
-                    <input class="form-control input-lg" type="text" name="name" placeholder="Nama" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control input-lg" type="email" name="email" placeholder="Alamat E-Mail" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control input-lg" type="text" name="subject" placeholder="Subjek" required>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control input-lg" name="message" placeholder="Pesan" rows="6" required></textarea>
-                </div>
-                <div class="form-group">
-                    <!-- Captcha -->
-                </div>
-                <p class="help-block">Balasan akan kami kirim pada e-mail Anda.</p>
-                <div>
-                    <button class="btn btn-lg btn-primary" type="submit">Kirim Pesan</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-sm-6">
-            <h3 style="margin-top:0">Kunjungi Kami</h3>
-
-            <address style="font-size:12pt">
-                <strong>Komplek Universitas Pertamina</strong><br>
-                Jalan Teuku Nyak Arief<br>
-                Simprug<br>
-                Kebayoran Lama<br>
-                Jakarta 12220<br>
-            </address>
-
-            <hr>
-
-            <h3>Contact Person</h3>
-            <p style="font-size:12pt">
-                <span class="glyphicon glyphicon-earphone"></span> Humas +62 85720592958
-            </p>
-
-            <hr>
-            
-            <h3>Media Sosial</h3>
-            <ul class="list-unstyled">
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">LINE</a></li>
-            </ul>
-        </div>
-    </div> --}}
-
 </div>
+@endif
 
+@if ($config['landing']['show']['sponsors'])
 <!-- Sponsors Div -->
 <div id="front-sponsors">
     <div class="container text-center">
@@ -374,5 +387,6 @@
         </div>
     </div>
 </div>
+@endif
 
 @endsection

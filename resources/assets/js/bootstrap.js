@@ -48,7 +48,7 @@ var axiosRetry = require('axios-retry');
 
 axiosRetry(window.axios, {
     retryCondition: (error) => {
-        return error.response.status === 401 || error.response.status >= 500
+        return error.response.status == 401 || error.response.status >= 500
     }
 });
 

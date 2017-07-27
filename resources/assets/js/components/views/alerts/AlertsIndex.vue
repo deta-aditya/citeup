@@ -13,7 +13,7 @@
             <data-panel-addon 
                 slot="control" 
                 source="/alerts"
-                :refreshable="true"
+                :refresh="getAlerts"
                 :create="authorized ? { name: 'Notifikasi.Buat' } : null"></data-panel-addon>
             
             <template slot="list" scope="props">

@@ -7,6 +7,8 @@ var Citeup = {};
 
 Citeup.csrf = document.head.querySelector('meta[name="csrf-token"]').content;
 
+Citeup.gmapKey = 'AIzaSyAgPkOOLDX99cfexC_3kUCxKNCPI6aHJh4';
+
 Citeup.appPath = document.head.querySelector('meta[name="app-path"]').content;
 
 Citeup.apiPath = Citeup.appPath + '/api/v1';
