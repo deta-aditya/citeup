@@ -20,7 +20,9 @@
     <div id="app-front">
         @include('front.partials.nav')
 
-        @yield('content')
+        <div class="front-content">
+            @yield('content')
+        </div>
 
         @include('front.partials.footer')
     </div>

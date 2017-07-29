@@ -14,6 +14,14 @@ import ActivitiesIndex from './components/views/activities/ActivitiesIndex.vue';
 import ActivitiesView from './components/views/activities/ActivitiesView.vue';
 import ActivitiesCreate from './components/views/activities/ActivitiesCreate.vue';
 import ActivitiesUpdate from './components/views/activities/ActivitiesUpdate.vue';
+import SchedulesCreate from './components/views/activities/schedules/SchedulesCreate.vue';
+import SchedulesUpdate from './components/views/activities/schedules/SchedulesUpdate.vue';
+import SponsorsIndex from './components/views/sponsors/SponsorsIndex.vue';
+import SponsorsCreate from './components/views/sponsors/SponsorsCreate.vue';
+import SponsorsUpdate from './components/views/sponsors/SponsorsUpdate.vue';
+import FaqsIndex from './components/views/faqs/FaqsIndex.vue';
+import FaqsCreate from './components/views/faqs/FaqsCreate.vue';
+import FaqsUpdate from './components/views/faqs/FaqsUpdate.vue';
 import Logout from './components/views/Logout.vue';
 import ErrorPage from './components/views/Error.vue';
 import CompleteProfile from './components/views/profiles/CompleteProfile.vue';
@@ -29,8 +37,16 @@ const router = new VueRouter({
         { path: '/alerts/:id/update', name: 'Notifikasi.Sunting', component: AlertsUpdate, props: true },
         { path: '/activities', name: 'Acara', component: ActivitiesIndex },
         { path: '/activities/:id', name: 'Acara.Lihat', component: ActivitiesView, props: true },
+        { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },
+        { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: SchedulesUpdate, props: true },
         { path: '/activities/create', name: 'Acara.Buat', component: ActivitiesCreate },
         { path: '/activities/:id/update', name: 'Acara.Sunting', component: ActivitiesUpdate, props: true },
+        { path: '/sponsors', name: 'Sponsor', component: SponsorsIndex },
+        { path: '/sponsors/create', name: 'Sponsor.Buat', component: SponsorsCreate },
+        { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: SponsorsUpdate, props: true },
+        { path: '/faqs', name: 'FAQ', component: FaqsIndex },
+        { path: '/faqs/create', name: 'FAQ.Buat', component: FaqsCreate },
+        { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: FaqsUpdate, props: true },
         { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
         { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
         { path: '/logout', name: 'Logout', component: Logout },

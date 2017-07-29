@@ -44,6 +44,33 @@ const frontViewModel = new Vue({
         }
     },
 
+    filters: {
+
+        monetize(val) {
+            var counter = 0
+            var value = String(val)
+            var formatted = ''
+
+            for (let i = value.length - 1; i >= 0; i--) {
+
+                if (counter > 0 && counter % 3 === 0) {
+                    formatted += '.'
+                }
+
+                formatted += value[i]
+
+                counter++
+            }
+
+            return formatted.split('').reverse().join('') + ',00'
+        },
+
+    },
+
+    mounted() {
+        $('[data-toggle="tooltip"]').tooltip()
+    },
+
     components: {
 
         // The radio-vertical-lg for radio button eyecandy on some forms.

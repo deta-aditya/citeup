@@ -1,0 +1,59 @@
+
+@font-face {
+    font-family: 'Rounded Elegance';
+    src: url('fonts/Rounded_Elegance.ttf');
+}
+
+$title-font-family: 'Rounded Elegance', Open Sans, sans-serif;
+
+$signature-lighter: #ffc533;
+$signature-light: #f49e26;
+$signature-dark: #dd7322;
+
+$light-text-color: #eeeedd;
+$original-text-color: #636b6f;
+
+$content-min-height: 615px;
+
+#app-front {
+    background: #fff;
+
+    a:not(.btn) {
+        color: $signature-light;
+    }
+
+    .form-control:focus {
+        border-color: $signature-light;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 
+                    0 0 8px transparentize($signature-light, 0.6);
+    }
+
+    .btn-primary {
+        background-color: $signature-light;
+        border-color: darken($signature-light, 3%);
+
+        &:hover {
+            background-color: lighten($signature-light, 3%);
+        }
+    }
+
+    .front-content {
+        min-height: $content-min-height;
+    }
+}
+
+.middle-bar {
+    border-color: #ddd;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.bg-lighter {
+    background-color: $signature-lighter;
+    min-height: $content-min-height;
+}
+
+@import "front/landing";
+@import "front/activities";
+@import "front/faqs";
+

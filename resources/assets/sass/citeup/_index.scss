@@ -1,6 +1,6 @@
 
 // Landing page
-@import "landing";
+@import "front";
 
 %no-border-radius {
     border-radius: 0;
@@ -175,6 +175,78 @@
     }
 }
 
+.form-panel {
+
+    $border-color: #d3e0e9;
+    $control-border-color: #dfdffd;
+    $control-btn-padding: 4px 11px;
+
+    .panel {
+        @extend %no-border-radius;
+    }
+
+    .panel-body {
+        @extend %no-border-radius;
+        padding: 18px;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+    }
+
+    .btn { 
+        @extend %no-border-radius;
+        padding: $control-btn-padding;
+    }
+
+    .btn-default {
+        border-color: $control-border-color;
+    }
+
+    .btn-primary {
+        border-color: transparent;
+    }
+
+    .page-title {
+        font-size: 16pt;
+        margin: 0;
+    }
+
+    .small-title {
+        font-size: 14pt;
+    }
+
+    .subtitle {
+        font-size: 12pt;
+        margin: 12px 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #dddddd;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .control-label {
+        font-weight: normal;
+    }
+
+    .panel-group {
+        margin-bottom: 0;
+    }
+
+    .form-control {
+        @extend %no-border-radius;
+    }
+
+    .input-group-addon {
+        @extend %no-border-radius;
+    }
+
+}
+
 .data-panel {
 
     $control-border-color: #dfdffd;
@@ -188,6 +260,7 @@
 
     .panel-body {
         @extend %no-border-radius;
+        border-bottom: none;
         padding: 18px;
     }
 
@@ -271,78 +344,6 @@
             max-height: 100000px;
             transition: 4s;
         }
-    }
-
-}
-
-.form-panel {
-
-    $border-color: #d3e0e9;
-    $control-border-color: #dfdffd;
-    $control-btn-padding: 4px 11px;
-
-    .panel {
-        @extend %no-border-radius;
-    }
-
-    .panel-body {
-        @extend %no-border-radius;
-        padding: 18px;
-        border-bottom: 1px solid $border-color;
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-    }
-
-    .btn { 
-        @extend %no-border-radius;
-        padding: $control-btn-padding;
-    }
-
-    .btn-default {
-        border-color: $control-border-color;
-    }
-
-    .btn-primary {
-        border-color: transparent;
-    }
-
-    .page-title {
-        font-size: 16pt;
-        margin: 0;
-    }
-
-    .small-title {
-        font-size: 14pt;
-    }
-
-    .subtitle {
-        font-size: 12pt;
-        margin: 12px 0;
-        padding-bottom: 5px;
-        border-bottom: 1px solid #dddddd;
-
-        &:first-child {
-            margin-top: 0;
-        }
-    }
-
-    .control-label {
-        font-weight: normal;
-    }
-
-    .panel-group {
-        margin-bottom: 0;
-    }
-
-    .form-control {
-        @extend %no-border-radius;
-    }
-
-    .input-group-addon {
-        @extend %no-border-radius;
     }
 
 }

@@ -24,8 +24,8 @@
                     <ul class="nav navbar-nav">
 
                         <li v-for="(crumb, index) in crumbs">
-                            <router-link v-if="index < crumbs.length - 1" :to="{ name: crumb }" class="crumbs">/ {{ crumb }}</router-link>
-                            <a class="crumbs" v-else>/ {{ crumb }}</a>
+                            <router-link v-if="index < crumbs.length - 1" :to="{ name: crumb }" class="crumbs">/ {{ crumb | pop }}</router-link>
+                            <a class="crumbs" v-else>/ {{ crumb | pop }}</a>
                         </li>
 
                         <!-- Main Links -->
@@ -127,6 +127,14 @@
 
         },
 
+        filters: {
+
+            pop(val) {
+                return val.split('.').pop()
+            },
+
+        },
+
         created() {
             this.makeCrumbs(this.route)
         },
@@ -151,7 +159,23 @@
                 }
 
                 if (raw.indexOf('.') >= 0) {
-                    this.crumbs = raw.split('.')
+                    
+                    let items = raw.split('.')
+
+                    this.crumbs = []
+
+                    for (let i = 0; i < items.length; i++) {
+                        
+                        let item = [items[i]]
+
+                        for (let j = i - 1; j >= 0; j--) {
+                            item.unshift(items[j])
+                        }
+
+                        this.crumbs.push(item.join('.'))
+
+                    }
+
                 } else {
                     this.crumbs = [raw]
                 }

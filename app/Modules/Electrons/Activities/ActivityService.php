@@ -28,7 +28,9 @@ class ActivityService extends Service
      * @var array
      */
     protected $default = [
-        'Lomba Logika', 'Lomba Desain Grafis', 'Seminar IT',
+        ['name' => 'Lomba Logika', 'short_description' => 'Uji kemampuan berpikirmu dan teman-teman setimmu untuk menyelesaikan soal-soal logika berbasis ad-hoc yang seru dan menantang!'],
+        ['name' => 'Lomba Desain Grafis', 'short_description' => 'Tunjukan bakat artistikmu di masa keemasan teknologi ini dengan mendesain poster terkeren yang pernah kamu buat!'],
+        ['name' => 'Seminar IT', 'short_description' => 'Hadiri seminar teknologi informasi penuh inspirasi yang dibintangi oleh pembicara terbaik! Gratis untuk finalis kedua mata lomba.'],
     ];
 
     /**
@@ -43,9 +45,7 @@ class ActivityService extends Service
         $insertables = [];
 
         foreach ($this->default as $activity) {
-            factory(Activity::class)->create([
-                'name' => $activity
-            ]);
+            factory(Activity::class)->create($activity);
         }
 
         return $this;

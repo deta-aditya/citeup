@@ -55,6 +55,7 @@
                 formPanel: null,
                 activity: {
                     id: 0,
+                    description: '',
                 },
             }
         },

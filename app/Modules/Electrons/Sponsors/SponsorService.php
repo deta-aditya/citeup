@@ -8,6 +8,13 @@ use App\Modules\Nucleons\Service;
 class SponsorService extends Service
 {
     /**
+     * The URL to the default picture.
+     *
+     * @var string
+     */
+    protected $defaultPicture = 'storage/images/default.jpg';
+
+    /**
      * The main model for the service.
      *
      * @var Sponsor
@@ -36,6 +43,10 @@ class SponsorService extends Service
     public function create(array $data)
     {
         $cleaned = $this->clean($data);
+
+        if (! array_has($cleaned, 'picture')) {
+            $cleaned['picture'] = $this->defaultPicture;
+        }
 
         $sponsor = Sponsor::create($cleaned);
 

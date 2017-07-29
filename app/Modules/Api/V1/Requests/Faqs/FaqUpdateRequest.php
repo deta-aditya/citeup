@@ -27,7 +27,7 @@ class FaqUpdateRequest extends FormRequest
     {
         return [
             'question' => 'string|max:191',
-            'answer' => 'string|max:191',
+            'answer' => 'string',
         ];
     }
 }

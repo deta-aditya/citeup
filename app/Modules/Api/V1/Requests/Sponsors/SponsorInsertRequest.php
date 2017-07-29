@@ -28,7 +28,7 @@ class SponsorInsertRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:191',
-            'picture' => 'required|string|max:191',
+            'picture' => 'string|max:191',
         ];
     }
 }

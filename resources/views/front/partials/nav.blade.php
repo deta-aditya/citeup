@@ -22,12 +22,11 @@
 
                 <!-- Main Links -->
                 <li><a href="#">Tentang</a></li>
-                <li><a href="#">Acara</a></li>
+                <li class="{{ request()->is('activities') ? 'active' : '' }}"><a href="{{ route('activities') }}">Acara</a></li>
                 <li><a href="#">Jadwal</a></li>
                 <li><a href="#">Berita</a></li>
                 <li><a href="#">Galeri</a></li>
-                <li><a href="#">Sponsor</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li class="{{ request()->is('faqs') ? 'active' : '' }}"><a href="{{ route('faqs') }}">FAQ</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

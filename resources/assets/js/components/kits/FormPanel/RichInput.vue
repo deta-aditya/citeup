@@ -5,7 +5,7 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <wysiwyg v-model="privateValue"></wysiwyg>
+            <trix-editor ref="trix" @trix-change="privateValue = $event.target.innerHTML"></trix-editor>
             <slot name="help-block"></slot>
         </div>
     </div>
@@ -13,12 +13,7 @@
 
 <script>
 
-    import wysiwyg from 'vue-wysiwyg'
-    import Vue from 'vue'
-
-    Vue.use(wysiwyg, {
-        hideModules: { image: true }
-    })
+    require('trix')
 
     export default {
 
@@ -65,6 +60,13 @@
 
         },
 
+        data() {
+            return {
+                trixed: false,
+                trix: null,
+            }
+        },
+
         computed: {
 
             horizontal() {
@@ -86,9 +88,23 @@
 
                 set(newVal) {
                     this.$emit('input', newVal)
-                }
+                },
             },
 
+        },
+
+        watch: {
+
+            value(newVal) {
+                if (this.trixed) {
+                    return
+                }
+
+                this.trix.editor.setSelectedRange([0, 0])
+                this.trix.editor.insertHTML(newVal)
+                this.trixed = true
+            },
+            
         },
 
         mounted() {
@@ -98,7 +114,7 @@
         methods: {
 
             prepareComponent() {
-                //
+                this.trix = this.$refs.trix
             },
 
         },

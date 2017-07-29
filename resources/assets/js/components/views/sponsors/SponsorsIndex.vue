@@ -1,34 +1,27 @@
 
 <template>
-    <div id="activities-index">
+    <div id="sponsors-index">
 
-        <data-panel ref="dataPanel" v-model="activities" :checkable="true" :expandable="true" :deletable="true">
-            Daftar Acara
-            <data-panel-addon slot="control" :refresh="getActivities" :create="{ name: 'Acara.Buat' }"></data-panel-addon>
+        <data-panel ref="dataPanel" v-model="sponsors" :checkable="true" :expandable="true" :deletable="true">
+            Daftar Sponsor
+            <data-panel-addon slot="control" :refresh="getSponsors" :create="{ name: 'Sponsor.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">
-                <data-panel-list-item :id="props.data.id" :update="{ name: 'Acara.Sunting', params: { id: props.data.id }}" :delete="props.data.id > 3 ? '/activities/' + props.data.id : false">
+                <data-panel-list-item :id="props.data.id" :update="{ name: 'Sponsor.Sunting', params: { id: props.data.id }}" :delete="'/sponsors/' + props.data.id">
                     <template slot="title">
-                        <img :src="props.data.icon | assetify" class="img-circle user-img">
+                        <img :src="props.data.picture | assetify" class="img-circle user-img">
                         {{ props.data.name }}
                     </template>
-                    <div>{{ props.data.short_description }}</div>
                     <p>
                         <small class="text-muted">
                             Dibuat pada {{ props.data.created_at | normalize }}. Terakhir disunting pada {{ props.data.updated_at | normalize }}
                         </small>
                     </p>
-                    <template slot="actions">
-                        <li role="separator" class="divider"></li>
-                        <router-link tag="li" :to="{ name: 'Acara.Lihat', params: { id: props.data.id }}"><a>Lihat Detail</a></router-link>
-                        <router-link tag="li" :to="{ name: 'Dasbor' }"><a>Lihat Peserta</a></router-link>
-                    </template>
                 </data-panel-list-item>
             </template>
             <template slot="delete-preview" scope="props">
                 <div class="panel panel-default delete-preview">
                     <div class="panel-body">
-                        <h4><small>#{{ props.data.id }}</small> <img :src="props.data.icon | assetify" class="img-circle user-img"> {{ props.data.name }}</h4>
-                        <div>{{ props.data.short_description }}</div>
+                        <h4><small>#{{ props.data.id }}</small> <img :src="props.data.picture | assetify" class="img-circle user-img"> {{ props.data.name }}</h4>
                         <div><small class="text-muted">
                             Dibuat pada {{ props.data.created_at | normalize }}. Terakhir disunting pada {{ props.data.updated_at | normalize }}
                         </small></div>
@@ -59,7 +52,7 @@
         data() {
             return {
                 dataPanel: null,
-                activities: [],
+                sponsors: [],
             }
         },
 
@@ -78,7 +71,7 @@
         },
 
         created() {
-            this.getActivities()
+            this.getSponsors()
         },
 
         mounted() {
@@ -87,10 +80,10 @@
 
         methods: {
 
-            getActivities() {
-                Citeup.get('/activities', { 
+            getSponsors() {
+                Citeup.get('/sponsors', { 
                     take: 15 
-                }).then(response => this.activities = response.data.data.activities)
+                }).then(response => this.sponsors = response.data.data.sponsors)
             },
 
             prepareComponent() {

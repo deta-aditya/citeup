@@ -1,0 +1,55 @@
+
+#faqs-page {
+
+    // min-height: 100%;
+
+    .page-title-container {
+        background: #fff;
+        padding: 30px 0;
+    }
+    
+    .page-title {
+        font-weight: 300;
+    }
+
+    .content-container {
+        background-image: url(../storage/images/web/bg_contact.png);
+        background-repeat: repeat-x;
+        background-size: 800px;
+
+        .container {
+            margin-bottom: 0;
+        }
+    }
+
+    .panel-content {
+        @extend %no-border-radius;
+        border: none;
+        margin-bottom: 70px;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+
+        & > .panel-heading {
+            @extend %no-border-radius;
+            padding: 0;
+            border: none;
+            background-color: $signature-light;
+            color: $light-text-color;
+        }
+    }
+
+    .faq-section {
+        margin: 20px 0 40px;
+
+        &:last-child {
+            margin-bottom: 20px;
+        }
+    }
+
+    .faq-question {
+        color: $signature-dark;
+        font-size: 18pt;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+
+}

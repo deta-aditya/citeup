@@ -28,7 +28,7 @@ class FaqInsertRequest extends FormRequest
     {
         return [
             'question' => 'required|string|max:191',
-            'answer' => 'required|string|max:191',
+            'answer' => 'required|string',
         ];
     }
 }

@@ -35,16 +35,15 @@
                     $realActivity = $activities->where('id', $activity['id'])->first();
                 @endphp
                 <div class="col-sm-4">
-                    <div class="panel panel-default text-center activity-item">
+                    <a href="{{ route('activities', ['t' => kebab_case($realActivity->name)]) }}" class="panel panel-default text-center activity-item">
                         <div class="panel-body icon-holder">
                             <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
                         </div>
                         <div class="panel-body content-holder">
                             <h3 class="activity-title">{{ $realActivity->name }}</h3>
                             <p>{{ $realActivity->short_description }}</p>
-                            <a class="btn btn-primary" href="#">Rincian &raquo;</a>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
 
@@ -55,50 +54,31 @@
 
 @if ($config['landing']['show']['prizes'])
 <!-- Prizes Div -->
-<div class="background" style="background-color:#fff">
+<div id="front-prizes">
     <div class="container">
-        <div id="prizes" class="text-center">
-            <h2 style="padding-top:20px">Total Hadiah</h2>
-            <p style="font-size:48pt;padding:20px 0">Rp500.000.000,00</p>
-        </div>
-
-        <hr>
-
-        <div class="row" style="padding-bottom:40px">
-            <div class="col-sm-6">
-                <div class="activity-prize-item text-center">
-                    <h3 style="padding:20px 0">Lomba Logika</h2>
-                    <dl class="prize-item">
-                        <dt style="font-size:16pt">Juara I</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                    <dl class="prize-item">
-                        <dt style="font-size:16pt">Juara II</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                    <dl class="prize-item">
-                        <dt style="font-size:18pt">Juara III</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                </div>
+        <div class="panel panel-default panel-prizes center-block text-center">
+            <div class="panel-body">
+                <h2 class="prizes-title">Total Hadiah</h2>
+                <div class="total-prizes">Rp{{ '&#123;&#123;' }} {{ collect($config['prizes'])->sum(function ($product) { return $product['first'] + $product['second'] + $product['third']; }) }} {{ '| monetize &#125;&#125;' }}</div>
             </div>
-
-            <div class="col-sm-6" style="border-left:1px solid #eee">
-                <div class="activity-prize-item text-center">
-                    <h3 style="padding:20px 0">Lomba Desain Grafis</h2>
-                    <dl class="prize-item">
-                        <dt style="font-size:16pt">Juara I</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                    <dl class="prize-item">
-                        <dt style="font-size:16pt">Juara II</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                    <dl class="prize-item">
-                        <dt style="font-size:16pt">Juara III</dt>
-                        <dd style="font-size:24pt">RpXXX.XXX,00</dd>
-                    </dl>
-                </div>
+            <div class="row prizes-list">
+                @foreach ($config['prizes'] as $prize)
+                    <div class="col-sm-6 prizes-list-item panel-body">
+                        <h3>{{ $prize['name'] }}</h3>
+                        <div class="prize-wrapper">
+                            <div class="prize-place">Juara 1</div>
+                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['first'] }} {{ '| monetize &#125;&#125;' }}</div>
+                        </div>
+                        <div class="prize-wrapper">
+                            <div class="prize-place">Juara 2</div>
+                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['second'] }} {{ '| monetize &#125;&#125;' }}</div>
+                        </div>
+                        <div class="prize-wrapper">
+                            <div class="prize-place">Juara 3</div>
+                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['third'] }} {{ '| monetize &#125;&#125;' }}</div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -114,7 +94,7 @@
     </div>
 
     <!-- Google Map -->
-    <gmap-map class="map-content" :center="{{ json_encode($config['address']['location']) }}" :zoom="16" :options="gmapOptions">
+    <gmap-map class="map-content" :center="{{ json_encode($config['address']['location']) }}" :zoom="15" :options="gmapOptions">
         <gmap-marker :position="{{ json_encode($config['address']['location']) }}"></gmap-marker>
     </gmap-map>
 
@@ -122,10 +102,10 @@
     <div class="map-info">
         <div class="info-body">
             <h2>
-                Lokasi Perlombaan
+                Lokasi Acara
             </h2>
             <address>
-                <strong>Komplek Universitas Pertamina</strong><br>
+                <strong>Universitas Pertamina</strong><br>
                 <small>
                     Jalan Teuku Nyak Arief<br>
                     Simprug<br>
@@ -145,44 +125,20 @@
     <div class="container">
         <h2>Pertanyaan Umum (FAQ)</h2>
         <div class="panel-group" id="faq-list" role="tablist" aria-multiselectable="true">
-
-            <div class="panel panel-default">
-                <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#faq-list" data-target="#collapsible-faq-1">
-                    <h4 class="panel-title">Contoh Pertanyaan pada FAQ</h4>
-                </div>
-                <div id="collapsible-faq-1" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Jawaban dari pertanyaan FAQ yang akan ditampilkan saat diklik.
+            @foreach ($faqs as $faq)
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#faq-list" data-target="#collapsible-faq-{{ $faq->id }}">
+                        <h4 class="panel-title">{{ $faq->question }}</h4>
+                    </div>
+                    <div id="collapsible-faq-{{ $faq->id }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {!! $faq->answer !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#faq-list" data-target="#collapsible-faq-2">
-                    <h4 class="panel-title">Contoh Pertanyaan pada FAQ</h4>
-                </div>
-                <div id="collapsible-faq-2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Jawaban dari pertanyaan FAQ yang akan ditampilkan saat diklik.
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#faq-list" data-target="#collapsible-faq-3">
-                    <h4 class="panel-title">Contoh Pertanyaan pada FAQ</h4>
-                </div>
-                <div id="collapsible-faq-3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Jawaban dari pertanyaan FAQ yang akan ditampilkan saat diklik.
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
-
         <p class="see-all">Lihat semua pertanyaan di <a href="#">halaman FAQ</a>.</p>
-
     </div>
 </div>
 @endif
@@ -369,6 +325,9 @@
     <div class="container text-center">
         <h2>Kegiatan ini disponsori oleh</h2>
         <div class="sponsors-list">
+            @foreach ($sponsors as $sponsor)
+                <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+            @endforeach
             <div class="sponsor-item" style="width:100px"></div>
             <div class="sponsor-item" style="width:200px"></div>
             <div class="sponsor-item" style="width:150px"></div>
