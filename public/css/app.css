@@ -12898,6 +12898,33 @@ trix-editor .attachment progress {
   color: #fff !important;
 }
 
+#error-page {
+  padding-top: 200px;
+}
+
+#error-page .error-code {
+  font-weight: 300;
+  font-size: 75pt;
+  line-height: 2;
+}
+
+#error-page .logo-placeholder {
+  margin-left: 20px;
+}
+
+#error-page .pun {
+  margin-top: 50px;
+  margin-left: 20px;
+  font-size: 18pt;
+  font-weight: 700;
+  color: #dd7322;
+}
+
+#error-page .error-message {
+  font-size: 14pt;
+  margin-left: 20px;
+}
+
 #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
   border-radius: 0;
 }

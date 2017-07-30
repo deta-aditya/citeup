@@ -1,0 +1,29 @@
+
+#error-page {
+
+    padding-top: 200px;
+
+    .error-code {
+        font-weight: 300;
+        font-size: 75pt;
+        line-height: 2;
+    }
+
+    .logo-placeholder {
+        margin-left: 20px;
+    }
+
+    .pun {
+        margin-top: 50px;
+        margin-left: 20px;
+        font-size: 18pt;
+        font-weight: 700;
+        color: $signature-dark;
+    }
+
+    .error-message {
+        font-size: 14pt;
+        margin-left: 20px;
+    }
+
+}
