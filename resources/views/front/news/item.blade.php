@@ -1,5 +1,9 @@
 @extends('front.layouts.basic')
 
+@section('title')
+    {{ $news->title }}
+@endsection
+
 @section('content')
 
 <div class="bg-lighter wrapper">

@@ -1,5 +1,9 @@
 @extends('front.layouts.basic')
 
+@section('title')
+    FAQ
+@endsection
+
 @section('content')
 
 <div id="faqs-page" class="wrapper">
@@ -14,6 +18,9 @@
                     <div class="faq-answer">{!! $faq->answer !!}</div>
                 </div>
             @endforeach
+            @if ($faqs->count() === 0)
+                <p class="lead">Tidak ada FAQ.</p>
+            @endif
         </div>
     </div>
 </div>

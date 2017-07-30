@@ -1,5 +1,9 @@
 @extends('front.layouts.basic')
 
+@section('title')
+    Acara
+@endsection
+
 @section('content')
 
 <div class="bg-lighter wrapper">
@@ -33,7 +37,9 @@
                                             {!! $activity['description'] !!}
                                         </div>
                                         <div class="col-sm-4">
-                                            @if (! auth()->check()) <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-primary">Daftar</a> @endif
+                                            @if (! auth()->check() && $activity['registration_open']) 
+                                                <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-primary btn-register">Daftar</a> 
+                                            @endif
                                             @if ($activity['id'] < 3)
                                                 <div class="panel panel-default panel-prizes">
                                                     <div class="panel-heading"><h3 class="panel-title">Hadiah Pemenang</h3></div>
@@ -63,6 +69,12 @@
                                                             <div class="schedule-description">{{ $schedule['description'] }}</div>
                                                         </div>
                                                     @endforeach
+
+                                                    @if (empty($activity['schedule']))
+                                                        <div class="list-group-item text-center">
+                                                            Tidak Ada Jadwal.
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

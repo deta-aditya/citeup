@@ -1,5 +1,9 @@
 @extends('front.layouts.basic')
 
+@section('title')
+    Login
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row" style="margin:25px 0 75px">

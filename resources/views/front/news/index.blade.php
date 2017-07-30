@@ -1,11 +1,21 @@
 @extends('front.layouts.basic')
 
+@section('title')
+    Berita
+@endsection
+
 @section('content')
 
 <div class="bg-lighter wrapper">
     <div id="news-page">
         <div class="page-title-container">
-            <div class="container"><h1 class="page-title">Daftar Berita</h1></div>
+            <div class="container">
+                @if ($news->count() === 0)
+                    <h1 class="page-title">Tidak Ada Berita.</h1>
+                @else  
+                    <h1 class="page-title">Daftar Berita</h1>
+                @endif
+            </div>
         </div>
         <div class="content-container">
             <div class="container">
@@ -14,7 +24,7 @@
                         <div class="col-sm-3">
                             <div class="panel news-list-item panel-default">
                                 <div class="panel-body img-placeholder">
-                                    <a href="#news/id/title-in-kebab-case">
+                                    <a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">
                                         <img src="{{ asset($item->picture) }}">
                                     </a>
                                 </div>

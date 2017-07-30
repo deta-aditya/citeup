@@ -31,6 +31,9 @@
                             @foreach($f_news->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $item)
                                 <li><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></li>
                             @endforeach
+                            @if ($f_news->getMultiple([])->count() === 0)
+                                <li>Tidak Ada Berita.</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-sm-4">
@@ -39,6 +42,9 @@
                             @foreach($f_faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $faq)
                                 <li><a href="{{ route('faqs') }}">{{ $faq->question }}</a></li>
                             @endforeach
+                            @if ($f_faqs->getMultiple([])->count() === 0)
+                                <li>Tidak Ada FAQ.</li>
+                            @endif
                         </ul>
                     </div>
                 </div>

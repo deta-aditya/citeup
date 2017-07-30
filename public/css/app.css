@@ -12709,8 +12709,12 @@ trix-editor .attachment progress {
   margin: 0 30px 30px 0;
 }
 
+#activities-page .btn-register {
+  margin-bottom: 20px;
+}
+
 #activities-page .panel-prizes {
-  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -12738,7 +12742,6 @@ trix-editor .attachment progress {
 }
 
 #activities-page .panel-schedules {
-  margin-top: 20px;
   border-color: #be631d;
 }
 

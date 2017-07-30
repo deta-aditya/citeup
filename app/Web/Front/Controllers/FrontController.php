@@ -55,6 +55,12 @@ class FrontController extends Controller
                 'activity' => $activities[$i]['id'],
                 'sort' => 'held_at:asc'
             ]);
+
+            $activities[$i]['registration_open'] = ! ($config->get('stage')['name'] === 'Pra-Pendaftaran' || $config->get('stage')['name'] === 'Paska Acara');
+
+            if ($activities[$i]['id'] < 3) {
+                $activities[$i]['registration_open'] = $config->get('stage')['name'] === 'Pendaftaran';
+            }
         }
 
         $data = [

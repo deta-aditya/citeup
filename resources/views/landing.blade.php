@@ -137,6 +137,10 @@
                     </div>
                 </div>
             @endforeach
+
+            @if ($faqs->count() === 0)
+                <p class="lead text-center">Tidak Ada FAQ.</p>
+            @endif
         </div>
         <p class="see-all">Lihat semua pertanyaan di <a href="{{ route('faqs') }}">halaman FAQ</a>.</p>
     </div>
@@ -152,7 +156,9 @@
         <h2 class="text-center">Berita Terkini</h2>
         
         <div id="news-list">
-            @if ($news->count() === 1)
+            @if ($news->count() === 0)
+                <p class="lead text-center">Tidak Ada Berita.</p>
+            @elseif ($news->count() === 1)
                 @php $item = $news->first() @endphp
                 <div class="row news-first">
                     <div class="col-sm-8">
@@ -349,7 +355,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['sponsors'])
+@if ($config['landing']['show']['sponsors'] && $sponsors->count() > 0)
 <!-- Sponsors Div -->
 <div id="front-sponsors">
     <div class="container text-center">

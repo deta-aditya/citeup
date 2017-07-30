@@ -11,10 +11,18 @@
     <!-- The App Root Path -->
     <meta name="app-path" content="{{ url('/') }}">
 
-    <title>{{ config('app.name', 'CiteUP') }}</title>
+    <title>
+        {{ config('app.name', 'CiteUP') }} 
+        @if (! request()->is('/')) 
+            &middot; @yield('title')
+        @endif
+    </title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link href="{{ asset('storage/images/web/favicon.png') }}" rel="shortcut icon" type="image/png">
 </head>
 <body>
     <div id="app-front">

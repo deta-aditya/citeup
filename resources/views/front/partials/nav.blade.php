@@ -1,3 +1,5 @@
+@inject('config' ,'App\Modules\Electrons\Config\Config')
+
 <nav id="front-nav" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -23,9 +25,7 @@
                 <!-- Main Links -->
                 <li><a href="#">Tentang</a></li>
                 <li class="{{ request()->is('activities') ? 'active' : '' }}"><a href="{{ route('activities') }}">Acara</a></li>
-                <li><a href="#">Jadwal</a></li>
                 <li class="{{ request()->is('news*') ? 'active' : '' }}"><a href="{{ route('news') }}">Berita</a></li>
-                <li><a href="#">Galeri</a></li>
                 <li class="{{ request()->is('faqs') ? 'active' : '' }}"><a href="{{ route('faqs') }}">FAQ</a></li>
             </ul>
 
@@ -33,8 +33,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="{{ route('login.form') }}">Login</a></li>
-                    <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="{{ route('register.form') }}">Daftar</a></li>
+                    @unless ($config->get('stage')['name'] === 'Pra-Pendaftaran' )
+                        <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="{{ route('login.form') }}">Login</a></li>
+                    @endunless
+                    @unless ($config->get('stage')['name'] === 'Pra-Pendaftaran' || $config->get('stage')['name'] === 'Paska Acara')
+                        <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="{{ route('register.form') }}">Daftar</a></li>
+                    @endunless
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

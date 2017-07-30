@@ -15,6 +15,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link href="{{ asset('storage/images/web/favicon.png') }}" rel="shortcut icon" type="image/png">
 </head>
 <body>
     <div id="app-dashboard">
