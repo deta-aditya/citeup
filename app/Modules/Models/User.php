@@ -11,7 +11,8 @@ trait User
      */
     public function getNameAttribute()
     {
-        return $this->profile ? $this->profile()->first()->name : 'Pengguna';
+        return $this->profile ? $this->profile()->first()->name : 
+            ($this->isAdmin() ? 'Administrator' : 'Pengguna');
     }
 
     /**

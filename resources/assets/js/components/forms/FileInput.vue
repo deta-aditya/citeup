@@ -180,9 +180,14 @@
                 default: true
             },
 
+            aspectRatio: {
+                type: Number,
+                default: 1,   
+            },
+
             value: {
                 type: String,
-            }
+            },
 
         },
 
@@ -252,6 +257,7 @@
 
         mounted() {
             this.prepareComponent();
+            console.log(this.aspectRatio)
         },
 
         watch: {
@@ -346,7 +352,7 @@
             initializeCropper() {
 
                 this.cropper = new Cropper(this.$refs.croppable, {
-                    aspectRatio: 1,
+                    aspectRatio: this.aspectRatio,
                     responsive: true
                 });
 

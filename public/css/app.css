@@ -12140,9 +12140,16 @@ trix-editor .attachment progress {
   margin-bottom: 0;
 }
 
+.wrapper {
+  min-height: 615px;
+}
+
 .bg-lighter {
   background-color: #ffc533;
-  min-height: 615px;
+}
+
+.bg-light {
+  background-color: #f49e26;
 }
 
 .short-middle-bar {
@@ -12604,7 +12611,6 @@ trix-editor .attachment progress {
   margin: 10px;
   display: inline-block;
   vertical-align: top;
-  background-color: #f49e26;
 }
 
 #front-footer {
@@ -12806,7 +12812,90 @@ trix-editor .attachment progress {
   margin-bottom: 10px;
 }
 
-#activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
+#news-page .page-title-container {
+  background: #f49e26;
+  padding: 30px 0;
+}
+
+#news-page .page-title {
+  color: #fff;
+  font-weight: 700;
+}
+
+#news-page .content-container {
+  background-image: url(../storage/images/web/bg_about.png);
+  background-repeat: repeat-x;
+  background-size: 700px;
+}
+
+#news-page .content-container .container {
+  margin-bottom: 0;
+}
+
+#news-page .panel-content {
+  border: none;
+  margin-bottom: 70px;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+}
+
+#news-page .panel-content > .panel-heading {
+  padding: 0;
+  border: none;
+  background-color: #f49e26;
+  color: #eeeedd;
+}
+
+#news-page .panel-content .panel-body {
+  border-bottom: 1px solid #ddd;
+}
+
+#news-page .panel-content .panel-body:last-child {
+  border-bottom: none;
+}
+
+#news-page .panel-content .news-picture {
+  height: 350px;
+}
+
+#news-page .panel-content .editor-placeholder img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+#news-page .news-list-item {
+  border: none;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+  height: 340px;
+}
+
+#news-page .news-list-item h3 {
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+#news-page .news-list-item .img-placeholder {
+  width: 100%;
+  height: 133px;
+  padding: 0;
+  overflow: hidden;
+}
+
+#news-page .news-list-item .img-placeholder img {
+  width: 100%;
+}
+
+#news-page .news-list-item .editor-placeholder img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+#news-page .back-link {
+  font-size: 12pt;
+  font-weight: 400;
+  color: #fff !important;
+}
+
+#activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
   border-radius: 0;
 }
 

@@ -138,7 +138,7 @@
                 </div>
             @endforeach
         </div>
-        <p class="see-all">Lihat semua pertanyaan di <a href="#">halaman FAQ</a>.</p>
+        <p class="see-all">Lihat semua pertanyaan di <a href="{{ route('faqs') }}">halaman FAQ</a>.</p>
     </div>
 </div>
 @endif
@@ -152,67 +152,97 @@
         <h2 class="text-center">Berita Terkini</h2>
         
         <div id="news-list">
-            <div class="row news-first">
-                <div class="col-sm-8">
-                    <a class="img-placeholder" href="#">
-                        <img src="{{ asset('storage/images/default.jpg') }}">
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <h3><a href="#">Contoh Judul Artikel/Berita</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    <div class="editor-placeholder text-muted clearfix">
-                        <img src="{{ asset('storage/images/default.jpg') }}" class="img-circle pull-left">
-                        <div>Administrator</div>
-                        <small>15 Jul, 15:09</small>
+            @if ($news->count() === 1)
+                @php $item = $news->first() @endphp
+                <div class="row news-first">
+                    <div class="col-sm-8">
+                        <a class="img-placeholder" href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">
+                            <img src="{{ asset($item->picture) }}">
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
+                        <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                        <div class="editor-placeholder text-muted clearfix">
+                            <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <div>{{ $item->edits->last()->user->name }}</div>
+                            <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 news-other">
-                    <a class="img-placeholder" href="#">
-                        <img src="{{ asset('storage/images/default.jpg') }}">
-                    </a>
-                    <h3><a href="#">Contoh Judul Artikel/Berita</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    <div class="editor-placeholder text-muted clearfix">
-                        <img src="{{ asset('storage/images/default.jpg') }}" class="img-circle pull-left">
-                        <div>Administrator</div>
-                        <small>15 Jul, 15:09</small>
-                    </div>    
+            @elseif ($news->count() === 2)
+                <div class="row">
+                    @foreach ($news as $item)
+                        <div class="col-sm-6 news-other">
+                            <a class="img-placeholder" href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">
+                                <img src="{{ asset($item->picture) }}">
+                            </a>
+                            <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
+                            <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                            <div class="editor-placeholder text-muted clearfix">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <div>{{ $item->edits->last()->user->name }}</div>
+                                <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
+                            </div>    
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-sm-4 news-other">
-                    <a class="img-placeholder" href="#">
-                        <img src="{{ asset('storage/images/default.jpg') }}">
-                    </a>
-                    <h3><a href="#">Contoh Judul Artikel/Berita</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    <div class="editor-placeholder text-muted clearfix">
-                        <img src="{{ asset('storage/images/default.jpg') }}" class="img-circle pull-left">
-                        <div>Administrator</div>
-                        <small>15 Jul, 15:09</small>
-                    </div>    
+            @elseif ($news->count() === 3)
+                <div class="row">
+                    @foreach ($news as $item)
+                        <div class="col-sm-4 news-other">
+                            <a class="img-placeholder" href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">
+                                <img src="{{ asset($item->picture) }}">
+                            </a>
+                            <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
+                            <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                            <div class="editor-placeholder text-muted clearfix">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <div>{{ $item->edits->last()->user->name }}</div>
+                                <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
+                            </div>    
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-sm-4 news-other">
-                    <a class="img-placeholder" href="#">
-                        <img src="{{ asset('storage/images/default.jpg') }}">
-                    </a>
-                    <h3><a href="#">Contoh Judul Artikel/Berita</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    <div class="editor-placeholder text-muted clearfix">
-                        <img src="{{ asset('storage/images/default.jpg') }}" class="img-circle pull-left">
-                        <div>Administrator</div>
-                        <small>15 Jul, 15:09</small>
-                    </div>    
+            @else
+                @php $first = $news->first() @endphp
+                <div class="row news-first">
+                    <div class="col-sm-8">
+                        <a class="img-placeholder" href="{{ route('news.item', ['news' => $first->id, 'slug' => kebab_case($first->title)]) }}">
+                            <img src="{{ asset($first->picture) }}">
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3><a href="{{ route('news.item', ['news' => $first->id, 'slug' => kebab_case($first->title)]) }}">{{ $first->title }}</a></h3>
+                        <p>{{ str_limit(strip_tags($first->content, 150)) }}</p>
+                        <div class="editor-placeholder text-muted clearfix">
+                            <img src="{{ asset(is_null($first->edits->last()->user->profile) ? '/storage/images/default.jpg' : $first->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <div>{{ $first->edits->last()->user->name }}</div>
+                            <small>{{ \Carbon\Carbon::parse($first->updated_at)->format('j M, H:i') }}</small>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    @foreach ($news as $item)
+                        @continue($loop->first)
+                        <div class="col-sm-4 news-other">
+                            <a class="img-placeholder" href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">
+                                <img src="{{ asset($item->picture) }}">
+                            </a>
+                            <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
+                            <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                            <div class="editor-placeholder text-muted clearfix">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <div>{{ $item->edits->last()->user->name }}</div>
+                                <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
+                            </div>    
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
 
-        <p class="see-all">Kunjungi <a href="#">halaman berita</a> untuk melihat semua berita.</p>
+        <p class="see-all">Kunjungi <a href="{{ route('news') }}">halaman berita</a> untuk melihat semua berita.</p>
 
     </div>
 </div>
@@ -245,7 +275,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">  
-                <form class="panel panel-default panel-contact-form" method="post">
+                <form class="panel panel-default panel-contact-form" method="post" action="">
                     <div class="panel-body">
                         <h2 class="text-center">Hubungi Kami</h2>
                     </div>
@@ -328,21 +358,6 @@
             @foreach ($sponsors as $sponsor)
                 <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
             @endforeach
-            <div class="sponsor-item" style="width:100px"></div>
-            <div class="sponsor-item" style="width:200px"></div>
-            <div class="sponsor-item" style="width:150px"></div>
-            <div class="sponsor-item" style="width:80px"></div>
-            <div class="sponsor-item" style="width:90px"></div>
-            <div class="sponsor-item" style="width:180px"></div>
-            <div class="sponsor-item" style="width:150px"></div>
-            <div class="sponsor-item" style="width:75px"></div>
-            <div class="sponsor-item" style="width:200px"></div>
-            <div class="sponsor-item" style="width:100px"></div>
-            <div class="sponsor-item" style="width:200px"></div>
-            <div class="sponsor-item" style="width:200px"></div>
-            <div class="sponsor-item" style="width:50px"></div>
-            <div class="sponsor-item" style="width:180px"></div>
-            <div class="sponsor-item" style="width:130px"></div>
         </div>
     </div>
 </div>

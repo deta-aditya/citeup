@@ -28,7 +28,6 @@
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import RichInput from '../../kits/FormPanel/RichInput.vue'
-    import MultilineInput from '../../kits/FormPanel/MultilineInput.vue'
 
     export default {
 
@@ -63,7 +62,6 @@
             'form-panel': FormPanel,
             'text-input': TextInput,
             'rich-input': RichInput,
-            'multiline-input': MultilineInput,
         }
 
     }

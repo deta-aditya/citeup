@@ -1,5 +1,9 @@
-<!-- Footer Div -->
 
+@inject('f_activities', 'App\Modules\Electrons\Activities\ActivityService')
+@inject('f_news', 'App\Modules\Electrons\News\NewsService')
+@inject('f_faqs', 'App\Modules\Electrons\Faqs\FaqService')
+
+<!-- Footer Div -->
 <div id="front-footer" style="">
     <div class="container">
         <div class="row upper-yard">
@@ -16,27 +20,25 @@
                     <div class="col-sm-4">
                         <h3>Acara</h3>
                         <ul class="list-unstyled">
-                            <li><a href="#">Lomba Logika</a></li>
-                            <li><a href="#">Lomba Desain Grafis</a></li>
-                            <li><a href="#">Seminar Teknologi Informasi</a></li>
+                            @foreach($f_activities->getMultiple([]) as $activity)
+                                <li><a href="{{ route('activities', kebab_case($activity->name)) }}">{{ $activity->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-sm-4">
                         <h3>Berita</h3>
                         <ul class="list-unstyled">
-                            <li><a href="#">Lorem Ipsum Dolor Sit Amet</a></li>
-                            <li><a href="#">Consectetur Adipiscing Elit</a></li>
-                            <li><a href="#">Sed do Eiusmod Tempor Incididunt</a></li>
-                            <li><a href="#">Ut Labore et Dolore Magna Aliqua</a></li>
+                            @foreach($f_news->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $item)
+                                <li><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-sm-4">
                         <h3>FAQ</h3>
                         <ul class="list-unstyled">
-                            <li><a href="#">Kenapa Satu tambah Satu Sama Dengan Dua?</a></li>
-                            <li><a href="#">Mengapa Ikut Acara Ini?</a></li>
-                            <li><a href="#">Kapan Pendaftaran Dibuka dan Ditutup?</a></li>
-                            <li><a href="#">Dokumen Apa Saja Yang Dibutuhkan?</a></li>
+                            @foreach($f_faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $faq)
+                                <li><a href="{{ route('faqs') }}">{{ $faq->question }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

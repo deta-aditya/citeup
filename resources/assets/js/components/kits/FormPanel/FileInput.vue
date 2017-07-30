@@ -133,6 +133,11 @@
                 default: false
             },
 
+            aspectRatio: {
+                type: Number,
+                default: 1,
+            },
+
             crop: {
                 type: Boolean,
                 default: true
@@ -323,7 +328,7 @@
             initializeCropper() {
 
                 this.cropper = new Cropper(this.$refs.croppable, {
-                    aspectRatio: 1,
+                    aspectRatio: this.aspectRatio,
                     responsive: true
                 });
 

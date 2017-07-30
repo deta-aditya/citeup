@@ -74,6 +74,8 @@
 
                 if (this.duration === null) {
                     return EMPTY_DURATION
+                } else if (this.duration < 0) {
+                    return 0
                 }
 
                 return Math.floor(this.duration.asDays())
@@ -84,6 +86,8 @@
 
                 if (this.duration === null) {
                     return EMPTY_DURATION
+                } else if (this.duration < 0) {
+                    return 0
                 }
 
                 return this.duration.hours()
@@ -94,6 +98,8 @@
 
                 if (this.duration === null) {
                     return EMPTY_DURATION
+                } else if (this.duration < 0) {
+                    return 0
                 }
 
                 return this.duration.minutes()
@@ -104,6 +110,8 @@
 
                 if (this.duration === null) {
                     return EMPTY_DURATION
+                } else if (this.duration < 0) {
+                    return 0
                 }
 
                 return this.duration.seconds()

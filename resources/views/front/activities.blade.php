@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="bg-lighter">
+<div class="bg-lighter wrapper">
     <div id="activities-page">
         <div class="page-title-container">
             <div class="container"><h1 class="page-title">Rincian Acara</h1></div>

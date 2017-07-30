@@ -297,7 +297,7 @@ return [
         ],
 
         'loadable' => [
-            'edits',
+            'edits', 'edits.user.profile',
         ],
 
     ],

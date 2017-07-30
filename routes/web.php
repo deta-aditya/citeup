@@ -44,6 +44,8 @@ Route::group(['namespace' => 'App\Web'], function () {
         Route::get('/', 'FrontController@root')->name('root');
         Route::get('/activities/{t?}', 'FrontController@activities')->name('activities');
         Route::get('/faqs', 'FrontController@faqs')->name('faqs');
+        Route::get('/news', 'FrontController@news')->name('news');
+        Route::get('/news/{news}/{slug?}', 'FrontController@newsItem')->name('news.item');
 
     });
 

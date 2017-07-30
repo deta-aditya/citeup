@@ -9,25 +9,29 @@ use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\ScheduleService as Schedules;
 use App\Modules\Electrons\Sponsors\SponsorService as Sponsors;
 use App\Modules\Electrons\Faqs\FaqService as Faqs;
+use App\Modules\Electrons\News\NewsService;
+use App\Modules\Models\News;
 
 class FrontController extends Controller
 {
     /**
      * Show the landing page.
      *
-     * @param  Activities  $activities
-     * @param  Faqs        $faqs
-     * @param  Sponsors    $sponsors
-     * @param  Config      $config
+     * @param  Activities   $activities
+     * @param  Faqs         $faqs
+     * @param  Sponsors     $sponsors
+     * @param  NewsService  $news
+     * @param  Config       $config
      * @return Response
      */
-    public function root(Activities $activities, Faqs $faqs, Sponsors $sponsors, Config $config)
+    public function root(Activities $activities, Faqs $faqs, Sponsors $sponsors, NewsService $news, Config $config)
     {
         $data = [
-            'config' => $config->all(),
-            'sponsors' => $sponsors->getMultiple([]),
-            'faqs' => $faqs->getMultiple(['take' => 5]),
             'activities' => $activities->getMultiple([]),
+            'config' => $config->all(),
+            'faqs' => $faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]),
+            'news' => $news->getMultiple(['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user.profile']),
+            'sponsors' => $sponsors->getMultiple([]),
         ];
 
         return view('landing', $data);
@@ -75,6 +79,60 @@ class FrontController extends Controller
         ];
 
         return view('front.faqs', $data);
+    }
+
+    /**
+     * Show the news page.
+     *
+     * @param  Request      $request
+     * @param  NewsService  $news
+     * @return Response
+     */
+    public function news(Request $request, NewsService $news)
+    {
+        $page = $request->query('p', 1);
+
+        $take = 15;
+
+        $skip = $take * ($page - 1);
+        
+        $news = $news->getMultiple(['sort' => 'created_at:desc']);
+
+        $possible = [];
+
+        for ($i = 1; $i < ceil($news->count() / $take); $i++) {
+            $possible[] = $i;
+        }
+        
+        $count = $news->count();
+
+        $data = [
+            'news' => $news->slice($skip, $take),
+            'page' => [
+                'possible' => $possible,
+                'current' => $page,
+                'previous' => $page > 1 ? $page - 1 : null,
+                'next' => $page < count($possible) ? $page + 1 : null,
+            ],
+        ];
+
+        return view('front.news.index', $data);
+    }
+
+    /**
+     * Show the news page.
+     *
+     * @param  News  $news
+     * @param  string  $slug
+     * @return Response
+     */
+    public function newsItem(News $news, $slug = null)
+    {
+        $data = [
+            'news' => $news->load('edits.user.profile')
+        ];
+
+        return view('front.news.item', $data);
     }
 
     /**

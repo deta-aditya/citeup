@@ -48,12 +48,20 @@ $content-min-height: 615px;
     margin-bottom: 0;
 }
 
+.wrapper {
+    min-height: $content-min-height;
+}
+
 .bg-lighter {
     background-color: $signature-lighter;
-    min-height: $content-min-height;
+}
+
+.bg-light {
+    background-color: $signature-light;
 }
 
 @import "front/landing";
 @import "front/activities";
 @import "front/faqs";
+@import "front/news";
 

@@ -24,13 +24,17 @@
                     <i class="fa fa-fw fa-bullhorn"></i>
                     Acara
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
-                    <i class="fa fa-fw fa-handshake-o"></i>
-                    Sponsor
-                </router-link>
                 <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
                     <i class="fa fa-fw fa-question-circle"></i>
                     FAQ
+                </router-link>
+                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Berita') >= 0 }" :to="{ name: 'Berita' }">
+                    <i class="fa fa-fw fa-file-text"></i>
+                    Berita
+                </router-link>
+                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
+                    <i class="fa fa-fw fa-handshake-o"></i>
+                    Sponsor
                 </router-link>
                 <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
                     <i class="fa fa-fw fa-cogs"></i>

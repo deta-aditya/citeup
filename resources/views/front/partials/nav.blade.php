@@ -24,7 +24,7 @@
                 <li><a href="#">Tentang</a></li>
                 <li class="{{ request()->is('activities') ? 'active' : '' }}"><a href="{{ route('activities') }}">Acara</a></li>
                 <li><a href="#">Jadwal</a></li>
-                <li><a href="#">Berita</a></li>
+                <li class="{{ request()->is('news*') ? 'active' : '' }}"><a href="{{ route('news') }}">Berita</a></li>
                 <li><a href="#">Galeri</a></li>
                 <li class="{{ request()->is('faqs') ? 'active' : '' }}"><a href="{{ route('faqs') }}">FAQ</a></li>
             </ul>
