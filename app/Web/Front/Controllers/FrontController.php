@@ -40,14 +40,18 @@ class FrontController extends Controller
     /**
      * Show the about page.
      *
-     * @param  Config  $config
+     * @param  Config      $config
+     * @param  Activities  $activities
      * @return Response
      */
-    public function about(Config $config)
+    public function about(Config $config, Activities $activities)
     {
-        return view('front.about', [
+        $data = [
             'config' => $config->all(),
-        ]);
+            'activities' => $activities->getMultiple([]),
+        ];
+
+        return view('front.about', $data);
     }
 
     /**

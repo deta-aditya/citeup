@@ -55,7 +55,7 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Auth\Controllers'], function () {
 
-        Route::get('/purplebubblegum', 'LoginController@form')->name('login.form');
+        Route::get('/secretloginroute', 'LoginController@form')->name('login.form');
         Route::post('/login', 'LoginController@login')->name('login');
         // Route::get('/register', 'RegisterController@form')->name('register.form');
         // Route::post('/register', 'RegisterController@register')->name('register');

@@ -12631,8 +12631,17 @@ trix-editor .attachment progress {
 }
 
 #front-footer .footer-img {
-  width: 175px;
+  margin-right: 20px;
   margin-bottom: 20px;
+  vertical-align: bottom;
+}
+
+#front-footer .footer-img.logo-citeup {
+  height: 40px;
+}
+
+#front-footer .footer-img.logo-up {
+  height: 75px;
 }
 
 #front-footer .footer-subtitle {
@@ -12645,8 +12654,9 @@ trix-editor .attachment progress {
   padding-bottom: 30px;
 }
 
-#about-page .page-title img {
-  width: 300px;
+#about-page .page-title {
+  color: #fff;
+  font-weight: 700;
 }
 
 #about-page .content-container {
@@ -12661,8 +12671,12 @@ trix-editor .attachment progress {
 
 #about-page .panel-content {
   border: none;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+}
+
+#about-page .panel-content:last-child {
+  margin-bottom: 70px;
 }
 
 #about-page .panel-content .panel-body {
@@ -12691,6 +12705,53 @@ trix-editor .attachment progress {
 
 #about-page .panel-content p.lead {
   margin-bottom: 0;
+}
+
+#about-page .main-illustration {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+#about-page .main-motto {
+  font-weight: 700;
+  font-size: 16pt;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+#about-page .activity-list .activity-list-item {
+  display: block;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+  border: none;
+}
+
+#about-page .activity-list .activity-name {
+  font-size: 10pt;
+}
+
+#about-page .activity-list .activity-name:hover {
+  text-decoration: none;
+}
+
+#about-page .activity-list img {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+}
+
+#about-page .logo-up-container {
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+
+#about-page .logo-up-container p {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+#about-page .logo-up-container .logo-up {
+  height: 125px;
+  margin: 0 15px;
 }
 
 #activities-page .page-title-container {

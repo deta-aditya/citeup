@@ -9,11 +9,12 @@
     <div class="container">
         <div class="row upper-yard">
             <div class="col-sm-4">
-                <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img">
+                <img src="{{ asset('storage/images/web/logoup_sm.png') }}" class="footer-img logo-up">
+                <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img logo-citeup">
                 <p class="footer-subtitle">Celebrating The Golden Era of Technology</p>
                 <p>
-                    Cite UP adalah serangkaian acara berupa perlombaan dan seminar yang 
-                    diselenggarakan setiap tahun oleh jurusan Ilmu Komputer, Universitas Pertamina.
+                    Cite UP adalah serangkaian acara berupa perlombaan dan seminar bertema IT yang 
+                    diselenggarakan setiap tahun oleh program studi Ilmu Komputer, Universitas Pertamina.
                 </p>
             </div>
             <div class="col-sm-8">

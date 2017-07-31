@@ -9,17 +9,35 @@
 <div class="bg-lighter wrapper">
     <div id="about-page">
         <div class="page-title-container container-fluid">
-            <h1 class="page-title text-center"><img src="{{ asset('storage/images/web/logo_white_lg.png') }}"></h1>
+            <h1 class="page-title text-center">Tentang CITE UP</h1>
         </div>
         <div class="content-container">
             <div class="container">
-                <div class="panel panel-default panel-content">
-                    <div class="panel-body">
-                        <p class="lead text-center">" Celebrating The Golden Era of Technology "</p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="{{ asset('storage/images/web/main_illustration.png') }}" class="main-illustration">
+                        <p class="text-center main-motto">" Celebrating The Golden Era of Technology "</p>
+                        <div class="row activity-list">
+                            @foreach ($activities as $activity)
+                                <div class="col-sm-4">
+                                    <a href="{{ route('activities', kebab_case($activity->name)) }}" class="panel panel-default activity-list-item">
+                                        <img src="{{ asset($activity->icon) }}" class="img-rounded">
+                                        <div class="panel-body text-center activity-name">
+                                            {{ $activity->name }}
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="text-center logo-up-container">
+                            <p>Acara ini diselenggarakan oleh</p>
+                            <img src="{{ asset('storage/images/web/focs_white_sm.png') }}" class="logo-up">
+                            <img src="{{ asset('storage/images/web/logoup_white_sm.png') }}" class="logo-up">
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default panel-content">
+                            <div class="panel-body">
                                 <h2>Latar Belakang</h2>
                                 <p class="text-justify">
                                     Perkembangan teknologi adalah perkembangan yang selalu
@@ -55,9 +73,11 @@
                                         Membantu pihak sponsor mempromosikan perusahaan dan/atau produknya, serta menjalin hubungan baik
                                         berjangka panjang untuk kedepannya antara kampus dan pihak sponsor.
                                     </li>
-                                </ul>
+                                </ul>                                    
                             </div>
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="panel panel-default panel-content">
+                            <div class="panel-body">
                                 <h2>Aplikasi &amp; Web</h2>
                                 <p>Aplikasi CITE UP kini berada pada versi <i>{{ $config['version'] }}</i>.</p>
                                 <p>Aplikasi ini dikembangkan menggunakan <a href="https://laravel.com"  target="_blank">Laravel 5.4</a> dan <a href="https://vuejs.org" target="_blank">Vue.js</a>.</p>

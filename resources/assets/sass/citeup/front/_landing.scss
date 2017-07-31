@@ -513,8 +513,17 @@
     }
 
     .footer-img {
-        width: 175px;
+        margin-right: 20px;
         margin-bottom: 20px;
+        vertical-align: bottom;
+
+        &.logo-citeup {
+            height: 40px;
+        }
+
+        &.logo-up {
+            height: 75px;
+        }
     }
 
     .footer-subtitle {
