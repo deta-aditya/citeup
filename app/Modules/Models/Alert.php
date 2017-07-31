@@ -22,6 +22,98 @@ class Alert extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('seen_at');
+        return $this->belongsToMany('App\User')->withPivot('seen_at', 'announced_at');
+    }
+
+    /**
+     * Scope a query to only include announced alerts.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeAnnounced($query)
+    {
+        return $query->has('users');
+    }
+
+    /**
+     * Scope a query to only include unannounced alerts.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeUnannounced($query)
+    {
+        return $query->doesntHave('users');
+    }
+
+    /**
+     * Scope a query to only include alerts for the given users.
+     *
+     * @param  Builder  $query
+     * @param  array    $users
+     * @return Builder
+     */
+    public function scopeForUsers($query, array $users)
+    {
+        return $query->whereHas('users', function ($query) use ($users) {
+            $query->whereIn('user_id', $users);
+        });
+    }
+
+    /**
+     * Scope a query to sort the result by seen_at pivot field.
+     *
+     * @param  Builder  $query
+     * @param  string   $direction
+     * @return Builder
+     */
+    public function scopeSortBySeenAt($query, $direction)
+    {
+        return $query->whereHas('users', function ($query) use ($direction) {
+            $query->orderBy('seen_at', $direction);
+        });
+    }
+
+    /**
+     * Scope a query to sort the result by announced_at pivot field.
+     *
+     * @param  Builder  $query
+     * @param  string   $direction
+     * @return Builder
+     */
+    public function scopeSortByAnnouncedAt($query, $direction)
+    {
+        return $query->whereHas('users', function ($query) use ($direction) {
+            $query->orderBy('announced_at', $direction);
+        });
+    }
+
+    /**
+     * Scope a query to only include alerts seen by the given users.
+     *
+     * @param  Builder  $query
+     * @param  array    $users
+     * @return Builder
+     */
+    public function scopeSeenBy($query, array $users)
+    {
+        return $query->whereHas('users', function ($query) use ($users) {
+            $query->where('user_id', $users)->where('seen_at', '<>', null);
+        });
+    }
+
+    /**
+     * Scope a query to only include alerts unseen by the given users.
+     *
+     * @param  Builder  $query
+     * @param  array    $users
+     * @return Builder
+     */
+    public function scopeUnseenBy($query, array $users)
+    {
+        return $query->whereHas('users', function ($query) use ($users) {
+            $query->where('user_id', $users)->where('seen_at', null);
+        });
     }
 }

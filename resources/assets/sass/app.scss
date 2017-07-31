@@ -1,9 +1,28 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,600,700);
+
+// Font Awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// CropperJs
+@import "node_modules/cropperjs/dist/cropper";
 
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Bootstrap Switch
+@import "node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch";
+
+// Eonasdan Bootstrap DateTime Picker
+@import "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker";
+
+// Trix
+@import "node_modules/trix/dist/trix";
+
+// App's Stylesheet
+@import "citeup/index";

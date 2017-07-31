@@ -1,0 +1,554 @@
+
+.short-middle-bar {
+    width: 400px;
+    border-color: #ddd;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#front-nav {
+
+    $front-nav-bg: $signature-dark;
+
+    background: $front-nav-bg;
+    color: $light-text-color;
+    border-bottom: 1px solid darken($front-nav-bg, 10%);
+
+    .navbar-brand img {
+        width: 100px;
+    }
+
+    .navbar-nav {
+
+        li {
+            padding: 7.5px 2px;
+        }
+
+        li.active a, li.dropdown.open > a {
+            background-color: darken($front-nav-bg, 8%);
+        }
+
+        .dropdown-menu > li {
+            padding: 0;
+
+            & > a {
+                color: $front-nav-bg;
+            }
+        }
+
+        a {
+            padding: 7px 12px;
+            color: $light-text-color;
+            border-radius: 2px;
+            transition: 0.05s;
+
+            &:hover {
+                background: #fff;
+                color: $front-nav-bg;
+            }
+        }
+
+    }
+
+}
+
+#front-welcometron {
+
+    $welcometron-bg: #2a2a2a;
+    $welcometron-color: $light-text-color;
+
+    height: 750px;
+    background-color: $welcometron-bg;
+    background-image: url(../storage/images/web/bg_welcometron.png);
+    background-position-x: center; 
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+
+    .logo-placeholder {
+        margin-top: 60px;
+
+        img {
+            width: 300px;
+        }
+    }
+
+    .text-placeholder {
+        margin-top: 225px;
+        color: #161616;
+        font-weight: 700;
+    }
+
+    .title {
+        width: 500px;
+    }
+
+    .notice {
+        margin-bottom: 0; 
+        font-size: 14pt;
+    }
+
+    .countdown {
+
+        .unit-item {
+        }
+
+        .unit-number {
+            width: 100px;
+            text-align: center;
+            font-size: 48pt;
+        }
+
+        .unit-info {
+            font-size: 12pt;
+        }
+
+    }
+
+}
+
+#front-about {
+    background-color: $signature-light;
+    color: $light-text-color;
+    padding: 50px 0 70px;
+
+    p {
+        // font-family: $title-font-family;
+        font-size: 24pt;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}
+
+#front-activities {
+
+    $icon-bg: $signature-dark;
+
+    background: $signature-lighter;
+    background-image: url(../storage/images/web/bg_about.png);
+    background-repeat: repeat-x;
+    background-size: 800px;
+    padding: 20px 0 70px;
+    height: 375px;
+
+    .container {
+        position: absolute;
+        width: 100%;
+        margin-top: -100px;
+        z-index: 100;
+    }
+
+    .row {
+        margin-top: 40px;
+        width: 1100px;
+    }
+
+    .activity-item {
+        border: none;
+        display: block;
+        color: $original-text-color !important;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+        height: 400px;
+        margin: 0 25px;
+        transition: 0.2s;
+
+        &:hover {
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    .activity-title {
+        margin-top: 10px;
+    }
+
+    .icon-holder {
+        border-radius: 4px 4px 0 0;
+        padding: 0;
+        background: $icon-bg;
+    }
+
+    .activity-icon {
+        height: 200px;
+    }
+}
+
+#front-prizes {
+    background: $signature-lighter;
+    height: 590px;
+
+    .container {
+        position: absolute;
+        width: 100%;
+        margin-top: 20px;
+        z-index: 100;
+    }
+
+    .panel-prizes {
+        width: 1022px;
+        margin-top: 40px;
+        border: none;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+    }
+
+    .prizes-list {
+        margin-left: 0;
+        margin-right: 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .prizes-list-item {
+
+        h3 {
+            margin: 15px 0 30px;
+            font-size: 14pt;
+            color: $signature-dark;
+        }
+
+        &:first-child {
+            border-right: 1px solid #ddd;
+        }
+
+        .prize-wrapper {
+            margin: 20px 0;
+        }
+
+        .prize-place {
+            font-weight: 700;
+            font-size: 14pt;
+            text-transform: uppercase;
+        }
+
+        .prize-qty {
+            margin: 4px 0;
+            font-size: 22pt;
+            font-weight: 300;
+        }
+    }
+
+    .prizes-title {
+        font-weight: 700;
+        font-size: 18pt;
+        text-transform: uppercase;
+    }
+
+    .total-prizes {
+        font-size: 40pt;
+        font-weight: 300;
+        margin: 12px 0;
+    }
+}
+
+#front-map {
+    height: 500px;
+    background: #efdfbf;
+
+    .map-content {
+        height: 500px;
+    }
+
+    .map-cover {
+        position: absolute;
+        background: transparentize($signature-lighter, 0.7);
+        width: 100%;
+        height: 500px;
+        z-index: 90;
+    }
+
+    .map-info {
+        position: absolute;
+        z-index: 99;
+        width: 400px;
+        margin-top: -310px;
+        margin-left: 50px;
+        background: $signature-dark;
+        color: $light-text-color;
+        border: 1px solid darken($signature-dark, 4%);
+        border-radius: 4px;
+    }
+
+    h2 {
+        margin: 0;
+        padding: 20px;
+        font-size: 18pt;
+        font-weight: normal;
+        border-bottom: 1px solid darken($signature-dark, 4%);
+    }
+
+    address {
+        font-size: 14pt;
+        padding: 10px 20px;
+    }
+
+    .go-to-location {
+        color: $light-text-color !important
+        ;
+    }
+}
+
+#front-faq {
+
+    padding: 60px 0 90px;
+    text-align: center;
+
+    h2 {
+        font-weight: 300;
+    }
+
+    #faq-list {
+        width: 900px;
+        margin: 50px auto;
+
+        .panel {
+            border-color: darken($signature-light, 5%);
+        }
+
+        .panel-heading {
+            background-color: $signature-light;
+            color: #fff;
+            transition: 0.15s;
+
+            &:hover {
+                background-color: $signature-lighter;
+            }
+        }
+
+        .panel-title {
+            padding: 7px 15px;
+            font-weight: bold;
+            font-size: 16pt;
+        }
+
+        .panel-body {
+            font-size: 12pt;
+        }
+    }
+
+    .see-all {
+        font-size: 14pt;
+    }
+
+}
+
+#front-news {
+
+    padding: 60px 0 90px;
+
+    h2 {
+        font-weight: 300;
+    }
+
+    #news-list {
+        width: 900px;
+        margin: 50px auto;
+
+        h3 {
+            font-weight: bold;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 142px;
+            margin-bottom: 10px;
+            display: block;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .news-first {
+            
+            margin-bottom: 25px;
+
+            .img-placeholder {
+                height: 300px;
+                margin: 0;
+            }
+        }
+
+        .editor-placeholder {
+
+            img {
+                width: 40px;
+                margin-right: 10px;
+            }
+
+        }
+    }
+
+    .see-all {
+        font-size: 14pt;
+        text-align: center;
+    }
+}
+
+#front-contact-us {
+
+    padding: 10px 0 60px;
+    background-color: $signature-lighter;
+    background-image: url(../storage/images/web/bg_contact.png);
+    background-repeat: repeat-x;
+    background-size: 900px;
+
+    .panel {
+        margin: auto;
+        width: 900px;
+        font-size: 16pt;
+        border: none;
+        border-top: 5px solid $signature-light;
+        box-shadow: 0px 5px 10px 1px rgba(221,115,34,0.5);
+
+        &.panel-social {
+            text-align: center;
+
+            h2 {
+                font-size: 18pt;
+            }
+
+            .row, .col-sm-3 {
+                margin-top: 0;
+            }
+
+            a:hover {
+                color: $signature-lighter;
+            }
+
+            .line {
+                font-size: 1.6em;
+                background-color: $signature-light;
+                color: #fff;
+                padding: 8px;
+                border-radius: 10px;
+                line-height: 1.94;
+                display: inline-block;
+                font-weight: 700;
+                margin-top: 5px;
+
+                &:hover {
+                    color: #fff;
+                    background: $signature-lighter;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &.panel-contact-person {
+            margin-top: 30px;
+
+            h2 {
+                font-size: 18pt;
+            }
+        }
+    }
+
+    .panel-body {
+        border-bottom: 1px solid #ddd;
+        padding: 25px 30px;
+
+        &:last-child {
+            border-bottom: none;
+
+            div {
+                margin-top: 12px;
+            }
+        }
+    }
+
+    .contact-person-item {
+        font-size: 16pt;
+
+        & > div {
+            margin-top: 0 !important;
+        }
+
+        &:first-child {
+            margin-top: 0 !important;
+        }
+    }
+
+    .form-body {
+        padding: 30px;
+    }
+
+    h2 {
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .control-label {
+        font-weight: normal;
+    }
+
+    .form-control {
+        border-color: #ccc;
+        border-radius: 0;
+    }
+
+}
+
+#front-sponsors {
+    padding: 50px;
+    background-color: #fff;
+
+    h2 {
+        font-size: 15pt;
+    }
+
+    .sponsors-list {
+        margin-top: 50px;
+    }
+
+    .sponsor-item {
+        height: 75px;
+        margin: 10px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+}
+
+#front-footer {
+    padding: 20px 0;
+    box-shadow: 0px 5px 10px 1px rgba(221,115,34,0.5);
+
+    .upper-yard {
+        paddin: 20px 0 10px;
+
+        & > :first-child {
+            margin-top: 21px;
+        }
+    }
+
+    .middle-yard {
+        padding-top: 10px;
+
+        h3 {
+            margin: 0 0 10px;
+        }
+    }
+
+    .lower-yard {
+        padding: 20px 0;
+    }
+
+    .footer-img {
+        margin-right: 20px;
+        margin-bottom: 20px;
+        vertical-align: bottom;
+
+        &.logo-citeup {
+            height: 40px;
+        }
+
+        &.logo-up {
+            height: 75px;
+        }
+    }
+
+    .socmeds {
+        a {
+            margin-right: 8px;
+        }
+    }
+}

@@ -12,7 +12,7 @@ class Submission extends Model
      * @var array
      */
     protected $fillable = [
-        'picture', 'description',
+        'entry_id', 'picture', 'description',
     ];
 
     /**
@@ -24,5 +24,18 @@ class Submission extends Model
     {
         return $this->belongsTo('App\Modules\Models\Entry');
     }
-    
+
+    /**
+     * Scope a query to only include submissions of the given entry.
+     *
+     * @param  Builder  $query
+     * @param  int      $entry
+     * @return Builder
+     */
+    public function scopeOfEntry($query, $entry)
+    {
+        return $query->whereHas('entry', function ($query) use ($entry) {
+            $query->where('entry_id', $entry);
+        });
+    }
 }

@@ -12,7 +12,7 @@ class Choice extends Model
      * @var array
      */
     protected $fillable = [
-        'content', 'picture',
+        'question_id', 'content', 'picture',
     ];
 
     /**
@@ -33,5 +33,17 @@ class Choice extends Model
     public function question()
     {
         return $this->belongsTo('App\Modules\Models\Question');
+    }
+
+    /**
+     * Scope a query to only include choices of the given question.
+     *
+     * @param  Builder  $query
+     * @param  int      $question
+     * @return Builder
+     */
+    public function scopeOfQuestion($query, $question)
+    {
+        return $query->where('question_id', $question);
     }
 }

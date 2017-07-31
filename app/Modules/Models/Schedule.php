@@ -4,16 +4,27 @@ namespace App\Modules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Contracts\Models\Editable;
+use App\Modules\Events\EditWasMade;
 
 class Schedule extends Model implements Editable
 {
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $events = [
+        'saved' => EditWasMade::class,
+        'updated' => EditWasMade::class,
+    ];
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'held_at', 'description',
+        'activity_id', 'held_at', 'description',
     ];
 
     /**
@@ -36,4 +47,15 @@ class Schedule extends Model implements Editable
         return $this->morphMany('App\Modules\Models\Edit', 'editable');
     }
 
+    /**
+     * Scope a query to only include schedules of the given activity.
+     *
+     * @param  Builder  $query
+     * @param  int      $activity
+     * @return Builder
+     */
+    public function scopeOfActivity($query, $activity)
+    {
+        return $query->where('activity_id', $activity);
+    }
 }

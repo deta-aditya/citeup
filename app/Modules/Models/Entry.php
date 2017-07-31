@@ -12,7 +12,7 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'stage', 'status',
+        'user_id', 'activity_id', 'stage', 'status',
     ];
 
     /**

@@ -26,7 +26,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->timestamps();
         });
 
-        Schema::create('key_users', function (Blueprint $table) {
+        Schema::create('key_user', function (Blueprint $table) {
             $table->integer('key_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
@@ -65,7 +65,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->timestamps();
         });
 
-        Schema::create('alert_users', function (Blueprint $table) {
+        Schema::create('alert_user', function (Blueprint $table) {
             $table->integer('alert_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->dateTime('seen_at')->nullable();
@@ -84,8 +84,8 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description');
-            $table->string('short_description');
+            $table->text('description')->nullable();
+            $table->string('short_description')->nullable();
             $table->string('icon');
             $table->timestamps();
         });
@@ -106,8 +106,8 @@ class CreateAllRequiredTablesAndModifySome extends Migration
             $table->increments('id');
             $table->integer('activity_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('stage')->unsigned()->nullable();
-            $table->tinyInteger('status')->unsigned();
+            $table->tinyInteger('stage')->unsigned()->default(0);
+            $table->tinyInteger('status')->unsigned()->default(1);
 
             $table->foreign('activity_id')
                 ->references('id')
@@ -123,7 +123,7 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('entry_id')->unsigned();
-            $table->string('picture');
+            $table->string('file');
             $table->tinyInteger('type')->unsigned();
             $table->timestamps();
 
@@ -253,10 +253,10 @@ class CreateAllRequiredTablesAndModifySome extends Migration
         Schema::dropIfExists('entries');
         Schema::dropIfExists('schedules');
         Schema::dropIfExists('activities');
-        Schema::dropIfExists('alert_users');
+        Schema::dropIfExists('alert_user');
         Schema::dropIfExists('alerts');
         Schema::dropIfExists('profiles');
-        Schema::dropIfExists('key_users');
+        Schema::dropIfExists('key_user');
         Schema::dropIfExists('keys');
         Schema::dropIfExists('roles');
     }

@@ -1,0 +1,93 @@
+<?php
+
+namespace Tests\Feature\Api\Policy\Activities;
+
+use Tests\TestCase;
+use App\Modules\Testing\TestAssistant;
+use App\Modules\Models\Activity;
+
+class PostActivitiesSchedulesTest extends TestCase
+{
+    use TestAssistant;
+
+    /**
+     * Testing a successful attempt by admin.
+     *
+     * @return void
+     */
+    public function test200Admin()
+    {
+        $activity = $this->createFactoryActivity();
+
+        $user = $this->randomAdmin();
+
+        $response = $this->requestToApi(
+            $user, 'POST', '/activities/'. $activity->id .'/schedules', $this->randomMakeData()
+        );
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testing a successful attempt using key.
+     *
+     * @return void
+     */
+    public function test200Keyed()
+    {
+        $activity = $this->createFactoryActivity();
+
+        $user = $this->randomCommittee();
+
+        $this->grant($user, 'post-activities-schedules');
+
+        $response = $this->requestToApi(
+            $user, 'POST', '/activities/'. $activity->id .'/schedules', $this->randomMakeData()
+        );
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testing a forbidden attempt.
+     *
+     * @return void
+     */
+    public function test403()
+    {
+        $activity = $this->createFactoryActivity();
+
+        $user = $this->randomEntrant();
+
+        $response = $this->requestToApi(
+            $user, 'POST', '/activities/'. $activity->id .'/schedules', $this->randomMakeData()
+        );
+
+        $response->assertStatus(403);
+    }    
+
+    /**
+     * Create a new activity using factory.
+     *
+     * @return this
+     */
+    protected function createFactoryActivity()
+    {
+        return factory(Activity::class)->create();
+    }
+
+    /**
+     * Generate a random make data.
+     *
+     * @return array
+     */
+    protected function randomMakeData()
+    {
+        $faker = resolve('Faker\Generator');
+
+        return [
+            'description' => $faker->text(191),
+            'held_at' => $faker->date('Y-m-d H:i:s')
+        ];
+    }
+}

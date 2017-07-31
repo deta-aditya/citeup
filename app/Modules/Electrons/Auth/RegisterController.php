@@ -4,7 +4,8 @@ namespace App\Modules\Electrons\Auth;
 
 use App\User;
 use App\Modules\Electrons\Users\UserService;
-use App\Modules\Electrons\Auth\Electrons\RegistrationRequest;
+use App\Modules\Electrons\Users\RoleService;
+use App\Modules\Electrons\Auth\Requests\RegistrationRequest;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -20,9 +21,11 @@ trait RegisterController
      * @param  UserService  $users
      * @return \Illuminate\Http\Response
      */
-    public function register(RegistrationRequest $request, UserService $users)
+    public function register(RegistrationRequest $request, UserService $users, RoleService $roles)
     {
         event(new Registered($user = $users->create($request->all())));
+
+        $roles->associate($user, RoleService::ROLE_ENTRANT);
 
         $this->guard()->login($user);
 

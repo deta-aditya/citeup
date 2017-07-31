@@ -4,9 +4,20 @@ namespace App\Modules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Contracts\Models\Editable;
+use App\Modules\Events\EditWasMade;
 
 class Activity extends Model implements Editable
 {
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $events = [
+        'saved' => EditWasMade::class,
+        'updated' => EditWasMade::class,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +35,17 @@ class Activity extends Model implements Editable
     public function entries()
     {
         return $this->hasMany('App\Modules\Models\Entry');
+    }
+
+    /**
+     * Get the users that are entering the activity.
+     *
+     * @return BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'entries')
+                    ->withPivot('id', 'stage', 'status');
     }
 
     /**

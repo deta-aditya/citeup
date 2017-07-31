@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'CiteUP'),
+    'name' => env('APP_NAME', 'CITE UP'),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'rHNfzNcTo+ZY2zeiwlxqUem9MyVkVTcfpttrseHKgiA='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -182,6 +182,10 @@ return [
          */
         Laravel\Passport\PassportServiceProvider::class,
 
+        /*
+         * Others...
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
