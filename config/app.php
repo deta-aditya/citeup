@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Cite UP'),
+    'name' => env('APP_NAME', 'CITE UP'),
 
     /*
     |--------------------------------------------------------------------------

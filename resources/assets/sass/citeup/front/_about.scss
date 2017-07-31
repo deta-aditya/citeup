@@ -1,0 +1,64 @@
+
+#about-page {
+
+    .page-title-container {
+        background: $signature-light;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    
+    .page-title img {
+        width: 300px;
+    }
+
+    .content-container {
+
+        background-image: url(../storage/images/web/bg_about.png);
+        background-repeat: repeat-x;
+        background-size: 700px;
+
+        .container {
+            margin-bottom: 0;
+        }
+    }
+
+    .panel-content {
+        @extend %no-border-radius;
+        border: none;
+        margin-bottom: 70px;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+
+        .panel-body {
+            @extend %no-border-radius;
+            border-bottom: 1px solid #ddd;
+            padding: 30px;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        h2 {
+            margin: 0;
+            font-weight: 300;
+            padding-top: 30px;
+            padding-bottom: 20px;
+
+            &:first-of-type {
+                padding-top: 0;
+            }
+        }
+
+        ul {
+
+            li {
+                margin-bottom: 10px;
+            }
+        }
+
+        p.lead {
+            margin-bottom: 0;
+        }
+    }
+
+}

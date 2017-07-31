@@ -38,6 +38,19 @@ class FrontController extends Controller
     }
 
     /**
+     * Show the about page.
+     *
+     * @param  Config  $config
+     * @return Response
+     */
+    public function about(Config $config)
+    {
+        return view('front.about', [
+            'config' => $config->all(),
+        ]);
+    }
+
+    /**
      * Show the activities page.
      *
      * @param  Activities  $activities

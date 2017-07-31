@@ -12639,6 +12639,60 @@ trix-editor .attachment progress {
   text-decoration: uppercase;
 }
 
+#about-page .page-title-container {
+  background: #f49e26;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#about-page .page-title img {
+  width: 300px;
+}
+
+#about-page .content-container {
+  background-image: url(../storage/images/web/bg_about.png);
+  background-repeat: repeat-x;
+  background-size: 700px;
+}
+
+#about-page .content-container .container {
+  margin-bottom: 0;
+}
+
+#about-page .panel-content {
+  border: none;
+  margin-bottom: 70px;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+}
+
+#about-page .panel-content .panel-body {
+  border-bottom: 1px solid #ddd;
+  padding: 30px;
+}
+
+#about-page .panel-content .panel-body:last-child {
+  border-bottom: none;
+}
+
+#about-page .panel-content h2 {
+  margin: 0;
+  font-weight: 300;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+#about-page .panel-content h2:first-of-type {
+  padding-top: 0;
+}
+
+#about-page .panel-content ul li {
+  margin-bottom: 10px;
+}
+
+#about-page .panel-content p.lead {
+  margin-bottom: 0;
+}
+
 #activities-page .page-title-container {
   background: #fff;
   padding: 30px 0;
@@ -12899,6 +12953,7 @@ trix-editor .attachment progress {
 }
 
 #error-page {
+  height: 669px;
   padding-top: 200px;
 }
 
@@ -12925,7 +12980,7 @@ trix-editor .attachment progress {
   margin-left: 20px;
 }
 
-#activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
+#about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
   border-radius: 0;
 }
 

@@ -2,6 +2,7 @@
 @inject('f_activities', 'App\Modules\Electrons\Activities\ActivityService')
 @inject('f_news', 'App\Modules\Electrons\News\NewsService')
 @inject('f_faqs', 'App\Modules\Electrons\Faqs\FaqService')
+@inject('f_config', 'App\Modules\Electrons\Config\Config')
 
 <!-- Footer Div -->
 <div id="front-footer" style="">
@@ -11,8 +12,8 @@
                 <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img">
                 <p class="footer-subtitle">Celebrating The Golden Era of Technology</p>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!
+                    Cite UP adalah serangkaian acara berupa perlombaan dan seminar yang 
+                    diselenggarakan setiap tahun oleh jurusan Ilmu Komputer, Universitas Pertamina.
                 </p>
             </div>
             <div class="col-sm-8">
@@ -50,6 +51,9 @@
                 </div>
             </div>
         </div>
-        <p class="lower-yard">&copy; {{ date('Y') }} Ilmu Komputer, Fakultas Sains &amp; Komputer, Universitas Pertamina.</p>
+        <div class="lower-yard">
+            <div>&copy; {{ date('Y') }} Ilmu Komputer, Fakultas Sains &amp; Komputer, Universitas Pertamina.</div>
+            <p class="help-block"><small>{{ $f_config->get('version') }}. Developed and maintained by <a href="https://github.com/purplebubblegum" style="color:#991e9b">purplebubblegum</a>.</small></p>
+        </div>
     </div>
 </div>

@@ -23,7 +23,7 @@
             <ul class="nav navbar-nav">
 
                 <!-- Main Links -->
-                <li><a href="#">Tentang</a></li>
+                <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">Tentang</a></li>
                 <li class="{{ request()->is('activities') ? 'active' : '' }}"><a href="{{ route('activities') }}">Acara</a></li>
                 <li class="{{ request()->is('news*') ? 'active' : '' }}"><a href="{{ route('news') }}">Berita</a></li>
                 <li class="{{ request()->is('faqs') ? 'active' : '' }}"><a href="{{ route('faqs') }}">FAQ</a></li>
