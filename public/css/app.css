@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,600,700);@charset "UTF-8";
+
 
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -12103,12 +12104,8 @@ trix-editor .attachment progress {
   border-radius: 5px;
 }
 
-@font-face {
-  font-family: 'Rounded Elegance';
-  src: url("fonts/Rounded_Elegance.ttf");
-}
-
 #app-front {
+  font-family: Quicksand, Open Sans, sans-serif;
   background: #fff;
 }
 
@@ -12198,33 +12195,41 @@ trix-editor .attachment progress {
 }
 
 #front-welcometron {
-  height: 619px;
+  height: 750px;
   background-color: #2a2a2a;
-  background-image: url(../storage/images/web/bg_tron.png);
-  background-position: center center;
-  background-size: 1300px;
+  background-image: url(../storage/images/web/bg_welcometron.png);
+  background-position-x: center;
+  background-position-y: bottom;
   background-repeat: no-repeat;
-  color: #eeeedd;
+}
+
+#front-welcometron .logo-placeholder {
+  margin-top: 60px;
+}
+
+#front-welcometron .logo-placeholder img {
+  width: 300px;
+}
+
+#front-welcometron .text-placeholder {
+  margin-top: 225px;
+  color: #161616;
+  font-weight: 700;
 }
 
 #front-welcometron .title {
-  margin-top: 140px;
   width: 500px;
 }
 
 #front-welcometron .notice {
-  margin-top: 50px;
   margin-bottom: 0;
   font-size: 14pt;
 }
 
-#front-welcometron .countdown .unit-item {
-  margin: 0 10px;
-}
-
 #front-welcometron .countdown .unit-number {
-  font-size: 58pt;
-  font-weight: 300;
+  width: 100px;
+  text-align: center;
+  font-size: 48pt;
 }
 
 #front-welcometron .countdown .unit-info {
@@ -12494,15 +12499,17 @@ trix-editor .attachment progress {
 }
 
 #front-contact-us {
-  padding: 50px 0 60px;
+  padding: 10px 0 60px;
   background-color: #ffc533;
   background-image: url(../storage/images/web/bg_contact.png);
   background-repeat: repeat-x;
-  background-size: 1150px;
+  background-size: 900px;
 }
 
 #front-contact-us .panel {
-  margin: 0;
+  margin: auto;
+  width: 900px;
+  font-size: 16pt;
   border: none;
   border-top: 5px solid #f49e26;
   box-shadow: 0px 5px 10px 1px rgba(221, 115, 34, 0.5);
@@ -12614,20 +12621,28 @@ trix-editor .attachment progress {
 }
 
 #front-footer {
-  border-top: 1px solid #ddd;
   padding: 20px 0;
+  box-shadow: 0px 5px 10px 1px rgba(221, 115, 34, 0.5);
 }
 
 #front-footer .upper-yard {
-  padding: 20px 0;
+  paddin: 20px 0 10px;
 }
 
 #front-footer .upper-yard > :first-child {
   margin-top: 21px;
 }
 
+#front-footer .middle-yard {
+  padding-top: 10px;
+}
+
+#front-footer .middle-yard h3 {
+  margin: 0 0 10px;
+}
+
 #front-footer .lower-yard {
-  padding-bottom: 10px 0;
+  padding: 20px 0;
 }
 
 #front-footer .footer-img {
@@ -12644,8 +12659,8 @@ trix-editor .attachment progress {
   height: 75px;
 }
 
-#front-footer .footer-subtitle {
-  text-decoration: uppercase;
+#front-footer .socmeds a {
+  margin-right: 8px;
 }
 
 #about-page .page-title-container {

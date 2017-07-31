@@ -1,10 +1,5 @@
 
-@font-face {
-    font-family: 'Rounded Elegance';
-    src: url('fonts/Rounded_Elegance.ttf');
-}
-
-$title-font-family: 'Rounded Elegance', Open Sans, sans-serif;
+$title-font-family: Quicksand, Open Sans, sans-serif;
 
 $signature-lighter: #ffc533;
 $signature-light: #f49e26;
@@ -16,6 +11,7 @@ $original-text-color: #636b6f;
 $content-min-height: 615px;
 
 #app-front {
+    font-family: $title-font-family;
     background: #fff;
 
     a:not(.btn) {

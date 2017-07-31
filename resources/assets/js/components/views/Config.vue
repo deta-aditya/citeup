@@ -105,10 +105,6 @@
                             <text-input name="contact-instagram" :label-width="4" :control-width="8" v-model="value.contact.instagram">
                                 Akun Instagram
                             </text-input>
-                            <multiline-input name="contact-phone" :label-width="4" :control-width="8" v-model="phones">
-                                <i>Contact Person</i>
-                                <p class="help-block" slot="help-block">Pisah nama dan nomor dengan ":" (titik dua) dan setiap pasangan dengan "," (koma). Untuk menghapus pasangan nama dan nomor, block pasangan hingga bertemu koma, lalu hapus.</p>
-                            </multiline-input>
                         </div>
                     </form-panel>
                     <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">

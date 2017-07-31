@@ -79844,10 +79844,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -89278,23 +89274,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "value.contact.instagram"
     }
-  }, [_vm._v("\n                            Akun Instagram\n                        ")]), _vm._v(" "), _c('multiline-input', {
-    attrs: {
-      "name": "contact-phone",
-      "label-width": 4,
-      "control-width": 8
-    },
-    model: {
-      value: (_vm.phones),
-      callback: function($$v) {
-        _vm.phones = $$v
-      },
-      expression: "phones"
-    }
-  }, [_c('i', [_vm._v("Contact Person")]), _vm._v(" "), _c('p', {
-    staticClass: "help-block",
-    slot: "help-block"
-  }, [_vm._v("Pisah nama dan nomor dengan \":\" (titik dua) dan setiap pasangan dengan \",\" (koma). Untuk menghapus pasangan nama dan nomor, block pasangan hingga bertemu koma, lalu hapus.")])])], 1)]), _vm._v(" "), _c('form-panel', {
+  }, [_vm._v("\n                            Akun Instagram\n                        ")])], 1)]), _vm._v(" "), _c('form-panel', {
     attrs: {
       "formless": true,
       "horizontal": true,

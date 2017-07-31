@@ -7,11 +7,15 @@
 <div id="front-welcometron">
 
     <div class="container text-center">
-        <img class="title" src="{{ asset('storage/images/web/logo_lg.png') }}">
-        @if ($config['landing']['countdown']['active'])
-            <p class="notice">{{ $config['landing']['countdown']['text'] }}</p>
-            <countdown done="{{ $config['landing']['countdown']['off'] }}"></countdown>
-        @endif
+        <div class="logo-placeholder">
+            <img src="{{ asset('storage/images/web/logo_white_lg.png') }}">
+        </div>
+        <div class="text-placeholder">
+            @if ($config['landing']['countdown']['active'])
+                <p class="notice">{{ $config['landing']['countdown']['text'] }}</p>
+                <countdown done="{{ $config['landing']['countdown']['off'] }}"></countdown>
+            @endif
+        </div>
     </div>
 
 </div>
@@ -278,7 +282,35 @@
 @if ($config['landing']['show']['contact'])
 <div id="front-contact-us">
     
-    <div class="container">
+    <div class="container text-center">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Contact Person</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <dl>
+                            <dt>Adam Marsono Putra</dt>
+                            <dd>082133022618</dd>
+                            <dd>a.putra@universitaspertamina.ac.id</dd>
+                            <dd><a href="http://line.me/ti/p/~damanotra" target="_blank">damanotra</a></dd>
+                        </dl>      
+                    </div>
+                    <div class="col-sm-6">
+                        <dl>
+                            <dt>Aries Dwi Prasetiyo</dt>
+                            <dd>081230102023</dd>
+                            <dd>ariesdwiprasetiyo4@gmail.com</dd>
+                            <dd><a href="http://line.me/ti/p/~aries0" target="_blank">aries0</a></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="container">
         <div class="row">
             <div class="col-sm-6">  
                 <form class="panel panel-default panel-contact-form" method="post" action="">
@@ -350,7 +382,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 @endif

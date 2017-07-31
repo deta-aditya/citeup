@@ -7,17 +7,24 @@
 <!-- Footer Div -->
 <div id="front-footer" style="">
     <div class="container">
-        <div class="row upper-yard">
+        <div class="upper-yard">
+            <img src="{{ asset('storage/images/web/logoup_sm.png') }}" class="footer-img logo-up">
+            <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img logo-citeup">
+        </div>
+        <div class="row middle-yard">
             <div class="col-sm-4">
-                <img src="{{ asset('storage/images/web/logoup_sm.png') }}" class="footer-img logo-up">
-                <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img logo-citeup">
-                <p class="footer-subtitle">Celebrating The Golden Era of Technology</p>
                 <p>
-                    Cite UP adalah serangkaian acara berupa perlombaan dan seminar bertema IT yang 
+                    CITE UP adalah serangkaian acara berupa perlombaan dan seminar bertema IT yang 
                     diselenggarakan setiap tahun oleh program studi Ilmu Komputer, Universitas Pertamina.
                 </p>
+                <p class="socmeds">
+                    <a href="http://facebook.com/{{ $f_config->get('contact')['facebook'] }}" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
+                    <a href="http://twitter.com/{{ $f_config->get('contact')['twitter'] }}" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
+                    <a href="http://instagram.com/{{ $f_config->get('contact')['instagram'] }}" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
+                    <a href="http://line.me/ti/p/~{{ $f_config->get('contact')['line'] }}" target="_blank"><i class="fa fa-lg fa-comment"></i></a>
+                </p>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-7 col-sm-offset-1">
                 <div class="row">
                     <div class="col-sm-4">
                         <h3>Acara</h3>
