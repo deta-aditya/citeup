@@ -16,10 +16,6 @@
                     <i class="fa fa-fw fa-tachometer"></i>
                     Dasbor
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Notifikasi') >= 0 }" :to="{ name: 'Notifikasi' }">
-                    <i class="fa fa-fw fa-bell"></i>
-                    Notifikasi
-                </router-link>
                 <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
                     <i class="fa fa-fw fa-bullhorn"></i>
                     Acara
