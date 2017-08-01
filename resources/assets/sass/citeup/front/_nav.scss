@@ -1,0 +1,92 @@
+
+@mixin navbar-theme($background-color, $text-color) {
+
+    background-color: $background-color;
+
+    .navbar-nav {
+
+        li.active a, li.dropdown.open > a {
+            background-color: darken($background-color, 5%);
+
+            &:hover {
+                color: $text-color;
+            }
+        }
+
+        a {
+            color: $text-color;
+
+            &:hover {
+                background: $text-color;
+                color: $background-color;
+            }    
+        }
+
+        .dropdown-menu > li > a {
+            
+            @if $text-color == #fff {
+                color: $background-color;
+            } @else {
+                color: $text-color;
+            }
+
+            &:hover {
+                background: darken(#fff, 3%);
+            }
+        }
+
+    }
+}
+
+#front-nav {
+
+    $background-color: $signature-dark;
+    border-bottom: none;
+
+    margin-bottom: 0;
+
+    &.navbar-dark {
+        @include navbar-theme(#2a2a2a, #fff);
+    }
+
+    &.navbar-light {
+        @include navbar-theme($signature-light, #fff);
+    }
+
+    &.navbar-white {
+        @include navbar-theme(#fff, $signature-light);
+    }
+
+    .navbar-brand img {
+        width: 100px;
+    }
+
+    .navbar-nav {
+
+        li {
+            padding: 7.5px 2px;
+        }
+
+        .dropdown-menu > li {
+            padding: 0;
+        }
+
+        a {
+            padding: 7px 12px;
+            border-radius: 2px;
+            transition: 0.05s;
+
+            &.login-link {
+                background-color: $signature-dark;
+                color: #fff;
+
+                &:hover {
+                    background-color: darken($signature-dark, 4%);
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+
+}

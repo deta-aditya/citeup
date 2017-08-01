@@ -12149,17 +12149,96 @@ trix-editor .attachment progress {
   background-color: #f49e26;
 }
 
-.short-middle-bar {
-  width: 400px;
-  border-color: #ddd;
-  margin-top: 0;
+#front-nav {
+  border-bottom: none;
   margin-bottom: 0;
 }
 
-#front-nav {
-  background: #dd7322;
-  color: #eeeedd;
-  border-bottom: 1px solid #b15c1b;
+#front-nav.navbar-dark {
+  background-color: #2a2a2a;
+}
+
+#front-nav.navbar-dark .navbar-nav li.active a, #front-nav.navbar-dark .navbar-nav li.dropdown.open > a {
+  background-color: #1d1d1d;
+}
+
+#front-nav.navbar-dark .navbar-nav li.active a:hover, #front-nav.navbar-dark .navbar-nav li.dropdown.open > a:hover {
+  color: #fff;
+}
+
+#front-nav.navbar-dark .navbar-nav a {
+  color: #fff;
+}
+
+#front-nav.navbar-dark .navbar-nav a:hover {
+  background: #fff;
+  color: #2a2a2a;
+}
+
+#front-nav.navbar-dark .navbar-nav .dropdown-menu > li > a {
+  color: #2a2a2a;
+}
+
+#front-nav.navbar-dark .navbar-nav .dropdown-menu > li > a:hover {
+  background: #f7f7f7;
+}
+
+#front-nav.navbar-light {
+  background-color: #f49e26;
+}
+
+#front-nav.navbar-light .navbar-nav li.active a, #front-nav.navbar-light .navbar-nav li.dropdown.open > a {
+  background-color: #f3930e;
+}
+
+#front-nav.navbar-light .navbar-nav li.active a:hover, #front-nav.navbar-light .navbar-nav li.dropdown.open > a:hover {
+  color: #fff;
+}
+
+#front-nav.navbar-light .navbar-nav a {
+  color: #fff;
+}
+
+#front-nav.navbar-light .navbar-nav a:hover {
+  background: #fff;
+  color: #f49e26;
+}
+
+#front-nav.navbar-light .navbar-nav .dropdown-menu > li > a {
+  color: #f49e26;
+}
+
+#front-nav.navbar-light .navbar-nav .dropdown-menu > li > a:hover {
+  background: #f7f7f7;
+}
+
+#front-nav.navbar-white {
+  background-color: #fff;
+}
+
+#front-nav.navbar-white .navbar-nav li.active a, #front-nav.navbar-white .navbar-nav li.dropdown.open > a {
+  background-color: #f2f2f2;
+}
+
+#front-nav.navbar-white .navbar-nav li.active a:hover, #front-nav.navbar-white .navbar-nav li.dropdown.open > a:hover {
+  color: #f49e26;
+}
+
+#front-nav.navbar-white .navbar-nav a {
+  color: #f49e26;
+}
+
+#front-nav.navbar-white .navbar-nav a:hover {
+  background: #f49e26;
+  color: #fff;
+}
+
+#front-nav.navbar-white .navbar-nav .dropdown-menu > li > a {
+  color: #f49e26;
+}
+
+#front-nav.navbar-white .navbar-nav .dropdown-menu > li > a:hover {
+  background: #f7f7f7;
 }
 
 #front-nav .navbar-brand img {
@@ -12170,28 +12249,31 @@ trix-editor .attachment progress {
   padding: 7.5px 2px;
 }
 
-#front-nav .navbar-nav li.active a, #front-nav .navbar-nav li.dropdown.open > a {
-  background-color: #ba611d;
-}
-
 #front-nav .navbar-nav .dropdown-menu > li {
   padding: 0;
 }
 
-#front-nav .navbar-nav .dropdown-menu > li > a {
-  color: #dd7322;
-}
-
 #front-nav .navbar-nav a {
   padding: 7px 12px;
-  color: #eeeedd;
   border-radius: 2px;
   transition: 0.05s;
 }
 
-#front-nav .navbar-nav a:hover {
-  background: #fff;
-  color: #dd7322;
+#front-nav .navbar-nav a.login-link {
+  background-color: #dd7322;
+  color: #fff;
+}
+
+#front-nav .navbar-nav a.login-link:hover {
+  background-color: #cb6a1f;
+  color: #fff;
+}
+
+.short-middle-bar {
+  width: 400px;
+  border-color: #ddd;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #front-welcometron {

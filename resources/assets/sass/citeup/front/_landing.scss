@@ -6,52 +6,6 @@
     margin-bottom: 0;
 }
 
-#front-nav {
-
-    $front-nav-bg: $signature-dark;
-
-    background: $front-nav-bg;
-    color: $light-text-color;
-    border-bottom: 1px solid darken($front-nav-bg, 10%);
-
-    .navbar-brand img {
-        width: 100px;
-    }
-
-    .navbar-nav {
-
-        li {
-            padding: 7.5px 2px;
-        }
-
-        li.active a, li.dropdown.open > a {
-            background-color: darken($front-nav-bg, 8%);
-        }
-
-        .dropdown-menu > li {
-            padding: 0;
-
-            & > a {
-                color: $front-nav-bg;
-            }
-        }
-
-        a {
-            padding: 7px 12px;
-            color: $light-text-color;
-            border-radius: 2px;
-            transition: 0.05s;
-
-            &:hover {
-                background: #fff;
-                color: $front-nav-bg;
-            }
-        }
-
-    }
-
-}
-
 #front-welcometron {
 
     $welcometron-bg: #2a2a2a;

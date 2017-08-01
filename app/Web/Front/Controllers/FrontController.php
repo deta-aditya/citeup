@@ -32,6 +32,7 @@ class FrontController extends Controller
             'faqs' => $faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]),
             'news' => $news->getMultiple(['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user.profile']),
             'sponsors' => $sponsors->getMultiple([]),
+            'nav' => 'dark',
         ];
 
         return view('landing', $data);
@@ -49,6 +50,7 @@ class FrontController extends Controller
         $data = [
             'config' => $config->all(),
             'activities' => $activities->getMultiple([]),
+            'nav' => 'light',
         ];
 
         return view('front.about', $data);
@@ -84,6 +86,7 @@ class FrontController extends Controller
             'config' => $config->all(),
             'activities' => $activities,
             'type' => $t,
+            'nav' => 'white',
         ];
 
         return view('front.activities', $data);
@@ -99,13 +102,14 @@ class FrontController extends Controller
     {
         $data = [
             'faqs' => $faqs->getMultiple([]),
+            'nav' => 'white',
         ];
 
         return view('front.faqs', $data);
     }
 
     /**
-     * Show the news page.
+     * Show the news index page.
      *
      * @param  Request      $request
      * @param  NewsService  $news
@@ -137,13 +141,14 @@ class FrontController extends Controller
                 'previous' => $page > 1 ? $page - 1 : null,
                 'next' => $page < count($possible) ? $page + 1 : null,
             ],
+            'nav' => 'light',
         ];
 
         return view('front.news.index', $data);
     }
 
     /**
-     * Show the news page.
+     * Show the news item page.
      *
      * @param  News  $news
      * @param  string  $slug
@@ -152,19 +157,11 @@ class FrontController extends Controller
     public function newsItem(News $news, $slug = null)
     {
         $data = [
-            'news' => $news->load('edits.user.profile')
+            'news' => $news->load('edits.user.profile'),
+            'nav' => 'light',
         ];
 
         return view('front.news.item', $data);
     }
 
-    /**
-     * Show the test page.
-     *
-     * @return Response
-     */
-    public function test(Config $config)
-    {
-        //       
-    }
 }
