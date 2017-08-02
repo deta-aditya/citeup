@@ -82,6 +82,10 @@
         margin-bottom: 20px;
     }
 
+    .col-right-side {
+        margin-top: 25px;
+    }
+
     .panel-prizes {
         margin-bottom: 20px;
         text-align: center;
@@ -134,6 +138,14 @@
         .schedule-description {
             font-weight: 600;
             font-size: 12pt;
+        }
+
+    }
+
+    @media (min-width: $screen-md-min) {
+        
+        .col-right-side {
+            margin-top: 0;
         }
 
     }

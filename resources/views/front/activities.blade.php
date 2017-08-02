@@ -31,12 +31,12 @@
                                 <div role="tab-panel" class="tab-pane fade @if ($type == kebab_case($activity['name'])) in active @endif" id="{{ kebab_case($activity['name']) }}">
                                     <h2 class="activity-name">{{ $activity['name'] }}</h2>
                                     <div class="row">
-                                        <div class="col-sm-8">
+                                        <div class="col-md-8">
                                             <img src="{{ asset($activity['icon']) }}" class="pull-left activity-icon">
                                             <p class="lead">{{ $activity['short_description'] }}</p>
                                             {!! $activity['description'] !!}
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-md-4 col-right-side">
                                             @if (! auth()->check() && $activity['registration_open']) 
                                                 <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-primary btn-register">Daftar</a> 
                                             @endif

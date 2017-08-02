@@ -13076,6 +13076,10 @@ trix-editor .attachment progress {
   margin-bottom: 20px;
 }
 
+#activities-page .col-right-side {
+  margin-top: 25px;
+}
+
 #activities-page .panel-prizes {
   margin-bottom: 20px;
   text-align: center;
@@ -13129,6 +13133,12 @@ trix-editor .attachment progress {
 #activities-page .panel-schedules .schedule-description {
   font-weight: 600;
   font-size: 12pt;
+}
+
+@media (min-width: 992px) {
+  #activities-page .col-right-side {
+    margin-top: 0;
+  }
 }
 
 #faqs-page .page-title-container {
