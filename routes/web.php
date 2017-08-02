@@ -72,7 +72,3 @@ Route::group(['namespace' => 'App\Web'], function () {
     });
 
 });
-
-Route::get('/coba', function () {
-    // return view('coba');
-});
