@@ -56,6 +56,8 @@ $content-min-height: 615px;
     background-color: $signature-light;
 }
 
+@import "front/nav";
+@import "front/footer";
 @import "front/landing";
 @import "front/about";
 @import "front/activities";

@@ -14,7 +14,7 @@ class UserService extends Service
      * @var array
      */
     protected $starterAdmin = [
-        'email' => 'admin@citeup.com',
+        'email' => 'admin@citeup.web.id',
         'password' => 'rahasia',
     ];
 
@@ -24,7 +24,7 @@ class UserService extends Service
      * @var array
      */
     protected $exampleEntrant = [
-        'email' => 'peserta@citeup.com',
+        'email' => 'peserta@citeup.web.id',
         'password' => 'rahasia',
     ];
 
@@ -34,7 +34,7 @@ class UserService extends Service
      * @var array
      */
     protected $exampleCommittee = [
-        'email' => 'panitia@citeup.com',
+        'email' => 'panitia@citeup.web.id',
         'password' => 'rahasia',
     ];
 

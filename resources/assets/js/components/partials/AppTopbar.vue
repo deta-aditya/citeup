@@ -42,9 +42,6 @@
                             <a href="/"><i class="fa fa-lg fa-home" title="Halaman Depan"></i></a>
                         </li>
 
-                        <nav-alert-list v-if="user.entrant">
-                        </nav-alert-list>
-
                         <dropdown type="nav" :caret="false" align="right">
                             
                             <i class="fa fa-lg fa-cog" title="Pengaturan"></i>
@@ -77,7 +74,6 @@
 
     import _ from 'lodash';
     import { mapState, mapGetters, mapMutations } from 'vuex';
-    import NavAlertList from './NavAlertList.vue';
     import Dropdown from '../kits/Dropdown.vue';
     import Citeup from '../../citeup';
 
@@ -185,7 +181,6 @@
         }),
 
         components: {
-            'nav-alert-list': NavAlertList,
             'dropdown': Dropdown,
         }
 

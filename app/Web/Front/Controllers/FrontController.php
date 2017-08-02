@@ -8,163 +8,119 @@ use App\Modules\Electrons\Config\Config;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\ScheduleService as Schedules;
 use App\Modules\Electrons\Sponsors\SponsorService as Sponsors;
+use App\Modules\Electrons\News\NewsService as News;
 use App\Modules\Electrons\Faqs\FaqService as Faqs;
-use App\Modules\Electrons\News\NewsService;
-use App\Modules\Models\News;
 
 class FrontController extends Controller
 {
     /**
+     * The activity service instance.
+     *
+     * @var Activities
+     */
+    protected $activities;
+
+    /**
+     * The faq service instance.
+     *
+     * @var Faqs
+     */
+    protected $faqs;
+
+    /**
+     * The sponsor service instance.
+     *
+     * @var Sponsors
+     */
+    protected $sponsors;
+
+    /**
+     * The news service instance.
+     *
+     * @var News
+     */
+    protected $news;
+
+    /**
+     * The web config instance.
+     *
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * The navigation theme.
+     *
+     * @var string
+     */
+    protected $navtheme = 'dark';
+
+    /**
+     * The view name.
+     *
+     * @var string
+     */
+    protected $view = 'landing';
+
+    /**
+     * The faqs query parameter.
+     * 
+     * @var array
+     */
+    protected $faqsQuery = ['sort' => 'created_at:desc', 'take' => 5];
+
+    /**
+     * The news query parameter.
+     * 
+     * @var array
+     */
+    protected $newsQuery = ['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user.profile'];
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  Activities  $activities
+     * @param  Faqs        $faqs
+     * @param  Sponsors    $sponsors
+     * @param  News        $news
+     * @param  Config      $config
+     * @return void
+     */
+    public function __construct(Activities $activities, Faqs $faqs, News $news, 
+        Sponsors $sponsors, Config $config)
+    {
+        $this->activities = $activities;
+        $this->faqs = $faqs;
+        $this->news = $news;
+        $this->sponsors = $sponsors;
+        $this->config = $config;
+    }
+
+    /**
      * Show the landing page.
      *
-     * @param  Activities   $activities
-     * @param  Faqs         $faqs
-     * @param  Sponsors     $sponsors
-     * @param  NewsService  $news
-     * @param  Config       $config
+     * @param  Request  $request
      * @return Response
      */
-    public function root(Activities $activities, Faqs $faqs, Sponsors $sponsors, NewsService $news, Config $config)
+    public function index(Request $request)
     {
-        $data = [
-            'activities' => $activities->getMultiple([]),
-            'config' => $config->all(),
-            'faqs' => $faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]),
-            'news' => $news->getMultiple(['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user.profile']),
-            'sponsors' => $sponsors->getMultiple([]),
-        ];
-
-        return view('landing', $data);
+        return view($this->view, $this->data());
     }
 
     /**
-     * Show the about page.
+     * Return the data required in the view.
      *
-     * @param  Config      $config
-     * @param  Activities  $activities
-     * @return Response
+     * @return array
      */
-    public function about(Config $config, Activities $activities)
+    protected function data()
     {
-        $data = [
-            'config' => $config->all(),
-            'activities' => $activities->getMultiple([]),
+        return [
+            'activities'    => $this->activities->getMultiple([]),
+            'config'        => $this->config->all(),
+            'faqs'          => $this->faqs->getMultiple($this->faqsQuery),
+            'news'          => $this->news->getMultiple($this->newsQuery),
+            'sponsors'      => $this->sponsors->getMultiple([]),
+            'nav'           => $this->navtheme,
         ];
-
-        return view('front.about', $data);
-    }
-
-    /**
-     * Show the activities page.
-     *
-     * @param  Activities  $activities
-     * @param  Schedules   $schedules
-     * @param  Config      $config
-     * @param  string      $t
-     * @return Response
-     */
-    public function activities(Activities $activities, Schedules $schedules, Config $config, $t = 'lomba-logika')
-    {
-        $activities = $activities->getMultiple([])->toArray();
-
-        for ($i = 0; $i < count($activities); $i++) {
-            $activities[$i]['schedules'] = $schedules->getMultiple([
-                'activity' => $activities[$i]['id'],
-                'sort' => 'held_at:asc'
-            ]);
-
-            $activities[$i]['registration_open'] = ! ($config->get('stage')['name'] === 'Pra-Pendaftaran' || $config->get('stage')['name'] === 'Paska Acara');
-
-            if ($activities[$i]['id'] < 3) {
-                $activities[$i]['registration_open'] = $config->get('stage')['name'] === 'Pendaftaran';
-            }
-        }
-
-        $data = [
-            'config' => $config->all(),
-            'activities' => $activities,
-            'type' => $t,
-        ];
-
-        return view('front.activities', $data);
-    }
-
-    /**
-     * Show the faqs page.
-     *
-     * @param  Faqs  $faqs
-     * @return Response
-     */
-    public function faqs(Faqs $faqs)
-    {
-        $data = [
-            'faqs' => $faqs->getMultiple([]),
-        ];
-
-        return view('front.faqs', $data);
-    }
-
-    /**
-     * Show the news page.
-     *
-     * @param  Request      $request
-     * @param  NewsService  $news
-     * @return Response
-     */
-    public function news(Request $request, NewsService $news)
-    {
-        $page = $request->query('p', 1);
-
-        $take = 15;
-
-        $skip = $take * ($page - 1);
-        
-        $news = $news->getMultiple(['sort' => 'created_at:desc']);
-
-        $possible = [];
-
-        for ($i = 1; $i < ceil($news->count() / $take); $i++) {
-            $possible[] = $i;
-        }
-        
-        $count = $news->count();
-
-        $data = [
-            'news' => $news->slice($skip, $take),
-            'page' => [
-                'possible' => $possible,
-                'current' => $page,
-                'previous' => $page > 1 ? $page - 1 : null,
-                'next' => $page < count($possible) ? $page + 1 : null,
-            ],
-        ];
-
-        return view('front.news.index', $data);
-    }
-
-    /**
-     * Show the news page.
-     *
-     * @param  News  $news
-     * @param  string  $slug
-     * @return Response
-     */
-    public function newsItem(News $news, $slug = null)
-    {
-        $data = [
-            'news' => $news->load('edits.user.profile')
-        ];
-
-        return view('front.news.item', $data);
-    }
-
-    /**
-     * Show the test page.
-     *
-     * @return Response
-     */
-    public function test(Config $config)
-    {
-        //       
     }
 }

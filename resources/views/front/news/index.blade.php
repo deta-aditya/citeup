@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="row news-list">
                     @foreach ($news as $item)
-                        <div class="col-sm-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="panel news-list-item panel-default">
                                 <div class="panel-body img-placeholder">
                                     <a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">

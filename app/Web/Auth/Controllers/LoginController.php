@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function form()
     {
-        return view('auth.login');
+        return view('auth.login', ['nav' => 'light']);
     }
 
     /**

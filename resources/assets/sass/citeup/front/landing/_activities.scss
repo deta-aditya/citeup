@@ -1,0 +1,115 @@
+
+#front-activities {
+
+    $icon-bg: $signature-dark;
+
+    background: $signature-lighter;
+    background-image: url(../storage/images/web/bg_about.png);
+    background-repeat: repeat-x;
+    background-size: 800px;
+    padding: 20px 0 70px;
+    height: 200px;
+
+    .container-container {
+        position: absolute;
+        width: 100%;
+        margin-top: -40px;
+        z-index: 100;
+    }
+
+    .row {
+        margin-top: 10px;
+    }
+
+    .content-holder {
+        padding: 8px;
+    }
+
+    .activity-item {
+        border: none;
+        display: block;
+        color: $original-text-color !important;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+        height: 150px;
+        margin: 0;
+        transition: 0.2s;
+
+        &:hover {
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    .activity-title {
+        font-size: 12pt;
+        margin-top: 0;
+    }
+
+    .icon-holder {
+        border-radius: 4px 4px 0 0;
+        padding: 0;
+        background: $icon-bg;
+    }
+        
+    .activity-icon {
+        height: 75px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+        
+        height: 375px;
+
+        .activity-icon {
+            height: 150px;
+        }
+
+        .content-holder {
+            padding: 15px;
+        }
+
+        .activity-item {
+            margin: 0 5px;
+            height: 360px;
+        }
+
+    }
+
+    @media (min-width: $screen-md-min) {
+
+        .row {
+            margin-top: 40px;
+        }
+
+        .container-container {
+            margin-top: -100px;
+        }
+
+        .activity-item {
+            margin: 0 25px;
+            height: 400px;
+        }
+
+        .activity-title {
+            font-size: 14pt;
+            margin-top: 10px;
+        }
+        
+        .activity-icon {
+            height: 200px;
+        }
+
+    }
+    
+    @media (min-width: $screen-lg-min) {
+        
+        .row {
+            width: 1100px;
+        }
+
+        .activity-title {
+            font-size: 18pt;
+        } 
+
+    }
+
+}

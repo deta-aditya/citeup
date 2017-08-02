@@ -26,7 +26,7 @@
             </div>
             <div class="col-sm-7 col-sm-offset-1">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 footer-links">
                         <h3>Acara</h3>
                         <ul class="list-unstyled">
                             @foreach($f_activities->getMultiple([]) as $activity)
@@ -34,7 +34,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 footer-links">
                         <h3>Berita</h3>
                         <ul class="list-unstyled">
                             @foreach($f_news->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $item)
@@ -45,7 +45,7 @@
                             @endif
                         </ul>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 footer-links">
                         <h3>FAQ</h3>
                         <ul class="list-unstyled">
                             @foreach($f_faqs->getMultiple(['sort' => 'created_at:desc', 'take' => 5]) as $faq)

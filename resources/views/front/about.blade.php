@@ -14,28 +14,7 @@
         <div class="content-container">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <img src="{{ asset('storage/images/web/main_illustration.png') }}" class="main-illustration">
-                        <p class="text-center main-motto">" Celebrating The Golden Era of Technology "</p>
-                        <div class="row activity-list">
-                            @foreach ($activities as $activity)
-                                <div class="col-sm-4">
-                                    <a href="{{ route('activities', kebab_case($activity->name)) }}" class="panel panel-default activity-list-item">
-                                        <img src="{{ asset($activity->icon) }}" class="img-rounded">
-                                        <div class="panel-body text-center activity-name">
-                                            {{ $activity->name }}
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="text-center logo-up-container">
-                            <p>Acara ini diselenggarakan oleh</p>
-                            <img src="{{ asset('storage/images/web/focs_white_sm.png') }}" class="logo-up">
-                            <img src="{{ asset('storage/images/web/logoup_white_sm.png') }}" class="logo-up">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="panel panel-default panel-content">
                             <div class="panel-body">
                                 <h2>Latar Belakang</h2>
@@ -86,6 +65,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <img src="{{ asset('storage/images/web/main_illustration.png') }}" class="main-illustration">
+                        <p class="text-center main-motto">" Celebrating The Golden Era of Technology "</p>
+                        <div class="row activity-list hidden-sm hidden-xs">
+                            @foreach ($activities as $activity)
+                                <div class="col-sm-4">
+                                    <a href="{{ route('activities', kebab_case($activity->name)) }}" class="panel panel-default activity-list-item">
+                                        <img src="{{ asset($activity->icon) }}" class="img-rounded">
+                                        <div class="panel-body text-center activity-name">
+                                            {{ $activity->name }}
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="text-center logo-up-container">
+                            <p>Acara ini diselenggarakan oleh</p>
+                            <img src="{{ asset('storage/images/web/focs_white_sm.png') }}" class="logo-up">
+                            <img src="{{ asset('storage/images/web/logoup_white_sm.png') }}" class="logo-up">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
