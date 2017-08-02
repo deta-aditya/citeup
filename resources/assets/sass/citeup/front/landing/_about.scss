@@ -1,0 +1,13 @@
+
+#front-about {
+    background-color: $signature-light;
+    color: $light-text-color;
+    padding: 50px 0 70px;
+
+    p {
+        // font-family: $title-font-family;
+        font-size: 24pt;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}

@@ -31,26 +31,28 @@
 
 <!-- Activities Div -->
 <div id="front-activities">
-    <div class="container">
-        <div class="row center-block">
+    <div class="container-container">
+        <div class="container">
+            <div class="row center-block">
 
-            @foreach ($config['landing']['activities']['order'] as $activity)
-                @php 
-                    $realActivity = $activities->where('id', $activity['id'])->first();
-                @endphp
-                <div class="col-sm-4">
-                    <a href="{{ route('activities', ['t' => kebab_case($realActivity->name)]) }}" class="panel panel-default text-center activity-item">
-                        <div class="panel-body icon-holder">
-                            <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
-                        </div>
-                        <div class="panel-body content-holder">
-                            <h3 class="activity-title">{{ $realActivity->name }}</h3>
-                            <p>{{ $realActivity->short_description }}</p>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+                @foreach ($config['landing']['activities']['order'] as $activity)
+                    @php 
+                        $realActivity = $activities->where('id', $activity['id'])->first();
+                    @endphp
+                    <div class="col-xs-4">
+                        <a href="{{ route('activities', ['t' => kebab_case($realActivity->name)]) }}" class="panel panel-default text-center activity-item">
+                            <div class="panel-body icon-holder">
+                                <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
+                            </div>
+                            <div class="panel-body content-holder">
+                                <h3 class="activity-title">{{ $realActivity->name }}</h3>
+                                <p class="hidden-xs">{{ $realActivity->short_description }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
 
+            </div>
         </div>
     </div>
 </div>
@@ -59,30 +61,32 @@
 @if ($config['landing']['show']['prizes'])
 <!-- Prizes Div -->
 <div id="front-prizes">
-    <div class="container">
-        <div class="panel panel-default panel-prizes center-block text-center">
-            <div class="panel-body">
-                <h2 class="prizes-title">Total Hadiah</h2>
-                <div class="total-prizes">Rp{{ '&#123;&#123;' }} {{ collect($config['prizes'])->sum(function ($product) { return $product['first'] + $product['second'] + $product['third']; }) }} {{ '| monetize &#125;&#125;' }}</div>
-            </div>
-            <div class="row prizes-list">
-                @foreach ($config['prizes'] as $prize)
-                    <div class="col-sm-6 prizes-list-item panel-body">
-                        <h3>{{ $prize['name'] }}</h3>
-                        <div class="prize-wrapper">
-                            <div class="prize-place">Juara 1</div>
-                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['first'] }} {{ '| monetize &#125;&#125;' }}</div>
+    <div class="container-container">
+        <div class="container">
+            <div class="panel panel-default panel-prizes center-block text-center">
+                <div class="panel-body">
+                    <h2 class="prizes-title">Total Hadiah</h2>
+                    <div class="total-prizes">Rp{{ '&#123;&#123;' }} {{ collect($config['prizes'])->sum(function ($product) { return $product['first'] + $product['second'] + $product['third']; }) }} {{ '| monetize &#125;&#125;' }}</div>
+                </div>
+                <div class="row prizes-list">
+                    @foreach ($config['prizes'] as $prize)
+                        <div class="col-sm-6 prizes-list-item panel-body">
+                            <h3>{{ $prize['name'] }}</h3>
+                            <div class="prize-wrapper">
+                                <div class="prize-place">Juara 1</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['first'] }} {{ '| monetize &#125;&#125;' }}</div>
+                            </div>
+                            <div class="prize-wrapper">
+                                <div class="prize-place">Juara 2</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['second'] }} {{ '| monetize &#125;&#125;' }}</div>
+                            </div>
+                            <div class="prize-wrapper">
+                                <div class="prize-place">Juara 3</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['third'] }} {{ '| monetize &#125;&#125;' }}</div>
+                            </div>
                         </div>
-                        <div class="prize-wrapper">
-                            <div class="prize-place">Juara 2</div>
-                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['second'] }} {{ '| monetize &#125;&#125;' }}</div>
-                        </div>
-                        <div class="prize-wrapper">
-                            <div class="prize-place">Juara 3</div>
-                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['third'] }} {{ '| monetize &#125;&#125;' }}</div>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

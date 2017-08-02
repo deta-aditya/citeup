@@ -1,0 +1,96 @@
+
+#front-prizes {
+    background: $signature-lighter;
+    overflow-y: visible;
+    height: 880px;
+
+    .container-container {
+        position: absolute;
+        width: 100%;
+        margin-top: 20px;
+        z-index: 100;
+    }
+
+    .panel-prizes {
+        margin: 5px 25px 0;
+        border: none;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+    }
+
+    .prizes-list {
+        margin-left: 0;
+        margin-right: 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .prizes-list-item {
+
+        h3 {
+            margin: 0 0 30px;
+            font-size: 14pt;
+            color: $signature-dark;
+        }
+
+        &:first-child {
+            border-right: 1px solid #ddd;
+        }
+
+        .prize-wrapper {
+            margin: 20px 0;
+        }
+
+        .prize-place {
+            font-weight: 700;
+            font-size: 14pt;
+            text-transform: uppercase;
+        }
+
+        .prize-qty {
+            margin: 4px 0;
+            font-size: 22pt;
+            font-weight: 300;
+        }
+    }
+
+    .prizes-title {
+        font-weight: 700;
+        font-size: 18pt;
+        text-transform: uppercase;
+    }
+
+    .total-prizes {
+        font-size: 24pt;
+        font-weight: 300;
+        margin: 12px 0;
+    }
+
+    @media (min-width: $screen-sm-min) {
+        
+        height: 590px;
+
+        .panel-prizes {
+            margin-top: 30px;
+        }
+
+        .total-prizes {
+            font-size: 40pt;
+        }
+    }
+
+    @media (min-width: $screen-md-min) {
+
+        .panel-prizes {
+            margin-top: 40px;
+        }   
+
+    }
+    
+    @media (min-width: $screen-lg-min) {
+        
+        .container {
+            width: 1100px;
+        }
+
+    }
+
+}

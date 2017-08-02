@@ -12,9 +12,11 @@
     <meta name="app-path" content="{{ url('/') }}">
 
     <title>
-        {{ config('app.name', 'CiteUP') }} 
+        {{ config('app.name', 'CITE UP') }} 
         @if (! request()->is('/')) 
             &middot; @yield('title')
+        @else
+            &middot; Computer and IT Event Universitas Pertamina
         @endif
     </title>
 
