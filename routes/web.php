@@ -41,12 +41,12 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Front\Controllers'], function () {
 
-        Route::get('/', 'FrontController@root')->name('root');
-        Route::get('/about', 'FrontController@about')->name('about');
-        Route::get('/activities/{t?}', 'FrontController@activities')->name('activities');
-        Route::get('/faqs', 'FrontController@faqs')->name('faqs');
-        Route::get('/news', 'FrontController@news')->name('news');
-        Route::get('/news/{news}/{slug?}', 'FrontController@newsItem')->name('news.item');
+        Route::get('/',                     'FrontController@index')        ->name('root');
+        Route::get('/about',                'AboutController@index')        ->name('about');
+        Route::get('/activities/{t?}',      'ActivitiesController@index')   ->name('activities');
+        Route::get('/faqs',                 'FaqsController@index')         ->name('faqs');
+        Route::get('/news',                 'NewsController@index')         ->name('news');
+        Route::get('/news/{news}/{slug?}',  'NewsController@item')          ->name('news.item');
 
     });
 
