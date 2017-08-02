@@ -13145,6 +13145,10 @@ trix-editor .attachment progress {
   }
 }
 
+#faqs-page {
+  text-align: center;
+}
+
 #faqs-page .page-title-container {
   background: #fff;
   padding: 30px 0;
@@ -13190,6 +13194,12 @@ trix-editor .attachment progress {
   font-size: 18pt;
   font-weight: 300;
   margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  #faqs-page {
+    text-align: left;
+  }
 }
 
 #news-page .page-title-container {
