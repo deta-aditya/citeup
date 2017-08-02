@@ -12,7 +12,7 @@
             <div class="container">
                 <h1 class="page-title">
                     {{ $news->title }}
-                    <div class="pull-right">
+                    <div class="pull-right hidden-xs">
                         <a class="back-link" href="{{ route('news') }}">Kembali ke Indeks</a>
                     </div>
                 </h1>

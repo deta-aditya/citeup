@@ -13008,6 +13008,7 @@ trix-editor .attachment progress {
 }
 
 #activities-page .page-title {
+  text-align: center;
   font-weight: 300;
 }
 
@@ -13136,6 +13137,9 @@ trix-editor .attachment progress {
 }
 
 @media (min-width: 992px) {
+  #activities-page .page-title {
+    text-align: left;
+  }
   #activities-page .col-right-side {
     margin-top: 0;
   }
@@ -13195,6 +13199,7 @@ trix-editor .attachment progress {
 
 #news-page .page-title {
   color: #fff;
+  text-align: center;
   font-weight: 700;
 }
 
@@ -13230,12 +13235,19 @@ trix-editor .attachment progress {
 }
 
 #news-page .panel-content .news-picture {
-  height: 350px;
+  height: auto;
+  width: 250px;
 }
 
 #news-page .panel-content .editor-placeholder img {
   width: 40px;
   margin-right: 10px;
+}
+
+#news-page .news-list {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #news-page .news-list-item {
@@ -13245,6 +13257,7 @@ trix-editor .attachment progress {
 }
 
 #news-page .news-list-item h3 {
+  font-size: 14pt;
   margin: 0 0 10px;
   font-weight: bold;
 }
@@ -13269,6 +13282,22 @@ trix-editor .attachment progress {
   font-size: 12pt;
   font-weight: 400;
   color: #fff !important;
+}
+
+@media (min-width: 768px) {
+  #news-page .panel-content .news-picture {
+    height: 350px;
+    width: auto;
+  }
+  #news-page .page-title {
+    text-align: left;
+  }
+  #news-page .news-list {
+    max-width: 100%;
+  }
+  #news-page .news-list-item h3 {
+    font-size: 18pt;
+  }
 }
 
 #error-page {
