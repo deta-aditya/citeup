@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Modules\Electrons\Keys\KeyService;
-use App\User;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,11 +10,6 @@ use App\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/user', function (Request $request) {
-    $user = User::find(3);
-    return [$user->hasKey('get-users')];
-});
 
 /*
  * API v1 Namespace Group
