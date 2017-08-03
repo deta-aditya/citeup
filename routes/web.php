@@ -67,7 +67,7 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Dashboard\Controllers'], function () {
         
-        Route::get('/app/{vue?}', 'DashboardController@index')->name('dashboard')->where('vue', '[\/\w\.-]*');
+        Route::get('/panel/{vue?}', 'DashboardController@index')->name('dashboard')->where('vue', '[\/\w\.-]*');
         
     });
 
