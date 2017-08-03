@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <img src="{{ asset('storage/images/web/main_illustration.png') }}" class="main-illustration">
+                        <img src="{{ asset('images/web/main_illustration.png') }}" class="main-illustration">
                         <p class="text-center main-motto">" Celebrating The Golden Era of Technology "</p>
                         <div class="row activity-list hidden-sm hidden-xs">
                             @foreach ($activities as $activity)
@@ -83,8 +83,8 @@
                         </div>
                         <div class="text-center logo-up-container">
                             <p>Acara ini diselenggarakan oleh</p>
-                            <img src="{{ asset('storage/images/web/focs_white_sm.png') }}" class="logo-up">
-                            <img src="{{ asset('storage/images/web/logoup_white_sm.png') }}" class="logo-up">
+                            <img src="{{ asset('images/web/focs_white_sm.png') }}" class="logo-up">
+                            <img src="{{ asset('images/web/logoup_white_sm.png') }}" class="logo-up">
                         </div>
                     </div>
 

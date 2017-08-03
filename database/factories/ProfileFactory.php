@@ -18,7 +18,7 @@ $factory->define(App\Modules\Models\Profile::class, function (Faker\Generator $f
         'address' => $faker->address,
         'school' => $faker->company,
         'city' => $faker->city,
-        'photo' => 'storage/images/default.jpg',
+        'photo' => 'images/default.jpg',
         'phone' => $faker->phoneNumber,
         'section' => $faker->jobTitle,
     ];

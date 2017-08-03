@@ -21705,7 +21705,7 @@ Citeup.appPath = document.head.querySelector('meta[name="app-path"]').content;
 
 Citeup.apiPath = Citeup.appPath + '/api/v1';
 
-Citeup.defaultImage = Citeup.appPath + '/storage/images/default.jpg';
+Citeup.defaultImage = Citeup.appPath + '/images/default.jpg';
 
 Citeup.defaultTableParams = {
     skip: 0,
@@ -78038,7 +78038,7 @@ var ORIGINAL_FILE_PATH = 'No file selected.';
 
             this.status = FILE_REMOVING;
 
-            if (this.filePath === 'storage/images/default.jpg') {
+            if (this.filePath === 'storage/images/default.jpg' || this.filePath === __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].defaultImage) {
                 this.backToNone();
                 return;
             }

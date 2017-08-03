@@ -8,8 +8,8 @@
 <div id="front-footer" style="">
     <div class="container">
         <div class="upper-yard">
-            <img src="{{ asset('storage/images/web/logoup_sm.png') }}" class="footer-img logo-up">
-            <img src="{{ asset('storage/images/web/logo_lg.png') }}" class="footer-img logo-citeup">
+            <img src="{{ asset('images/web/logoup_sm.png') }}" class="footer-img logo-up">
+            <img src="{{ asset('images/web/logo_lg.png') }}" class="footer-img logo-citeup">
         </div>
         <div class="row middle-yard">
             <div class="col-sm-4">

@@ -15,7 +15,7 @@ class ProfileService extends Service
      *
      * @var Profile
      */
-    protected $defaultPhoto = 'storage/images/default.jpg';
+    protected $defaultPhoto = 'images/default.jpg';
 
     /**
      * The main model for the service.

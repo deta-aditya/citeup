@@ -12376,7 +12376,7 @@ trix-editor .attachment progress {
 #front-welcometron {
   height: 450px;
   background-color: #2a2a2a;
-  background-image: url(../storage/images/web/bg_welcometron.png);
+  background-image: url(../images/web/bg_welcometron.png);
   background-position-x: center;
   background-position-y: bottom;
   background-repeat: no-repeat;
@@ -12489,7 +12489,7 @@ trix-editor .attachment progress {
 
 #front-activities {
   background: #ffc533;
-  background-image: url(../storage/images/web/bg_about.png);
+  background-image: url(../images/web/bg_about.png);
   background-repeat: repeat-x;
   background-size: 800px;
   padding: 20px 0 70px;
@@ -12993,7 +12993,7 @@ trix-editor .attachment progress {
 #front-contact-us {
   padding: 10px 0 60px;
   background-color: #ffc533;
-  background-image: url(../storage/images/web/bg_contact.png);
+  background-image: url(../images/web/bg_contact.png);
   background-repeat: repeat-x;
   background-size: 900px;
 }
@@ -13092,7 +13092,7 @@ trix-editor .attachment progress {
 }
 
 #about-page .content-container {
-  background-image: url(../storage/images/web/bg_about.png);
+  background-image: url(../images/web/bg_about.png);
   background-repeat: repeat-x;
   background-size: 700px;
 }
@@ -13226,7 +13226,7 @@ trix-editor .attachment progress {
 }
 
 #activities-page .content-container {
-  background-image: url(../storage/images/web/bg_contact.png);
+  background-image: url(../images/web/bg_contact.png);
   background-repeat: repeat-x;
   background-size: 800px;
 }
@@ -13436,7 +13436,7 @@ trix-editor .attachment progress {
 }
 
 #faqs-page .content-container {
-  background-image: url(../storage/images/web/bg_contact.png);
+  background-image: url(../images/web/bg_contact.png);
   background-repeat: repeat-x;
   background-size: 800px;
 }
@@ -13508,7 +13508,7 @@ trix-editor .attachment progress {
 }
 
 #news-page .content-container {
-  background-image: url(../storage/images/web/bg_about.png);
+  background-image: url(../images/web/bg_about.png);
   background-repeat: repeat-x;
   background-size: 700px;
 }

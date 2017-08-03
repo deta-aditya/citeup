@@ -428,7 +428,7 @@
 
                 this.status = FILE_REMOVING;
 
-                if (this.filePath === 'storage/images/default.jpg') {
+                if (this.filePath === 'storage/images/default.jpg' || this.filePath === Citeup.defaultImage) {
                     this.backToNone()
                     return
                 }

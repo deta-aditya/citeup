@@ -22,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Favicon -->
-    <link href="{{ asset('storage/images/web/favicon.png') }}" rel="shortcut icon" type="image/png">
+    <link href="{{ asset('images/web/favicon.png') }}" rel="shortcut icon" type="image/png">
 </head>
 <body>
     <div id="app-front">
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-4">
                     <div class="logo-placeholder">
-                        <img src="{{ asset('storage/images/web/logo_simple_sm.png') }}">
+                        <img src="{{ asset('images/web/logo_simple_sm.png') }}">
                     </div>
                 </div>
                 <div class="col-sm-4">

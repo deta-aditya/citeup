@@ -23,7 +23,7 @@
                 <div class="panel panel-content panel-default">
                     <div class="panel-body">
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($news->edits->last()->user->profile) ? '/storage/images/default.jpg' : $news->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset(is_null($news->edits->last()->user->profile) ? '/images/default.jpg' : $news->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                             <div>{{ $news->edits->last()->user->name }}</div>
                             <small>Terakhir disunting pada {{ \Carbon\Carbon::parse($news->edits->last()->created_at)->format('j M, H:i') }}</small>
                         </div>

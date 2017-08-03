@@ -12,7 +12,7 @@ class SponsorService extends Service
      *
      * @var string
      */
-    protected $defaultPicture = 'storage/images/default.jpg';
+    protected $defaultPicture = 'images/default.jpg';
 
     /**
      * The main model for the service.
