@@ -12898,6 +12898,7 @@ trix-editor .attachment progress {
 
 #front-news #news-list .img-placeholder {
   width: 100%;
+  height: 125px;
   margin-bottom: 10px;
   display: block;
   overflow: hidden;
@@ -13102,7 +13103,7 @@ trix-editor .attachment progress {
 
 #about-page .panel-content {
   border: none;
-  font-size: 8.75pt;
+  font-size: 9pt;
   margin-bottom: 20px;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
 }
@@ -13296,7 +13297,7 @@ trix-editor .attachment progress {
 }
 
 #activities-page .activity-description {
-  font-size: 8.75pt;
+  font-size: 9pt;
 }
 
 #activities-page .btn-register {
@@ -13484,8 +13485,9 @@ trix-editor .attachment progress {
 
 #news-page .page-title {
   color: #fff;
-  text-align: center;
+  font-size: 22.5pt;
   font-weight: 700;
+  text-align: center;
 }
 
 #news-page .content-container {
@@ -13513,6 +13515,7 @@ trix-editor .attachment progress {
 
 #news-page .panel-content .panel-body {
   border-bottom: 1px solid #ddd;
+  font-size: 9pt;
 }
 
 #news-page .panel-content .panel-body:last-child {
@@ -13521,11 +13524,15 @@ trix-editor .attachment progress {
 
 #news-page .panel-content .news-picture {
   height: auto;
-  width: 250px;
+  width: 150px;
+}
+
+#news-page .panel-content .editor-placeholder {
+  font-size: 9pt;
 }
 
 #news-page .panel-content .editor-placeholder img {
-  width: 40px;
+  width: 30px;
   margin-right: 10px;
 }
 
@@ -13538,7 +13545,7 @@ trix-editor .attachment progress {
 #news-page .news-list-item {
   border: none;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
-  height: 340px;
+  height: auto;
 }
 
 #news-page .news-list-item h3 {
@@ -13549,7 +13556,7 @@ trix-editor .attachment progress {
 
 #news-page .news-list-item .img-placeholder {
   width: 100%;
-  height: 133px;
+  height: 125px;
   padding: 0;
   overflow: hidden;
 }
@@ -13558,8 +13565,16 @@ trix-editor .attachment progress {
   width: 100%;
 }
 
+#news-page .news-list-item .news-content {
+  font-size: 9pt;
+}
+
+#news-page .news-list-item .editor-placeholder {
+  font-size: 9pt;
+}
+
 #news-page .news-list-item .editor-placeholder img {
-  width: 40px;
+  width: 30px;
   margin-right: 10px;
 }
 
@@ -13567,6 +13582,37 @@ trix-editor .attachment progress {
   font-size: 12pt;
   font-weight: 400;
   color: #fff !important;
+}
+
+@media (min-width: 480px) {
+  #news-page .page-title {
+    font-size: 27pt;
+  }
+  #news-page .panel-content .news-picture {
+    height: auto;
+    width: 250px;
+  }
+  #news-page .panel-content .panel-body {
+    font-size: 10.5pt;
+  }
+  #news-page .panel-content .editor-placeholder {
+    font-size: 10.5pt;
+  }
+  #news-page .panel-content .editor-placeholder img {
+    width: 40px;
+  }
+  #news-page .news-list-item .img-placeholder {
+    height: 133px;
+  }
+  #news-page .news-list-item .news-content {
+    font-size: 10.5pt;
+  }
+  #news-page .news-list-item .editor-placeholder {
+    font-size: 10.5pt;
+  }
+  #news-page .news-list-item .editor-placeholder img {
+    width: 40px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -13579,6 +13625,9 @@ trix-editor .attachment progress {
   }
   #news-page .news-list {
     max-width: 100%;
+  }
+  #news-page .news-list-item {
+    height: 340px;
   }
   #news-page .news-list-item h3 {
     font-size: 18pt;
