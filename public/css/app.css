@@ -13083,6 +13083,7 @@ trix-editor .attachment progress {
 #about-page .page-title {
   color: #fff;
   font-weight: 700;
+  font-size: 22.5pt;
 }
 
 #about-page .content-container {
@@ -13097,6 +13098,7 @@ trix-editor .attachment progress {
 
 #about-page .panel-content {
   border: none;
+  font-size: 8.75pt;
   margin-bottom: 20px;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
 }
@@ -13116,6 +13118,7 @@ trix-editor .attachment progress {
 
 #about-page .panel-content h2 {
   margin: 0;
+  font-size: 18pt;
   font-weight: 300;
   padding-top: 30px;
   padding-bottom: 20px;
@@ -13123,6 +13126,10 @@ trix-editor .attachment progress {
 
 #about-page .panel-content h2:first-of-type {
   padding-top: 0;
+}
+
+#about-page .panel-content ul {
+  padding-left: 20px;
 }
 
 #about-page .panel-content ul li {
@@ -13165,7 +13172,7 @@ trix-editor .attachment progress {
 }
 
 #about-page .logo-up-container {
-  margin-top: 40px;
+  margin-top: 10px;
   margin-bottom: 70px;
 }
 
@@ -13176,8 +13183,30 @@ trix-editor .attachment progress {
 }
 
 #about-page .logo-up-container .logo-up {
-  height: 125px;
-  margin: 0 15px;
+  height: 100px;
+  margin: 15px 0;
+}
+
+@media (min-width: 480px) {
+  #about-page .page-title {
+    font-size: 27pt;
+  }
+  #about-page .panel-content {
+    font-size: 10.5pt;
+  }
+  #about-page .panel-content h2 {
+    font-size: 22.5pt;
+  }
+  #about-page .panel-content ul {
+    padding-left: 40px;
+  }
+  #about-page .logo-up-container {
+    margin-top: 40px;
+  }
+  #about-page .logo-up-container .logo-up {
+    height: 125px;
+    margin: 0 15px;
+  }
 }
 
 #activities-page .page-title-container {
