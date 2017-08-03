@@ -39,13 +39,10 @@
         margin: 0;
     }
 
-    .control-label {
-        font-weight: normal;
-    }
-
-    .form-control {
-        border-color: #ccc;
-        border-radius: 0;
+    .email {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hypens: auto;
     }
 
     @media (min-width: $screen-sm-min) {

@@ -1,9 +1,13 @@
 
 .short-middle-bar {
-    width: 400px;
+    width: 150px;
     border-color: #ddd;
     margin-top: 0;
     margin-bottom: 0;
+
+    @media (min-width: $screen-sm-min) {
+        width: 400px;
+    }
 }
 
 @import "landing/welcometron";

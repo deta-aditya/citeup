@@ -12276,7 +12276,7 @@ trix-editor .attachment progress {
 }
 
 #front-footer .upper-yard {
-  paddin: 20px 0 10px;
+  padding: 20px 0 10px;
 }
 
 #front-footer .upper-yard > :first-child {
@@ -12292,6 +12292,7 @@ trix-editor .attachment progress {
 }
 
 #front-footer .lower-yard {
+  font-size: 9pt;
   padding: 20px 0;
 }
 
@@ -12299,27 +12300,56 @@ trix-editor .attachment progress {
   margin-top: 20px;
 }
 
+#front-footer .footer-links h3 {
+  font-size: 14pt;
+}
+
+#front-footer .footer-links ul {
+  font-size: 9pt;
+}
+
 #front-footer .footer-img {
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 7px;
   vertical-align: bottom;
 }
 
 #front-footer .footer-img.logo-citeup {
-  height: 40px;
+  height: 30px;
 }
 
 #front-footer .footer-img.logo-up {
-  height: 75px;
+  margin-right: 20px;
+  height: 50px;
 }
 
 #front-footer .socmeds a {
   margin-right: 8px;
 }
 
+@media (min-width: 480px) {
+  #front-footer .footer-links h3 {
+    font-size: 18pt;
+  }
+  #front-footer .footer-links ul {
+    font-size: 10.5pt;
+  }
+  #front-footer .footer-img.logo-citeup {
+    height: 40px;
+  }
+  #front-footer .footer-img.logo-up {
+    height: 75px;
+  }
+  #front-footer .lower-yard {
+    font-size: 10.5pt;
+  }
+}
+
 @media (min-width: 768px) {
   #front-footer {
     text-align: left;
+  }
+  #front-footer .footer-img {
+    margin-bottom: 20px;
   }
   #front-footer .footer-links {
     margin-top: 0;
@@ -12327,20 +12357,26 @@ trix-editor .attachment progress {
 }
 
 .short-middle-bar {
-  width: 400px;
+  width: 150px;
   border-color: #ddd;
   margin-top: 0;
   margin-bottom: 0;
 }
 
+@media (min-width: 768px) {
+  .short-middle-bar {
+    width: 400px;
+  }
+}
+
 #front-welcometron {
-  height: 550px;
+  height: 450px;
   background-color: #2a2a2a;
   background-image: url(../storage/images/web/bg_welcometron.png);
   background-position-x: center;
   background-position-y: bottom;
   background-repeat: no-repeat;
-  background-size: 650px;
+  background-size: 500px;
 }
 
 #front-welcometron .logo-placeholder {
@@ -12348,11 +12384,11 @@ trix-editor .attachment progress {
 }
 
 #front-welcometron .logo-placeholder img {
-  width: 300px;
+  width: 200px;
 }
 
 #front-welcometron .text-placeholder {
-  margin-top: 155px;
+  margin-top: 140px;
   color: #161616;
   font-weight: 700;
 }
@@ -12363,17 +12399,40 @@ trix-editor .attachment progress {
 
 #front-welcometron .notice {
   margin-bottom: 0;
-  font-size: 11pt;
+  font-size: 9pt;
 }
 
 #front-welcometron .countdown .unit-number {
-  width: 60px;
+  width: 35px;
   text-align: center;
-  font-size: 30pt;
+  font-size: 20pt;
 }
 
 #front-welcometron .countdown .unit-info {
-  font-size: 11pt;
+  font-size: 9pt;
+}
+
+@media (min-width: 480px) {
+  #front-welcometron {
+    height: 550px;
+    background-size: 650px;
+  }
+  #front-welcometron .logo-placeholder img {
+    width: 300px;
+  }
+  #front-welcometron .text-placeholder {
+    margin-top: 155px;
+  }
+  #front-welcometron .notice {
+    font-size: 11pt;
+  }
+  #front-welcometron .countdown .unit-number {
+    width: 60px;
+    font-size: 30pt;
+  }
+  #front-welcometron .countdown .unit-info {
+    font-size: 11pt;
+  }
 }
 
 @media (min-width: 768px) {
@@ -12400,13 +12459,28 @@ trix-editor .attachment progress {
 #front-about {
   background-color: #f49e26;
   color: #eeeedd;
-  padding: 50px 0 70px;
+  padding: 25px 0;
 }
 
 #front-about p {
-  font-size: 24pt;
+  font-size: 16pt;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+@media (min-width: 480px) {
+  #front-about {
+    padding: 30px 0 40px;
+  }
+  #front-about p {
+    font-size: 24pt;
+  }
+}
+
+@media (min-width: 768px) {
+  #front-about {
+    padding: 50px 0 70px;
+  }
 }
 
 #front-activities {
@@ -12415,7 +12489,7 @@ trix-editor .attachment progress {
   background-repeat: repeat-x;
   background-size: 800px;
   padding: 20px 0 70px;
-  height: 200px;
+  height: 375px;
 }
 
 #front-activities .container-container {
@@ -12433,13 +12507,17 @@ trix-editor .attachment progress {
   padding: 8px;
 }
 
+#front-activities .activity-item-placeholder {
+  width: 100%;
+}
+
 #front-activities .activity-item {
   border: none;
   display: block;
   color: #636b6f !important;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
-  height: 150px;
-  margin: 0;
+  height: auto;
+  margin: 0 0 10px;
   transition: 0.2s;
 }
 
@@ -12462,6 +12540,15 @@ trix-editor .attachment progress {
 
 #front-activities .activity-icon {
   height: 75px;
+}
+
+@media (min-width: 480px) {
+  #front-activities {
+    height: 150px;
+  }
+  #front-activities .activity-item-placeholder {
+    width: 33.33333333%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -12512,7 +12599,7 @@ trix-editor .attachment progress {
 #front-prizes {
   background: #ffc533;
   overflow-y: visible;
-  height: 880px;
+  height: 700px;
 }
 
 #front-prizes .container-container {
@@ -12523,7 +12610,7 @@ trix-editor .attachment progress {
 }
 
 #front-prizes .panel-prizes {
-  margin: 5px 25px 0;
+  margin: 5px 12px 0;
   border: none;
   box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
 }
@@ -12536,12 +12623,16 @@ trix-editor .attachment progress {
 
 #front-prizes .prizes-list-item h3 {
   margin: 0 0 30px;
-  font-size: 14pt;
+  font-size: 10pt;
   color: #dd7322;
 }
 
 #front-prizes .prizes-list-item:first-child {
-  border-right: 1px solid #ddd;
+  border-right: none;
+}
+
+#front-prizes .prizes-list-item:last-child {
+  border-top: 1px solid #ddd;
 }
 
 #front-prizes .prizes-list-item .prize-wrapper {
@@ -12550,31 +12641,61 @@ trix-editor .attachment progress {
 
 #front-prizes .prizes-list-item .prize-place {
   font-weight: 700;
-  font-size: 14pt;
+  font-size: 9pt;
   text-transform: uppercase;
 }
 
 #front-prizes .prizes-list-item .prize-qty {
   margin: 4px 0;
-  font-size: 22pt;
+  font-size: 14pt;
   font-weight: 300;
 }
 
 #front-prizes .prizes-title {
   font-weight: 700;
-  font-size: 18pt;
+  font-size: 10pt;
   text-transform: uppercase;
 }
 
 #front-prizes .total-prizes {
-  font-size: 24pt;
+  font-size: 16pt;
   font-weight: 300;
   margin: 12px 0;
+}
+
+@media (min-width: 480px) {
+  #front-prizes {
+    height: 880px;
+  }
+  #front-prizes .prizes-list-item h3 {
+    font-size: 14pt;
+  }
+  #front-prizes .prizes-list-item .prize-place {
+    font-size: 14pt;
+  }
+  #front-prizes .prizes-list-item .prize-qty {
+    font-size: 22pt;
+  }
+  #front-prizes .panel-prizes {
+    margin: 0 20px 0;
+  }
+  #front-prizes .prizes-title {
+    font-size: 18pt;
+  }
+  #front-prizes .total-prizes {
+    font-size: 24pt;
+  }
 }
 
 @media (min-width: 768px) {
   #front-prizes {
     height: 590px;
+  }
+  #front-prizes .prizes-list-item:first-child {
+    border-right: 1px solid #ddd;
+  }
+  #front-prizes .prizes-list-item:last-child {
+    border-top: none;
   }
   #front-prizes .panel-prizes {
     margin-top: 30px;
@@ -12616,9 +12737,9 @@ trix-editor .attachment progress {
 #front-map .map-info {
   position: absolute;
   z-index: 99;
-  width: 200px;
+  width: 185px;
   margin-top: -220px;
-  margin-left: 35px;
+  margin-left: 30px;
   background: #dd7322;
   color: #eeeedd;
   border: 1px solid #cb6a1f;
@@ -12640,6 +12761,13 @@ trix-editor .attachment progress {
 
 #front-map .go-to-location {
   color: #eeeedd !important;
+}
+
+@media (min-width: 480px) {
+  #front-map .map-info {
+    width: 200px;
+    margin-left: 35px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -12665,11 +12793,12 @@ trix-editor .attachment progress {
 }
 
 #front-faq {
-  padding: 60px 0 90px;
+  padding: 30px 0 50px;
   text-align: center;
 }
 
 #front-faq h2 {
+  font-size: 18pt;
   font-weight: 300;
 }
 
@@ -12692,18 +12821,38 @@ trix-editor .attachment progress {
 }
 
 #front-faq #faq-list .panel-title {
-  padding: 5px 12px;
+  padding: 4px 10px;
   font-weight: bold;
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 #front-faq #faq-list .panel-body {
-  font-size: 11pt;
-  padding: 8px;
+  font-size: 10pt;
+  padding: 6px;
 }
 
 #front-faq .see-all {
-  font-size: 14pt;
+  font-size: 10pt;
+}
+
+@media (min-width: 480px) {
+  #front-faq {
+    padding: 60px 0 90px;
+  }
+  #front-faq h2 {
+    font-size: 22.5pt;
+  }
+  #front-faq #faq-list .panel-title {
+    padding: 5px 12px;
+    font-size: 14pt;
+  }
+  #front-faq #faq-list .panel-body {
+    font-size: 11pt;
+    padding: 8px;
+  }
+  #front-faq .see-all {
+    font-size: 14pt;
+  }
 }
 
 @media (min-width: 768px) {
@@ -12724,10 +12873,11 @@ trix-editor .attachment progress {
 }
 
 #front-news {
-  padding: 60px 0 90px;
+  padding: 30px 0 50px;
 }
 
 #front-news h2 {
+  font-size: 18pt;
   font-weight: 300;
 }
 
@@ -12744,7 +12894,6 @@ trix-editor .attachment progress {
 
 #front-news #news-list .img-placeholder {
   width: 100%;
-  height: 175px;
   margin-bottom: 10px;
   display: block;
   overflow: hidden;
@@ -12759,18 +12908,50 @@ trix-editor .attachment progress {
 }
 
 #front-news #news-list .news-first .img-placeholder {
-  height: 175px;
+  height: 125px;
   margin: 0;
 }
 
+#front-news #news-list .news-content {
+  font-size: 9pt;
+}
+
+#front-news #news-list .editor-placeholder {
+  font-size: 9pt;
+}
+
 #front-news #news-list .editor-placeholder img {
-  width: 40px;
+  width: 30px;
   margin-right: 10px;
 }
 
 #front-news .see-all {
-  font-size: 14pt;
+  font-size: 10pt;
   text-align: center;
+}
+
+@media (min-width: 480px) {
+  #front-news {
+    padding: 60px 0 90px;
+  }
+  #front-news h2 {
+    font-size: 22.5pt;
+  }
+  #front-news #news-list .img-placeholder {
+    height: 175px;
+  }
+  #front-news #news-list .news-content {
+    font-size: 10.5pt;
+  }
+  #front-news #news-list .editor-placeholder {
+    font-size: 10.5pt;
+  }
+  #front-news #news-list .editor-placeholder img {
+    width: 40px;
+  }
+  #front-news .see-all {
+    font-size: 14pt;
+  }
 }
 
 @media (min-width: 768px) {
@@ -12843,13 +13024,10 @@ trix-editor .attachment progress {
   margin: 0;
 }
 
-#front-contact-us .control-label {
-  font-weight: normal;
-}
-
-#front-contact-us .form-control {
-  border-color: #ccc;
-  border-radius: 0;
+#front-contact-us .email {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hypens: auto;
 }
 
 @media (min-width: 768px) {

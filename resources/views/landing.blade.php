@@ -39,7 +39,7 @@
                     @php 
                         $realActivity = $activities->where('id', $activity['id'])->first();
                     @endphp
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 activity-item-placeholder">
                         <a href="{{ route('activities', ['t' => kebab_case($realActivity->name)]) }}" class="panel panel-default text-center activity-item">
                             <div class="panel-body icon-holder">
                                 <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
@@ -176,7 +176,7 @@
                     </div>
                     <div class="col-sm-4">
                         <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
-                        <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                        <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
                             <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                             <div>{{ $item->edits->last()->user->name }}</div>
@@ -192,7 +192,7 @@
                                 <img src="{{ asset($item->picture) }}">
                             </a>
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
-                            <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                            <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
                                 <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
@@ -297,7 +297,7 @@
                         <dl>
                             <dt>Adam Marsono Putra</dt>
                             <dd>082133022618</dd>
-                            <dd>a.putra@universitaspertamina.ac.id</dd>
+                            <dd class="email">a.putra@universitaspertamina.ac.id</dd>
                             <dd><a href="http://line.me/ti/p/~damanotra" target="_blank">damanotra</a></dd>
                         </dl>      
                     </div>
@@ -305,7 +305,7 @@
                         <dl>
                             <dt>Aries Dwi Prasetiyo</dt>
                             <dd>081230102023</dd>
-                            <dd>ariesdwiprasetiyo4@gmail.com</dd>
+                            <dd class="email">ariesdwiprasetiyo4@gmail.com</dd>
                             <dd><a href="http://line.me/ti/p/~aries0" target="_blank">aries0</a></dd>
                         </dl>
                     </div>
@@ -313,80 +313,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <div class="container">
-        <div class="row">
-            <div class="col-sm-6">  
-                <form class="panel panel-default panel-contact-form" method="post" action="">
-                    <div class="panel-body">
-                        <h2 class="text-center">Hubungi Kami</h2>
-                    </div>
-                    <div class="panel-body form-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Nama</label>
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Alamat E-mail</label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Judul</label>
-                            <input type="text" class="form-control" name="subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Pesan</label>
-                            <textarea class="form-control" name="subject"></textarea>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <button type="submit" class="btn btn-lg btn-primary pull-right">
-                            Kirim Pesan
-                        </button>
-                        <div>Balasan akan kami kirim ke alamat e-mail yang Anda tulis di atas.</div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-social panel-default">
-                    <div class="panel-body">
-                        <h2 class="text-center">Media Sosial</h2>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <a href="http://facebook.com/{{ $config['contact']['facebook'] }}"><i class="fa fa-5x fa-facebook-square"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="http://twitter.com/{{ $config['contact']['twitter'] }}"><i class="fa fa-5x fa-twitter-square"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="http://instagram.com/{{ $config['contact']['instagram'] }}"><i class="fa fa-5x fa-instagram"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a class="line" href="http://line.me/ti/p/~{{ $config['contact']['line'] }}">LINE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default panel-contact-person">
-                    <div class="panel-body">
-                        <h2 class="text-center">Contact Person</h2>
-                    </div>
-                    <div class="panel-body">
-                        @foreach ($config['contact']['phones'] as $name => $number)
-                        <div class="contact-person-item row">
-                            <div class="col-xs-5 text-right">
-                                <strong>{{ $name }}</strong> :
-                            </div> 
-                            <div class="col-xs-7">{{ $number }}</div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
 </div>
 @endif
