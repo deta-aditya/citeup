@@ -13060,23 +13060,45 @@ trix-editor .attachment progress {
 }
 
 #front-sponsors {
-  padding: 50px;
+  padding: 30px;
+  margin-bottom: 30px;
   background-color: #fff;
 }
 
 #front-sponsors h2 {
-  font-size: 15pt;
+  font-size: 11pt;
 }
 
 #front-sponsors .sponsors-list {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 #front-sponsors .sponsor-item {
-  height: 75px;
-  margin: 10px;
+  height: 50px;
+  margin: 5px;
   display: inline-block;
   vertical-align: top;
+}
+
+#front-sponsors .sponsors-container {
+  margin-bottom: 50px;
+}
+
+#front-sponsors .media-partners-container {
+  margin-top: 50px;
+}
+
+@media (min-width: 480px) {
+  #front-sponsors {
+    padding: 50px;
+  }
+  #front-sponsors h2 {
+    font-size: 15pt;
+  }
+  #front-sponsors .sponsor-item {
+    height: 75px;
+    margin: 10px;
+  }
 }
 
 #about-page .page-title-container {

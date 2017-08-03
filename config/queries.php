@@ -305,15 +305,15 @@ return [
     'sponsors' => [
 
         'selectable' => [
-            'name', 'picture',
+            'name', 'picture', 'type', 'url',
         ],
 
         'sortable' => [
-            'name',
+            'name', 'type', 'url',
         ],
 
         'comparable' => [
-            'name', 'picture',
+            'name', 'picture', 'type', 'url',
         ],
 
         'loadable' => [

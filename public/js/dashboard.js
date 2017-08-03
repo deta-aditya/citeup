@@ -21705,7 +21705,9 @@ Citeup.appPath = document.head.querySelector('meta[name="app-path"]').content;
 
 Citeup.apiPath = Citeup.appPath + '/api/v1';
 
-Citeup.defaultImage = Citeup.appPath + '/images/default.jpg';
+Citeup.defaultImageClean = 'images/default.jpg';
+
+Citeup.defaultImage = Citeup.appPath + '/' + Citeup.defaultImageClean;
 
 Citeup.defaultTableParams = {
     skip: 0,
@@ -78038,7 +78040,7 @@ var ORIGINAL_FILE_PATH = 'No file selected.';
 
             this.status = FILE_REMOVING;
 
-            if (this.filePath === 'storage/images/default.jpg' || this.filePath === __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].defaultImage) {
+            if (this.filePath === 'storage/images/default.jpg' || this.filePath === __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].defaultImageClean) {
                 this.backToNone();
                 return;
             }
@@ -81458,6 +81460,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81490,13 +81501,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+var RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             formPanel: null,
             sponsor: { id: 0 },
-            created: false
+            created: false,
+            radioButtons: RADIO_BUTTONS
         };
     },
     created: function created() {
@@ -81511,7 +81526,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createSponsor: function createSponsor() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/sponsors', { name: 'Sponsor' }).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/sponsors', { name: 'Sponsor', type: 1 }).then(function (response) {
                 _this.sponsor = response.data.data.sponsor;
             });
         },
@@ -81544,7 +81559,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'form-panel': __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue___default.a,
         'text-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default.a,
-        'file-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default.a
+        'file-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default.a,
+        'radio-button': __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue___default.a
     }
 
 });
@@ -81631,6 +81647,14 @@ var STATES = ['user'];
         },
         assetify: function assetify(value) {
             return __WEBPACK_IMPORTED_MODULE_3__citeup__["a" /* default */].appPath + '/' + value;
+        },
+        detectType: function detectType(value) {
+            switch (value) {
+                case 1:
+                    return 'Sponsor';
+                case 2:
+                    return 'Media Partner';
+            }
         }
     },
 
@@ -81678,6 +81702,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81710,6 +81743,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+var RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -81725,7 +81761,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             formPanel: null,
-            sponsor: {}
+            sponsor: {},
+            radioButtons: RADIO_BUTTONS
         };
     },
     created: function created() {
@@ -81758,7 +81795,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'form-panel': __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue___default.a,
         'text-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default.a,
-        'file-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default.a
+        'file-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FileInput_vue___default.a,
+        'radio-button': __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RadioButton_List_vue___default.a
     }
 
 });
@@ -83599,7 +83637,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n            Logo Sponsor\n            "), _c('p', {
     staticClass: "help-block",
     slot: "help-block"
-  }, [_vm._v("Agar pemuatan halaman lebih cepat, gunakan gambar berformat .png dengan tinggi 100px dan latar belakang transparan.")])]), _vm._v(" "), _c('template', {
+  }, [_vm._v("Agar pemuatan halaman lebih cepat, gunakan gambar berformat .png dengan tinggi 100px dan latar belakang transparan.")])]), _vm._v(" "), _c('radio-button', {
+    attrs: {
+      "name": "type",
+      "label-width": 2,
+      "control-width": 10,
+      "list": _vm.radioButtons
+    },
+    scopedSlots: _vm._u([{
+      key: "list",
+      fn: function(props) {
+        return [_vm._v(_vm._s(props.data))]
+      }
+    }]),
+    model: {
+      value: (_vm.sponsor.type),
+      callback: function($$v) {
+        _vm.sponsor.type = $$v
+      },
+      expression: "sponsor.type"
+    }
+  }, [_vm._v("\n            Tipe\n            ")]), _vm._v(" "), _c('text-input', {
+    attrs: {
+      "name": "url",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.sponsor.url),
+      callback: function($$v) {
+        _vm.sponsor.url = $$v
+      },
+      expression: "sponsor.url"
+    }
+  }, [_vm._v("\n            URL (Tidak Wajib)\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"
@@ -85660,7 +85732,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           attrs: {
             "src": _vm._f("assetify")(props.data.picture)
           }
-        }), _vm._v("\n                    " + _vm._s(props.data.name) + "\n                ")]), _vm._v(" "), _c('p', [_c('small', {
+        }), _vm._v("\n                    " + _vm._s(props.data.name) + ", "), _c('small', [_vm._v(_vm._s(_vm._f("detectType")(props.data.type)))])]), _vm._v(" "), _c('p', [_c('small', {
           staticClass: "text-muted"
         }, [_vm._v("\n                        Dibuat pada " + _vm._s(_vm._f("normalize")(props.data.created_at)) + ". Terakhir disunting pada " + _vm._s(_vm._f("normalize")(props.data.updated_at)) + "\n                    ")])])], 2)]
       }
@@ -85998,7 +86070,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n            Logo Sponsor\n            "), _c('p', {
     staticClass: "help-block",
     slot: "help-block"
-  }, [_vm._v("Agar pemuatan halaman lebih cepat, gunakan gambar berformat .png dengan tinggi 100px dan latar belakang transparan.")])]), _vm._v(" "), _c('template', {
+  }, [_vm._v("Agar pemuatan halaman lebih cepat, gunakan gambar berformat .png dengan tinggi 100px dan latar belakang transparan.")])]), _vm._v(" "), _c('radio-button', {
+    attrs: {
+      "name": "type",
+      "label-width": 2,
+      "control-width": 10,
+      "list": _vm.radioButtons
+    },
+    scopedSlots: _vm._u([{
+      key: "list",
+      fn: function(props) {
+        return [_vm._v(_vm._s(props.data))]
+      }
+    }]),
+    model: {
+      value: (_vm.sponsor.type),
+      callback: function($$v) {
+        _vm.sponsor.type = $$v
+      },
+      expression: "sponsor.type"
+    }
+  }, [_vm._v("\n            Tipe\n            ")]), _vm._v(" "), _c('text-input', {
+    attrs: {
+      "name": "url",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.sponsor.url),
+      callback: function($$v) {
+        _vm.sponsor.url = $$v
+      },
+      expression: "sponsor.url"
+    }
+  }, [_vm._v("\n            URL (Tidak Wajib)\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"
@@ -87166,7 +87272,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         value: {
-            type: String
+            type: Number
         }
 
     },
@@ -87277,6 +87383,318 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-6c6ad706", module.exports)
+  }
+}
+
+/***/ }),
+/* 464 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__item__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+
+        name: {
+            type: String,
+            required: true
+        },
+
+        list: {
+            type: Object,
+            required: true
+        },
+
+        grouped: {
+            type: Boolean,
+            default: true
+        },
+
+        labeled: {
+            type: Boolean,
+            default: true
+        },
+
+        labelWidth: {
+            type: Number,
+            default: 0
+        },
+
+        controlWidth: {
+            type: Number,
+            default: 0
+        },
+
+        value: {
+            type: [Number, String]
+        }
+
+    },
+
+    data: function data() {
+        return {
+            passableValue: this.value
+        };
+    },
+
+
+    computed: {
+        horizontal: function horizontal() {
+            this.labelWidth > 0 && this.controlWidth > 0;
+        },
+        labelColumn: function labelColumn() {
+            return this.labelWidth > 0 ? 'col-sm-' + this.labelWidth : '';
+        },
+        controlColumn: function controlColumn() {
+            return this.controlWidth > 0 ? 'col-sm-' + this.controlWidth : '';
+        }
+    },
+
+    watch: {
+        value: function value(newVal) {
+            this.$emit('input', newVal);
+        }
+    },
+
+    mounted: function mounted() {
+        // this.prepareComponent()
+    },
+
+
+    methods: {
+        input: function input(value) {
+            this.$emit('input', value);
+        }
+    },
+
+    components: {
+        'item': __WEBPACK_IMPORTED_MODULE_0__item___default.a
+    }
+
+});
+
+/***/ }),
+/* 465 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+
+        id: {
+            required: true
+        },
+
+        state: {
+            type: Boolean,
+            default: false
+        }
+
+    },
+
+    data: function data() {
+        return {
+            list: null,
+            checked: this.state
+        };
+    },
+
+
+    computed: {
+        stateClass: function stateClass() {
+            return this.checked ? 'btn-primary' : 'btn-default';
+        }
+    },
+
+    mounted: function mounted() {
+        this.prepareComponent();
+        this.registerListeners();
+    },
+
+
+    methods: {
+        prepareComponent: function prepareComponent() {
+            this.list = this.$parent;
+        },
+        registerListeners: function registerListeners() {
+            this.list.$on('input', this.changeState);
+        },
+        changeState: function changeState(id) {
+            this.checked = this.id == id;
+        },
+        check: function check() {
+            this.$emit('check', this.id);
+        }
+    }
+
+});
+
+/***/ }),
+/* 466 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(464),
+  /* template */
+  __webpack_require__(468),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\kits\\FormPanel\\RadioButton\\List.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] List.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-01d98b6a", Component.options)
+  } else {
+    hotAPI.reload("data-v-01d98b6a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 467 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(465),
+  /* template */
+  __webpack_require__(469),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\kits\\FormPanel\\RadioButton\\item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1d9943c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-1d9943c0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    class: {
+      'form-group': _vm.grouped
+    }
+  }, [(_vm.labeled) ? _c('label', {
+    class: ['control-label', _vm.labelColumn],
+    attrs: {
+      "for": _vm.name
+    }
+  }, [_vm._t("default")], 2) : _vm._e(), _vm._v(" "), _c('div', {
+    class: [_vm.controlColumn]
+  }, [_c('div', {
+    staticClass: "btn-group"
+  }, _vm._l((_vm.list), function(data, id, index) {
+    return _c('item', {
+      key: index,
+      attrs: {
+        "id": id,
+        "state": id == _vm.passableValue
+      },
+      on: {
+        "check": _vm.input
+      }
+    }, [_vm._t("list", null, {
+      data: data,
+      id: id
+    })], 2)
+  })), _vm._v(" "), _vm._t("help-block")], 2)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-01d98b6a", module.exports)
+  }
+}
+
+/***/ }),
+/* 469 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    ref: "element",
+    class: ['btn', _vm.stateClass],
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.check
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1d9943c0", module.exports)
   }
 }
 

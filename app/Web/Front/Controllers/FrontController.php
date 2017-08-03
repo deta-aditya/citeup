@@ -126,7 +126,8 @@ class FrontController extends Controller
             'config'        => $this->config->all(),
             'faqs'          => $this->faqs->getMultiple($this->faqsQuery),
             'news'          => $this->news->getMultiple($this->newsQuery),
-            'sponsors'      => $this->sponsors->getMultiple([]),
+            'sponsors'      => $this->sponsors->getMultiple(['type' => Sponsors::TYPE_SPONSOR]),
+            'media_partners'=> $this->sponsors->getMultiple(['type' => Sponsors::TYPE_MEDIA_PARTNER]),
             'nav'           => $this->navtheme,
         ];
     }

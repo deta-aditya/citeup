@@ -13,7 +13,9 @@ Citeup.appPath = document.head.querySelector('meta[name="app-path"]').content;
 
 Citeup.apiPath = Citeup.appPath + '/api/v1';
 
-Citeup.defaultImage = Citeup.appPath + '/images/default.jpg';
+Citeup.defaultImageClean = 'images/default.jpg';
+
+Citeup.defaultImage = Citeup.appPath + '/' + Citeup.defaultImageClean;
 
 Citeup.defaultTableParams = {
     skip: 0,

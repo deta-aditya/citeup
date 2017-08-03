@@ -13,6 +13,13 @@
                 Logo Sponsor
                 <p class="help-block" slot="help-block">Agar pemuatan halaman lebih cepat, gunakan gambar berformat .png dengan tinggi 100px dan latar belakang transparan.</p>
             </file-input>
+            <radio-button name="type" :label-width="2" :control-width="10" :list="radioButtons" v-model="sponsor.type">
+                Tipe
+                <template slot="list" scope="props">{{ props.data }}</template>
+            </radio-button>
+            <text-input name="url" :required="true" :label-width="2" :control-width="10" v-model="sponsor.url">
+                URL (Tidak Wajib)
+            </text-input>
             <template slot="footer-control">
                 <div class="text-right">
                     <button type="button" class="btn btn-primary" @click="submit">
@@ -30,6 +37,9 @@
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
+    import RadioButton from '../../kits/FormPanel/RadioButton/List.vue'
+
+    const RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' }
 
     export default {
 
@@ -46,6 +56,7 @@
             return {
                 formPanel: null,
                 sponsor: {},
+                radioButtons: RADIO_BUTTONS,
             }
         },
 
@@ -83,6 +94,7 @@
             'form-panel': FormPanel,
             'text-input': TextInput,
             'file-input': FileInput,
+            'radio-button': RadioButton,
         }
 
     }

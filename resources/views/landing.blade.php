@@ -315,14 +315,27 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['sponsors'] && $sponsors->count() > 0)
+@if ($config['landing']['show']['sponsors'] && ($sponsors->count() > 0 || $media_partners->count() > 0))
 <!-- Sponsors Div -->
 <div id="front-sponsors">
-    <div class="container text-center">
-        <h2>Kegiatan ini disponsori oleh</h2>
+    <div class="container text-center sponsors-container">
+        <h2>Sponsor</h2>
         <div class="sponsors-list">
             @foreach ($sponsors as $sponsor)
-                <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
+                    <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) </a> @endunless
+            @endforeach
+        </div>
+    </div>
+    <hr class="short-middle-bar center-block">
+    <div class="container text-center media-partners-container">
+        <h2>Media Partner</h2>
+        <div class="sponsors-list">
+            @foreach ($media_partners as $sponsor)
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
+                    <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) </a> @endunless
             @endforeach
         </div>
     </div>

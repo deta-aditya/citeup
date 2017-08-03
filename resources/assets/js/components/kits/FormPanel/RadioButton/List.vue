@@ -5,25 +5,19 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <input
-                type="number" 
-                class="form-control"
-                :id="name"
-                :name="name" 
-                :value="value" 
-                :step="step"
-                :min="min"
-                :max="max"
-                :required="required"
-                :disabled="disabled"
-                :autofocus="autofocus"
-                @input="input($event.target.value)">
+            <div class="btn-group">
+                <item v-for="(data, id, index) in list" :key="index" :id="id" :state="id == passableValue" @check="input">
+                    <slot name="list" :data="data" :id="id"></slot>
+                </item>
+            </div>
             <slot name="help-block"></slot>
         </div>
     </div>
 </template>
 
 <script>
+
+    import Item from './item'
 
     export default {
 
@@ -34,44 +28,19 @@
                 required: true
             },
 
+            list: {
+                type: Object,
+                required: true,
+            },
+
             grouped: {
                 type: Boolean,
                 default: true,
             },
 
-            required: {
-                type: Boolean,
-                default: false
-            },
-
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-
             labeled: {
                 type: Boolean,
                 default: true
-            },
-
-            step: {
-                type: Number,
-                default: 1
-            },
-
-            min: {
-                type: Number,
-                default: -128
-            },
-
-            max: {
-                type: Number,
-                default: 128
             },
 
             labelWidth: {
@@ -85,9 +54,15 @@
             },
 
             value: {
-                type: Number
+                type: [Number, String]
             },
 
+        },
+
+        data() {
+            return {
+                passableValue: this.value
+            }
         },
 
         computed: {
@@ -106,21 +81,27 @@
 
         },
 
+        watch: {
+            value(newVal) {
+                this.$emit('input', newVal)
+            }
+        },
+
         mounted() {
-            this.prepareComponent()
+            // this.prepareComponent()
         },
 
         methods: {
-
-            prepareComponent() {
-                //
-            },
 
             input(value) {
                 this.$emit('input', value)
             },
 
         },
+
+        components: {
+            'item': Item,
+        }
 
     }
 
