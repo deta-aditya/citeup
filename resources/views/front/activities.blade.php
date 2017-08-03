@@ -17,9 +17,9 @@
                     <div class="panel-heading">
                         <ul class="activities-nav nav nav-pills" role="tablist">
                             @foreach ($activities as $activity)
-                                <li role="presentation" @if ($type == kebab_case($activity['name'])) class="active" @endif>
-                                    <a href="#{{ kebab_case($activity['name']) }}" aria-controls="{{ kebab_case($activity['name']) }}" role="tab" data-toggle="tab">
-                                        {{ $activity['name'] }}
+                                <li role="presentation" @if ($type == kebab_case($activity->name)) class="active" @endif>
+                                    <a href="#{{ kebab_case($activity->name) }}" aria-controls="{{ kebab_case($activity->name) }}" role="tab" data-toggle="tab">
+                                        {{ $activity->name }}
                                     </a>
                                 </li>
                             @endforeach
@@ -28,38 +28,37 @@
                     <div class="panel-body activity-content">
                         <div class="tab-content">
                             @foreach ($activities as $activity)
-                                <div role="tab-panel" class="tab-pane fade @if ($type == kebab_case($activity['name'])) in active @endif" id="{{ kebab_case($activity['name']) }}">
-                                    <h2 class="activity-name">{{ $activity['name'] }}</h2>
+                                <div role="tab-panel" class="tab-pane fade @if ($type == kebab_case($activity->name)) in active @endif" id="{{ kebab_case($activity->name) }}">
+                                    <h2 class="activity-name">{{ $activity->name }}</h2>
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="activity-icon-placeholder">
-                                                <img src="{{ asset($activity['icon']) }}" class="activity-icon">
+                                                <img src="{{ asset($activity->icon) }}" class="activity-icon">
                                             </div>
-                                            <p class="lead">{{ $activity['short_description'] }}</p>
+                                            <p class="lead">{{ $activity->short_description }}</p>
                                             <div class="activity-description">
-                                                {!! $activity['description'] !!}
+                                                {!! $activity->description !!}
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-right-side">
-                                            @if (! auth()->check() && $activity['registration_open']) 
+                                            @if (! auth()->check() && (($activity->isCompetition() && $regs_condition['competition']) || (! $activity->isCompetition() && $regs_condition['non_competition']))) 
                                                 <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-primary btn-register">Daftar</a> 
                                             @endif
-                                            @if ($activity['id'] < 3)
+                                            @if ($activity->isCompetition())
                                                 <div class="panel panel-default panel-prizes">
                                                     <div class="panel-heading"><h3 class="panel-title">Hadiah Pemenang</h3></div>
                                                     <div class="list-group">
-                                                        @php $prize = collect($config['prizes'])->where('id', $activity['id'])->first(); @endphp
                                                         <div class="list-group-item">
                                                             <div class="prize-place">Juara 1</div>
-                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['first'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_first }} {{ '| monetize &#125;&#125;' }}</div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="prize-place">Juara 2</div>
-                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['second'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_second }} {{ '| monetize &#125;&#125;' }}</div>
                                                         </div>
                                                         <div class="list-group-item">
                                                             <div class="prize-place">Juara 3</div>
-                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['third'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                                            <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_third }} {{ '| monetize &#125;&#125;' }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -67,14 +66,14 @@
                                             <div class="panel panel-default panel-schedules">
                                                 <div class="panel-heading"><h3 class="panel-title">Jadwal Acara</h3></div>
                                                 <div class="list-group">
-                                                    @foreach ($activity['schedules'] as $schedule)
+                                                    @foreach ($activity->schedules as $schedule)
                                                         <div class="list-group-item text-center">
-                                                            <div class="schedule-held-at">{{ \Carbon\Carbon::parse($schedule['held_at'])->format('j F Y, H:i') }}</div>
-                                                            <div class="schedule-description">{{ $schedule['description'] }}</div>
+                                                            <div class="schedule-held-at">{{ \Carbon\Carbon::parse($schedule->held_at)->format('j F Y, H:i') }}</div>
+                                                            <div class="schedule-description">{{ $schedule->description }}</div>
                                                         </div>
                                                     @endforeach
 
-                                                    @if (empty($activity['schedules']))
+                                                    @if ($activity->schedules->isEmpty())
                                                         <div class="list-group-item text-center">
                                                             Tidak Ada Jadwal.
                                                         </div>

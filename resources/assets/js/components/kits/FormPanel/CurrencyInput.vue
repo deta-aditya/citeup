@@ -136,6 +136,12 @@
 
         watch: {
             value(newVal) {
+
+                if (newVal === null || newVal === undefined) {
+                    this.privateValue = 0
+                    return
+                }
+
                 this.privateValue = newVal
             },
         },

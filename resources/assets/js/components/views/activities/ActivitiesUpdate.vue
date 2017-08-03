@@ -15,6 +15,19 @@
             <rich-input name="description" :required="true" :label-width="2" :control-width="10" v-model="activity.description">
                 Deskripsi Panjang
             </rich-input>
+            <number-input name="order" :required="true" :label-width="2" :control-width="10" v-model="activity.order">
+                Urutan
+                <p class="help-block" slot="help-block">Bagian ini menentukan urutan acara yang ditampilkan di halaman depan.</p>
+            </number-input>
+            <currency-input name="prize_first" :label-width="2" :control-width="10" v-model="activity.prize_first">
+                Hadiah Juara 1
+            </currency-input>
+            <currency-input name="prize_second" :label-width="2" :control-width="10" v-model="activity.prize_second">
+                Hadiah Juara 2
+            </currency-input>
+            <currency-input name="prize_third" :label-width="2" :control-width="10" v-model="activity.prize_third">
+                Hadiah Juara 3
+            </currency-input>
             <file-input name="icon" :label-width="2" :control-width="10" :object-id="activity.id" object-type="activity" accept="image/*" :store-immediately="true" :crop="false" v-model="activity.icon">
                 Ikon
                 <p class="help-block" slot="help-block">Gunakan gambar dengan ukuran 512 x 512 dengan latar belakang berwarna <span style="color:#dd7322">jingga tua (#DD7322)</span>.</p>
@@ -37,6 +50,8 @@
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import RichInput from '../../kits/FormPanel/RichInput.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
+    import NumberInput from '../../kits/FormPanel/NumberInput.vue'
+    import CurrencyInput from '../../kits/FormPanel/CurrencyInput.vue'
     import MultilineInput from '../../kits/FormPanel/MultilineInput.vue'
 
     export default {
@@ -96,6 +111,8 @@
             'text-input': TextInput,
             'rich-input': RichInput,
             'file-input': FileInput,
+            'number-input': NumberInput,
+            'currency-input': CurrencyInput,
             'multiline-input': MultilineInput,
         }
 

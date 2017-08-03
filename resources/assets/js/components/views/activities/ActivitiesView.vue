@@ -26,6 +26,22 @@
                             <p class="lead">{{ activity.short_description }}</p>
                             <div v-html="activity.description"></div>
                         </div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Urutan</th><td>{{ activity.order }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Hadiah Juara 1</th><td>Rp{{ activity.prize_first | monetize }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Hadiah Juara 2</th><td>Rp{{ activity.prize_second | monetize }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Hadiah Juara 3</th><td>Rp{{ activity.prize_third | monetize }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="panel-body">
                             Dibuat pada {{ activity.created_at | normalize }}, terakhir disunting pada {{ activity.updated_at | normalize }}
                         </div>
@@ -104,6 +120,30 @@
 
             assetify(value) {
                 return Citeup.appPath + '/' + value
+            },
+
+            monetize(val) {
+
+                if (val === null) {
+                    val = '0'
+                }
+
+                var counter = 0
+                var value = String(val)
+                var formatted = ''
+
+                for (let i = value.length - 1; i >= 0; i--) {
+
+                    if (counter > 0 && counter % 3 === 0) {
+                        formatted += '.'
+                    }
+
+                    formatted += value[i]
+
+                    counter++
+                }
+
+                return formatted.split('').reverse().join('') + ',00'
             },
 
         },

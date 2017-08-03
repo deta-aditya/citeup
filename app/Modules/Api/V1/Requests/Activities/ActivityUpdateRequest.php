@@ -30,6 +30,10 @@ class ActivityUpdateRequest extends FormRequest
             'description' => 'string',
             'short_description' => 'string|max:191',
             'icon' => 'string|max:191',
+            'order' => 'int|min:-1',
+            'prize_first' => 'int|min:0|nullable',
+            'prize_second' => 'int|min:0|nullable',
+            'prize_third' => 'int|min:0|nullable',
         ];
     }
 }

@@ -77488,6 +77488,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         value: function value(newVal) {
+
+            if (newVal === null || newVal === undefined) {
+                this.privateValue = 0;
+                return;
+            }
+
             this.privateValue = newVal;
         }
     },
@@ -79872,8 +79878,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_MultilineInput_vue__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_MultilineInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_MultilineInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_NumberInput_vue__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_NumberInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_NumberInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_CurrencyInput_vue__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_CurrencyInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_CurrencyInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue__);
 //
 //
 //
@@ -79903,6 +79913,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -79914,7 +79939,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             formPanel: null,
-            activity: {}
+            activity: {
+                order: 0,
+                prize_first: 0,
+                prize_second: 0,
+                prize_third: 0
+            }
         };
     },
     mounted: function mounted() {
@@ -79938,7 +79968,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'form-panel': __WEBPACK_IMPORTED_MODULE_0__kits_FormPanel_FormPanel_vue___default.a,
         'text-input': __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue___default.a,
         'rich-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue___default.a,
-        'multiline-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_MultilineInput_vue___default.a
+        'number-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_NumberInput_vue___default.a,
+        'currency-input': __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_CurrencyInput_vue___default.a,
+        'multiline-input': __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue___default.a
     }
 
 });
@@ -80081,8 +80113,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_FileInput_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_FileInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_FileInput_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_NumberInput_vue__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_NumberInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_NumberInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_FormPanel_CurrencyInput_vue__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_FormPanel_CurrencyInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_FormPanel_CurrencyInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_FormPanel_MultilineInput_vue__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_FormPanel_MultilineInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__kits_FormPanel_MultilineInput_vue__);
 //
 //
 //
@@ -80115,6 +80151,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -80176,7 +80227,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'text-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default.a,
         'rich-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue___default.a,
         'file-input': __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_FileInput_vue___default.a,
-        'multiline-input': __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_MultilineInput_vue___default.a
+        'number-input': __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_NumberInput_vue___default.a,
+        'currency-input': __WEBPACK_IMPORTED_MODULE_6__kits_FormPanel_CurrencyInput_vue___default.a,
+        'multiline-input': __WEBPACK_IMPORTED_MODULE_7__kits_FormPanel_MultilineInput_vue___default.a
     }
 
 });
@@ -80198,6 +80251,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_Addon_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_ListItem_vue__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_ListItem_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -80302,6 +80371,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         assetify: function assetify(value) {
             return __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].appPath + '/' + value;
+        },
+        monetize: function monetize(val) {
+
+            if (val === null) {
+                val = '0';
+            }
+
+            var counter = 0;
+            var value = String(val);
+            var formatted = '';
+
+            for (var i = value.length - 1; i >= 0; i--) {
+
+                if (counter > 0 && counter % 3 === 0) {
+                    formatted += '.';
+                }
+
+                formatted += value[i];
+
+                counter++;
+            }
+
+            return formatted.split('').reverse().join('') + ',00';
         }
     },
 
@@ -86292,7 +86384,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "innerHTML": _vm._s(_vm.activity.description)
     }
-  })]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('table', {
+    staticClass: "table"
+  }, [_c('tbody', [_c('tr', [_c('th', [_vm._v("Urutan")]), _c('td', [_vm._v(_vm._s(_vm.activity.order))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Hadiah Juara 1")]), _c('td', [_vm._v("Rp" + _vm._s(_vm._f("monetize")(_vm.activity.prize_first)))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Hadiah Juara 2")]), _c('td', [_vm._v("Rp" + _vm._s(_vm._f("monetize")(_vm.activity.prize_second)))])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Hadiah Juara 3")]), _c('td', [_vm._v("Rp" + _vm._s(_vm._f("monetize")(_vm.activity.prize_third)))])])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_vm._v("\n                        Dibuat pada " + _vm._s(_vm._f("normalize")(_vm.activity.created_at)) + ", terakhir disunting pada " + _vm._s(_vm._f("normalize")(_vm.activity.updated_at)) + "\n                    ")])])]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-4"
@@ -86667,7 +86761,63 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "activity.description"
     }
-  }, [_vm._v("\n            Deskripsi Panjang\n        ")]), _vm._v(" "), _c('file-input', {
+  }, [_vm._v("\n            Deskripsi Panjang\n        ")]), _vm._v(" "), _c('number-input', {
+    attrs: {
+      "name": "order",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.order),
+      callback: function($$v) {
+        _vm.activity.order = $$v
+      },
+      expression: "activity.order"
+    }
+  }, [_vm._v("\n            Urutan\n            "), _c('p', {
+    staticClass: "help-block",
+    slot: "help-block"
+  }, [_vm._v("Bagian ini menentukan urutan acara yang ditampilkan di halaman depan.")])]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_first",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_first),
+      callback: function($$v) {
+        _vm.activity.prize_first = $$v
+      },
+      expression: "activity.prize_first"
+    }
+  }, [_vm._v("\n            Hadiah Juara 1\n        ")]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_second",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_second),
+      callback: function($$v) {
+        _vm.activity.prize_second = $$v
+      },
+      expression: "activity.prize_second"
+    }
+  }, [_vm._v("\n            Hadiah Juara 2\n        ")]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_third",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_third),
+      callback: function($$v) {
+        _vm.activity.prize_third = $$v
+      },
+      expression: "activity.prize_third"
+    }
+  }, [_vm._v("\n            Hadiah Juara 3\n        ")]), _vm._v(" "), _c('file-input', {
     attrs: {
       "name": "icon",
       "label-width": 2,
@@ -87069,7 +87219,63 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "activity.description"
     }
-  }, [_vm._v("\n            Deskripsi Panjang\n        ")]), _vm._v(" "), _c('template', {
+  }, [_vm._v("\n            Deskripsi Panjang\n        ")]), _vm._v(" "), _c('number-input', {
+    attrs: {
+      "name": "order",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.order),
+      callback: function($$v) {
+        _vm.activity.order = $$v
+      },
+      expression: "activity.order"
+    }
+  }, [_vm._v("\n            Urutan\n            "), _c('p', {
+    staticClass: "help-block",
+    slot: "help-block"
+  }, [_vm._v("Bagian ini menentukan urutan acara yang ditampilkan di halaman depan.")])]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_first",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_first),
+      callback: function($$v) {
+        _vm.activity.prize_first = $$v
+      },
+      expression: "activity.prize_first"
+    }
+  }, [_vm._v("\n            Hadiah Juara 1\n        ")]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_second",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_second),
+      callback: function($$v) {
+        _vm.activity.prize_second = $$v
+      },
+      expression: "activity.prize_second"
+    }
+  }, [_vm._v("\n            Hadiah Juara 2\n        ")]), _vm._v(" "), _c('currency-input', {
+    attrs: {
+      "name": "prize_third",
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.activity.prize_third),
+      callback: function($$v) {
+        _vm.activity.prize_third = $$v
+      },
+      expression: "activity.prize_third"
+    }
+  }, [_vm._v("\n            Hadiah Juara 3\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"
@@ -89099,6 +89305,216 @@ module.exports = __webpack_amd_options__;
 
 module.exports = __webpack_require__(292);
 
+
+/***/ }),
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+
+        name: {
+            type: String,
+            required: true
+        },
+
+        grouped: {
+            type: Boolean,
+            default: true
+        },
+
+        required: {
+            type: Boolean,
+            default: false
+        },
+
+        autofocus: {
+            type: Boolean,
+            default: false
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+
+        labeled: {
+            type: Boolean,
+            default: true
+        },
+
+        step: {
+            type: Number,
+            default: 1
+        },
+
+        min: {
+            type: Number,
+            default: -128
+        },
+
+        max: {
+            type: Number,
+            default: 128
+        },
+
+        labelWidth: {
+            type: Number,
+            default: 0
+        },
+
+        controlWidth: {
+            type: Number,
+            default: 0
+        },
+
+        value: {
+            type: String
+        }
+
+    },
+
+    computed: {
+        horizontal: function horizontal() {
+            this.labelWidth > 0 && this.controlWidth > 0;
+        },
+        labelColumn: function labelColumn() {
+            return this.labelWidth > 0 ? 'col-sm-' + this.labelWidth : '';
+        },
+        controlColumn: function controlColumn() {
+            return this.controlWidth > 0 ? 'col-sm-' + this.controlWidth : '';
+        }
+    },
+
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        prepareComponent: function prepareComponent() {
+            //
+        },
+        input: function input(value) {
+            this.$emit('input', value);
+        }
+    }
+
+});
+
+/***/ }),
+/* 462 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(461),
+  /* template */
+  __webpack_require__(463),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\kits\\FormPanel\\NumberInput.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] NumberInput.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6c6ad706", Component.options)
+  } else {
+    hotAPI.reload("data-v-6c6ad706", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 463 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    class: {
+      'form-group': _vm.grouped
+    }
+  }, [(_vm.labeled) ? _c('label', {
+    class: ['control-label', _vm.labelColumn],
+    attrs: {
+      "for": _vm.name
+    }
+  }, [_vm._t("default")], 2) : _vm._e(), _vm._v(" "), _c('div', {
+    class: [_vm.controlColumn]
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "id": _vm.name,
+      "name": _vm.name,
+      "step": _vm.step,
+      "min": _vm.min,
+      "max": _vm.max,
+      "required": _vm.required,
+      "disabled": _vm.disabled,
+      "autofocus": _vm.autofocus
+    },
+    domProps: {
+      "value": _vm.value
+    },
+    on: {
+      "input": function($event) {
+        _vm.input($event.target.value)
+      }
+    }
+  }), _vm._v(" "), _vm._t("help-block")], 2)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6c6ad706", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -117,15 +117,15 @@ return [
     'activities' => [
 
         'selectable' => [
-            'name', 'description', 'short_description', 'icon',
+            'name', 'description', 'short_description', 'icon', 'order', 'total_prizes', 'prize_first', 'prize_second', 'prize_third',
         ],
 
         'sortable' => [
-            'name',
+            'name', 'order',
         ],
 
         'comparable' => [
-            'name', 'description', 'short_description',
+            'name', 'description', 'short_description', 'order',
         ],
 
         'loadable' => [
