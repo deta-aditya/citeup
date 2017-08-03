@@ -32,9 +32,13 @@
                                     <h2 class="activity-name">{{ $activity['name'] }}</h2>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <img src="{{ asset($activity['icon']) }}" class="pull-left activity-icon">
+                                            <div class="activity-icon-placeholder">
+                                                <img src="{{ asset($activity['icon']) }}" class="activity-icon">
+                                            </div>
                                             <p class="lead">{{ $activity['short_description'] }}</p>
-                                            {!! $activity['description'] !!}
+                                            <div class="activity-description">
+                                                {!! $activity['description'] !!}
+                                            </div>
                                         </div>
                                         <div class="col-md-4 col-right-side">
                                             @if (! auth()->check() && $activity['registration_open']) 
@@ -70,7 +74,7 @@
                                                         </div>
                                                     @endforeach
 
-                                                    @if (empty($activity['schedule']))
+                                                    @if (empty($activity['schedules']))
                                                         <div class="list-group-item text-center">
                                                             Tidak Ada Jadwal.
                                                         </div>

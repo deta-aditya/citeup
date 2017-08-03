@@ -12285,6 +12285,7 @@ trix-editor .attachment progress {
 
 #front-footer .middle-yard {
   padding-top: 10px;
+  font-size: 9pt;
 }
 
 #front-footer .middle-yard h3 {
@@ -12327,6 +12328,9 @@ trix-editor .attachment progress {
 }
 
 @media (min-width: 480px) {
+  #front-footer .middle-yard {
+    font-size: 10.5pt;
+  }
   #front-footer .footer-links h3 {
     font-size: 18pt;
   }
@@ -13215,6 +13219,7 @@ trix-editor .attachment progress {
 }
 
 #activities-page .page-title {
+  font-size: 22.5pt;
   text-align: center;
   font-weight: 300;
 }
@@ -13242,10 +13247,15 @@ trix-editor .attachment progress {
   color: #eeeedd;
 }
 
+#activities-page .activities-nav li {
+  width: 100%;
+  margin-left: 0;
+}
+
 #activities-page .activities-nav li a {
   color: #eeeedd;
-  padding: 20px;
-  font-size: 12pt;
+  padding: 10px;
+  font-size: 10pt;
   font-weight: 700;
   text-transform: uppercase;
   transition: 0.25s;
@@ -13265,6 +13275,7 @@ trix-editor .attachment progress {
 }
 
 #activities-page .activity-name {
+  font-size: 18pt;
   font-weight: 300;
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
@@ -13275,9 +13286,17 @@ trix-editor .attachment progress {
   padding: 30px;
 }
 
+#activities-page .activity-icon-placeholder {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
 #activities-page .activity-icon {
-  height: 150px;
-  margin: 0 30px 30px 0;
+  height: 125px;
+}
+
+#activities-page .activity-description {
+  font-size: 8.75pt;
 }
 
 #activities-page .btn-register {
@@ -13299,20 +13318,21 @@ trix-editor .attachment progress {
 
 #activities-page .panel-prizes .panel-title {
   font-weight: 700;
-  padding: 15px;
+  padding: 8px;
   color: #636b6f;
   text-transform: uppercase;
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 #activities-page .panel-prizes .prize-place {
+  font-size: 9pt;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 #activities-page .panel-prizes .prize-qty {
   margin: 4px 0;
-  font-size: 16pt;
+  font-size: 11pt;
   font-weight: 300;
 }
 
@@ -13328,19 +13348,67 @@ trix-editor .attachment progress {
 
 #activities-page .panel-schedules .panel-title {
   font-weight: 700;
-  padding: 15px;
+  padding: 8px;
   text-align: center;
   text-transform: uppercase;
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 #activities-page .panel-schedules .schedule-held-at {
   margin-bottom: 5px;
+  font-size: 9pt;
 }
 
 #activities-page .panel-schedules .schedule-description {
   font-weight: 600;
-  font-size: 12pt;
+  font-size: 10pt;
+}
+
+@media (min-width: 480px) {
+  #activities-page .page-title {
+    font-size: 27pt;
+  }
+  #activities-page .activity-name {
+    font-size: 22.5pt;
+  }
+  #activities-page .activities-nav li {
+    width: auto;
+  }
+  #activities-page .activities-nav li a {
+    padding: 20px;
+    font-size: 12pt;
+  }
+  #activities-page .activity-icon-placeholder {
+    float: left;
+    margin: 0 30px 30px 0;
+  }
+  #activities-page .activity-icon {
+    height: 150px;
+  }
+  #activities-page .activity-description {
+    font-size: 10pt;
+  }
+  #activities-page .panel-prizes .panel-title {
+    padding: 15px;
+    font-size: 14pt;
+  }
+  #activities-page .panel-prizes .prize-place {
+    font-size: 10.5pt;
+  }
+  #activities-page .panel-prizes .prize-qty {
+    font-size: 16pt;
+  }
+  #activities-page .panel-schedules .panel-title {
+    padding: 15px;
+    font-size: 14pt;
+  }
+  #activities-page .panel-schedules .schedule-held-at {
+    margin-bottom: 5px;
+    font-size: 10.5pt;
+  }
+  #activities-page .panel-schedules .schedule-description {
+    font-size: 12pt;
+  }
 }
 
 @media (min-width: 992px) {
