@@ -13431,6 +13431,7 @@ trix-editor .attachment progress {
 }
 
 #faqs-page .page-title {
+  font-size: 22.5pt;
   font-weight: 300;
 }
 
@@ -13467,9 +13468,25 @@ trix-editor .attachment progress {
 
 #faqs-page .faq-question {
   color: #dd7322;
-  font-size: 18pt;
+  font-size: 14pt;
   font-weight: 300;
   margin-bottom: 10px;
+}
+
+#faqs-page .faq-answer {
+  font-size: 9pt;
+}
+
+@media (min-width: 480px) {
+  #faqs-page .page-title {
+    font-size: 27pt;
+  }
+  #faqs-page .faq-question {
+    font-size: 18pt;
+  }
+  #faqs-page .faq-answer {
+    font-size: 10.5pt;
+  }
 }
 
 @media (min-width: 768px) {

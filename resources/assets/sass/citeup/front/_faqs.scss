@@ -11,6 +11,7 @@
     }
     
     .page-title {
+        font-size: 22.5pt;
         font-weight: 300;
     }
 
@@ -49,9 +50,29 @@
 
     .faq-question {
         color: $signature-dark;
-        font-size: 18pt;
+        font-size: 14pt;
         font-weight: 300;
         margin-bottom: 10px;
+    }
+
+    .faq-answer {
+        font-size: 9pt;
+    }
+
+    @media (min-width: $screen-xs-min) {
+
+        .page-title {
+            font-size: 27pt;
+        }
+        
+        .faq-question {
+            font-size: 18pt;
+        }
+
+        .faq-answer {
+            font-size: 10.5pt;
+        }
+
     }
 
     @media (min-width: $screen-sm-min) {
