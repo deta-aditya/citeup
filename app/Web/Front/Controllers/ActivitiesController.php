@@ -82,6 +82,7 @@ class ActivitiesController extends Controller
         return [
             'config'        => $this->config->all(),
             'activities'    => $this->getActivities(),
+            'regs_condition'=> $this->getRegsCondition(),
             'nav'           => $this->navtheme,
             'type'          => $type,
         ];
@@ -94,46 +95,42 @@ class ActivitiesController extends Controller
      */
     protected function getActivities()
     {
-        $activities = $this->activities->getMultiple([])->toArray();
+        $activities = $this->activities->getMultiple(['sort' => 'order:asc']);
 
-        for ($i = 0; $i < count($activities); $i++) {
-
-            $activities[$i]['schedules'] = $this->getSchedules($activities[$i]['id']);
-
-            $activities[$i]['registration_open'] = $this->canRegister($activities[$i]['id']);
-
-        }
+        $this->getSchedules($activities);
 
         return $activities;
     }
 
     /**
-     * Get the schedules of the given activity ID.
+     * Get the schedules of the given activities collection.
      *
-     * @param  int  $id
-     * @return array
+     * @param  Collection  $activities
+     * @return this
      */
-    protected function getSchedules($id)
+    protected function getSchedules($activities)
     {
-        return $this->schedules->getMultiple([
-            'activity' => $id,
-            'sort' => 'held_at:asc'
-        ])->toArray();
+        $activities->load(['schedules' => function ($query) {
+            $query->orderBy('held_at', 'asc');
+        }]);
+
+        return $this;
     }
 
     /**
-     * Determine whether the registration of the activity of the given ID is open.
+     * Get the registration condition data.
      *
      * @param  int  $id
      * @return bool
      */
-    protected function canRegister($id)
+    protected function getRegsCondition()
     {
         $stage = $this->config->get('stage')['name'];
 
-        return $id < 3 ? 
-                $stage === 'Pendaftaran' :
-                (! ($stage === 'Pra-Pendaftaran' || $stage === 'Paska Acara'));
+        return [
+            'competition' => $stage === 'Pendaftaran',
+            'non_competition' => ! ($stage === 'Pra-Pendaftaran' || $stage === 'Paska Acara'),
+        ];
     }
 
 }

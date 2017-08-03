@@ -29,7 +29,7 @@ import CompleteProfile from './components/views/profiles/CompleteProfile.vue';
 
 const router = new VueRouter({
     mode: 'history',
-    base: '/app/',
+    base: '/panel/',
     routes: [
         { path: '/', name: 'Dasbor', component: Root },
         { path: '/config', name: 'Konfigurasi', component: Config },

@@ -8,7 +8,7 @@
 
     <div class="container text-center">
         <div class="logo-placeholder">
-            <img src="{{ asset('storage/images/web/logo_white_lg.png') }}">
+            <img src="{{ asset('images/web/logo_white_lg.png') }}">
         </div>
         <div class="text-placeholder">
             @if ($config['landing']['countdown']['active'])
@@ -35,18 +35,15 @@
         <div class="container">
             <div class="row center-block">
 
-                @foreach ($config['landing']['activities']['order'] as $activity)
-                    @php 
-                        $realActivity = $activities->where('id', $activity['id'])->first();
-                    @endphp
-                    <div class="col-xs-4">
-                        <a href="{{ route('activities', ['t' => kebab_case($realActivity->name)]) }}" class="panel panel-default text-center activity-item">
+                @foreach ($activities as $activity)
+                    <div class="col-xs-4 activity-item-placeholder">
+                        <a href="{{ route('activities', ['t' => kebab_case($activity->name)]) }}" class="panel panel-default text-center activity-item">
                             <div class="panel-body icon-holder">
-                                <img class="activity-icon" src="{{ asset($realActivity->icon) }}">
+                                <img class="activity-icon" src="{{ asset($activity->icon) }}">
                             </div>
                             <div class="panel-body content-holder">
-                                <h3 class="activity-title">{{ $realActivity->name }}</h3>
-                                <p class="hidden-xs">{{ $realActivity->short_description }}</p>
+                                <h3 class="activity-title">{{ $activity->name }}</h3>
+                                <p class="hidden-xs">{{ $activity->short_description }}</p>
                             </div>
                         </a>
                     </div>
@@ -66,23 +63,24 @@
             <div class="panel panel-default panel-prizes center-block text-center">
                 <div class="panel-body">
                     <h2 class="prizes-title">Total Hadiah</h2>
-                    <div class="total-prizes">Rp{{ '&#123;&#123;' }} {{ collect($config['prizes'])->sum(function ($product) { return $product['first'] + $product['second'] + $product['third']; }) }} {{ '| monetize &#125;&#125;' }}</div>
+                    <div class="total-prizes">Rp{{ '&#123;&#123;' }} {{ $activities->sum('total_prizes') }} {{ '| monetize &#125;&#125;' }}</div>
                 </div>
                 <div class="row prizes-list">
-                    @foreach ($config['prizes'] as $prize)
+                    @foreach ($activities as $activity)
+                        @continue(! $activity->isCompetition())
                         <div class="col-sm-6 prizes-list-item panel-body">
-                            <h3>{{ $prize['name'] }}</h3>
+                            <h3>{{ $activity->name }}</h3>
                             <div class="prize-wrapper">
                                 <div class="prize-place">Juara 1</div>
-                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['first'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_first }} {{ '| monetize &#125;&#125;' }}</div>
                             </div>
                             <div class="prize-wrapper">
                                 <div class="prize-place">Juara 2</div>
-                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['second'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_second }} {{ '| monetize &#125;&#125;' }}</div>
                             </div>
                             <div class="prize-wrapper">
                                 <div class="prize-place">Juara 3</div>
-                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $prize['third'] }} {{ '| monetize &#125;&#125;' }}</div>
+                                <div class="prize-qty">Rp{{ '&#123;&#123;' }} {{ $activity->prize_third }} {{ '| monetize &#125;&#125;' }}</div>
                             </div>
                         </div>
                     @endforeach
@@ -176,9 +174,9 @@
                     </div>
                     <div class="col-sm-4">
                         <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
-                        <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                        <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                             <div>{{ $item->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -192,9 +190,9 @@
                                 <img src="{{ asset($item->picture) }}">
                             </a>
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
-                            <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                            <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -211,7 +209,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -230,7 +228,7 @@
                         <h3><a href="{{ route('news.item', ['news' => $first->id, 'slug' => kebab_case($first->title)]) }}">{{ $first->title }}</a></h3>
                         <p>{{ str_limit(strip_tags($first->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($first->edits->last()->user->profile) ? '/storage/images/default.jpg' : $first->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset(is_null($first->edits->last()->user->profile) ? '/images/default.jpg' : $first->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                             <div>{{ $first->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($first->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -246,7 +244,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -268,16 +266,16 @@
     <div class="container">
         <h2 class="text-center">Galeri</h2>
         <div class="text-center" style="margin-top:40px">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
-            <img src="{{ asset('storage/images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
+            <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail">
         </div>
     </div>
 </div>
@@ -297,7 +295,7 @@
                         <dl>
                             <dt>Adam Marsono Putra</dt>
                             <dd>082133022618</dd>
-                            <dd>a.putra@universitaspertamina.ac.id</dd>
+                            <dd class="email">a.putra@universitaspertamina.ac.id</dd>
                             <dd><a href="http://line.me/ti/p/~damanotra" target="_blank">damanotra</a></dd>
                         </dl>      
                     </div>
@@ -305,7 +303,7 @@
                         <dl>
                             <dt>Aries Dwi Prasetiyo</dt>
                             <dd>081230102023</dd>
-                            <dd>ariesdwiprasetiyo4@gmail.com</dd>
+                            <dd class="email">ariesdwiprasetiyo4@gmail.com</dd>
                             <dd><a href="http://line.me/ti/p/~aries0" target="_blank">aries0</a></dd>
                         </dl>
                     </div>
@@ -314,91 +312,30 @@
         </div>
     </div>
 
-    {{-- <div class="container">
-        <div class="row">
-            <div class="col-sm-6">  
-                <form class="panel panel-default panel-contact-form" method="post" action="">
-                    <div class="panel-body">
-                        <h2 class="text-center">Hubungi Kami</h2>
-                    </div>
-                    <div class="panel-body form-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Nama</label>
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Alamat E-mail</label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Judul</label>
-                            <input type="text" class="form-control" name="subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="control-label">Pesan</label>
-                            <textarea class="form-control" name="subject"></textarea>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <button type="submit" class="btn btn-lg btn-primary pull-right">
-                            Kirim Pesan
-                        </button>
-                        <div>Balasan akan kami kirim ke alamat e-mail yang Anda tulis di atas.</div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-social panel-default">
-                    <div class="panel-body">
-                        <h2 class="text-center">Media Sosial</h2>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <a href="http://facebook.com/{{ $config['contact']['facebook'] }}"><i class="fa fa-5x fa-facebook-square"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="http://twitter.com/{{ $config['contact']['twitter'] }}"><i class="fa fa-5x fa-twitter-square"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="http://instagram.com/{{ $config['contact']['instagram'] }}"><i class="fa fa-5x fa-instagram"></i></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a class="line" href="http://line.me/ti/p/~{{ $config['contact']['line'] }}">LINE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default panel-contact-person">
-                    <div class="panel-body">
-                        <h2 class="text-center">Contact Person</h2>
-                    </div>
-                    <div class="panel-body">
-                        @foreach ($config['contact']['phones'] as $name => $number)
-                        <div class="contact-person-item row">
-                            <div class="col-xs-5 text-right">
-                                <strong>{{ $name }}</strong> :
-                            </div> 
-                            <div class="col-xs-7">{{ $number }}</div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 </div>
 @endif
 
-@if ($config['landing']['show']['sponsors'] && $sponsors->count() > 0)
+@if ($config['landing']['show']['sponsors'] && ($sponsors->count() > 0 || $media_partners->count() > 0))
 <!-- Sponsors Div -->
 <div id="front-sponsors">
-    <div class="container text-center">
-        <h2>Kegiatan ini disponsori oleh</h2>
+    <div class="container text-center sponsors-container">
+        <h2>Sponsor</h2>
         <div class="sponsors-list">
             @foreach ($sponsors as $sponsor)
-                <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
+                    <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) </a> @endunless
+            @endforeach
+        </div>
+    </div>
+    <hr class="short-middle-bar center-block">
+    <div class="container text-center media-partners-container">
+        <h2>Media Partner</h2>
+        <div class="sponsors-list">
+            @foreach ($media_partners as $sponsor)
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
+                    <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) </a> @endunless
             @endforeach
         </div>
     </div>

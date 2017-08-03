@@ -15,9 +15,9 @@
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
                 @if ($nav === 'white')
-                    <img src="{{ asset('storage/images/web/logo_simple_sm.png') }}">
+                    <img src="{{ asset('images/web/logo_simple_sm.png') }}">
                 @else
-                    <img src="{{ asset('storage/images/web/logo_simple_white_sm.png') }}">
+                    <img src="{{ asset('images/web/logo_simple_white_sm.png') }}">
                 @endif
             </a>
         </div>

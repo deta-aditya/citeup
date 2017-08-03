@@ -9,7 +9,7 @@
                 <data-panel-list-item :id="props.data.id" :update="{ name: 'Sponsor.Sunting', params: { id: props.data.id }}" :delete="'/sponsors/' + props.data.id">
                     <template slot="title">
                         <img :src="props.data.picture | assetify" class="img-circle user-img">
-                        {{ props.data.name }}
+                        {{ props.data.name }}, <small>{{ props.data.type | detectType }}</small>
                     </template>
                     <p>
                         <small class="text-muted">
@@ -67,6 +67,15 @@
             assetify(value) {
                 return Citeup.appPath + '/' + value
             },
+
+            detectType(value) {
+                switch (value) {
+                    case 1: 
+                        return 'Sponsor'
+                    case 2:
+                        return 'Media Partner'
+                }
+            }
 
         },
 

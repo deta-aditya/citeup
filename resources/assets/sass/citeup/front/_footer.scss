@@ -5,7 +5,7 @@
     text-align: center;
 
     .upper-yard {
-        paddin: 20px 0 10px;
+        padding: 20px 0 10px;
 
         & > :first-child {
             margin-top: 21px;
@@ -14,6 +14,7 @@
 
     .middle-yard {
         padding-top: 10px;
+        font-size: 9pt;
 
         h3 {
             margin: 0 0 10px;
@@ -21,24 +22,33 @@
     }
 
     .lower-yard {
+        font-size: 9pt;
         padding: 20px 0;
     }
 
     .footer-links {
         margin-top: 20px;
+
+        h3 {
+            font-size: 14pt;
+        }
+
+        ul {
+            font-size: 9pt;
+        }
     }
 
     .footer-img {
-        margin-right: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 7px;
         vertical-align: bottom;
 
         &.logo-citeup {
-            height: 40px;
+            height: 30px;
         }
 
         &.logo-up {
-            height: 75px;
+            margin-right: 20px;
+            height: 50px;
         }
     }
 
@@ -48,7 +58,47 @@
         }
     }
 
+    @media (min-width: $screen-xs-min) {
+
+        .middle-yard {
+            font-size: 10.5pt;
+        }
+
+        .footer-links {
+            
+            h3 {
+                font-size: 18pt;
+            }
+
+            ul {
+                font-size: 10.5pt;
+            }
+
+        }
+
+        .footer-img {
+
+            &.logo-citeup {
+                height: 40px;
+            }
+
+            &.logo-up {
+                height: 75px;
+            }
+
+        }
+
+        .lower-yard {
+            font-size: 10.5pt;
+        }
+
+    }
+
     @media (min-width: $screen-sm-min) {
+
+        .footer-img {
+            margin-bottom: 20px;
+        }
         
         text-align: left;
 

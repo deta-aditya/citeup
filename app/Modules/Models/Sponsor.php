@@ -24,16 +24,28 @@ class Sponsor extends Model implements Editable
      * @var array
      */
     protected $fillable = [
-        'name', 'picture',
+        'name', 'picture', 'type', 'url',
     ];
 
     /**
-     * Get all of the gallery's tracked edits.
+     * Get all of the sponsor's tracked edits.
      *
      * @return MorphMany
      */
     public function edits()
     {
         return $this->morphMany('App\Modules\Models\Edit', 'editable');
+    }
+
+    /**
+     * Scope a query to only include sponsors of the given type.
+     *
+     * @param  Builder  $query
+     * @param  int      $type
+     * @return Builder
+     */
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
     }
 }

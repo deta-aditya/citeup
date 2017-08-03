@@ -1,21 +1,45 @@
 
 #front-sponsors {
-    padding: 50px;
+    padding: 30px;
+    margin-bottom: 30px;
     background-color: #fff;
 
     h2 {
-        font-size: 15pt;
+        font-size: 11pt;
     }
 
     .sponsors-list {
-        margin-top: 50px;
+        margin-top: 40px;
     }
 
     .sponsor-item {
-        height: 75px;
-        margin: 10px;
+        height: 50px;
+        margin: 5px;
         display: inline-block;
         vertical-align: top;
+    }
+
+    .sponsors-container {
+        margin-bottom: 50px;
+    }
+
+    .media-partners-container {
+        margin-top: 50px;
+    }
+
+    @media (min-width: $screen-xs-min) {
+
+        padding: 50px;
+
+        h2 {
+            font-size: 15pt;
+        }
+
+        .sponsor-item {
+            height: 75px;
+            margin: 10px;
+        }
+
     }
 
 }

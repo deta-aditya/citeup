@@ -4,24 +4,24 @@
     $welcometron-bg: #2a2a2a;
     $welcometron-color: $light-text-color;
 
-    height: 550px;
+    height: 450px;
     background-color: $welcometron-bg;
-    background-image: url(../storage/images/web/bg_welcometron.png);
+    background-image: url(../images/web/bg_welcometron.png);
     background-position-x: center; 
     background-position-y: bottom;
     background-repeat: no-repeat;
-    background-size: 650px;
+    background-size: 500px;
 
     .logo-placeholder {
         margin-top: 60px;
 
         img {
-            width: 300px;
+            width: 200px;
         }
     }
 
     .text-placeholder {
-        margin-top: 155px;
+        margin-top: 140px;
         color: #161616;
         font-weight: 700;
     }
@@ -32,19 +32,53 @@
 
     .notice {
         margin-bottom: 0; 
-        font-size: 11pt;
+        font-size: 9pt;
     }
 
     .countdown {
 
         .unit-number {
-            width: 60px;
+            width: 35px;
             text-align: center;
-            font-size: 30pt;
+            font-size: 20pt;
         }
 
         .unit-info {
+            font-size: 9pt;
+        }
+
+    }
+
+    @media (min-width: $screen-xs-min) {
+
+        height: 550px;
+        background-size: 650px;
+        
+        .logo-placeholder {
+            img {
+                width: 300px;
+            }
+        }
+
+        .text-placeholder {
+            margin-top: 155px;
+        }
+
+        .notice {
             font-size: 11pt;
+        }
+
+        .countdown {
+
+            .unit-number {
+                width: 60px;
+                font-size: 30pt;
+            }
+
+            .unit-info {
+                font-size: 11pt;
+            }
+
         }
 
     }

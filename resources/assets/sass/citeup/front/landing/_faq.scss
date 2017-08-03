@@ -1,10 +1,11 @@
 
 #front-faq {
 
-    padding: 60px 0 90px;
+    padding: 30px 0 50px;
     text-align: center;
 
     h2 {
+        font-size: 18pt;
         font-weight: 300;
     }
 
@@ -26,19 +27,47 @@
         }
 
         .panel-title {
-            padding: 5px 12px;
+            padding: 4px 10px;
             font-weight: bold;
-            font-size: 14pt;
+            font-size: 11pt;
         }
 
         .panel-body {
-            font-size: 11pt;
-            padding: 8px;
+            font-size: 10pt;
+            padding: 6px;
         }
     }
 
     .see-all {
-        font-size: 14pt;
+        font-size: 10pt;
+    }
+
+    @media (min-width: $screen-xs-min) {
+
+        padding: 60px 0 90px;
+        
+        h2 {
+            font-size: 22.5pt;
+        }
+
+        #faq-list {
+
+            .panel-title {
+                padding: 5px 12px;
+                font-size: 14pt;
+            }
+
+            .panel-body {
+                font-size: 11pt;
+                padding: 8px;
+            }
+
+        }
+
+        .see-all {
+            font-size: 14pt;
+        }
+
     }
 
     @media (min-width: $screen-sm-min) {

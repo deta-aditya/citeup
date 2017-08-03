@@ -8,11 +8,21 @@ use App\Modules\Nucleons\Service;
 class SponsorService extends Service
 {
     /**
+     * The sponsor type.
+     */
+    const TYPE_SPONSOR = 1;
+
+    /**
+     * The media partner type.
+     */
+    const TYPE_MEDIA_PARTNER = 2;
+
+    /**
      * The URL to the default picture.
      *
      * @var string
      */
-    protected $defaultPicture = 'storage/images/default.jpg';
+    protected $defaultPicture = 'images/default.jpg';
 
     /**
      * The main model for the service.
@@ -30,6 +40,10 @@ class SponsorService extends Service
     public function getMultiple(array $params)
     {
         $query = $this->parseQueryString($this->getModel()->query(), $params);
+
+        if (array_has($params, 'type')) {
+            $query->ofType((int) $params['type']);
+        }
 
         return $query->get();
     }

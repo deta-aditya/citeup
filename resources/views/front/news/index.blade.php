@@ -30,9 +30,9 @@
                                 </div>
                                 <div class="panel-body">
                                     <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
-                                    <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
+                                    <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                                     <div class="editor-placeholder text-muted clearfix">
-                                        <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/storage/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                        <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
                                         <div>{{ $item->edits->last()->user->name }}</div>
                                         <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                                     </div>

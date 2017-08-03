@@ -28,6 +28,8 @@ class SponsorUpdateRequest extends FormRequest
         return [
             'name' => 'string|max:191',
             'picture' => 'string|max:191',
+            'type' => 'int|between:1,2',
+            'url' => 'string|max:191|nullable',
         ];
     }
 }

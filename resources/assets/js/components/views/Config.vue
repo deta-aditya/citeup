@@ -37,38 +37,12 @@
                                 Teks
                                 <p class="help-block" slot="help-block">Teks in akan ditampilkan di atas penghitung mundur.</p>
                             </text-input>
-                            <h2 class="subtitle text-muted">Urutan Acara</h2>
-                            <draggable name="landing-activities-order" :control-width="12" :labeled="false" v-model="value.landing.activities.order">
-                                <draggable-item slot="list" v-for="(activity, index) in value.landing.activities.order" :key="index">
-                                    <small class="text-muted">#{{ activity.id }}</small>{{ activity.name }}
-                                </draggable-item>
-                                <p class="help-block" slot="help-block">Drag untuk mengubah urutan. Urutan teratas akan tampil di paling kiri dan seterusnya.</p>
-                            </draggable>
                             <h2 class="subtitle text-muted">Bagian yang Ditampilkan</h2>
                             <check-list name="landing-show" :control-width="12" :labeled="false" v-model="value.landing.show">
                                 <template slot="list" scope="props">
                                     {{ props.data.name }}
                                 </template>
                             </check-list>
-                        </div>
-                    </form-panel>
-                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
-                        <div class="panel-body">
-                            <h2 class="page-title small-title">Penghadiahan</h2>
-                        </div>
-                        <div class="panel-body" v-for="(prize, index) in value.prizes" :key="index">
-                            <static-input :name="'prizes-' + prize.id + '-name'" :label-width="4" :control-width="8" v-model="value.prizes[index].name">
-                                Acara
-                            </static-input>
-                            <currency-input :name="'prizes-' + prize.id + '-first'" :label-width="4" :control-width="8" v-model="value.prizes[index].first">
-                                Juara 1
-                            </currency-input>
-                            <currency-input :name="'prizes-' + prize.id + '-second'" :label-width="4" :control-width="8" v-model="value.prizes[index].second">
-                                Juara 2
-                            </currency-input>
-                            <currency-input :name="'prizes-' + prize.id + '-third'" :label-width="4" :control-width="8" v-model="value.prizes[index].third">
-                                Juara 3
-                            </currency-input>
                         </div>
                     </form-panel>
                 </div>
@@ -150,11 +124,8 @@
     import SwitchButton from '../kits/FormPanel/SwitchButton.vue'
     import DateTimeInput from '../kits/FormPanel/DateTimeInput.vue'
     import TextInput from '../kits/FormPanel/TextInput.vue'
-    import Draggable from '../kits/FormPanel/Draggable/Draggable.vue'
-    import DraggableItem from '../kits/FormPanel/Draggable/DraggableItem.vue'
     import CheckList from '../kits/FormPanel/CheckList/CheckList.vue'
     import StaticInput from '../kits/FormPanel/StaticInput.vue'
-    import CurrencyInput from '../kits/FormPanel/CurrencyInput.vue'
     import MultilineInput from '../kits/FormPanel/MultilineInput.vue'
     import MessageBox from '../kits/MessageBox.vue'
 
@@ -281,11 +252,8 @@
             'switch-button': SwitchButton,
             'date-time-input': DateTimeInput,
             'text-input': TextInput,
-            'draggable': Draggable,
-            'draggable-item': DraggableItem,
             'check-list': CheckList,
             'static-input': StaticInput,
-            'currency-input': CurrencyInput,
             'multiline-input': MultilineInput,
             'message-box': MessageBox,
         },

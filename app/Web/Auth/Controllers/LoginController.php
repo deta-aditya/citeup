@@ -88,7 +88,7 @@ class LoginController extends Controller
         $this->passport();
         
         // Redirect to the right page.
-        return redirect('app');
+        return redirect()->route('dashboard');
     }
 
 }

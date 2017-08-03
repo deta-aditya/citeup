@@ -13,7 +13,7 @@ class ActivityService extends Service
      *
      * @var string
      */
-    protected $defaultIcon = 'storage/images/default.jpg';
+    protected $defaultIcon = 'images/default.jpg';
 
     /**
      * The main model for the service.

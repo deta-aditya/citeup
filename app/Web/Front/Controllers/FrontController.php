@@ -63,6 +63,13 @@ class FrontController extends Controller
     protected $view = 'landing';
 
     /**
+     * The activities query parameter.
+     * 
+     * @var array
+     */
+    protected $activitiesQuery = ['sort' => 'order:asc'];
+
+    /**
      * The faqs query parameter.
      * 
      * @var array
@@ -115,11 +122,12 @@ class FrontController extends Controller
     protected function data()
     {
         return [
-            'activities'    => $this->activities->getMultiple([]),
+            'activities'    => $this->activities->getMultiple($this->activitiesQuery),
             'config'        => $this->config->all(),
             'faqs'          => $this->faqs->getMultiple($this->faqsQuery),
             'news'          => $this->news->getMultiple($this->newsQuery),
-            'sponsors'      => $this->sponsors->getMultiple([]),
+            'sponsors'      => $this->sponsors->getMultiple(['type' => Sponsors::TYPE_SPONSOR]),
+            'media_partners'=> $this->sponsors->getMultiple(['type' => Sponsors::TYPE_MEDIA_PARTNER]),
             'nav'           => $this->navtheme,
         ];
     }
