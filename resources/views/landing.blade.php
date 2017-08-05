@@ -322,7 +322,7 @@
         <h2>Sponsor</h2>
         <div class="sponsors-list">
             @foreach ($sponsors as $sponsor)
-                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}" target="_blank"> @endunless
                     <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
                 @unless (is_null($sponsor->url)) </a> @endunless
             @endforeach
@@ -333,8 +333,8 @@
         <h2>Media Partner</h2>
         <div class="sponsors-list">
             @foreach ($media_partners as $sponsor)
-                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}"> @endunless
-                    <img src="{{ asset($sponsor->picture) }}" class="sponsor-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
+                @unless (is_null($sponsor->url)) <a href="{{ $sponsor->url }}" target="_blank"> @endunless
+                    <img src="{{ asset($sponsor->picture) }}" class="media-partner-item" data-toggle="tooltip" data-placement="top" title="{{ $sponsor->name }}">
                 @unless (is_null($sponsor->url)) </a> @endunless
             @endforeach
         </div>

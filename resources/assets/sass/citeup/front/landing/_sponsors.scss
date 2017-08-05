@@ -1,5 +1,16 @@
 
 #front-sponsors {
+
+    %sponsor-item {
+        margin: 5px;
+        display: inline-block;
+        vertical-align: middle;
+
+        @media (min-width: $screen-xs-min) {
+            margin: 10px;
+        }
+    }
+
     padding: 30px;
     margin-bottom: 30px;
     background-color: #fff;
@@ -13,10 +24,15 @@
     }
 
     .sponsor-item {
-        height: 50px;
-        margin: 5px;
-        display: inline-block;
-        vertical-align: top;
+        @extend %sponsor-item;
+        max-height: 50px;
+        max-width: 100px;
+    }
+
+    .media-partner-item {
+        @extend %sponsor-item;
+        max-height: 40px;
+        max-width: 90px;
     }
 
     .sponsors-container {
@@ -36,8 +52,13 @@
         }
 
         .sponsor-item {
-            height: 75px;
-            margin: 10px;
+            max-height: 85px;
+            max-width: 170px;
+        }
+
+        .media-partner-item {
+            max-height: 65px;
+            max-width: 140px;
         }
 
     }
