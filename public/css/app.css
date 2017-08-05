@@ -13065,6 +13065,18 @@ trix-editor .attachment progress {
   background-color: #fff;
 }
 
+#front-sponsors .sponsor-item, #front-sponsors .media-partner-item {
+  margin: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media (min-width: 480px) {
+  #front-sponsors .sponsor-item, #front-sponsors .media-partner-item {
+    margin: 10px;
+  }
+}
+
 #front-sponsors h2 {
   font-size: 11pt;
 }
@@ -13074,10 +13086,13 @@ trix-editor .attachment progress {
 }
 
 #front-sponsors .sponsor-item {
-  height: 50px;
-  margin: 5px;
-  display: inline-block;
-  vertical-align: top;
+  max-height: 50px;
+  max-width: 100px;
+}
+
+#front-sponsors .media-partner-item {
+  max-height: 40px;
+  max-width: 90px;
 }
 
 #front-sponsors .sponsors-container {
@@ -13096,8 +13111,12 @@ trix-editor .attachment progress {
     font-size: 15pt;
   }
   #front-sponsors .sponsor-item {
-    height: 75px;
-    margin: 10px;
+    max-height: 85px;
+    max-width: 170px;
+  }
+  #front-sponsors .media-partner-item {
+    max-height: 65px;
+    max-width: 140px;
   }
 }
 
