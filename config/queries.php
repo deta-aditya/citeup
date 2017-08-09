@@ -358,4 +358,24 @@ return [
 
     ],
 
+    'html_contents' => [
+
+        'selectable' => [
+            'name', 'content',
+        ],
+
+        'sortable' => [
+            'name',
+        ],
+
+        'comparable' => [
+            'name',
+        ],
+
+        'loadable' => [
+            'edits',
+        ],
+
+    ],
+
 ];

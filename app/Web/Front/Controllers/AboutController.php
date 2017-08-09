@@ -5,9 +5,17 @@ namespace App\Web\Front\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
+use App\Modules\Electrons\HtmlContents\HtmlContentService as Contents;
 
 class AboutController extends Controller
 {
+    /**
+     * The html content service instance.
+     *
+     * @var Contents
+     */
+    protected $contents;
+
     /**
      * The activity service instance.
      *
@@ -35,8 +43,9 @@ class AboutController extends Controller
      * @param  Activities  $activities
      * @return void
      */
-    public function __construct(Activities $activities)
+    public function __construct(Contents $contents, Activities $activities)
     {
+        $this->contents = $contents;
         $this->activities = $activities;
     }
 
@@ -60,6 +69,7 @@ class AboutController extends Controller
     {
         return [
             'activities'    => $this->activities->getMultiple([]),
+            'content'       => $this->contents->single('About')->content,
             'nav'           => $this->navtheme,
         ];
     }

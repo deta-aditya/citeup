@@ -13162,7 +13162,7 @@ trix-editor .attachment progress {
   border-bottom: none;
 }
 
-#about-page .panel-content h2 {
+#about-page .panel-content h1, #about-page .panel-content h2 {
   margin: 0;
   font-size: 18pt;
   font-weight: 300;
@@ -13170,7 +13170,7 @@ trix-editor .attachment progress {
   padding-bottom: 20px;
 }
 
-#about-page .panel-content h2:first-of-type {
+#about-page .panel-content h1:first-of-type, #about-page .panel-content h2:first-of-type {
   padding-top: 0;
 }
 
@@ -13240,7 +13240,7 @@ trix-editor .attachment progress {
   #about-page .panel-content {
     font-size: 10.5pt;
   }
-  #about-page .panel-content h2 {
+  #about-page .panel-content h1, #about-page .panel-content h2 {
     font-size: 22.5pt;
   }
   #about-page .panel-content ul {

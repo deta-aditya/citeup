@@ -16,43 +16,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="panel panel-default panel-content">
-                            <div class="panel-body">
-                                <h2>Latar Belakang</h2>
-                                <p class="text-justify">
-                                    Perkembangan teknologi adalah perkembangan yang selalu
-                                    berkembang seiring dengan bertambahnnya usia manusia mendiami bumi
-                                    ini. Perkembangan di bidang teknologi informasi telah melahirkan
-                                    penemuan seperti televisi, telepon, dan penemuan yang sangat
-                                    membantu manusia di era global saat ini yaitu komputer.
-                                </p>
-                                <p class="text-justify">
-                                    Namun di sisi lain dari perkembangan tersebut masih banyak manusia
-                                    yang awam terhadap perubahan teknologi sehingga perkembangan
-                                    teknologi tidak selalu berjalan seperti yang semestinya.
-                                </p>
-                                <p class="text-justify">
-                                    Berlandaskan pada pesatnya perkembangan teknologi di bidang
-                                    teknologi informasi dan kondisi masyarakat saat ini, Universitas Pertamina
-                                    melalui slogannya, “Be a Global Leader”, akan menumbuhkan pemahaman
-                                    dan pengalaman pelajar dalam bidang teknologi informasi melalui
-                                    kegiatan “Computer and IT Event of Universitas Pertamina” yang dapat
-                                    disingkat menjadi “CITE UP”
-                                </p>
-                                <h2>Tujuan</h2>
-                                <ul>
-                                    <li>
-                                        Mengenalkan dan menambah pengalaman mengenai dunia IT secara lebih luas kepada masyarakat, 
-                                        khususnya kepada siswa-siswi SMA/K se-Indonesia.
-                                    </li>
-                                    <li>
-                                        Mengenalkan profil program studi Ilmu Komputer sekaligus Universitas Pertamina kepada masyarakat, 
-                                        khususnya kepada siswa-siswi SMA/K se-Indonesia.
-                                    </li>
-                                    <li>
-                                        Membantu pihak sponsor mempromosikan perusahaan dan/atau produknya, serta menjalin hubungan baik
-                                        berjangka panjang untuk kedepannya antara kampus dan pihak sponsor.
-                                    </li>
-                                </ul>                                    
+                            <div class="panel-body text-justify">
+                                {!! $content !!}                   
                             </div>
                         </div>
                         <div class="panel panel-default panel-content">

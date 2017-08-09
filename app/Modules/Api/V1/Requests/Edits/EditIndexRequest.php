@@ -45,6 +45,7 @@ class EditIndexRequest extends ApiIndexRequest
             'gallery' => 'int|exists:galleries,id',
             'sponsor' => 'int|exists:sponsors,id',
             'faq' => 'int|exists:faqs,id',
+            'html_content' => 'int|exists:html_contents,id',
             'user' => 'int|exists:users,id',
         ];
     }

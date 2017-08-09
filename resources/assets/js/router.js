@@ -26,6 +26,10 @@ import NewsUpdate from './components/views/news/NewsUpdate.vue';
 import ContactPeopleIndex from './components/views/contact_people/ContactPeopleIndex.vue';
 import ContactPeopleCreate from './components/views/contact_people/ContactPeopleCreate.vue';
 import ContactPeopleUpdate from './components/views/contact_people/ContactPeopleUpdate.vue';
+import HtmlContentsIndex from './components/views/html_contents/HtmlContentsIndex.vue';
+import HtmlContentsView from './components/views/html_contents/HtmlContentsView.vue';
+import HtmlContentsCreate from './components/views/html_contents/HtmlContentsCreate.vue';
+import HtmlContentsUpdate from './components/views/html_contents/HtmlContentsUpdate.vue';
 import Logout from './components/views/Logout.vue';
 import ErrorPage from './components/views/Error.vue';
 import CompleteProfile from './components/views/profiles/CompleteProfile.vue';
@@ -55,6 +59,10 @@ const router = new VueRouter({
         { path: '/contact-people', name: 'Contact Person', component: ContactPeopleIndex },
         { path: '/contact-people/:id/update', name: 'Contact Person.Sunting', component: ContactPeopleUpdate, props: true },
         { path: '/contact-people/create', name: 'Contact Person.Buat', component: ContactPeopleCreate },
+        { path: '/html-contents', name: 'Konten', component: HtmlContentsIndex },
+        { path: '/html-contents/:id', name: 'Konten.Lihat', component: HtmlContentsView, props: true },
+        { path: '/html-contents/:id/update', name: 'Konten.Sunting', component: HtmlContentsUpdate, props: true },
+        { path: '/html-contents/create', name: 'Konten.Buat', component: HtmlContentsCreate },
         { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
         { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
         { path: '/logout', name: 'Logout', component: Logout },

@@ -79436,6 +79436,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -82257,12 +82261,20 @@ var RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_views_contact_people_ContactPeopleCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_views_contact_people_ContactPeopleCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_views_contact_people_ContactPeopleUpdate_vue__ = __webpack_require__(467);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_views_contact_people_ContactPeopleUpdate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_views_contact_people_ContactPeopleUpdate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_views_Logout_vue__ = __webpack_require__(379);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_views_Logout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_views_Logout_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_views_Error_vue__ = __webpack_require__(378);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_views_Error_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_views_Error_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_views_profiles_CompleteProfile_vue__ = __webpack_require__(394);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_views_profiles_CompleteProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_views_profiles_CompleteProfile_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_views_html_contents_HtmlContentsIndex_vue__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_views_html_contents_HtmlContentsIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_views_html_contents_HtmlContentsIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_views_html_contents_HtmlContentsView_vue__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_views_html_contents_HtmlContentsView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_views_html_contents_HtmlContentsView_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_views_html_contents_HtmlContentsCreate_vue__ = __webpack_require__(475);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_views_html_contents_HtmlContentsCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_views_html_contents_HtmlContentsCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_views_html_contents_HtmlContentsUpdate_vue__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_views_html_contents_HtmlContentsUpdate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_views_html_contents_HtmlContentsUpdate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_views_Logout_vue__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_views_Logout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_views_Logout_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_views_Error_vue__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_views_Error_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_views_Error_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_views_profiles_CompleteProfile_vue__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_views_profiles_CompleteProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_views_profiles_CompleteProfile_vue__);
 /**
  * The app's router.
  * This contains the router object and its configurations.
@@ -82295,10 +82307,14 @@ var RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' };
 
 
 
+
+
+
+
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
     base: '/panel/',
-    routes: [{ path: '/', name: 'Dasbor', component: __WEBPACK_IMPORTED_MODULE_1__components_views_Root_vue___default.a }, { path: '/settings', name: 'Konfigurasi', component: __WEBPACK_IMPORTED_MODULE_2__components_views_Config_vue___default.a }, { path: '/activities', name: 'Acara', component: __WEBPACK_IMPORTED_MODULE_3__components_views_activities_ActivitiesIndex_vue___default.a }, { path: '/activities/:id', name: 'Acara.Lihat', component: __WEBPACK_IMPORTED_MODULE_4__components_views_activities_ActivitiesView_vue___default.a, props: true }, { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: __WEBPACK_IMPORTED_MODULE_7__components_views_activities_schedules_SchedulesCreate_vue___default.a, props: true }, { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: __WEBPACK_IMPORTED_MODULE_8__components_views_activities_schedules_SchedulesUpdate_vue___default.a, props: true }, { path: '/activities/:id/update', name: 'Acara.Sunting', component: __WEBPACK_IMPORTED_MODULE_6__components_views_activities_ActivitiesUpdate_vue___default.a, props: true }, { path: '/activities/create', name: 'Acara.Buat', component: __WEBPACK_IMPORTED_MODULE_5__components_views_activities_ActivitiesCreate_vue___default.a }, { path: '/faqs', name: 'FAQ', component: __WEBPACK_IMPORTED_MODULE_12__components_views_faqs_FaqsIndex_vue___default.a }, { path: '/faqs/create', name: 'FAQ.Buat', component: __WEBPACK_IMPORTED_MODULE_13__components_views_faqs_FaqsCreate_vue___default.a }, { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: __WEBPACK_IMPORTED_MODULE_14__components_views_faqs_FaqsUpdate_vue___default.a, props: true }, { path: '/news', name: 'Berita', component: __WEBPACK_IMPORTED_MODULE_15__components_views_news_NewsIndex_vue___default.a }, { path: '/news/:id', name: 'Berita.Lihat', component: __WEBPACK_IMPORTED_MODULE_16__components_views_news_NewsView_vue___default.a, props: true }, { path: '/news/:id/update', name: 'Berita.Sunting', component: __WEBPACK_IMPORTED_MODULE_18__components_views_news_NewsUpdate_vue___default.a, props: true }, { path: '/news/create', name: 'Berita.Buat', component: __WEBPACK_IMPORTED_MODULE_17__components_views_news_NewsCreate_vue___default.a }, { path: '/sponsors', name: 'Sponsor', component: __WEBPACK_IMPORTED_MODULE_9__components_views_sponsors_SponsorsIndex_vue___default.a }, { path: '/sponsors/create', name: 'Sponsor.Buat', component: __WEBPACK_IMPORTED_MODULE_10__components_views_sponsors_SponsorsCreate_vue___default.a }, { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: __WEBPACK_IMPORTED_MODULE_11__components_views_sponsors_SponsorsUpdate_vue___default.a, props: true }, { path: '/contact-people', name: 'Contact Person', component: __WEBPACK_IMPORTED_MODULE_19__components_views_contact_people_ContactPeopleIndex_vue___default.a }, { path: '/contact-people/:id/update', name: 'Contact Person.Sunting', component: __WEBPACK_IMPORTED_MODULE_21__components_views_contact_people_ContactPeopleUpdate_vue___default.a, props: true }, { path: '/contact-people/create', name: 'Contact Person.Buat', component: __WEBPACK_IMPORTED_MODULE_20__components_views_contact_people_ContactPeopleCreate_vue___default.a }, { path: '/error/:status', name: 'Error', component: __WEBPACK_IMPORTED_MODULE_23__components_views_Error_vue___default.a, props: true }, { path: '/finishing', name: 'Pelengkapan Profil', component: __WEBPACK_IMPORTED_MODULE_24__components_views_profiles_CompleteProfile_vue___default.a }, { path: '/logout', name: 'Logout', component: __WEBPACK_IMPORTED_MODULE_22__components_views_Logout_vue___default.a }, { path: '*', name: 'error', component: __WEBPACK_IMPORTED_MODULE_23__components_views_Error_vue___default.a, props: { status: 404 } }]
+    routes: [{ path: '/', name: 'Dasbor', component: __WEBPACK_IMPORTED_MODULE_1__components_views_Root_vue___default.a }, { path: '/settings', name: 'Konfigurasi', component: __WEBPACK_IMPORTED_MODULE_2__components_views_Config_vue___default.a }, { path: '/activities', name: 'Acara', component: __WEBPACK_IMPORTED_MODULE_3__components_views_activities_ActivitiesIndex_vue___default.a }, { path: '/activities/:id', name: 'Acara.Lihat', component: __WEBPACK_IMPORTED_MODULE_4__components_views_activities_ActivitiesView_vue___default.a, props: true }, { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: __WEBPACK_IMPORTED_MODULE_7__components_views_activities_schedules_SchedulesCreate_vue___default.a, props: true }, { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: __WEBPACK_IMPORTED_MODULE_8__components_views_activities_schedules_SchedulesUpdate_vue___default.a, props: true }, { path: '/activities/:id/update', name: 'Acara.Sunting', component: __WEBPACK_IMPORTED_MODULE_6__components_views_activities_ActivitiesUpdate_vue___default.a, props: true }, { path: '/activities/create', name: 'Acara.Buat', component: __WEBPACK_IMPORTED_MODULE_5__components_views_activities_ActivitiesCreate_vue___default.a }, { path: '/faqs', name: 'FAQ', component: __WEBPACK_IMPORTED_MODULE_12__components_views_faqs_FaqsIndex_vue___default.a }, { path: '/faqs/create', name: 'FAQ.Buat', component: __WEBPACK_IMPORTED_MODULE_13__components_views_faqs_FaqsCreate_vue___default.a }, { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: __WEBPACK_IMPORTED_MODULE_14__components_views_faqs_FaqsUpdate_vue___default.a, props: true }, { path: '/news', name: 'Berita', component: __WEBPACK_IMPORTED_MODULE_15__components_views_news_NewsIndex_vue___default.a }, { path: '/news/:id', name: 'Berita.Lihat', component: __WEBPACK_IMPORTED_MODULE_16__components_views_news_NewsView_vue___default.a, props: true }, { path: '/news/:id/update', name: 'Berita.Sunting', component: __WEBPACK_IMPORTED_MODULE_18__components_views_news_NewsUpdate_vue___default.a, props: true }, { path: '/news/create', name: 'Berita.Buat', component: __WEBPACK_IMPORTED_MODULE_17__components_views_news_NewsCreate_vue___default.a }, { path: '/sponsors', name: 'Sponsor', component: __WEBPACK_IMPORTED_MODULE_9__components_views_sponsors_SponsorsIndex_vue___default.a }, { path: '/sponsors/create', name: 'Sponsor.Buat', component: __WEBPACK_IMPORTED_MODULE_10__components_views_sponsors_SponsorsCreate_vue___default.a }, { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: __WEBPACK_IMPORTED_MODULE_11__components_views_sponsors_SponsorsUpdate_vue___default.a, props: true }, { path: '/contact-people', name: 'Contact Person', component: __WEBPACK_IMPORTED_MODULE_19__components_views_contact_people_ContactPeopleIndex_vue___default.a }, { path: '/contact-people/:id/update', name: 'Contact Person.Sunting', component: __WEBPACK_IMPORTED_MODULE_21__components_views_contact_people_ContactPeopleUpdate_vue___default.a, props: true }, { path: '/contact-people/create', name: 'Contact Person.Buat', component: __WEBPACK_IMPORTED_MODULE_20__components_views_contact_people_ContactPeopleCreate_vue___default.a }, { path: '/html-contents', name: 'Konten', component: __WEBPACK_IMPORTED_MODULE_22__components_views_html_contents_HtmlContentsIndex_vue___default.a }, { path: '/html-contents/:id', name: 'Konten.Lihat', component: __WEBPACK_IMPORTED_MODULE_23__components_views_html_contents_HtmlContentsView_vue___default.a, props: true }, { path: '/html-contents/:id/update', name: 'Konten.Sunting', component: __WEBPACK_IMPORTED_MODULE_25__components_views_html_contents_HtmlContentsUpdate_vue___default.a, props: true }, { path: '/html-contents/create', name: 'Konten.Buat', component: __WEBPACK_IMPORTED_MODULE_24__components_views_html_contents_HtmlContentsCreate_vue___default.a }, { path: '/error/:status', name: 'Error', component: __WEBPACK_IMPORTED_MODULE_27__components_views_Error_vue___default.a, props: true }, { path: '/finishing', name: 'Pelengkapan Profil', component: __WEBPACK_IMPORTED_MODULE_28__components_views_profiles_CompleteProfile_vue___default.a }, { path: '/logout', name: 'Logout', component: __WEBPACK_IMPORTED_MODULE_26__components_views_Logout_vue___default.a }, { path: '*', name: 'error', component: __WEBPACK_IMPORTED_MODULE_27__components_views_Error_vue___default.a, props: { status: 404 } }]
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -84908,7 +84924,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-phone"
-  }), _vm._v("\n                Contact Person\n            ")]), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                Contact Person\n            ")]), _vm._v(" "), _c('router-link', {
+    class: {
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0
+    },
+    attrs: {
+      "to": {
+        name: 'Konten'
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-fw fa-archive"
+  }), _vm._v("\n                Konten\n            ")]), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
     class: {
       'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0
     },
@@ -88354,6 +88381,838 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-8f40699e", module.exports)
+  }
+}
+
+/***/ }),
+/* 471 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__kits_FormPanel_FormPanel_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__kits_FormPanel_FormPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__kits_FormPanel_FormPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            formPanel: null,
+            html_content: {}
+        };
+    },
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        prepareComponent: function prepareComponent() {
+            this.formPanel = this.$refs.formPanel;
+        },
+        preview: function preview() {
+            this.$router.push({ name: 'Konten' });
+        },
+        submit: function submit() {
+            this.formPanel.submit();
+        }
+    },
+
+    components: {
+        'form-panel': __WEBPACK_IMPORTED_MODULE_0__kits_FormPanel_FormPanel_vue___default.a,
+        'text-input': __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_TextInput_vue___default.a,
+        'rich-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_RichInput_vue___default.a
+    }
+
+});
+
+/***/ }),
+/* 472 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__citeup__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+var STATES = ['user'];
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            dataPanel: null,
+            html_contents: []
+        };
+    },
+
+
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapState */])(STATES),
+
+    filters: {
+        normalize: function normalize(value) {
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(value).format('DD MMM, HH:mm');
+        },
+        assetify: function assetify(value) {
+            return __WEBPACK_IMPORTED_MODULE_3__citeup__["a" /* default */].appPath + '/' + value;
+        }
+    },
+
+    created: function created() {
+        this.getHtmlContents();
+    },
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        getHtmlContents: function getHtmlContents() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_3__citeup__["a" /* default */].get('/html-contents', {
+                take: 15
+            }).then(function (response) {
+                return _this.html_contents = response.data.data.html_contents;
+            });
+        },
+        shorten: function shorten(value) {
+            if (value !== undefined && value.length > 300) {
+                return value.substring(0, 299) + '...';
+            }
+
+            return value;
+        },
+        prepareComponent: function prepareComponent() {
+            this.dataPanel = this.$refs.dataPanel;
+        }
+    },
+
+    components: {
+        'data-panel': __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue___default.a,
+        'data-panel-addon': __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default.a,
+        'data-panel-list-item': __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default.a
+    }
+
+});
+
+/***/ }),
+/* 473 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+
+        id: {
+            type: [Number, String],
+            required: true
+        }
+
+    },
+
+    data: function data() {
+        return {
+            formPanel: null,
+            html_content: {}
+        };
+    },
+    created: function created() {
+        this.getHtmlContent();
+    },
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        getHtmlContent: function getHtmlContent() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/html-contents/' + this.id).then(function (response) {
+                _this.html_content = response.data.data.html_content;
+            });
+        },
+        prepareComponent: function prepareComponent() {
+            this.formPanel = this.$refs.formPanel;
+        },
+        preview: function preview() {
+            this.$router.push({ name: 'Konten' });
+        },
+        submit: function submit() {
+            this.formPanel.submit();
+        }
+    },
+
+    components: {
+        'form-panel': __WEBPACK_IMPORTED_MODULE_1__kits_FormPanel_FormPanel_vue___default.a,
+        'text-input': __WEBPACK_IMPORTED_MODULE_2__kits_FormPanel_TextInput_vue___default.a,
+        'rich-input': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_RichInput_vue___default.a
+    }
+
+});
+
+/***/ }),
+/* 474 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__citeup__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+
+        id: {
+            type: [Number, String],
+            required: true
+        }
+
+    },
+
+    data: function data() {
+        return {
+            formPanel: null,
+            html_content: {}
+        };
+    },
+
+
+    filters: {
+        normalize: function normalize(value) {
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(value).format('DD MMM, HH:mm');
+        },
+        assetify: function assetify(value) {
+            return __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].appPath + '/' + value;
+        }
+    },
+
+    created: function created() {
+        this.getHtmlContent();
+    },
+
+
+    methods: {
+        getHtmlContent: function getHtmlContent() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/html-contents/' + this.id).then(function (response) {
+                _this.html_content = response.data.data.html_content;
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(471),
+  /* template */
+  __webpack_require__(482),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\views\\html_contents\\HtmlContentsCreate.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] HtmlContentsCreate.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8549d36e", Component.options)
+  } else {
+    hotAPI.reload("data-v-8549d36e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(472),
+  /* template */
+  __webpack_require__(480),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\views\\html_contents\\HtmlContentsIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] HtmlContentsIndex.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25dc1715", Component.options)
+  } else {
+    hotAPI.reload("data-v-25dc1715", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 477 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(473),
+  /* template */
+  __webpack_require__(481),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\views\\html_contents\\HtmlContentsUpdate.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] HtmlContentsUpdate.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a1aff96", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a1aff96", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(474),
+  /* template */
+  __webpack_require__(479),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\views\\html_contents\\HtmlContentsView.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] HtmlContentsView.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18705cb2", Component.options)
+  } else {
+    hotAPI.reload("data-v-18705cb2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "html-contents-view"
+    }
+  }, [_c('div', {
+    staticClass: "form-panel"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "pull-right"
+  }, [_c('router-link', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "to": {
+        name: 'Konten'
+      }
+    }
+  }, [_vm._v("Indeks")]), _vm._v(" "), _c('router-link', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "to": {
+        name: 'Konten.Sunting',
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_vm._v("Sunting")])], 1), _vm._v(" "), _c('h1', {
+    staticClass: "page-title"
+  }, [_vm._v(_vm._s(_vm.html_content.name) + " "), _c('small', [_vm._v("Konten / #" + _vm._s(_vm.id))])])]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body text-justify"
+  }, [_c('div', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.html_content.content)
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_vm._v("\n                Dibuat pada " + _vm._s(_vm._f("normalize")(_vm.html_content.created_at)) + ", terakhir disunting pada " + _vm._s(_vm._f("normalize")(_vm.html_content.updated_at)) + "\n            ")])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-18705cb2", module.exports)
+  }
+}
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "html-contents-index"
+    }
+  }, [_c('data-panel', {
+    ref: "dataPanel",
+    attrs: {
+      "checkable": true,
+      "expandable": true,
+      "deletable": true
+    },
+    scopedSlots: _vm._u([{
+      key: "list",
+      fn: function(props) {
+        return [_c('data-panel-list-item', {
+          attrs: {
+            "id": props.data.id,
+            "update": {
+              name: 'Konten.Sunting',
+              params: {
+                id: props.data.id
+              }
+            },
+            "delete": '/html-contents/' + props.data.id
+          }
+        }, [_c('template', {
+          slot: "title"
+        }, [_vm._v("\n                    " + _vm._s(props.data.name) + "\n                ")]), _vm._v(" "), _c('div', {
+          domProps: {
+            "innerHTML": _vm._s(_vm.shorten(props.data.content))
+          }
+        }), _vm._v(" "), _c('p', [_c('small', {
+          staticClass: "text-muted"
+        }, [_vm._v("\n                        Dibuat pada " + _vm._s(_vm._f("normalize")(props.data.created_at)) + ". Terakhir disunting pada " + _vm._s(_vm._f("normalize")(props.data.updated_at)) + "\n                    ")])]), _vm._v(" "), _c('template', {
+          slot: "actions"
+        }, [_c('li', {
+          staticClass: "divider",
+          attrs: {
+            "role": "separator"
+          }
+        }), _vm._v(" "), _c('router-link', {
+          attrs: {
+            "tag": "li",
+            "to": {
+              name: 'Konten.Lihat',
+              params: {
+                id: props.data.id
+              }
+            }
+          }
+        }, [_c('a', [_vm._v("Lihat Detail")])])], 1)], 2)]
+      }
+    }, {
+      key: "delete-preview",
+      fn: function(props) {
+        return [_c('div', {
+          staticClass: "panel panel-default delete-preview"
+        }, [_c('div', {
+          staticClass: "panel-body"
+        }, [_c('h4', [_c('small', [_vm._v("#" + _vm._s(props.data.id))]), _vm._v(" " + _vm._s(props.data.name))]), _vm._v(" "), _c('div', {
+          domProps: {
+            "innerHTML": _vm._s(_vm.shorten(props.data.content))
+          }
+        }), _vm._v(" "), _c('div', [_c('small', {
+          staticClass: "text-muted"
+        }, [_vm._v("\n                        Dibuat pada " + _vm._s(_vm._f("normalize")(props.data.created_at)) + ". Terakhir disunting pada " + _vm._s(_vm._f("normalize")(props.data.updated_at)) + "\n                    ")])])])])]
+      }
+    }]),
+    model: {
+      value: (_vm.html_contents),
+      callback: function($$v) {
+        _vm.html_contents = $$v
+      },
+      expression: "html_contents"
+    }
+  }, [_vm._v("\n        Daftar Konten\n        "), _c('data-panel-addon', {
+    attrs: {
+      "refresh": _vm.getHtmlContents,
+      "create": {
+        name: 'Konten.Buat'
+      }
+    },
+    slot: "control"
+  })], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-25dc1715", module.exports)
+  }
+}
+
+/***/ }),
+/* 481 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "html-contents-create"
+    }
+  }, [_c('form-panel', {
+    ref: "formPanel",
+    attrs: {
+      "method": "put",
+      "action": '/html-contents/' + _vm.id,
+      "model": _vm.html_content,
+      "horizontal": true
+    },
+    on: {
+      "submitted": _vm.preview
+    }
+  }, [_c('template', {
+    slot: "title"
+  }, [_vm._v("Sunting Konten")]), _vm._v(" "), _c('template', {
+    slot: "header-control"
+  }, [_c('router-link', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "to": {
+        name: 'Konten'
+      }
+    }
+  }, [_vm._v("Kembali")])], 1), _vm._v(" "), _c('text-input', {
+    attrs: {
+      "name": "name",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.html_content.name),
+      callback: function($$v) {
+        _vm.html_content.name = $$v
+      },
+      expression: "html_content.name"
+    }
+  }, [_vm._v("\n            Nama Konten\n        ")]), _vm._v(" "), _c('rich-input', {
+    attrs: {
+      "name": "content",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.html_content.content),
+      callback: function($$v) {
+        _vm.html_content.content = $$v
+      },
+      expression: "html_content.content"
+    }
+  }, [_vm._v("\n            Isi Konten\n        ")]), _vm._v(" "), _c('template', {
+    slot: "footer-control"
+  }, [_c('div', {
+    staticClass: "text-right"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v("\n                    Selesai\n                ")])])])], 2)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5a1aff96", module.exports)
+  }
+}
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "html-contents-create"
+    }
+  }, [_c('form-panel', {
+    ref: "formPanel",
+    attrs: {
+      "method": "post",
+      "action": "/html-contents",
+      "model": _vm.html_content,
+      "horizontal": true
+    },
+    on: {
+      "submitted": _vm.preview
+    }
+  }, [_c('template', {
+    slot: "title"
+  }, [_vm._v("Buat Konten")]), _vm._v(" "), _c('template', {
+    slot: "header-control"
+  }, [_c('router-link', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "to": {
+        name: 'Konten'
+      }
+    }
+  }, [_vm._v("Kembali")])], 1), _vm._v(" "), _c('text-input', {
+    attrs: {
+      "name": "name",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.html_content.name),
+      callback: function($$v) {
+        _vm.html_content.name = $$v
+      },
+      expression: "html_content.name"
+    }
+  }, [_vm._v("\n            Nama Konten\n        ")]), _vm._v(" "), _c('rich-input', {
+    attrs: {
+      "name": "content",
+      "required": true,
+      "label-width": 2,
+      "control-width": 10
+    },
+    model: {
+      value: (_vm.html_content.content),
+      callback: function($$v) {
+        _vm.html_content.content = $$v
+      },
+      expression: "html_content.content"
+    }
+  }, [_vm._v("\n            Isi Konten\n        ")]), _vm._v(" "), _c('template', {
+    slot: "footer-control"
+  }, [_c('div', {
+    staticClass: "text-right"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v("\n                    Selesai\n                ")])])])], 2)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-8549d36e", module.exports)
   }
 }
 

@@ -2,6 +2,7 @@
 @inject('f_activities', 'App\Modules\Electrons\Activities\ActivityService')
 @inject('f_news', 'App\Modules\Electrons\News\NewsService')
 @inject('f_faqs', 'App\Modules\Electrons\Faqs\FaqService')
+@inject('f_contents', 'App\Modules\Electrons\HtmlContents\HtmlContentService')
 
 <!-- Footer Div -->
 <div id="front-footer" style="">
@@ -13,8 +14,7 @@
         <div class="row middle-yard">
             <div class="col-sm-4">
                 <p>
-                    CITE UP adalah serangkaian acara berupa perlombaan dan seminar bertema IT yang 
-                    diselenggarakan setiap tahun oleh program studi Ilmu Komputer, Universitas Pertamina.
+                    {!! $f_contents->single('Footer')->content !!}
                 </p>
                 <p class="socmeds">
                     <a href="http://facebook.com/{{ $settings->contact->facebook }}" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>

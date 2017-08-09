@@ -36,6 +36,10 @@
                     <i class="fa fa-fw fa-phone"></i>
                     Contact Person
                 </router-link>
+                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0 }" :to="{ name: 'Konten' }">
+                    <i class="fa fa-fw fa-archive"></i>
+                    Konten
+                </router-link>
                 <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
                     <i class="fa fa-fw fa-cogs"></i>
                     Konfigurasi

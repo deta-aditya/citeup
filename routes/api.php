@@ -156,6 +156,13 @@ Route::group([
     Route::get('/contact-people/{contact}', 'ContactPersonController@show');
     Route::put('/contact-people/{contact}', 'ContactPersonController@update');
     Route::delete('/contact-people/{contact}', 'ContactPersonController@remove');
+
+    Route::get('/html-contents', 'HtmlContentController@index');
+    Route::post('/html-contents', 'HtmlContentController@insert');
+    Route::get('/html-contents/{content}', 'HtmlContentController@show');
+    Route::put('/html-contents/{content}', 'HtmlContentController@update');
+    Route::delete('/html-contents/{content}', 'HtmlContentController@remove');
+    Route::get('/html-contents/{content}/edits', 'HtmlContentController@edits');
     
     Route::get('/edits', 'EditController@index');
     

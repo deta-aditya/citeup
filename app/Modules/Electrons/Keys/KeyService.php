@@ -90,7 +90,12 @@ class KeyService extends Service
         'Put Faqs', 'Delete Faqs',
 
         // "Contact People" Keys
-        'Post Contact People', 'Put Contact People', 'Delete Contact People',
+        'Get Contact People', 'View Contact People', 'Post Contact People', 
+        'Put Contact People', 'Delete Contact People',
+
+        // "Html Contents" Keys
+        'Get Html Contents', 'View Html Contents', 'Post Html Contents', 
+        'Put Html Contents', 'Delete Html Contents',
 
         // "Edits" Keys
         'Get Edits',

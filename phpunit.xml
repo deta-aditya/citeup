@@ -10,7 +10,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Feature Tests">
-            <directory suffix="Test.php">./tests/Feature/Api/Policy/ContactPeople</directory>
+            <directory suffix="Test.php">./tests/Feature/Api/Policy/HtmlContents</directory>
         </testsuite>
 
         <testsuite name="Unit Tests">
