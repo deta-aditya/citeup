@@ -150,6 +150,12 @@ Route::group([
     Route::put('/faqs/{faq}', 'FaqController@update');
     Route::delete('/faqs/{faq}', 'FaqController@remove');
     Route::get('/faqs/{faq}/edits', 'FaqController@edits');
+
+    Route::get('/contact-people', 'ContactPersonController@index');
+    Route::post('/contact-people', 'ContactPersonController@insert');
+    Route::get('/contact-people/{contact}', 'ContactPersonController@show');
+    Route::put('/contact-people/{contact}', 'ContactPersonController@update');
+    Route::delete('/contact-people/{contact}', 'ContactPersonController@remove');
     
     Route::get('/edits', 'EditController@index');
     

@@ -291,13 +291,13 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    @foreach (config('web.contact.person') as $contactPerson)
-                        <div class="col-sm-6">
+                    @foreach ($contact_people as $contact)
+                        <div class="col-sm-{{ 12 / $contact_people->count() }}">
                             <dl>
-                                <dt>{{ $contactPerson['name'] }}</dt>
-                                <dd>{{ $contactPerson['phone'] }}</dd>
-                                <dd class="email">{{ $contactPerson['email'] }}</dd>
-                                <dd><a href="http://line.me/ti/p/~{{ $contactPerson['line'] }}" target="_blank">{{ $contactPerson['line'] }}</a></dd>
+                                <dt>{{ $contact['name'] }}</dt>
+                                <dd>{{ $contact['phone'] }}</dd>
+                                <dd class="email">{{ $contact['email'] }}</dd>
+                                <dd><a href="http://line.me/ti/p/~{{ $contact['line'] }}" target="_blank">{{ $contact['line'] }}</a></dd>
                             </dl>      
                         </div>
                     @endforeach

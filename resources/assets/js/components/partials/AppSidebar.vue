@@ -32,6 +32,10 @@
                     <i class="fa fa-fw fa-handshake-o"></i>
                     Sponsor
                 </router-link>
+                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Contact Person') >= 0 }" :to="{ name: 'Contact Person' }">
+                    <i class="fa fa-fw fa-phone"></i>
+                    Contact Person
+                </router-link>
                 <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
                     <i class="fa fa-fw fa-cogs"></i>
                     Konfigurasi

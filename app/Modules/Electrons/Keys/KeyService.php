@@ -89,6 +89,9 @@ class KeyService extends Service
         'Get Faqs', 'View Faqs', 'Post Faqs', 
         'Put Faqs', 'Delete Faqs',
 
+        // "Contact People" Keys
+        'Post Contact People', 'Put Contact People', 'Delete Contact People',
+
         // "Edits" Keys
         'Get Edits',
         

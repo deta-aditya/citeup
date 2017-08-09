@@ -338,4 +338,24 @@ return [
 
     ],
 
+    'contact_people' => [
+
+        'selectable' => [
+            'name', 'email', 'phone', 'line',
+        ],
+
+        'sortable' => [
+            'name', 'email',
+        ],
+
+        'comparable' => [
+            'name', 'email', 'phone', 'line',
+        ],
+
+        'loadable' => [
+            //
+        ],
+
+    ],
+
 ];

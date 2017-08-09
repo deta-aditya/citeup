@@ -23,6 +23,9 @@ import NewsIndex from './components/views/news/NewsIndex.vue';
 import NewsView from './components/views/news/NewsView.vue';
 import NewsCreate from './components/views/news/NewsCreate.vue';
 import NewsUpdate from './components/views/news/NewsUpdate.vue';
+import ContactPeopleIndex from './components/views/contact_people/ContactPeopleIndex.vue';
+import ContactPeopleCreate from './components/views/contact_people/ContactPeopleCreate.vue';
+import ContactPeopleUpdate from './components/views/contact_people/ContactPeopleUpdate.vue';
 import Logout from './components/views/Logout.vue';
 import ErrorPage from './components/views/Error.vue';
 import CompleteProfile from './components/views/profiles/CompleteProfile.vue';
@@ -32,16 +35,13 @@ const router = new VueRouter({
     base: '/panel/',
     routes: [
         { path: '/', name: 'Dasbor', component: Root },
-        { path: '/config', name: 'Konfigurasi', component: Config },
+        { path: '/settings', name: 'Konfigurasi', component: Config },
         { path: '/activities', name: 'Acara', component: ActivitiesIndex },
         { path: '/activities/:id', name: 'Acara.Lihat', component: ActivitiesView, props: true },
         { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },
         { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: SchedulesUpdate, props: true },
         { path: '/activities/:id/update', name: 'Acara.Sunting', component: ActivitiesUpdate, props: true },
         { path: '/activities/create', name: 'Acara.Buat', component: ActivitiesCreate },
-        { path: '/sponsors', name: 'Sponsor', component: SponsorsIndex },
-        { path: '/sponsors/create', name: 'Sponsor.Buat', component: SponsorsCreate },
-        { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: SponsorsUpdate, props: true },
         { path: '/faqs', name: 'FAQ', component: FaqsIndex },
         { path: '/faqs/create', name: 'FAQ.Buat', component: FaqsCreate },
         { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: FaqsUpdate, props: true },
@@ -49,6 +49,12 @@ const router = new VueRouter({
         { path: '/news/:id', name: 'Berita.Lihat', component: NewsView, props: true },
         { path: '/news/:id/update', name: 'Berita.Sunting', component: NewsUpdate, props: true },
         { path: '/news/create', name: 'Berita.Buat', component: NewsCreate },
+        { path: '/sponsors', name: 'Sponsor', component: SponsorsIndex },
+        { path: '/sponsors/create', name: 'Sponsor.Buat', component: SponsorsCreate },
+        { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: SponsorsUpdate, props: true },
+        { path: '/contact-people', name: 'Contact Person', component: ContactPeopleIndex },
+        { path: '/contact-people/:id/update', name: 'Contact Person.Sunting', component: ContactPeopleUpdate, props: true },
+        { path: '/contact-people/create', name: 'Contact Person.Buat', component: ContactPeopleCreate },
         { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
         { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
         { path: '/logout', name: 'Logout', component: Logout },
