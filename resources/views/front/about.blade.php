@@ -58,7 +58,7 @@
                         <div class="panel panel-default panel-content">
                             <div class="panel-body">
                                 <h2>Aplikasi &amp; Web</h2>
-                                <p>Aplikasi CITE UP kini berada pada versi <i>{{ $config['version'] }}</i>.</p>
+                                <p>Aplikasi CITE UP kini berada pada versi <i>{{ config('app.version') }}</i>.</p>
                                 <p>Aplikasi ini dikembangkan menggunakan <a href="https://laravel.com"  target="_blank">Laravel 5.4</a> dan <a href="https://vuejs.org" target="_blank">Vue.js</a>.</p>
                                 <p>Ikon acara dibuat oleh <a href="http://www.freepik.com" title="Freepik">Freepik</a> dari <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> dan berlisensi <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.</p>
                                 <p>Desain tampilan dan sistem pada aplikasi dikembangkan oleh <a href="https://github.com/purplebubblegum" target="_blank" style="color:#991e9b">purplebubblegum</a> dengan dukungan segenap mahasiswa Ilmu Komputer, Universitas Pertamina.</p>

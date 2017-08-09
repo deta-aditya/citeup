@@ -23,36 +23,65 @@
                 <div class="col-sm-6">
                     <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
                         <div class="panel-body">
-                            <h2 class="page-title small-title">Halaman Depan</h2>
+                            <h2 class="page-title small-title">Penghitung Mundur</h2>
                         </div>
                         <div class="panel-body">
-                            <h3 class="subtitle text-muted">Penghitung Mundur</h3>
-                            <switch-button name="landing-countdown-active" :label-width="4" :control-width="8" value="active" v-model="value.landing.countdown.active">
+                            <switch-button name="countdown-active" :label-width="4" :control-width="8" value="active" v-model="value.countdown.active">
                                 Status
                             </switch-button>
-                            <date-time-input name="landing-countdown-off" :label-width="4" :control-width="8" v-model="value.landing.countdown.off">
+                            <date-time-input name="countdown-off" :label-width="4" :control-width="8" v-model="value.countdown.off">
                                 Hitung Hingga
                             </date-time-input>
-                            <text-input name="landing-countdown-text" :label-width="4" :control-width="8" v-model="value.landing.countdown.text">
+                            <text-input name="countdown-text" :label-width="4" :control-width="8" v-model="value.countdown.text">
                                 Teks
                                 <p class="help-block" slot="help-block">Teks in akan ditampilkan di atas penghitung mundur.</p>
                             </text-input>
-                            <h2 class="subtitle text-muted">Bagian yang Ditampilkan</h2>
-                            <check-list name="landing-show" :control-width="12" :labeled="false" v-model="value.landing.show">
+                        </div>
+                    </form-panel>
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Bagian yang Ditampilkan</h2>
+                        </div>
+                        <div class="panel-body">
+                            <check-list name="show" :control-width="12" :labeled="false" v-model="value.show">
                                 <template slot="list" scope="props">
                                     {{ props.data.name }}
                                 </template>
                             </check-list>
                         </div>
                     </form-panel>
+                    <!-- <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Tahap Aplikasi</h2>
+                        </div>
+                        <div class="panel-body text-muted">
+                            Bagian ini menentukan kapan tahapan pada aplikasi akan berlangsung. Tahapan-tahapan tersebut bertanggungjawab atas aktifitas-aktifitas yang ada pada aplikasi. Suntinglah dengan hati-hati!
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-group" id="stages-list" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" v-for="(stage, index) in value.stages" :key="index">
+                                    <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#stages-list" :data-target="'#collapsible-stage-' + index">
+                                        <h4 class="panel-title">{{ stage.name }}</h4>
+                                    </div>
+                                    <div :id="'collapsible-stage-' + index" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <date-time-input :name="'stage-' + index + '-finished-at'" :label-width="4" :control-width="8" v-model="value.stages[index].finished_at">
+                                                Berlangsung Hingga
+                                            </date-time-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form-panel> -->
                 </div>
                 <div class="col-sm-6">
                     <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
                         <div class="panel-body">
                             <h2 class="page-title small-title">Lokasi Perlombaan</h2>
                         </div>
-                        <gmap-map class="panel-body" :center="value.address.location" :zoom="15" :style="{ 'height': '400px' }" @click="changeLocation">
-                            <gmap-marker :position="value.address.location"></gmap-marker>
+                        <gmap-map class="panel-body" :center="value.location" :zoom="15" :style="{ 'height': '400px' }" @click="changeLocation">
+                            <gmap-marker :position="value.location"></gmap-marker>
                         </gmap-map>
                         <div class="panel-body text-muted">
                             Klik pada lokasi baru untuk mengubah lokasi perlombaan.
@@ -79,30 +108,6 @@
                             <text-input name="contact-instagram" :label-width="4" :control-width="8" v-model="value.contact.instagram">
                                 Akun Instagram
                             </text-input>
-                        </div>
-                    </form-panel>
-                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
-                        <div class="panel-body">
-                            <h2 class="page-title small-title">Tahap Aplikasi</h2>
-                        </div>
-                        <div class="panel-body text-muted">
-                            Bagian ini menentukan kapan tahapan pada aplikasi akan berlangsung. Tahapan-tahapan tersebut bertanggungjawab atas aktifitas-aktifitas yang ada pada aplikasi. Suntinglah dengan hati-hati!
-                        </div>
-                        <div class="panel-body">
-                            <div class="panel-group" id="stages-list" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default" v-for="(stage, index) in value.stages" :key="index">
-                                    <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#stages-list" :data-target="'#collapsible-stage-' + index">
-                                        <h4 class="panel-title">{{ stage.name }}</h4>
-                                    </div>
-                                    <div :id="'collapsible-stage-' + index" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <date-time-input :name="'stage-' + index + '-end'" :label-width="4" :control-width="8" v-model="value.stages[index].end">
-                                                Berlangsung Hingga
-                                            </date-time-input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </form-panel>
                 </div>
@@ -147,16 +152,10 @@
                 btnSubmit: null,
                 btnText: 'Simpan Perubahan',
                 value: {
-                    landing: {
-                        countdown: {},
-                        activities: {},
-                    },
-                    address: {
-                        location: {lat: 0, lng: 0},
-                    },
-                    contact: {
-                        phones: {},
-                    }
+                    show: {},
+                    countdown: {},
+                    location: {lat: 0, lng: 0},
+                    contact: {},
                 },
             }
         },
@@ -207,6 +206,7 @@
         watch: {
 
             config(newVal) {
+                console.log(JSON.stringify(newVal));
                 this.value = newVal
             },
 

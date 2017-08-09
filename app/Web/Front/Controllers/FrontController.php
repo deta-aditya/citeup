@@ -4,7 +4,6 @@ namespace App\Web\Front\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modules\Electrons\Config\Config;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\ScheduleService as Schedules;
 use App\Modules\Electrons\Sponsors\SponsorService as Sponsors;
@@ -40,13 +39,6 @@ class FrontController extends Controller
      * @var News
      */
     protected $news;
-
-    /**
-     * The web config instance.
-     *
-     * @var Config
-     */
-    protected $config;
 
     /**
      * The navigation theme.
@@ -90,17 +82,15 @@ class FrontController extends Controller
      * @param  Faqs        $faqs
      * @param  Sponsors    $sponsors
      * @param  News        $news
-     * @param  Config      $config
      * @return void
      */
     public function __construct(Activities $activities, Faqs $faqs, News $news, 
-        Sponsors $sponsors, Config $config)
+        Sponsors $sponsors)
     {
         $this->activities = $activities;
         $this->faqs = $faqs;
         $this->news = $news;
         $this->sponsors = $sponsors;
-        $this->config = $config;
     }
 
     /**
@@ -123,7 +113,6 @@ class FrontController extends Controller
     {
         return [
             'activities'    => $this->activities->getMultiple($this->activitiesQuery),
-            'config'        => $this->config->all(),
             'faqs'          => $this->faqs->getMultiple($this->faqsQuery),
             'news'          => $this->news->getMultiple($this->newsQuery),
             'sponsors'      => $this->sponsors->getMultiple(['type' => Sponsors::TYPE_SPONSOR]),

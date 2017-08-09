@@ -1,5 +1,3 @@
-@inject('config' ,'App\Modules\Electrons\Config\Config')
-
 <nav id="front-nav" class="navbar navbar-default navbar-{{ $nav }} navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -36,7 +34,7 @@
 
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    @unless ($config->get('stage')['name'] === 'Pra-Pendaftaran' || $config->get('stage')['name'] === 'Paska Acara')
+                    @unless (value(config('web.stage'))->name === 'Pra-Pendaftaran' || value(config('web.stage'))->name === 'Paska Acara')
                         <li class="{{ request()->is('login') ? 'active' : '' }}"><a class="login-link" href="{{ route('login.form') }}">Daftar / Login</a></li>
                     @endunless
                 @else

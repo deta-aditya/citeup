@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if ($config['landing']['show']['welcometron'])
+@if ($settings->show->welcometron)
 <!-- Welcome Carousel -->
 <div id="front-welcometron">
 
@@ -11,9 +11,9 @@
             <img src="{{ asset('images/web/logo_white_lg.png') }}">
         </div>
         <div class="text-placeholder">
-            @if ($config['landing']['countdown']['active'])
-                <p class="notice">{{ $config['landing']['countdown']['text'] }}</p>
-                <countdown done="{{ $config['landing']['countdown']['off'] }}"></countdown>
+            @if ($settings->countdown->active)
+                <p class="notice">{{ $settings->countdown->text }}</p>
+                <countdown done="{{ $settings->countdown->off }}"></countdown>
             @endif
         </div>
     </div>
@@ -21,7 +21,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['activities'])
+@if ($settings->show->activities)
 <!-- About Div -->
 <div id="front-about" class="text-center">
     <div class="container">
@@ -55,7 +55,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['prizes'])
+@if ($settings->show->prizes)
 <!-- Prizes Div -->
 <div id="front-prizes">
     <div class="container-container">
@@ -91,7 +91,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['map'])
+@if ($settings->show->map)
 <!-- Map Div -->
 <div id="front-map">
 
@@ -100,8 +100,8 @@
     </div>
 
     <!-- Google Map -->
-    <gmap-map class="map-content" :center="{{ json_encode($config['address']['location']) }}" :zoom="15" :options="gmapOptions">
-        <gmap-marker :position="{{ json_encode($config['address']['location']) }}"></gmap-marker>
+    <gmap-map class="map-content" :center="{{ $settings->location->toJson() }}" :zoom="15" :options="gmapOptions">
+        <gmap-marker :position="{{ $settings->location->toJson() }}"></gmap-marker>
     </gmap-map>
 
     <!-- Info -->
@@ -125,7 +125,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['faqs'])
+@if ($settings->show->faqs)
 <!-- FAQ Div -->
 <div id="front-faq">
     <div class="container">
@@ -153,7 +153,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['news'])
+@if ($settings->show->news)
 <hr class="short-middle-bar center-block">
 
 <!-- News Div -->
@@ -260,7 +260,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['galleries'])
+@if ($settings->show->galleries)
 <!-- Galleries Div -->
 <div id="front-galleries" style="margin:20px 0 40px;">
     <div class="container">
@@ -281,7 +281,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['contact'])
+@if ($settings->show->contact)
 <div id="front-contact-us">
     
     <div class="container text-center">
@@ -291,22 +291,16 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <dl>
-                            <dt>Adam Marsono Putra</dt>
-                            <dd>082133022618</dd>
-                            <dd class="email">a.putra@universitaspertamina.ac.id</dd>
-                            <dd><a href="http://line.me/ti/p/~damanotra" target="_blank">damanotra</a></dd>
-                        </dl>      
-                    </div>
-                    <div class="col-sm-6">
-                        <dl>
-                            <dt>Aries Dwi Prasetiyo</dt>
-                            <dd>081230102023</dd>
-                            <dd class="email">ariesdwiprasetiyo4@gmail.com</dd>
-                            <dd><a href="http://line.me/ti/p/~aries0" target="_blank">aries0</a></dd>
-                        </dl>
-                    </div>
+                    @foreach (config('web.contact.person') as $contactPerson)
+                        <div class="col-sm-6">
+                            <dl>
+                                <dt>{{ $contactPerson['name'] }}</dt>
+                                <dd>{{ $contactPerson['phone'] }}</dd>
+                                <dd class="email">{{ $contactPerson['email'] }}</dd>
+                                <dd><a href="http://line.me/ti/p/~{{ $contactPerson['line'] }}" target="_blank">{{ $contactPerson['line'] }}</a></dd>
+                            </dl>      
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -315,7 +309,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['sponsors'] && ($sponsors->count() > 0 || $media_partners->count() > 0))
+@if ($settings->show->sponsors && ($sponsors->count() > 0 || $media_partners->count() > 0))
 <!-- Sponsors Div -->
 <div id="front-sponsors">
     <div class="container text-center sponsors-container">

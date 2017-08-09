@@ -79805,6 +79805,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -79837,16 +79842,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue2
             btnSubmit: null,
             btnText: 'Simpan Perubahan',
             value: {
-                landing: {
-                    countdown: {},
-                    activities: {}
-                },
-                address: {
-                    location: { lat: 0, lng: 0 }
-                },
-                contact: {
-                    phones: {}
-                }
+                show: {},
+                countdown: {},
+                location: { lat: 0, lng: 0 },
+                contact: {}
             }
         };
     },
@@ -79917,6 +79916,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue2
 
     watch: {
         config: function config(newVal) {
+            console.log(JSON.stringify(newVal));
             this.value = newVal;
         }
     },
@@ -86688,58 +86688,67 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('h2', {
     staticClass: "page-title small-title"
-  }, [_vm._v("Halaman Depan")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Penghitung Mundur")])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [_c('h3', {
-    staticClass: "subtitle text-muted"
-  }, [_vm._v("Penghitung Mundur")]), _vm._v(" "), _c('switch-button', {
+  }, [_c('switch-button', {
     attrs: {
-      "name": "landing-countdown-active",
+      "name": "countdown-active",
       "label-width": 4,
       "control-width": 8,
       "value": "active"
     },
     model: {
-      value: (_vm.value.landing.countdown.active),
+      value: (_vm.value.countdown.active),
       callback: function($$v) {
-        _vm.value.landing.countdown.active = $$v
+        _vm.value.countdown.active = $$v
       },
-      expression: "value.landing.countdown.active"
+      expression: "value.countdown.active"
     }
   }, [_vm._v("\n                            Status\n                        ")]), _vm._v(" "), _c('date-time-input', {
     attrs: {
-      "name": "landing-countdown-off",
+      "name": "countdown-off",
       "label-width": 4,
       "control-width": 8
     },
     model: {
-      value: (_vm.value.landing.countdown.off),
+      value: (_vm.value.countdown.off),
       callback: function($$v) {
-        _vm.value.landing.countdown.off = $$v
+        _vm.value.countdown.off = $$v
       },
-      expression: "value.landing.countdown.off"
+      expression: "value.countdown.off"
     }
   }, [_vm._v("\n                            Hitung Hingga\n                        ")]), _vm._v(" "), _c('text-input', {
     attrs: {
-      "name": "landing-countdown-text",
+      "name": "countdown-text",
       "label-width": 4,
       "control-width": 8
     },
     model: {
-      value: (_vm.value.landing.countdown.text),
+      value: (_vm.value.countdown.text),
       callback: function($$v) {
-        _vm.value.landing.countdown.text = $$v
+        _vm.value.countdown.text = $$v
       },
-      expression: "value.landing.countdown.text"
+      expression: "value.countdown.text"
     }
   }, [_vm._v("\n                            Teks\n                            "), _c('p', {
     staticClass: "help-block",
     slot: "help-block"
-  }, [_vm._v("Teks in akan ditampilkan di atas penghitung mundur.")])]), _vm._v(" "), _c('h2', {
-    staticClass: "subtitle text-muted"
-  }, [_vm._v("Bagian yang Ditampilkan")]), _vm._v(" "), _c('check-list', {
+  }, [_vm._v("Teks in akan ditampilkan di atas penghitung mundur.")])])], 1)]), _vm._v(" "), _c('form-panel', {
     attrs: {
-      "name": "landing-show",
+      "formless": true,
+      "horizontal": true,
+      "bodiless": true,
+      "footerless": true
+    }
+  }, [_c('div', {
+    staticClass: "panel-body"
+  }, [_c('h2', {
+    staticClass: "page-title small-title"
+  }, [_vm._v("Bagian yang Ditampilkan")])]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('check-list', {
+    attrs: {
+      "name": "show",
       "control-width": 12,
       "labeled": false
     },
@@ -86750,11 +86759,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }]),
     model: {
-      value: (_vm.value.landing.show),
+      value: (_vm.value.show),
       callback: function($$v) {
-        _vm.value.landing.show = $$v
+        _vm.value.show = $$v
       },
-      expression: "value.landing.show"
+      expression: "value.show"
     }
   })], 1)])], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-6"
@@ -86775,7 +86784,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'height': '400px'
     }),
     attrs: {
-      "center": _vm.value.address.location,
+      "center": _vm.value.location,
       "zoom": 15
     },
     on: {
@@ -86783,7 +86792,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('gmap-marker', {
     attrs: {
-      "position": _vm.value.address.location
+      "position": _vm.value.location
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "panel-body text-muted"
@@ -86868,64 +86877,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "value.contact.instagram"
     }
-  }, [_vm._v("\n                            Akun Instagram\n                        ")])], 1)]), _vm._v(" "), _c('form-panel', {
-    attrs: {
-      "formless": true,
-      "horizontal": true,
-      "bodiless": true,
-      "footerless": true
-    }
-  }, [_c('div', {
-    staticClass: "panel-body"
-  }, [_c('h2', {
-    staticClass: "page-title small-title"
-  }, [_vm._v("Tahap Aplikasi")])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body text-muted"
-  }, [_vm._v("\n                        Bagian ini menentukan kapan tahapan pada aplikasi akan berlangsung. Tahapan-tahapan tersebut bertanggungjawab atas aktifitas-aktifitas yang ada pada aplikasi. Suntinglah dengan hati-hati!\n                    ")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "panel-group",
-    attrs: {
-      "id": "stages-list",
-      "role": "tablist",
-      "aria-multiselectable": "true"
-    }
-  }, _vm._l((_vm.value.stages), function(stage, index) {
-    return _c('div', {
-      key: index,
-      staticClass: "panel panel-default"
-    }, [_c('div', {
-      staticClass: "panel-heading",
-      attrs: {
-        "role": "button",
-        "data-toggle": "collapse",
-        "data-parent": "#stages-list",
-        "data-target": '#collapsible-stage-' + index
-      }
-    }, [_c('h4', {
-      staticClass: "panel-title"
-    }, [_vm._v(_vm._s(stage.name))])]), _vm._v(" "), _c('div', {
-      staticClass: "panel-collapse collapse",
-      attrs: {
-        "id": 'collapsible-stage-' + index
-      }
-    }, [_c('div', {
-      staticClass: "panel-body"
-    }, [_c('date-time-input', {
-      attrs: {
-        "name": 'stage-' + index + '-end',
-        "label-width": 4,
-        "control-width": 8
-      },
-      model: {
-        value: (_vm.value.stages[index].end),
-        callback: function($$v) {
-          _vm.value.stages[index].end = $$v
-        },
-        expression: "value.stages[index].end"
-      }
-    }, [_vm._v("\n                                            Berlangsung Hingga\n                                        ")])], 1)])])
-  }))])])], 1)]), _vm._v(" "), _c('button', {
+  }, [_vm._v("\n                            Akun Instagram\n                        ")])], 1)])], 1)]), _vm._v(" "), _c('button', {
     ref: "btnSubmit",
     staticClass: "btn btn-lg btn-primary pull-right",
     staticStyle: {
