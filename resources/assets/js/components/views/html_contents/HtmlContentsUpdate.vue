@@ -25,12 +25,15 @@
 
 <script>
 
-    import Citeup from '../../../citeup'    
+    import Citeup from '../../../citeup'
+    import HtmlContentsMixin from './HtmlContentsMixin'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import RichInput from '../../kits/FormPanel/RichInput.vue'
 
     export default {
+
+        mixins: [HtmlContentsMixin],
 
         props: {
 

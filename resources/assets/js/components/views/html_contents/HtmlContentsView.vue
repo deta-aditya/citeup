@@ -25,8 +25,11 @@
 
     import moment from 'moment'
     import Citeup from '../../../citeup'
+    import HtmlContentsMixin from './HtmlContentsMixin'
 
     export default {
+
+        mixins: [HtmlContentsMixin],
 
         props: {
 

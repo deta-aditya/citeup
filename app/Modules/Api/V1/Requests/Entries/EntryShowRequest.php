@@ -16,8 +16,8 @@ class EntryShowRequest extends FormRequest
         $user = $this->user();
         $entry = $this->route('entry');
 
-        return $user->isAdmin() || $user->hasKey('get-entries') || 
-            ($user->isEntrant() && $user->entry->id == $entry->id);
+        return $user->isAdmin() || $user->hasKey('view-entries') || 
+            ($user->isEntrant() && $user->entry && $user->entry->id == $entry->id);
     }
 
     /**

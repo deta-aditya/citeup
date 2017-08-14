@@ -97,15 +97,7 @@
             }
         },
     
-        computed: _.merge(mapState(STATES), mapGetters(GETTERS), {
-
-            userSignature() {
-                return this.user.profile ? 
-                    Citeup.appPath + '/' + this.user.profile.photo :
-                    Citeup.defaultImage 
-            },
-
-        }),
+        computed: _.merge(mapState(STATES), mapGetters(GETTERS)),
 
         watch: {
 

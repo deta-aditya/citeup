@@ -37,17 +37,15 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
     import Citeup from '../../../citeup'
+    import SponsorsMixin from './SponsorsMixin'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
-    const STATES = [
-        'user'
-    ] 
-
     export default {
+
+        mixins: [SponsorsMixin],
 
         data() {
             return {
@@ -55,8 +53,6 @@
                 sponsors: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 

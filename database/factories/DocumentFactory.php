@@ -14,16 +14,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Modules\Models\Document::class, function (Faker\Generator $faker) {
     return [
-        'entry_id' => function () {
-            
-            $user = factory(App\User::class)->create();
-
-            resolve('App\Modules\Electrons\Activities\EntryService')->make(
-                $user, 
-                factory(App\Modules\Models\Activity::class)->create()
-            );
-
-            return $user->entry->id;
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
         },
         'file' => $faker->text(191),
         'type' => $faker->numberBetween(0, 9),

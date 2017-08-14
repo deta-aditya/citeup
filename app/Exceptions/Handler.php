@@ -44,12 +44,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-            
-            if (auth('web')->check()) {
-                return redirect('app/error/404');
-            }
-
+        if (
+            (
+                $exception instanceof ModelNotFoundException 
+                || $exception instanceof NotFoundHttpException
+            ) && auth('web')->check()
+        ) {
+            return redirect()->route('dashboard', ['vue' => 'error/404']);
         }
 
         return parent::render($request, $exception);
@@ -68,6 +69,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest(route('login'));
+        return redirect()->guest(route('login.form'));
     }
 }

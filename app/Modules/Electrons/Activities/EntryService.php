@@ -4,7 +4,6 @@ namespace App\Modules\Electrons\Activities;
 
 use App\User;
 use App\Modules\Models\Entry;
-use App\Modules\Models\Activity;
 use App\Modules\Nucleons\Service;
 
 class EntryService extends Service
@@ -57,6 +56,29 @@ class EntryService extends Service
     protected $model = Entry::class;
 
     /**
+     * Get multiple entries with conditions.
+     *
+     * @param  array  $params
+     * @return array
+     */
+    public function multiple(array $params)
+    {
+        return $this->multipleCustom($this->getModel()->query(), $params);
+    }
+
+    /**
+     * Get multiple entries with custom query and conditions.
+     *
+     * @param  Builder  $query
+     * @param  array    $params
+     * @return array
+     */
+    public function multipleCustom($query, array $params)
+    {
+        return $this->parseQueryString($query, $params)->get();
+    }
+
+    /**
      * Load mandatory relationships of the entry.
      *
      * @param  Entry  $entry
@@ -64,69 +86,89 @@ class EntryService extends Service
      */
     public function loadRelationships(Entry $entry)
     {
-        $entry->load('submissions', 'documents', 'attempts', 'testimonials');
+        $entry->load('submissions', 'attempts', 'testimonials');
 
         return $this;
     }
 
     /**
-     * Create the entry for a user.
+     * Associate the given user to an entry.
      *
-     * @param  User          $user
-     * @param  Activity|int  $activity
-     * @param  array         $data
+     * @param  User       $user
+     * @param  Entry|int  $entry
      * @return this
      */
-    public function make(User $user, $activity, array $data = [])
+    public function associate(User $user, $entry)
+    {
+        if (! $entry instanceof Entry) {
+            $entry = Entry::find($entry);
+        }
+
+        $entry->users()->save($user);
+
+        return $this;
+    }
+
+    /**
+     * Create a new entry and return it.
+     *
+     * @param  array  $data
+     * @return Entry
+     */
+    public function create(array $data)
     {
         $cleaned = $this->clean($data);
 
-        if ($activity instanceof Activity) {
-            $cleaned['activity_id'] = $activity->id;
-        } else {
-            $cleaned['activity_id'] = $activity;
+        $cleaned['activity_id'] = $data['activity'];
+
+        return Entry::create($cleaned);
+    }
+
+    /**
+     * Update an entry with new data.
+     *
+     * @param  Entry  $entry
+     * @param  array  $data
+     * @return this
+     */
+    public function update(Entry $entry, array $data)
+    {
+        $cleaned = $this->cleanForUpdate($data);
+
+        foreach ($cleaned as $field => $value) {
+            $entry->{$field} = $value;
         }
 
-        $entry = $user->entry()->create($cleaned);
+        $entry->save();
 
         return $this;
     }
 
     /**
-     * Modify stage of the given entry.
+     * Remove an entry from the database.
      *
      * @param  Entry  $entry
-     * @param  int    $stage
-     * @return $this
+     * @return this
      */
-    public function modifyStage(Entry $entry, $stage)
+    public function remove(Entry $entry)
     {
-        if (! is_null($stage)) {
-            
-            $entry->stage = $stage;
-
-            $entry->save();
-        }
+        $entry->delete();
 
         return $this;
     }
 
     /**
-     * Modify status of the given entry.
+     * Filter an array so it is eligible for updation.
      *
-     * @param  Entry  $entry
-     * @param  int    $status
-     * @return $this
+     * @param  array  $data
+     * @return array
      */
-    public function modifyStatus(Entry $entry, $status)
+    protected function cleanForUpdate(array $data)
     {
-        if (! is_null($status)) {
-            
-            $entry->status = $status;
+        $cleaned = $this->clean($data);
 
-            $entry->save();
-        }
+        array_forget($cleaned, ['activity', 'activity_id']);
 
-        return $this;
+        return $cleaned;
     }
 }

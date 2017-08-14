@@ -119,20 +119,21 @@
 
 <script>
 
-    import _ from 'lodash'
     import Vue from 'vue'
-    import Citeup from '../../citeup'
+    import _ from 'lodash'
     import { mapState } from 'vuex'
-    import * as VueGoogleMaps from 'vue2-google-maps' 
+    import Citeup from '../../citeup'
     import ApiForm from '../forms/ApiForm.vue'
+    import MessageBox from '../kits/MessageBox.vue'
+    import * as VueGoogleMaps from 'vue2-google-maps' 
+    import AdminGuardMixin from '../guards/AdminGuardMixin'
+    import TextInput from '../kits/FormPanel/TextInput.vue'
     import FormPanel from '../kits/FormPanel/FormPanel.vue'
+    import StaticInput from '../kits/FormPanel/StaticInput.vue'
     import SwitchButton from '../kits/FormPanel/SwitchButton.vue'
     import DateTimeInput from '../kits/FormPanel/DateTimeInput.vue'
-    import TextInput from '../kits/FormPanel/TextInput.vue'
     import CheckList from '../kits/FormPanel/CheckList/CheckList.vue'
-    import StaticInput from '../kits/FormPanel/StaticInput.vue'
     import MultilineInput from '../kits/FormPanel/MultilineInput.vue'
-    import MessageBox from '../kits/MessageBox.vue'
 
     const STATES = [
         'config'
@@ -145,6 +146,8 @@
     })
 
     export default {
+
+        mixins: [AdminGuardMixin],
 
         data() {
             return {
@@ -161,55 +164,15 @@
         },
 
         computed: _.merge(mapState(STATES), {
-
             formModel() {
                 return { value: JSON.stringify(this.value) }
-            },
-
-            phones: {
-                get() {
-
-                    var intended = []
-
-                    for (let name in this.value.contact.phones) {
-                        intended.push(name + ': ' +  this.value.contact.phones[name])
-                    }
-
-                    return intended.join(', ')
-                },
-
-                set(newVal) {
-
-                    var intended = {}
-
-                    for (var phone of newVal.split(',')) {
-                        var phone = phone.trim()
-                        var items = phone.split(':')
-
-                        for (let i = 0; i < items.length; i++) {
-                            items[i] = items[i].trim()
-                        }
-
-                        if (items[1] === undefined) {
-                            items[1] = ''
-                        }
-
-                        intended[items[0]] = items[1]
-                    }
-
-                    this.value.contact.phones = intended
-                },
-            },
-
+            }
         }),
 
         watch: {
-
             config(newVal) {
-                console.log(JSON.stringify(newVal));
                 this.value = newVal
             },
-
         },
 
         created() {

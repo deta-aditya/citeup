@@ -83,12 +83,15 @@
 
     import moment from 'moment'
     import Citeup from '../../../citeup'
+    import ActivitiesMixin from './ActivitiesMixin'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
     export default {
+
+        mixins: [ActivitiesMixin],
 
         props: {
 

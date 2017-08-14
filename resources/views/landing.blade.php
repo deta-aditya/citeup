@@ -176,7 +176,7 @@
                         <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                         <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                             <div>{{ $item->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -192,7 +192,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -209,7 +209,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -228,7 +228,7 @@
                         <h3><a href="{{ route('news.item', ['news' => $first->id, 'slug' => kebab_case($first->title)]) }}">{{ $first->title }}</a></h3>
                         <p>{{ str_limit(strip_tags($first->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($first->edits->last()->user->profile) ? '/images/default.jpg' : $first->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset($first->edits->last()->user->photo) }}" class="img-circle pull-left">
                             <div>{{ $first->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($first->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -244,7 +244,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    

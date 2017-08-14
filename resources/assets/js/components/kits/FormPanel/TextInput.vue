@@ -13,6 +13,7 @@
                 :value="value" 
                 :required="required"
                 :disabled="disabled"
+                :placeholder="placeholder"
                 :autofocus="autofocus"
                 :maxlength="maxlength"
                 @input="input($event.target.value)">
@@ -55,6 +56,11 @@
             labeled: {
                 type: Boolean,
                 default: true
+            },
+
+            placeholder: {
+                type: String,
+                default: ''
             },
 
             maxlength: {

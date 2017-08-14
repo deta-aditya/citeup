@@ -43,7 +43,7 @@ return [
 
         'defaults' => [
         
-            'with' => ['profile', 'entry'],
+            'with' => ['entry'],
 
         ],
 
@@ -53,19 +53,19 @@ return [
         ],
 
         'selectable' => [
-            'email',
+            'name', 'email', 'photo', 'section', 'crew',
         ],
 
         'sortable' => [
-            'email',
+            'name', 'email', 'section', 'crew',
         ],
 
         'comparable' => [
-            'email', 'role_id',
+            'name', 'email', 'section', 'crew', 'role_id', 'entry_id',
         ],
 
         'loadable' => [
-            'profile', 'entry', 'keys', 'alerts', 'activity', 'edits',
+            'entry', 'keys', 'alerts', 'activity', 'documents', 'edits',
         ],
 
     ],
@@ -110,6 +110,27 @@ return [
 
         'loadable' => [
             'users',
+        ],
+
+    ],
+
+
+    'entries' => [
+
+        'selectable' => [
+            'name', 'agency', 'address', 'phone', 'city', 'stage', 'status',
+        ],
+
+        'sortable' => [
+            'name', 'agency', 'stage', 'status',
+        ],
+
+        'comparable' => [
+            'name', 'agency', 'phone', 'city', 'stage', 'status', 'activity_id', 
+        ],
+
+        'loadable' => [
+            'users', 'activity', 'attempts', 'submissions', 'testimonials',
         ],
 
     ],
@@ -181,7 +202,7 @@ return [
         ],
 
         'loadable' => [
-            'entry',
+            'user',
         ],
 
     ],

@@ -5,12 +5,14 @@ namespace App\Modules\Api\V1\Controllers;
 use App\Modules\Models\Entry;
 use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Submissions\SubmissionService;
-use App\Modules\Electrons\Documents\DocumentService;
 use App\Modules\Electrons\Testimonials\TestimonialService;
 use App\Modules\Electrons\Attempts\AttemptService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
+use App\Modules\Api\V1\Requests\Entries\EntryIndexRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryShowRequest;
-use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
+use App\Modules\Api\V1\Requests\Entries\EntryInsertRequest;
+use App\Modules\Api\V1\Requests\Entries\EntryUpdateRequest;
+use App\Modules\Api\V1\Requests\Entries\EntryDeleteRequest;
 use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
 use App\Modules\Api\V1\Requests\Entries\AddTestimonialRequest;
@@ -45,10 +47,23 @@ class EntryController extends Controller
     }
 
     /**
+     * Get an array of entries data.
+     *
+     * @param  EntryIndexRequest  $request
+     * @return Response
+     */
+    public function index(EntryIndexRequest $request)
+    {
+        return $this->respondJson(
+            ['entries' => $this->entries->multiple($request->all())]
+        );
+    }
+
+    /**
      * Get an entry data.
      *
-     * @param  EntryShowRequest   $request
-     * @param  Entry     $entry
+     * @param  EntryShowRequest  $request
+     * @param  Entry             $entry
      * @return Response
      */
     public function show(EntryShowRequest $request, Entry $entry)
@@ -59,16 +74,48 @@ class EntryController extends Controller
     }
 
     /**
-     * Modify stage and status of an entry data.
+     * Insert a new entry data.
      *
-     * @param  EntryModifyRequest  $request
-     * @param  Entry               $entry
+     * @param  EntryInsertRequest  $request
+     * @param  RoleService        $roles
+     * @param  ProfileService     $profiles
+     * @param  EntryService       $entries
      * @return Response
      */
-    public function modify(EntryModifyRequest $request, Entry $entry)
+    public function insert(EntryInsertRequest $request)
     {
-        $this->entries->modifyStage($entry, $request->input('stage', null))
-                      ->modifyStatus($entry, $request->input('status', null));
+        $entry = $this->entries->create($request->all());
+
+        return $this->respondJson(['entry' => $entry]);
+    }
+
+    /**
+     * Update a entry data.
+     *
+     * @param  EntryUpdateRequest  $request
+     * @param  Entry               $entry
+     * @param  RoleService        $roles
+     * @param  ProfileService     $profiles
+     * @return Response
+     */
+    public function update(EntryUpdateRequest $request, Entry $entry)
+    {
+        $this->entries->update($entry, $request->all());
+
+        return $this->respondJson(['entry' => $entry]);
+    }
+
+    /**
+     * Delete a entry data.
+     *
+     * @param  EntryDeleteRequest  $request
+     * @param  Entry               $entry
+     * @param  StorageService     $storages
+     * @return Response
+     */
+    public function remove(EntryDeleteRequest $request, Entry $entry)
+    {
+        $this->entries->remove($entry);
 
         return $this->respondJson(['entry' => $entry]);
     }
@@ -109,44 +156,6 @@ class EntryController extends Controller
         $submission = $submissions->create($data);
 
         return $this->respondJson(['submission' => $submission]);
-    }
-
-    /**
-     * Get the documents of a given entry.
-     *
-     * @param  DocumentIndexRequest  $request
-     * @param  Entry                 $entry
-     * @param  DocumentService       $documents
-     * @return Response
-     */
-    public function documents(DocumentIndexRequest $request, Entry $entry, DocumentService $documents)
-    {
-        $queries = $request->all();
-
-        $queries['entry'] = $entry->id;
-
-        return $this->respondJson(
-            ['documents' => $documents->getMultiple($queries)]
-        );
-    }
-
-    /**
-     * Add a new document to a given entry.
-     *
-     * @param  AddDocumentRequest    $request
-     * @param  Entry                 $entry
-     * @param  DocumentService       $documents
-     * @return Response
-     */
-    public function addDocument(AddDocumentRequest $request, Entry $entry, DocumentService $documents)
-    {
-        $data = $request->all();
-
-        $data['entry'] = $entry->id;
-
-        $document = $documents->create($data);
-
-        return $this->respondJson(['document' => $document]);
     }
 
     /**

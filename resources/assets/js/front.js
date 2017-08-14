@@ -12,9 +12,12 @@ window.Vue = require('vue');
 /**
  * Components to be available in this application.
  */
-import RadioVerticalLg from './components/forms/RadioVerticalLg.vue'
-import RadioButton from './components/forms/RadioButton.vue'
 import Countdown from './components/misc/Countdown.vue'
+import TextInput from './components/kits/FormPanel/TextInput'
+import EmailInput from './components/kits/FormPanel/EmailInput'
+import StaticInput from './components/kits/FormPanel/StaticInput'
+import PasswordInput from './components/kits/FormPanel/PasswordInput'
+import MultilineInput from './components/kits/FormPanel/MultilineInput'
 
 import Citeup from './citeup'
 import * as VueGoogleMaps from 'vue2-google-maps' 
@@ -36,6 +39,8 @@ const frontViewModel = new Vue({
 
     data() {
         return {
+            labelWidth: 3,
+            controlWidth: 9,
             gmapOptions: {
                 mapTypeControl: false,
                 streetViewControl: false,
@@ -68,18 +73,26 @@ const frontViewModel = new Vue({
     },
 
     mounted() {
-        $('[data-toggle="tooltip"]').tooltip()
+        this.prepareComponent()
     },
 
-    components: {
+    methods: {
+        prepareComponent() {
+            this.turnOnTooltip()
+        },
 
-        // The radio-vertical-lg for radio button eyecandy on some forms.
-        'radio-vertical-lg': RadioVerticalLg,
+        turnOnTooltip() {
+            $('[data-toggle="tooltip"]').tooltip()
+        },
+    },
 
-        // The radio-button for radio button item.
-        'radio-button': RadioButton,
-
-        'countdown': Countdown
+    components: {        
+        'countdown': Countdown,
+        'text-input': TextInput,
+        'email-input': EmailInput,
+        'static-input': StaticInput,
+        'password-input': PasswordInput,
+        'multiline-input': MultilineInput,
     },
 
 });

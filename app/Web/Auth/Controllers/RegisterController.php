@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Modules\Electrons\Auth\Requests\RegistrationRequest;
+use App\Modules\Electrons\Auth\Requests\RegisterLombaLogikaRequest;
+use App\Modules\Electrons\Auth\Requests\RegisterLombaDesainRequest;
+use App\Modules\Electrons\Auth\Requests\RegisterSeminarItRequest;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\EntryService as Entries;
 use App\Modules\Electrons\Users\ProfileService as Profiles;
@@ -29,68 +32,190 @@ class RegisterController extends Controller
         $this->middleware('guest');
 
         // Apply password grant middleware to register method
-        $this->middleware('grant')->only('register');
+        // $this->middleware('grant')->only('register');
+    }
+
+    /**
+     * Show the registration index page.
+     *
+     * @param  Activities  $activities
+     * @return Response
+     */
+    public function index(Activities $activities)
+    {
+        $data = [
+            'nav' => 'light',
+            'activities' => $activities->getMultiple(['sort' => 'order:asc']),
+        ];
+
+        return view('auth.register.index', $data);
     }
 
     /**
      * Show the registration form page.
      *
-     * @param  Activities  $activities
+     * @param  Activities   $activities
+     * @param  string       $id
+     * @param  string|null  $name
      * @return Response
      */
-    public function form(Activities $activities)
+    public function form(Activities $activities, $id, $name = null)
     {
         $data = [
-            'activities' => $activities->getMultiple([])
+            'nav' => 'light',
+            'activity' => $activities->getMultiple(['condition' => 'id:=:'. $id]),
         ];
 
-        return view('auth.register', $data);
+        switch ($id) {
+            case 1: $name = 'logika'; break;
+            case 2: $name = 'desain'; break;
+            case 3: $name = 'seminar'; break;
+        }
+
+        return view('auth.register.' . $name, $data);
     }
 
     /**
-     * Handle a registration request for the application.
+     * Handle a register request for lomba logika.
      *
-     * @param  RegistrationRequest  $request
-     * @param  Users                $users
-     * @param  Roles                $roles
-     * @param  Entries              $entries
-     * @param  Profiles             $profiles
+     * @param  RegisterLombaLogikaRequest  $request
+     * @param  Users                       $users
+     * @param  Roles                       $roles
+     * @param  Entries                     $entries
      * @return RedirectResponse
      */
-    public function register(
-        RegistrationRequest $request, 
-        Users $users, Roles $roles, 
-        Entries $entries, Profiles $profiles)
+    public function registerLombaLogika(RegisterLombaLogikaRequest $request, Users $users, Entries $entries, Roles $roles)
     {
-        // Check the email's availability on the user table.
-        // Redirect immediately to login page if it is available.
-        if ($users->isAlreadyRegistered($request->input('email'))) {
-            return redirect()->route('login.form')->withErrors([
-                'email' => 'E-mail Anda sudah terdaftar sebelumnya! Silahkan login.'
-            ])->withInput();
+        if ($users->isAlreadyRegistered($request->input('user_0_email'))) {
+            return $this->toLogin();
         }
 
-        // Register user and dispatch the built-in "Registered" event with it.
-        event(new Registered($user = $users->create($request->all())));
+        $all = $request->all();
 
-        // The registered users will always be an entrant, so we associate the
-        // registered user right away to prevent unwanted result.
-        $roles->associate($user, Roles::ROLE_ENTRANT);
+        $entryData = $this->extractPrefixedData($all, 'entry_');
+        $leaderData = $this->extractPrefixedData($all, 'user_0_');
+        $crew1Data = $this->extractPrefixedData($all, 'user_1_');
+        $crew2Data = $this->extractPrefixedData($all, 'user_2_');
 
-        // Ditto.
-        $profiles->make($user, $request->all());
+        $entry = $this->createEntry($entries, $entryData, 1);
+        
+        $leader = $this->registerUser($users, $leaderData, $entry->id, false);
+        $this->registerUser($users, $crew1Data, $entry->id, false);
+        $this->registerUser($users, $crew2Data, $entry->id, false);
 
-        // Ditto.
-        $entries->make($user, $request->input('activity'));
-
-        // Log the registered user in.
-        $this->guard()->login($user);
-
-        // Authorize the application to Laravel Passport.
-        $this->passport();
-
-        // Redirect to profile completion view on entrant app.
-        return redirect('app/finishing');
+        return $this->postRegistration($roles, $leader);
     }
 
+    /**
+     * Handle a register request for lomba desain grafis.
+     *
+     * @param  RegisterLombaDesainRequest  $request
+     * @param  Users                       $users
+     * @param  Roles                       $roles
+     * @param  Entries                     $entries
+     * @return RedirectResponse
+     */
+    public function registerLombaDesain(RegisterLombaDesainRequest $request, Users $users, Entries $entries, Roles $roles)
+    {
+        if ($users->isAlreadyRegistered($request->input('user_email'))) {
+            return $this->toLogin();
+        }
+
+        $all = $request->all();
+
+        $entryData = $this->extractPrefixedData($all, 'entry_');
+        $userData = $this->extractPrefixedData($all, 'user_');
+
+        $entryData['name'] = $userData['name'] = $request->input('name');
+
+        $entry = $this->createEntry($entries, $entryData, 2);
+        
+        $user = $this->registerUser($users, $userData, $entry->id, false);
+
+        return $this->postRegistration($roles, $user);
+    }
+
+    /**
+     * Handle a register request for seminar it.
+     *
+     * @param  RegisterLombaDesainRequest  $request
+     * @param  Users                       $users
+     * @param  Roles                       $roles
+     * @param  Entries                     $entries
+     * @return RedirectResponse
+     */
+    public function registerSeminarIt(RegisterSeminarItRequest $request, Users $users, Entries $entries, Roles $roles)
+    {
+        if ($users->isAlreadyRegistered($request->input('user_email'))) {
+            return $this->toLogin();
+        }
+
+        $all = $request->all();
+
+        $entryData = $this->extractPrefixedData($all, 'entry_');
+        $userData = $this->extractPrefixedData($all, 'user_');
+
+        $entryData['name'] = $userData['name'] = $request->input('name');
+
+        $entry = $this->createEntry($entries, $entryData, 3);
+        
+        $user = $this->registerUser($users, $userData, $entry->id, false);
+
+        return $this->postRegistration($roles, $user);
+    }
+
+    /**
+     * Redirect to login form.
+     *
+     * @return RedirectResponse
+     */
+    protected function toLogin()
+    {
+        return redirect()->route('login.form')->withErrors([
+            'email' => 'E-mail Anda sudah terdaftar! Silahkan login.'
+        ])->withInput();
+    }
+
+    protected function extractPrefixedData($data, $prefix)
+    {
+        $result = [];
+
+        foreach ($data as $key => $value) {
+            if (strpos($key, $prefix) !== false) 
+                $result[str_replace($prefix, '', $key)] = $value;
+        }
+
+        return $result;
+    }
+
+    protected function createEntry($entryService, $entryData, $activityId)
+    {
+        $entryData['activity'] = $activityId;
+
+        return $entryService->create($entryData);
+    }
+
+    protected function registerUser($userService, $userData, $entryId, $crew)
+    {
+        $userData['entry'] = $entryId;
+
+        if ($crew) {
+            $userData['crew'] = $crew;
+        }
+
+        return $userService->create($userData);
+    }
+
+    protected function postRegistration($roleService, $user)
+    {
+        event(new Registered($user));
+
+        $roleService->associate($user, Roles::ROLE_ENTRANT);
+
+        $this->guard()->login($user);
+
+        $this->passport();
+
+        return redirect()->route('dashboard');
+    }
 }

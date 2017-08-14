@@ -5,17 +5,6 @@ namespace App\Modules\Models;
 trait User
 {
     /**
-     * Get the user's name.
-     *
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return $this->profile ? $this->profile()->first()->name : 
-            ($this->isAdmin() ? 'Administrator' : 'Pengguna');
-    }
-
-    /**
      * Get the user's role.
      *
      * @return string
@@ -46,78 +35,13 @@ trait User
     }
 
     /**
-     * Get the profile model associated with the user.
+     * Get the entry of the user.
      *
-     * @return HasOne
-     */
-    public function profile()
-    {
-        return $this->hasOne('App\Modules\Models\Profile');
-    }
-
-    /**
-     * Get the entry model associated with the user.
-     *
-     * @return HasOne
+     * @return BelongsTo
      */
     public function entry()
     {
-        return $this->hasOne('App\Modules\Models\Entry');
-    }
-
-    /**
-     * Get the activity that the user is entering.
-     *
-     * @return BelongsToMany
-     */
-    public function activity()
-    {
-        return $this->belongsToMany('App\Modules\Models\Activity', 'entries')
-                    ->withPivot('id', 'stage', 'status');
-    }
-
-    /**
-     * Get the documents of the user.
-     *
-     * @return HasManyThrough
-     */
-    public function documents()
-    {
-        return $this->hasManyThrough('App\Modules\Models\Document', 
-            'App\Modules\Models\Entry');
-    }
-
-    /**
-     * Get the test attempts of the user.
-     *
-     * @return HasManyThrough
-     */
-    public function attempts()
-    {
-        return $this->hasManyThrough('App\Modules\Models\Attempt', 
-            'App\Modules\Models\Entry');
-    }
-
-    /**
-     * Get the submissions by the user.
-     *
-     * @return HasManyThrough
-     */
-    public function submissions()
-    {
-        return $this->hasManyThrough('App\Modules\Models\Submission', 
-            'App\Modules\Models\Entry');
-    }
-
-    /**
-     * Get the testimonials by the user.
-     *
-     * @return HasManyThrough
-     */
-    public function testimonials()
-    {
-        return $this->hasManyThrough('App\Modules\Models\Testimonial', 
-            'App\Modules\Models\Entry');
+        return $this->belongsTo('App\Modules\Models\Entry');
     }
 
     /**
@@ -129,6 +53,16 @@ trait User
     {
         return $this->belongsToMany('App\Modules\Models\Alert')
             ->withPivot('seen_at', 'announced_at');
+    }
+
+    /**
+     * Get the documents for the user.
+     *
+     * @return HasMany
+     */
+    public function documents()
+    {
+        return $this->hasMany('App\Modules\Models\Document');
     }
 
     /**
@@ -187,6 +121,16 @@ trait User
     }
 
     /**
+     * Determine whether this user can perform authentication.
+     *
+     * @return bool
+     */
+    public function canAuth()
+    {
+        return ! ($this->crew || is_null($this->password));
+    }
+
+    /**
      * Scope a query to only include users of the given role.
      *
      * @param  Builder  $query
@@ -207,9 +151,7 @@ trait User
      */
     public function scopeOfName($query, $name)
     {
-        return $query->whereHas('profile', function ($query) use ($name) {
-            $query->where('name', 'like', '%' . $name . '%');
-        });
+        return $query->where('name', 'like', '%' . $name . '%');
     }
 
     /**

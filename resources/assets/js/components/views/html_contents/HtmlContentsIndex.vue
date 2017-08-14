@@ -42,17 +42,15 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
     import Citeup from '../../../citeup'
+    import HtmlContentsMixin from './HtmlContentsMixin'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
-    const STATES = [
-        'user'
-    ] 
-
     export default {
+
+        mixins: [HtmlContentsMixin],
 
         data() {
             return {
@@ -60,8 +58,6 @@
                 html_contents: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 

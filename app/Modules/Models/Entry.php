@@ -7,29 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class Entry extends Model
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'user_id', 'activity_id', 'stage', 'status',
-    ];
-
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = false;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'activity_id', 'name', 'agency', 'address', 'phone', 'city', 
+    ];
 
     /**
-     * Get the user who does the entry.
+     * Get the users who entry.
      *
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 
     /**
@@ -40,16 +40,6 @@ class Entry extends Model
     public function activity()
     {
         return $this->belongsTo('App\Modules\Models\Activity');
-    }
-
-    /**
-     * Get the documents for the entry.
-     *
-     * @return HasMany
-     */
-    public function documents()
-    {
-        return $this->hasMany('App\Modules\Models\Document');
     }
 
     /**
@@ -80,6 +70,5 @@ class Entry extends Model
     public function testimonials()
     {
         return $this->hasMany('App\Modules\Models\Testimonial');
-    }
-    
+    }    
 }

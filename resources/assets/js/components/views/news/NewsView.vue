@@ -33,9 +33,12 @@
 <script>
 
     import moment from 'moment'
+    import NewsMixin from './NewsMixin'
     import Citeup from '../../../citeup'
 
     export default {
+
+        mixins: [NewsMixin],
 
         props: {
 

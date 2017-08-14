@@ -12,30 +12,30 @@ class Document extends Model
      * @var array
      */
     protected $fillable = [
-        'entry_id', 'file', 'type',
+        'user_id', 'file', 'type',
     ];
 
     /**
-     * Get the entry of the document.
+     * Get the user of the document.
      *
      * @return BelongsTo
      */
-    public function entry()
+    public function user()
     {
-        return $this->belongsTo('App\Modules\Models\Entry');
+        return $this->belongsTo('App\User');
     }
     
     /**
-     * Scope a query to only include documents of the given entry.
+     * Scope a query to only include documents of the given user.
      *
      * @param  Builder  $query
-     * @param  int      $entry
+     * @param  int      $user
      * @return Builder
      */
-    public function scopeOfEntry($query, $entry)
+    public function scopeOfUser($query, $user)
     {
-        return $query->whereHas('entry', function ($query) use ($entry) {
-            $query->where('entry_id', $entry);
+        return $query->whereHas('user', function ($query) use ($user) {
+            $query->where('user_id', $user);
         });
     }
     

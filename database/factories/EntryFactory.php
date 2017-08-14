@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Profile Model Factories
+| Entry Model Factories
 |--------------------------------------------------------------------------
 |
 | Here you may define all of your model factories. Model factories give
@@ -12,14 +12,11 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Modules\Models\Profile::class, function (Faker\Generator $faker) {
+$factory->define(App\Modules\Models\Entry::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'address' => $faker->address,
-        'school' => $faker->company,
-        'city' => $faker->city,
-        'photo' => 'images/default.jpg',
-        'phone' => $faker->phoneNumber,
-        'section' => $faker->jobTitle,
+        'activity_id' =>  function () {
+            return factory(App\Modules\Models\Activity::class)->create()->id;
+        },
+        'name' => $faker->name(),
     ];
 });

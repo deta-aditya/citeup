@@ -42,4 +42,8 @@ Citeup.delete = function(resource, params = {}) {
     return Citeup._api(resource, 'delete', {params: params});
 }
 
+Citeup.hasKey = function(user, key) {
+    return user.admin || (user.committe && user.keys.findIndex(item => item.slug.includes(key)) >= 0)
+}
+
 export default Citeup;

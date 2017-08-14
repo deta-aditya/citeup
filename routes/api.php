@@ -30,7 +30,6 @@ Route::group([
     Route::post('/users/{user}/keys', 'UserController@grantKeys');
     Route::get('/users/{user}/alerts', 'UserController@alerts');
     Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
-    Route::post('/users/{user}/entries', 'UserController@modifyEntry');
     Route::get('/users/{user}/edits', 'UserController@edits');
 
     Route::get('/keys', 'KeyController@index');
@@ -66,12 +65,13 @@ Route::group([
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
     Route::get('/schedules/{schedule}/edits', 'ScheduleController@edits');
 
+    Route::get('/entries', 'EntryController@index');
+    Route::post('/entries', 'EntryController@insert');
     Route::get('/entries/{entry}', 'EntryController@show');
-    Route::post('/entries/{entry}', 'EntryController@modify');
+    Route::put('/entries/{entry}', 'EntryController@update');
+    Route::delete('/entries/{entry}', 'EntryController@remove');
     Route::get('/entries/{entry}/submissions', 'EntryController@submissions');
     Route::post('/entries/{entry}/submissions', 'EntryController@addSubmission');
-    Route::get('/entries/{entry}/documents', 'EntryController@documents');
-    Route::post('/entries/{entry}/documents', 'EntryController@addDocument');
     Route::get('/entries/{entry}/testimonials', 'EntryController@testimonials');
     Route::post('/entries/{entry}/testimonials', 'EntryController@addTestimonial');
     Route::get('/entries/{entry}/attempts', 'EntryController@attempts');

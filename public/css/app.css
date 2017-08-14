@@ -13692,6 +13692,131 @@ trix-editor .attachment progress {
   }
 }
 
+#register-page {
+  padding-bottom: 60px;
+}
+
+#register-page .page-title-container {
+  background: #f49e26;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+#register-page .page-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 22.5pt;
+}
+
+#register-page .content-container {
+  background-image: url(../images/web/bg_about.png);
+  background-repeat: repeat-x;
+  background-size: 700px;
+}
+
+#register-page .content-container .container {
+  margin-bottom: 0;
+}
+
+#register-page .logo-container .logo {
+  width: 250px;
+}
+
+#register-page .activity-item {
+  border: none;
+  display: block;
+  color: #636b6f !important;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+  height: auto;
+  margin: 0 0 10px;
+  transition: 0.2s;
+}
+
+#register-page .activity-item:hover {
+  text-decoration: none;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+#register-page .activity-title {
+  font-size: 12pt;
+  margin-top: 0;
+}
+
+#register-page .registration-form .form-title {
+  font-size: 16pt;
+  margin: 0;
+}
+
+#register-page .registration-form .panel {
+  border: none;
+  box-shadow: 0px 0px 10px 1px rgba(221, 115, 34, 0.5);
+}
+
+#register-page .registration-form .panel-body {
+  padding: 25px;
+  border-bottom: 1px solid #d3e0e9;
+}
+
+#register-page .registration-form .panel-body.panel-body-form {
+  max-width: 700px;
+  border-bottom: none;
+}
+
+#register-page .registration-form .panel-body:last-child {
+  border-bottom: none;
+}
+
+#register-page .registration-form .btn-submit {
+  background-color: #f49e26;
+  border-color: #dd7322;
+  font-size: 18pt;
+}
+
+#register-page .registration-form .btn-submit:hover, #register-page .registration-form .btn-submit:focus {
+  background-color: #dd7322;
+}
+
+#register-page .icon-holder {
+  border-radius: 4px 4px 0 0;
+  padding: 0;
+  background: #dd7322;
+}
+
+#register-page .activity-icon {
+  height: 75px;
+}
+
+@media (min-width: 768px) {
+  #register-page .activity-icon {
+    height: 150px;
+  }
+  #register-page .activity-item {
+    margin: 0 5px;
+    height: 360px;
+  }
+}
+
+@media (min-width: 992px) {
+  #register-page .activity-item {
+    margin: 0 25px;
+    height: 400px;
+  }
+  #register-page .activity-title {
+    font-size: 14pt;
+    margin-top: 10px;
+  }
+  #register-page .activity-icon {
+    height: 200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #register-page .activity-title {
+    font-size: 18pt;
+  }
+}
+
 #error-page {
   height: 669px;
   padding-top: 200px;

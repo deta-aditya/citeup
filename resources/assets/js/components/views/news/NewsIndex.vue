@@ -47,17 +47,15 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
+    import NewsMixin from './NewsMixin'
     import Citeup from '../../../citeup'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
-    const STATES = [
-        'user'
-    ] 
-
     export default {
+
+        mixins: [NewsMixin],
 
         data() {
             return {
@@ -65,8 +63,6 @@
                 news: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 

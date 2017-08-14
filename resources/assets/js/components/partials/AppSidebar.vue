@@ -16,27 +16,27 @@
                     <i class="fa fa-fw fa-tachometer"></i>
                     Dasbor
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
                     <i class="fa fa-fw fa-bullhorn"></i>
                     Acara
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
                     <i class="fa fa-fw fa-question-circle"></i>
                     FAQ
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Berita') >= 0 }" :to="{ name: 'Berita' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Berita') >= 0 }" :to="{ name: 'Berita' }">
                     <i class="fa fa-fw fa-file-text"></i>
                     Berita
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
                     <i class="fa fa-fw fa-handshake-o"></i>
                     Sponsor
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Contact Person') >= 0 }" :to="{ name: 'Contact Person' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Contact Person') >= 0 }" :to="{ name: 'Contact Person' }">
                     <i class="fa fa-fw fa-phone"></i>
                     Contact Person
                 </router-link>
-                <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0 }" :to="{ name: 'Konten' }">
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0 }" :to="{ name: 'Konten' }">
                     <i class="fa fa-fw fa-archive"></i>
                     Konten
                 </router-link>
@@ -67,8 +67,8 @@
         computed: _.merge(mapState(STATES), {
 
             userSignature() {
-                return this.user.profile ? 
-                    Citeup.appPath + '/' + this.user.profile.photo :
+                return this.user.photo ? 
+                    Citeup.appPath + '/' + this.user.photo :
                     Citeup.defaultImage 
             },
 
@@ -84,12 +84,12 @@
             },
 
             userSection() {
-                return this.user.profile.section && this.user.committee ?
-                    ', ' + this.user.profile.section : ''
+                return this.user.section && this.user.committee ?
+                    ', ' + this.user.section : ''
             },
 
             userActivity() {
-                return ' ' + this.user.activity[0].name
+                return ' ' + this.user.entry.activity.name
             }
 
         }),

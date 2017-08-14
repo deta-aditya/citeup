@@ -24,8 +24,8 @@ class DocumentService extends Service
     {
         $query = $this->parseQueryString($this->getModel()->query(), $params);
 
-        if (array_has($params, 'entry')) {
-            $query->ofEntry($params['entry']);
+        if (array_has($params, 'user')) {
+            $query->ofUser($params['user']);
         }
 
         if (array_has($params, 'type')) {
@@ -45,7 +45,7 @@ class DocumentService extends Service
     {
         $cleaned = $this->clean($data);
 
-        $cleaned['entry_id'] = $data['entry'];
+        $cleaned['user_id'] = $data['user'];
 
         $document = Document::create($cleaned);
 

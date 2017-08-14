@@ -66,7 +66,7 @@ const router = new VueRouter({
         { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
         { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
         { path: '/logout', name: 'Logout', component: Logout },
-        { path: '*', name: 'error', component: ErrorPage, props: {status: 404}}
+        { path: '*', component: ErrorPage, props: { status: 404 }}
     ]
 });
 

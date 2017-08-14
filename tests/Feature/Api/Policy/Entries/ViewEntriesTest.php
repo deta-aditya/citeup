@@ -5,9 +5,10 @@ namespace Tests\Feature\Api\Policy\Entries;
 use Tests\TestCase;
 use App\Modules\Testing\TestAssistant;
 use App\Modules\Models\Activity;
+use App\Modules\Models\Entry;
 use App\User;
 
-class GetEntriesDocumentsTest extends TestCase
+class ViewEntriesTest extends TestCase
 {
     use TestAssistant;
 
@@ -18,12 +19,12 @@ class GetEntriesDocumentsTest extends TestCase
      */
     public function test200Admin()
     {
+        $entry = $this->createFactoryEntry();
+
         $user = $this->randomAdmin();
 
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id .'/documents'
+            $user, 'GET', '/entries/' . $entry->id
         );
 
         $response->assertStatus(200);
@@ -36,14 +37,14 @@ class GetEntriesDocumentsTest extends TestCase
      */
     public function test200Keyed()
     {
+        $entry = $this->createFactoryEntry();
+        
         $user = $this->randomCommittee();
 
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
-        $this->grant($user, 'get-documents');
+        $this->grant($user, 'view-entries');
 
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id .'/documents'
+            $user, 'GET', '/entries/' . $entry->id
         );
 
         $response->assertStatus(200);
@@ -58,10 +59,10 @@ class GetEntriesDocumentsTest extends TestCase
     {
         $user = $this->createFactoryUser();
 
-        $entry = $this->createFactoryEntryFor($user);       
+        $entry = $this->createFactoryEntryFor($user);
 
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id .'/documents'
+            $user, 'GET', '/entries/'. $entry->id
         );
 
         $response->assertStatus(200);
@@ -74,33 +75,41 @@ class GetEntriesDocumentsTest extends TestCase
      */
     public function test403()
     {
+        $entry = $this->createFactoryEntry();
+
         $user = $this->createFactoryUser();
 
-        $this->createFactoryEntryFor($user);
-
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id . '/documents'
+            $user, 'GET', '/entries/' . $entry->id
         );
 
         $response->assertStatus(403);
     }
 
     /**
-     * Create a new entry for the specified user and return it.
+     * Create a new entry using factory.
+     *
+     * @return Entry
+     */
+    protected function createFactoryEntry()
+    {
+        return factory(Entry::class)->create();
+    }
+
+    /**
+     * Create a new entry using factory for specific user.
      *
      * @param  User  $user
-     * @return this
+     * @return Entry
      */
     protected function createFactoryEntryFor(User $user)
     {
-        $activity = factory(Activity::class)->create();
+        $entry = $this->createFactoryEntry();
 
-        resolve('App\Modules\Electrons\Activities\EntryService')->make(
-            $user, $activity
+        resolve('App\Modules\Electrons\Activities\EntryService')->associate(
+            $user, $entry
         );
 
-        return $user->entry;
+        return $entry;
     }
 }

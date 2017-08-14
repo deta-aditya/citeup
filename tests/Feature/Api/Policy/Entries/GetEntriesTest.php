@@ -20,10 +20,8 @@ class GetEntriesTest extends TestCase
     {
         $user = $this->randomAdmin();
 
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id
+            $user, 'GET', '/entries'
         );
 
         $response->assertStatus(200);
@@ -38,30 +36,10 @@ class GetEntriesTest extends TestCase
     {
         $user = $this->randomCommittee();
 
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
         $this->grant($user, 'get-entries');
 
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id
-        );
-
-        $response->assertStatus(200);
-    }
-
-    /**
-     * Testing a successful attempt on self.
-     *
-     * @return void
-     */
-    public function test200Self()
-    {
-        $user = $this->createFactoryUser();
-
-        $entry = $this->createFactoryEntryFor($user);       
-
-        $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id
+            $user, 'GET', '/entries'
         );
 
         $response->assertStatus(200);
@@ -76,31 +54,10 @@ class GetEntriesTest extends TestCase
     {
         $user = $this->createFactoryUser();
 
-        $this->createFactoryEntryFor($user);
-
-        $entry = $this->createFactoryEntryFor($this->createFactoryUser());
-
         $response = $this->requestToApi(
-            $user, 'GET', '/entries/'. $entry->id
+            $user, 'GET', '/entries'
         );
 
         $response->assertStatus(403);
-    }
-
-    /**
-     * Create a new entry for the specified user and return it.
-     *
-     * @param  User  $user
-     * @return this
-     */
-    protected function createFactoryEntryFor(User $user)
-    {
-        $activity = factory(Activity::class)->create();
-
-        resolve('App\Modules\Electrons\Activities\EntryService')->make(
-            $user, $activity
-        );
-
-        return $user->entry;
     }
 }

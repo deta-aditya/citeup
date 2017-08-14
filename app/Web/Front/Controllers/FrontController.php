@@ -81,7 +81,7 @@ class FrontController extends Controller
      * 
      * @var array
      */
-    protected $newsQuery = ['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user.profile'];
+    protected $newsQuery = ['sort' => 'created_at:desc', 'take' => 4, 'with' => 'edits.user'];
 
     /**
      * Create a new controller instance.

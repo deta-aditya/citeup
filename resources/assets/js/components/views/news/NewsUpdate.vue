@@ -29,6 +29,7 @@
 
 <script>
 
+    import NewsMixin from './NewsMixin'
     import Citeup from '../../../citeup'    
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
@@ -36,6 +37,8 @@
     import RichInput from '../../kits/FormPanel/RichInput.vue'
 
     export default {
+
+        mixins: [NewsMixin],
 
         props: {
 

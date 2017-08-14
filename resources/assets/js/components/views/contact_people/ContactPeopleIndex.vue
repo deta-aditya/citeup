@@ -39,8 +39,8 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
-    import Citeup from '../../../citeup'
+    import Citeup from '../../../citeup'    
+    import ContactPeopleMixin from './ContactPeopleMixin'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
@@ -51,14 +51,14 @@
 
     export default {
 
+        mixins: [ContactPeopleMixin],
+
         data() {
             return {
                 dataPanel: null,
                 contact_people: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 

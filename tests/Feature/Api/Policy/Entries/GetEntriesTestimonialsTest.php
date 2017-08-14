@@ -4,7 +4,7 @@ namespace Tests\Feature\Api\Policy\Entries;
 
 use Tests\TestCase;
 use App\Modules\Testing\TestAssistant;
-use App\Modules\Models\Activity;
+use App\Modules\Models\Entry;
 use App\User;
 
 class GetEntriesTestimonialsTest extends TestCase
@@ -37,10 +37,10 @@ class GetEntriesTestimonialsTest extends TestCase
      */
     protected function createFactoryEntryFor(User $user)
     {
-        $activity = factory(Activity::class)->create();
+        $entry = factory(Entry::class)->create();
 
-        resolve('App\Modules\Electrons\Activities\EntryService')->make(
-            $user, $activity
+        resolve('App\Modules\Electrons\Activities\EntryService')->associate(
+            $user, $entry
         );
 
         return $user->entry;

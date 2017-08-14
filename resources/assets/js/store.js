@@ -11,7 +11,6 @@ export default {
 
         user: {
             id: 0,
-            profile: {},
             entry: {},
             role: {},
             alerts: [],
