@@ -19,10 +19,12 @@ use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
 use App\Modules\Api\V1\Requests\Users\UserDeleteRequest;
 use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
 use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
+use App\Modules\Api\V1\Requests\Users\ChangePasswordRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -222,5 +224,19 @@ class UserController extends Controller
         return $this->respondJson(
             ['edits' => $edits->getMultiple($queries)]
         );
+    }
+
+    /**
+     * Perform a change password action
+     */
+    public function changePassword(ChangePasswordRequest $request, User $user)
+    {
+        if (! Hash::check($request->input('password_old'), $user->password)) {
+            return response()->json(['password_old' => 'Wrong old password'], 422);
+        }
+
+        $this->users->update($user, $request->all());
+
+        return $this->respondJson(['user' => $user]);
     }
 }

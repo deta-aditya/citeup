@@ -91,6 +91,7 @@
 
             registerEvents() {
                 $(this.modalElement).on('shown.bs.modal', e => this.$emit('shown', e))
+                $(this.modalElement).on('hidden.bs.modal', e => this.$emit('hidden', e))
             },
 
             open() {

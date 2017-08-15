@@ -31,6 +31,7 @@ Route::group([
     Route::get('/users/{user}/alerts', 'UserController@alerts');
     Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
     Route::get('/users/{user}/edits', 'UserController@edits');
+    Route::post('/users/{user}/password', 'UserController@changePassword');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');

@@ -64,7 +64,9 @@
                         <div class="panel-body" v-show="! edit">
                             <div class="row">
                                 <div class="col-sm-4"><strong>Kata Sandi</strong></div>
-                                <div class="col-sm-8"><a href="#">Ubah Kata Sandi</a></div>
+                                <div class="col-sm-8">
+                                    <router-link :to="{ name: 'Ubah Kata Sandi' }">Ubah Kata Sandi</router-link>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -171,6 +173,7 @@
             },
 
             afterEdit() {
+                this.editData = {}
                 this.reloadUser(this.user.id)
                 this.toggleEdit()
             },
