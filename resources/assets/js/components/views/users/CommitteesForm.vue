@@ -5,23 +5,21 @@
         <template slot="header-control">
             <router-link :to="{ name: 'Panitia' }" class="btn btn-default">Kembali</router-link>
         </template>
-        <text-input name="name" :required="true" :label-width="2" :control-width="10" v-model="user.name">
+        <text-input name="name" :required="createMode" :label-width="2" :control-width="10" v-model="user.name">
             Nama
         </text-input>
-        <email-input name="email" :required="true" :label-width="2" :control-width="10" :placeholder="email" v-model="user.email">
+        <email-input name="email" :required="createMode" :label-width="2" :control-width="10" :placeholder="email" v-model="user.email">
             Email 
         </email-input>
-        <password-input name="password" :required="true" :label-width="2" :control-width="10" v-model="user.password" v-if="createMode">
+        <password-input name="password" :required="createMode" :label-width="2" :control-width="10" v-model="user.password" v-if="createMode">
             Kata Sandi
         </password-input>
-        <password-input name="password_confirmation" :required="true" :label-width="2" :control-width="10" v-model="user.password_confirmation" v-if="createMode">
+        <password-input name="password_confirmation" :required="createMode" :label-width="2" :control-width="10" v-model="user.password_confirmation" v-if="createMode">
             Konfirmasi Kata Sandi
         </password-input>
-        <template v-if="user.role === 3 || user.committee">
-            <text-input name="section" :required="true" :label-width="2" :control-width="10" v-model="user.section">
-                Posisi Kepanitiaan
-            </text-input>
-        </template>
+        <text-input name="section" :required="createMode" :label-width="2" :control-width="10" v-model="user.section">
+            Posisi Kepanitiaan
+        </text-input>
         <template slot="footer-control">
             <div class="text-right">
                 <button type="button" class="btn btn-primary" @click="submit">

@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 
 import Root from './components/views/Root.vue';
 import Config from './components/views/Config.vue';
+import Profile from './components/views/users/Profile.vue';
 import CommitteesIndex from './components/views/users/CommitteesIndex.vue';
 import CommitteesCreate from './components/views/users/CommitteesCreate.vue';
 import CommitteesUpdate from './components/views/users/CommitteesUpdate.vue';
@@ -44,6 +45,7 @@ const router = new VueRouter({
     routes: [
         { path: '/', name: 'Dasbor', component: Root },
         { path: '/settings', name: 'Konfigurasi', component: Config },
+        { path: '/profile', name: 'Profil', component: Profile },
         { path: '/committees', name: 'Panitia', component: CommitteesIndex },
         { path: '/committees/:id', name: 'Panitia.Lihat', component: CommitteesView, props: true },
         { path: '/committees/:id/update', name: 'Panitia.Sunting', component: CommitteesUpdate, props: true },

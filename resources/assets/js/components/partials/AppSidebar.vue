@@ -5,7 +5,7 @@
         <div class="sidebar-container">
 
             <div class="sidebar-profile text-center">
-                <img :src="userSignature" class="img-circle user-signature">
+                <router-link :to="{ name: 'Profil' }"><img :src="userSignature" class="img-circle user-signature"></router-link>
                 <p class="profile-name">{{ user.name }}</p>
                 <p class="profile-privilege">{{ userPrivilege }}</p>
             </div>
