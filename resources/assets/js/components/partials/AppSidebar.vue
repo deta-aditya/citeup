@@ -16,38 +16,50 @@
                     <i class="fa fa-fw fa-tachometer"></i>
                     Dasbor
                 </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Panitia') >= 0 }" :to="{ name: 'Panitia' }">
-                    <i class="fa fa-fw fa-user-secret"></i>
-                    Panitia
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
-                    <i class="fa fa-fw fa-bullhorn"></i>
-                    Acara
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
-                    <i class="fa fa-fw fa-question-circle"></i>
-                    FAQ
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Berita') >= 0 }" :to="{ name: 'Berita' }">
-                    <i class="fa fa-fw fa-file-text"></i>
-                    Berita
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
-                    <i class="fa fa-fw fa-handshake-o"></i>
-                    Sponsor
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Contact Person') >= 0 }" :to="{ name: 'Contact Person' }">
-                    <i class="fa fa-fw fa-phone"></i>
-                    Contact Person
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0 }" :to="{ name: 'Konten' }">
-                    <i class="fa fa-fw fa-archive"></i>
-                    Konten
-                </router-link>
-                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    Konfigurasi
-                </router-link>
+                <template v-if="user.admin">
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Panitia') >= 0 }" :to="{ name: 'Panitia' }">
+                        <i class="fa fa-fw fa-user-secret"></i>
+                        Panitia
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
+                        <i class="fa fa-fw fa-bullhorn"></i>
+                        Acara
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                        FAQ
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Berita') >= 0 }" :to="{ name: 'Berita' }">
+                        <i class="fa fa-fw fa-file-text"></i>
+                        Berita
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Sponsor') >= 0 }" :to="{ name: 'Sponsor' }">
+                        <i class="fa fa-fw fa-handshake-o"></i>
+                        Sponsor
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Contact Person') >= 0 }" :to="{ name: 'Contact Person' }">
+                        <i class="fa fa-fw fa-phone"></i>
+                        Contact Person
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Konten') >= 0 }" :to="{ name: 'Konten' }">
+                        <i class="fa fa-fw fa-archive"></i>
+                        Konten
+                    </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Konfigurasi') >= 0 }" :to="{ name: 'Konfigurasi' }">
+                        <i class="fa fa-fw fa-cogs"></i>
+                        Konfigurasi
+                    </router-link>
+                </template>
+                <template v-else-if="user.committee">
+                    <router-link 
+                        v-for="(nav, index) in navs" 
+                        :key="index" 
+                        :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf(nav.name) >= 0 }" 
+                        :to="{ name: nav.name }">
+                        <i :class="['fa', 'fa-fw', 'fa-' + nav.icon]"></i>
+                        {{ nav.name }}
+                    </router-link>
+                </template>
             </div>
         </div>
     </div>
@@ -59,6 +71,7 @@
     import { mapState } from 'vuex'
     import Citeup from '../../citeup'
     import Spacer from '../misc/Spacer.vue'
+    import KeyMapper from '../keys/KeyMapper'
 
     const STATES = [
         'user',
@@ -67,6 +80,8 @@
     ]
 
     export default {
+
+        mixins: [KeyMapper],
     
         computed: _.merge(mapState(STATES), {
 
@@ -94,7 +109,11 @@
 
             userActivity() {
                 return ' ' + this.user.entry.activity.name
-            }
+            },
+
+            navs() {
+                return this.user.committee ? this.getNavs(this.user.keys) : []
+            },
 
         }),
 

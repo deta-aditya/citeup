@@ -17,7 +17,7 @@
                 <div class="pull-right panel-control">
                     <slot name="control"></slot>
                 </div>
-                <h1 class="page-title">
+                <h1 :class="{'page-title': true, 'small-title': smallTitle}">
                     <slot></slot>
                 </h1>
             </div>
@@ -68,6 +68,11 @@
             model: {
                 type: Array,
                 required: true,
+            },
+
+            smallTitle: {
+                type: Boolean,
+                default: false,
             },
 
         },

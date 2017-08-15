@@ -21739,7 +21739,7 @@ Citeup.delete = function (resource) {
 };
 
 Citeup.hasKey = function (user, key) {
-    return user.admin || user.committe && user.keys.findIndex(function (item) {
+    return user.admin || user.committee && user.keys.findIndex(function (item) {
         return item.slug.includes(key);
     }) >= 0;
 };

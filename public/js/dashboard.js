@@ -21739,7 +21739,7 @@ Citeup.delete = function (resource) {
 };
 
 Citeup.hasKey = function (user, key) {
-    return user.admin || user.committe && user.keys.findIndex(function (item) {
+    return user.admin || user.committee && user.keys.findIndex(function (item) {
         return item.slug.includes(key);
     }) >= 0;
 };
@@ -77784,6 +77784,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         model: {
             type: Array,
             required: true
+        },
+
+        smallTitle: {
+            type: Boolean,
+            default: false
         }
 
     },
@@ -77937,6 +77942,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -77948,6 +77954,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         id: {
             type: [Number, String],
             required: true
+        },
+
+        showId: {
+            type: Boolean,
+            default: true
         },
 
         size: {
@@ -78020,12 +78031,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.dataPanel.listItems.push(this);
         },
-        check: function check() {
+        click: function click(e) {
+            this.$emit('click', { id: this.id });
 
-            if (!this.checkable) {
-                return;
+            if (this.checkable) {
+                this.check();
             }
-
+        },
+        check: function check() {
             this.listElement.classList.toggle('checked');
             this.checked = this.listElement.classList.contains('checked');
         },
@@ -80105,6 +80118,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__citeup__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__misc_Spacer_vue__ = __webpack_require__(315);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__misc_Spacer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__misc_Spacer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__keys_KeyMapper__ = __webpack_require__(523);
 //
 //
 //
@@ -80160,6 +80174,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -80170,6 +80197,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var STATES = ['user', 'route', 'topbarHeight'];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_4__keys_KeyMapper__["a" /* default */]],
 
     computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])(STATES), {
         userSignature: function userSignature() {
@@ -80190,6 +80219,9 @@ var STATES = ['user', 'route', 'topbarHeight'];
         },
         userActivity: function userActivity() {
             return ' ' + this.user.entry.activity.name;
+        },
+        navs: function navs() {
+            return this.user.committee ? this.getNavs(this.user.keys) : [];
         }
     }),
 
@@ -86152,11 +86184,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "listElement",
     class: ['list-group-item', 'data-panel-list-item', 'clearfix', _vm.checkableClass, _vm.sizeClass],
     on: {
-      "click": _vm.check
+      "click": _vm.click
     }
-  }, [(_vm.controls) ? _c('div', {
+  }, [_c('div', {
     staticClass: "pull-right item-control"
-  }, [_c('dropdown', {
+  }, [_vm._t("controls"), _vm._v(" "), (_vm.controls) ? _c('dropdown', {
     attrs: {
       "align": "right",
       "variant": "link",
@@ -86174,9 +86206,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.runDelete
     }
-  }, [_vm._v("Hapus")])]) : _vm._e(), _vm._v(" "), _vm._t("actions")], 2)], 2)], 1) : _vm._e(), _vm._v(" "), _c('h4', {
+  }, [_vm._v("Hapus")])]) : _vm._e(), _vm._v(" "), _vm._t("actions")], 2)], 2) : _vm._e()], 2), _vm._v(" "), _c('h4', {
     staticClass: "list-title"
-  }, [_c('small', [_vm._v("#" + _vm._s(_vm.id))]), _vm._v(" "), _vm._t("title")], 2), _vm._v(" "), _c('div', {
+  }, [(_vm.showId) ? _c('small', [_vm._v("#" + _vm._s(_vm.id))]) : _vm._e(), _vm._v(" "), _vm._t("title")], 2), _vm._v(" "), _c('div', {
     ref: "expandableElement",
     class: {
       'expandable-content': _vm.expandable, 'list-content': true
@@ -86752,9 +86784,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-tachometer"
-  }), _vm._v("\n                Dasbor\n            ")]), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                Dasbor\n            ")]), _vm._v(" "), (_vm.user.admin) ? [_c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Panitia') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Panitia') >= 0
     },
     attrs: {
       "to": {
@@ -86763,9 +86795,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-user-secret"
-  }), _vm._v("\n                Panitia\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Panitia\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Acara') >= 0
     },
     attrs: {
       "to": {
@@ -86774,9 +86806,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-bullhorn"
-  }), _vm._v("\n                Acara\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Acara\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('FAQ') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('FAQ') >= 0
     },
     attrs: {
       "to": {
@@ -86785,9 +86817,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-question-circle"
-  }), _vm._v("\n                FAQ\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    FAQ\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Berita') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Berita') >= 0
     },
     attrs: {
       "to": {
@@ -86796,9 +86828,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-file-text"
-  }), _vm._v("\n                Berita\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Berita\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Sponsor') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Sponsor') >= 0
     },
     attrs: {
       "to": {
@@ -86807,9 +86839,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-handshake-o"
-  }), _vm._v("\n                Sponsor\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Sponsor\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Contact Person') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Contact Person') >= 0
     },
     attrs: {
       "to": {
@@ -86818,9 +86850,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-phone"
-  }), _vm._v("\n                Contact Person\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Contact Person\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konten') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Konten') >= 0
     },
     attrs: {
       "to": {
@@ -86829,9 +86861,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-archive"
-  }), _vm._v("\n                Konten\n            ")]) : _vm._e(), _vm._v(" "), (_vm.user.admin) ? _c('router-link', {
+  }), _vm._v("\n                    Konten\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Konfigurasi') >= 0
+      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Konfigurasi') >= 0
     },
     attrs: {
       "to": {
@@ -86840,7 +86872,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-fw fa-cogs"
-  }), _vm._v("\n                Konfigurasi\n            ")]) : _vm._e()], 1)])], 1)
+  }), _vm._v("\n                    Konfigurasi\n                ")])] : (_vm.user.committee) ? _vm._l((_vm.navs), function(nav, index) {
+    return _c('router-link', {
+      key: index,
+      class: {
+        'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf(nav.name) >= 0
+      },
+      attrs: {
+        "to": {
+          name: nav.name
+        }
+      }
+    }, [_c('i', {
+      class: ['fa', 'fa-fw', 'fa-' + nav.icon]
+    }), _vm._v("\n                    " + _vm._s(nav.name) + "\n                ")])
+  }) : _vm._e()], 2)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -87815,7 +87861,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "pull-right panel-control"
   }, [_vm._t("control")], 2), _vm._v(" "), _c('h1', {
-    staticClass: "page-title"
+    class: {
+      'page-title': true, 'small-title': _vm.smallTitle
+    }
   }, [_vm._t("default")], 2)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "list-group panel-list"
   }, [(_vm.model.length > 0) ? [_vm._l((_vm.model), function(item) {
@@ -90609,14 +90657,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__citeup__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UsersMixin__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FormPanel_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FormPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FormPanel_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__keys_KeyMapper__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_MessageBox_vue__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_MessageBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_FormPanel_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_FormPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_FormPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_DataPanel_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_DataPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_DataPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_Addon_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_Addon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue__);
 //
 //
 //
@@ -90698,6 +90749,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -90710,7 +90787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    mixins: [__WEBPACK_IMPORTED_MODULE_2__UsersMixin__["a" /* default */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_2__UsersMixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__keys_KeyMapper__["a" /* default */]],
 
     props: {
 
@@ -90724,27 +90801,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             formPanel: null,
-            committee: {
-                keys: []
+            committee: { keys: [] },
+            keys: [],
+            confirmation: {
+                mode: '',
+                title: '',
+                text: '',
+                key: { items: [], slug: '' },
+                box: null
             }
         };
     },
 
 
     filters: {
-        humanize: function humanize(value) {
-            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(value).format('D MMMM YYYY, HH:mm');
-        },
         normalize: function normalize(value) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(value).format('DD MMM, HH:mm');
         },
         assetify: function assetify(value) {
             return __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].appPath + '/' + value;
+        },
+        joinSlugs: function joinSlugs(value) {
+            return value.map(function (item) {
+                return item.slug;
+            }).join(', ');
         }
     },
 
     created: function created() {
         this.getUser();
+        this.getAllKeys();
     },
     mounted: function mounted() {
         this.prepareComponent();
@@ -90752,23 +90838,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
+        prepareComponent: function prepareComponent() {
+            this.formPanel = this.$refs.formPanel;
+            this.confirmation.box = this.$refs.confirmation;
+        },
         getUser: function getUser() {
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/users/' + this.id).then(function (response) {
                 _this.committee = response.data.data.user;
+                _this.committee.keys = _this.mapKeys(_this.committee.keys);
             });
         },
-        prepareComponent: function prepareComponent() {
-            this.formPanel = this.$refs.formPanel;
+        getAllKeys: function getAllKeys() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/keys', { take: 100 }).then(function (response) {
+                return _this2.keys = _this2.mapKeys(response.data.data.keys);
+            });
+        },
+        grant: function grant(key) {
+            this.confirmation.key = key;
+            this.confirmation.mode = 'grant';
+            this.confirmation.title = 'Beri';
+            this.confirmation.text = 'memberi';
+            this.confirmation.box.open();
+        },
+        ungrant: function ungrant(key) {
+            this.confirmation.key = key;
+            this.confirmation.mode = 'ungrant';
+            this.confirmation.title = 'Hapus';
+            this.confirmation.text = 'mengahpus';
+            this.confirmation.box.open();
+        },
+        confirm: function confirm() {
+            var _this3 = this;
+
+            var data = {};
+            data[this.confirmation.mode] = [];
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.confirmation.key.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    data[this.confirmation.mode].push(item.id);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].post('/users/' + this.id + '/keys', data).then(function (response) {
+                _this3.getUser();
+                _this3.getAllKeys();
+                _this3.confirmation.box.close();
+            });
+        },
+        committeeHasKey: function committeeHasKey(slug) {
+            return this.committee.keys.findIndex(function (item) {
+                return item.slug === slug;
+            }) >= 0;
         }
     },
 
     components: {
-        'form-panel': __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_FormPanel_vue___default.a,
-        'data-panel': __WEBPACK_IMPORTED_MODULE_4__kits_DataPanel_DataPanel_vue___default.a,
-        'data-panel-addon': __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default.a,
-        'data-panel-list-item': __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default.a
+        'form-panel': __WEBPACK_IMPORTED_MODULE_5__kits_FormPanel_FormPanel_vue___default.a,
+        'data-panel': __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_DataPanel_vue___default.a,
+        'message-box': __WEBPACK_IMPORTED_MODULE_4__kits_MessageBox_vue___default.a,
+        'data-panel-addon': __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_Addon_vue___default.a,
+        'data-panel-list-item': __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue___default.a
     }
 
 });
@@ -90778,7 +90930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)();
-exports.push([module.i, "\n.user-photo[data-v-b5984f6e] {\n  height: 150px;\n  margin: 0 30px 30px 0;\n}\n", ""]);
+exports.push([module.i, "\n.user-photo[data-v-b5984f6e] {\n  height: 150px;\n}\n.fa-minus[data-v-b5984f6e] {\n  color: #fff;\n}\n", ""]);
 
 /***/ }),
 /* 520 */
@@ -90827,12 +90979,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "committees-view"
     }
-  }, [_c('div', {
+  }, [_c('message-box', {
+    ref: "confirmation",
+    attrs: {
+      "name": "confirmation-box",
+      "backdrop": "static",
+      "dismissable": false
+    }
+  }, [_c('template', {
+    slot: "title"
+  }, [_vm._v(_vm._s(_vm.confirmation.title) + " Akses")]), _vm._v(" "), _c('p', [_vm._v("Anda akan " + _vm._s(_vm.confirmation.text) + " akses "), _c('strong', [_vm._v(_vm._s(_vm._f("translateKeyName")(_vm.confirmation.key.slug)))]), _vm._v(" pada pengguna ini.")]), _vm._v(" "), _c('p', {
+    staticClass: "help-block"
+  }, [_c('strong', [_vm._v("Kunci:")]), _vm._v(" " + _vm._s(_vm._f("joinSlugs")(_vm.confirmation.key.items)))]), _vm._v(" "), _c('template', {
+    slot: "buttons"
+  }, [_c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Batal")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.confirm
+    }
+  }, [_vm._v("OK")])])], 2), _vm._v(" "), _c('div', {
     staticClass: "form-panel"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-6"
   }, [_c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
@@ -90847,7 +91022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("Indeks")]), _vm._v(" "), _c('router-link', {
-    staticClass: "btn btn-default",
+    staticClass: "btn btn-primary",
     attrs: {
       "to": {
         name: 'Panitia.Sunting',
@@ -90858,28 +91033,117 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Sunting")])], 1), _vm._v(" "), _c('h1', {
     staticClass: "page-title"
-  }, [_vm._v(_vm._s(_vm.committee.name) + " "), _c('small', [_vm._v("Panitia / #" + _vm._s(_vm.id))])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.committee.name) + " "), _c('small', [_vm._v("Panitia / #" + _vm._s(_vm.id))])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-panel"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-6"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "panel-body text-center"
+  }, [_c('img', {
+    staticClass: "img-circle user-photo",
+    attrs: {
+      "src": _vm._f("assetify")(_vm.committee.photo)
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
-  }, [_vm._v(_vm._s(_vm.committee.email))])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.committee.name))])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "row"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
+  }, [_vm._v(_vm._s(_vm.committee.email))])])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
   }, [_vm._v(_vm._s(_vm.committee.section))])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_vm._v(_vm._s(_vm._f("normalize")(_vm.committee.created_at)))])])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-6"
-  })])])])
+  }, [_c('data-panel', {
+    ref: "dataPanel",
+    attrs: {
+      "small-title": true
+    },
+    scopedSlots: _vm._u([{
+      key: "list",
+      fn: function(props) {
+        return [_c('data-panel-list-item', {
+          class: {
+            'active': _vm.committeeHasKey(props.data.slug)
+          },
+          attrs: {
+            "size": "small",
+            "id": props.data.slug,
+            "controls": false,
+            "show-id": false
+          }
+        }, [_c('template', {
+          slot: "title"
+        }, [_vm._v(_vm._s(_vm._f("translateKeyName")(props.data.slug)))]), _vm._v(" "), _c('template', {
+          slot: "controls"
+        }, [(_vm.committeeHasKey(props.data.slug)) ? _c('button', {
+          staticClass: "btn btn-link",
+          attrs: {
+            "title": "Hapus Akses"
+          },
+          on: {
+            "click": function($event) {
+              $event.stopPropagation();
+              _vm.ungrant(props.data)
+            }
+          }
+        }, [_c('i', {
+          staticClass: "fa fa-minus"
+        })]) : _c('button', {
+          staticClass: "btn btn-link",
+          attrs: {
+            "title": "Beri Akses"
+          },
+          on: {
+            "click": function($event) {
+              $event.stopPropagation();
+              _vm.grant(props.data)
+            }
+          }
+        }, [_c('i', {
+          staticClass: "fa fa-plus"
+        })])])], 2)]
+      }
+    }]),
+    model: {
+      value: (_vm.keys),
+      callback: function($$v) {
+        _vm.keys = $$v
+      },
+      expression: "keys"
+    }
+  }, [_vm._v("\n                    Daftar Akses\n                    ")])], 1)])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-body"
+  }, [_c('h2', {
+    staticClass: "page-title small-title"
+  }, [_vm._v("Profil")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('strong', [_vm._v("Nama Lengkap")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-sm-4"
   }, [_c('strong', [_vm._v("Email")])])
@@ -90939,6 +91203,105 @@ if(false) {
  // When the module is disposed, remove the <style> tags
  module.hot.dispose(function() { update(); });
 }
+
+/***/ }),
+/* 523 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+
+
+
+var DICTIONARY = {
+    'users': { keyName: 'Kelola Peserta', navName: 'Peserta', icon: 'user' },
+    'alerts': { keyName: 'Kelola Notifikasi', navName: 'Notifikasi', icon: 'bell' },
+    'activities': { keyName: 'Kelola Acara', navName: 'Acara', icon: 'bullhorn' },
+    'schedules': { keyName: 'Kelola Jadwal' },
+    'entries': { keyName: 'Kelola Pendaftaran', navName: 'Pendaftaran', icon: 'paperclip' },
+    'submissions': { keyName: 'Kelola Submisi', navName: 'Submisi', icon: 'paper-plane' },
+    'documents': { keyName: 'Kelola Dokumen', navName: 'Dokumen', icon: 'folder' },
+    'testimonials': { keyName: 'Kelola Testimoni', navName: 'Testimoni', icon: 'star' },
+    'attempts': { keyName: 'Kelola Percobaan (Quiz)' },
+    'questions': { keyName: 'Kelola Pertanyaan (Quiz)', navName: 'Quiz', icon: 'map-signs' },
+    'choices': { keyName: 'Kelola Pilihan (Quiz)' },
+    'answers': { keyName: 'Kelola Jawaban (Quiz)' },
+    'galleries': { keyName: 'Kelola Galeri', navName: 'Galeri', icon: 'picture-o' },
+    'news': { keyName: 'Kelola Berita', navName: 'Berita', icon: 'file-text' },
+    'sponsors': { keyName: 'Kelola Sponsor', navName: 'Sponsor', icon: 'handshake-o' },
+    'faqs': { keyName: 'Kelola FAQ', navName: 'FAQ', icon: 'question-circle' },
+    'contact-people': { keyName: 'Kelola Contact Person', navName: 'Contact Person', icon: 'phone' },
+    'html-contents': { keyName: 'Kelola Konten', navName: 'Konten', icon: 'archive' },
+    'edits': { keyName: 'Lihat Suntingan', navName: 'Suntingan', icon: 'pencil-square-o' }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    filters: {
+        translateKeyName: function translateKeyName(value) {
+            return DICTIONARY.hasOwnProperty(value) ? DICTIONARY[value].keyName : 'Tidak Diketahui';
+        }
+    },
+    methods: {
+        mapKeys: function mapKeys(raw) {
+            var ripe = [];
+            var prefix = 'null';
+            var latest = {};
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = raw[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    var sliced = item.slug.split('-').slice(1);
+                    var joined = sliced.join('-');
+
+                    if (sliced.length === 2 && !(joined === 'contact-people' || joined === 'html-contents')) continue;
+
+                    if (item.slug.endsWith(prefix)) {
+                        latest.items.push(item);
+                        continue;
+                    }
+
+                    if (!__WEBPACK_IMPORTED_MODULE_0_lodash___default.a.isEmpty(latest)) ripe.push(latest);
+
+                    prefix = joined;
+                    latest = { slug: prefix, items: [item] };
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            ripe.push(latest);
+
+            return ripe;
+        },
+        getNavs: function getNavs(keys) {
+            return this.mapKeys(keys).filter(function (item) {
+                return DICTIONARY.hasOwnProperty(item.slug) && DICTIONARY[item.slug].hasOwnProperty('navName');
+            }).map(function (item) {
+                return {
+                    name: DICTIONARY[item.slug].navName,
+                    icon: DICTIONARY[item.slug].icon
+                };
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

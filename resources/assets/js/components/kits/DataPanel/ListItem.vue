@@ -3,9 +3,10 @@
     <a 
         ref="listElement" 
         :class="['list-group-item', 'data-panel-list-item', 'clearfix', checkableClass, sizeClass]" 
-        @click="check">
-        <div class="pull-right item-control" v-if="controls">
-            <dropdown align="right" variant="link" :caret="false">
+        @click="click">
+        <div class="pull-right item-control">
+            <slot name="controls"></slot>
+            <dropdown align="right" variant="link" :caret="false" v-if="controls">
                 <i class="fa fa-lg fa-ellipsis-h"></i>
                 <template slot="menu">
                     <li v-if="updatable">
@@ -19,7 +20,7 @@
             </dropdown>
         </div>
         <h4 class="list-title">
-            <small>#{{ id }}</small>
+            <small v-if="showId">#{{ id }}</small>
             <slot name="title"></slot>
         </h4>
         <div ref="expandableElement" :class="{ 'expandable-content': expandable, 'list-content': true }">
@@ -39,6 +40,11 @@
             id: {
                 type: [Number, String],
                 required: true
+            },
+
+            showId: {
+                type: Boolean,
+                default: true,
             },
 
             size: {
@@ -116,12 +122,15 @@
                 this.dataPanel.listItems.push(this)
             },
 
-            check() {
+            click(e) {
+                this.$emit('click', { id: this.id })
 
-                if (! this.checkable) {
-                    return
+                if (this.checkable) {
+                    this.check()
                 }
+            },
 
+            check() {
                 this.listElement.classList.toggle('checked')
                 this.checked = this.listElement.classList.contains('checked')
             },
