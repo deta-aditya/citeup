@@ -16,6 +16,10 @@
                     <i class="fa fa-fw fa-tachometer"></i>
                     Dasbor
                 </router-link>
+                <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Panitia') >= 0 }" :to="{ name: 'Panitia' }">
+                    <i class="fa fa-fw fa-user-secret"></i>
+                    Panitia
+                </router-link>
                 <router-link v-if="user.admin" :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': this.route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
                     <i class="fa fa-fw fa-bullhorn"></i>
                     Acara

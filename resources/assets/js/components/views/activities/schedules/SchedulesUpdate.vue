@@ -29,12 +29,15 @@
 <script>
 
     import Citeup from '../../../../citeup'
+    import SchedulesMixin from './SchedulesMixin'
     import FormPanel from '../../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../../kits/FormPanel/TextInput.vue'
     import StaticInput from '../../../kits/FormPanel/StaticInput.vue'
     import DateTimeInput from '../../../kits/FormPanel/DateTimeInput.vue'
 
     export default {
+
+        mixins: [SchedulesMixin],
 
         props: {
 

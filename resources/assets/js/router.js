@@ -7,6 +7,10 @@ import VueRouter from 'vue-router';
 
 import Root from './components/views/Root.vue';
 import Config from './components/views/Config.vue';
+import CommitteesIndex from './components/views/users/CommitteesIndex.vue';
+import CommitteesCreate from './components/views/users/CommitteesCreate.vue';
+import CommitteesUpdate from './components/views/users/CommitteesUpdate.vue';
+import CommitteesView from './components/views/users/CommitteesView.vue';
 import ActivitiesIndex from './components/views/activities/ActivitiesIndex.vue';
 import ActivitiesView from './components/views/activities/ActivitiesView.vue';
 import ActivitiesCreate from './components/views/activities/ActivitiesCreate.vue';
@@ -40,6 +44,10 @@ const router = new VueRouter({
     routes: [
         { path: '/', name: 'Dasbor', component: Root },
         { path: '/settings', name: 'Konfigurasi', component: Config },
+        { path: '/committees', name: 'Panitia', component: CommitteesIndex },
+        { path: '/committees/:id', name: 'Panitia.Lihat', component: CommitteesView, props: true },
+        { path: '/committees/:id/update', name: 'Panitia.Sunting', component: CommitteesUpdate, props: true },
+        { path: '/committees/create', name: 'Panitia.Buat', component: CommitteesCreate },
         { path: '/activities', name: 'Acara', component: ActivitiesIndex },
         { path: '/activities/:id', name: 'Acara.Lihat', component: ActivitiesView, props: true },
         { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },

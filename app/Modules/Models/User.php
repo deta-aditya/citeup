@@ -11,7 +11,37 @@ trait User
      */
     public function getRolenameAttribute()
     {
-        return $this->role()->first()->name;
+        return $this->role->name;
+    }
+
+    /**
+     * Get the user's flag for Entrant.
+     *
+     * @return bool
+     */
+    public function getEntrantAttribute()
+    {
+        return $this->isEntrant();
+    }
+
+    /**
+     * Get the user's flag for Committee.
+     *
+     * @return bool
+     */
+    public function getCommitteeAttribute()
+    {
+        return $this->isCommittee();
+    }
+
+    /**
+     * Get the user's flag for Admin.
+     *
+     * @return bool
+     */
+    public function getAdminAttribute()
+    {
+        return $this->isAdmin();
     }
 
     /**

@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'email|unique:users',
+            'email' => 'email|unique:users|nullable',
             'password' => 'string|confirmed',
             'name' => 'string|max:191',
             'photo' => 'string|max:191',

@@ -269,6 +269,10 @@ class UserService extends Service
 
         array_forget($cleaned, ['role', 'role_id', 'entry', 'entry_id', 'crew']);
 
+        if (array_has($cleaned, 'email') && empty($cleaned['email'])) {
+            array_forget($cleaned, 'email');
+        }
+
         return $cleaned;
     }
 

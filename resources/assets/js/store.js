@@ -57,15 +57,7 @@ export default {
     mutations: {
 
         updateUser(state, payload) {
-
-            let user = payload.user;
-            
-            user.admin = user.rolename === 'Administrator';
-            user.committee = user.rolename === 'Committee';
-            user.entrant = user.rolename === 'Entrant';
-
-            state.user = user;
-            
+            state.user = payload.user;            
         },
 
         updateConfig(state, payload) {

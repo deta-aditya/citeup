@@ -1,17 +1,9 @@
 
 <template>
-    <div :class="{'form-group': grouped}">
-        <label v-if="labeled" :for="name" :class="['control-label', labelColumn]">
-            <slot></slot>
-        </label>
-        <div :class="[controlColumn]">
-            <div class="btn-group">
-                <item v-for="(data, id, index) in list" :key="index" :id="id" :disabled="disabled" :state="id == passableValue" @check="input">
-                    <slot name="list" :data="data" :id="id"></slot>
-                </item>
-            </div>
-            <slot name="help-block"></slot>
-        </div>
+    <div class="btn-group">
+        <item v-for="(data, id, index) in list" :key="index" :id="id" :state="id == passableValue" @check="input">
+            <slot name="list" :data="data" :id="id"></slot>
+        </item>
     </div>
 </template>
 
@@ -41,11 +33,6 @@
             labeled: {
                 type: Boolean,
                 default: true
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false,
             },
 
             labelWidth: {

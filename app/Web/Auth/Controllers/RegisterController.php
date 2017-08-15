@@ -99,11 +99,11 @@ class RegisterController extends Controller
 
         $entry = $this->createEntry($entries, $entryData, 1);
         
-        $leader = $this->registerUser($users, $leaderData, $entry->id, false);
-        $this->registerUser($users, $crew1Data, $entry->id, false);
-        $this->registerUser($users, $crew2Data, $entry->id, false);
+        $leader = $this->registerUser($users, $roles, $leaderData, $entry->id, false);
+        $this->registerUser($users, $roles, $crew1Data, $entry->id, false);
+        $this->registerUser($users, $roles, $crew2Data, $entry->id, false);
 
-        return $this->postRegistration($roles, $leader);
+        return $this->postRegistration($leader);
     }
 
     /**
@@ -130,9 +130,9 @@ class RegisterController extends Controller
 
         $entry = $this->createEntry($entries, $entryData, 2);
         
-        $user = $this->registerUser($users, $userData, $entry->id, false);
+        $user = $this->registerUser($users, $roles, $userData, $entry->id, false);
 
-        return $this->postRegistration($roles, $user);
+        return $this->postRegistration($user);
     }
 
     /**
@@ -159,9 +159,9 @@ class RegisterController extends Controller
 
         $entry = $this->createEntry($entries, $entryData, 3);
         
-        $user = $this->registerUser($users, $userData, $entry->id, false);
+        $user = $this->registerUser($users, $roles, $userData, $entry->id, false);
 
-        return $this->postRegistration($roles, $user);
+        return $this->postRegistration($user);
     }
 
     /**
@@ -195,7 +195,7 @@ class RegisterController extends Controller
         return $entryService->create($entryData);
     }
 
-    protected function registerUser($userService, $userData, $entryId, $crew)
+    protected function registerUser($userService, $roleService, $userData, $entryId, $crew)
     {
         $userData['entry'] = $entryId;
 
@@ -203,14 +203,16 @@ class RegisterController extends Controller
             $userData['crew'] = $crew;
         }
 
-        return $userService->create($userData);
-    }
-
-    protected function postRegistration($roleService, $user)
-    {
-        event(new Registered($user));
+        $user =  $userService->create($userData);
 
         $roleService->associate($user, Roles::ROLE_ENTRANT);
+
+        return $user;
+    }
+
+    protected function postRegistration($user)
+    {
+        event(new Registered($user));
 
         $this->guard()->login($user);
 
