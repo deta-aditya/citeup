@@ -8,10 +8,10 @@
 <script>
 
     import CommitteesForm from './CommitteesForm'
-    import UsersMixin from './UsersMixin'
+    import AdminGuardMixin from '../../guards/AdminGuardMixin'
 
     export default {
-        mixins: [UsersMixin],
+        mixins: [AdminGuardMixin],
         props: { id: [Number, String] },
         components: {
             'committees-form': CommitteesForm,

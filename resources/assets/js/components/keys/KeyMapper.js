@@ -2,11 +2,10 @@
 import _ from 'lodash'
 
 const DICTIONARY = {
-    'users':            { keyName: 'Kelola Peserta', navName: 'Peserta', icon: 'user' },
     'alerts':           { keyName: 'Kelola Notifikasi', navName: 'Notifikasi', icon: 'bell' },
     'activities':       { keyName: 'Kelola Acara', navName: 'Acara', icon: 'bullhorn' },
     'schedules':        { keyName: 'Kelola Jadwal' },
-    'entries':          { keyName: 'Kelola Pendaftaran', navName: 'Pendaftaran', icon: 'paperclip' },
+    'entries':          { keyName: 'Kelola Peserta', navName: 'Peserta', icon: 'user' },
     'submissions':      { keyName: 'Kelola Submisi', navName: 'Submisi', icon: 'paper-plane' },
     'documents':        { keyName: 'Kelola Dokumen', navName: 'Dokumen', icon: 'folder' },
     'testimonials':     { keyName: 'Kelola Testimoni', navName: 'Testimoni', icon: 'star' },

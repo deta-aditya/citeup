@@ -19,7 +19,7 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'activity_id', 'name', 'agency', 'address', 'phone', 'city', 
+        'activity_id', 'name', 'agency', 'city', 
     ];
 
     /**
@@ -71,4 +71,18 @@ class Entry extends Model
     {
         return $this->hasMany('App\Modules\Models\Testimonial');
     }    
+
+    /**
+     * Scope a query to only include entries who enter the given activity.
+     *
+     * @param  Builder  $query
+     * @param  int      $activity
+     * @return Builder
+     */
+    public function scopeOfActivity($query, $activity)
+    {
+        return $query->whereHas('activity', function ($query) use ($activity) {
+            $query->where('id', $activity);
+        });
+    }
 }

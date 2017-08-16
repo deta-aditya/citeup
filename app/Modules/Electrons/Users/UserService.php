@@ -141,6 +141,18 @@ class UserService extends Service
     }
 
     /**
+     * Update a user by id.
+     *
+     * @param  int    $userId
+     * @param  array  $data
+     * @return this
+     */
+    public function updateById($id, array $data)
+    {
+        return $this->update(User::find($id), $data);
+    }
+
+    /**
      * Update a user with new data.
      *
      * @param  User   $user

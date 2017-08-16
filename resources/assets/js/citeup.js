@@ -17,6 +17,8 @@ Citeup.defaultImageClean = 'images/default.jpg';
 
 Citeup.defaultImage = Citeup.appPath + '/' + Citeup.defaultImageClean;
 
+// Citeup.captcha = document.head.querySelector('meta[name="recaptcha-sitekey"]').content;
+
 Citeup.defaultTableParams = {
     skip: 0,
     take: 15,

@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'grant' => \App\Modules\Middlewares\AttachPasswordGrantInputs::class,
         'api.token' => \App\Modules\Middlewares\InsertAccessTokenHeader::class,
+        'recaptcha' => \App\Modules\Electrons\Recaptcha\VerifyRecaptchaMiddleware::class,
     ];
 }

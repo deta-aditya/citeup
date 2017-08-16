@@ -52,9 +52,10 @@
                                 <!-- Dropdown Links -->
                                 <slot name="dropdown-side"></slot>
 
-                                <router-link tag="li" :to="{ name: 'Logout' }">
-                                    <a>Logout</a>
-                                </router-link>
+                                <router-link tag="li" :to="{ name: 'Profil' }"><a>Profil</a></router-link>
+                                <router-link tag="li" :to="{ name: 'Ubah Kata Sandi' }"><a>Ubah Kata Sandi</a></router-link>
+                                <li role="separator" class="divider"></li>
+                                <router-link tag="li" :to="{ name: 'Logout' }"><a>Logout</a></router-link>
                             </template>
                         </dropdown>
 

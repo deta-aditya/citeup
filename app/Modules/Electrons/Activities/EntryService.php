@@ -14,29 +14,24 @@ class EntryService extends Service
     const STAGE_REGISTERED_ENTRANT = 0;
 
     /**
-     * The "done test" stage.
+     * The completed document stage.
      */
-    const STAGE_TESTED_ENTRANT = 1;
+    const STAGE_COMPLETED_ENTRANT = 1;
+
+    /**
+     * The done test stage.
+     */
+    const STAGE_TESTED_ENTRANT = 2;
 
     /**
      * The finalist stage.
      */
-    const STAGE_FINALIST = 2;
-
-    /**
-     * The re-registered finalist stage.
-     */
-    const STAGE_REGISTERED_FINALIST = 3;
-
-    /**
-     * The "done test" finalist stage.
-     */
-    const STAGE_TESTED_FINALIST = 4;
+    const STAGE_FINALIST = 3;
 
     /**
      * The winner stage.
      */
-    const STAGE_WINNER = 5;
+    const STAGE_WINNER = 4;
 
     /**
      * The suspended/disqualified status.
@@ -75,7 +70,13 @@ class EntryService extends Service
      */
     public function multipleCustom($query, array $params)
     {
-        return $this->parseQueryString($query, $params)->get();
+        $query = $this->parseQueryString($query, $params);
+
+        if (array_has($params, 'activity')) {
+            $query->ofActivity((int) $params['activity']);
+        }
+
+        return $query->get();
     }
 
     /**
@@ -86,7 +87,7 @@ class EntryService extends Service
      */
     public function loadRelationships(Entry $entry)
     {
-        $entry->load('submissions', 'attempts', 'testimonials');
+        $entry->load('users', 'users.documents', 'submissions', 'attempts', 'testimonials', 'activity');
 
         return $this;
     }

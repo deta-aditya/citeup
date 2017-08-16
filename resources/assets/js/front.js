@@ -17,6 +17,7 @@ import TextInput from './components/kits/FormPanel/TextInput'
 import EmailInput from './components/kits/FormPanel/EmailInput'
 import StaticInput from './components/kits/FormPanel/StaticInput'
 import PasswordInput from './components/kits/FormPanel/PasswordInput'
+import DateTimeInput from './components/kits/FormPanel/DateTimeInput'
 import MultilineInput from './components/kits/FormPanel/MultilineInput'
 
 import Citeup from './citeup'
@@ -46,6 +47,9 @@ const frontViewModel = new Vue({
                 streetViewControl: false,
                 zoomControl: false,
             },
+            recaptcha: {
+                siteKey: Citeup.captcha,
+            }
         }
     },
 
@@ -92,6 +96,7 @@ const frontViewModel = new Vue({
         'email-input': EmailInput,
         'static-input': StaticInput,
         'password-input': PasswordInput,
+        'date-time-input': DateTimeInput,
         'multiline-input': MultilineInput,
     },
 

@@ -33,6 +33,8 @@ Route::group([
     Route::get('/users/{user}/edits', 'UserController@edits');
     Route::post('/users/{user}/password', 'UserController@changePassword');
 
+    Route::put('/entrants/{entry}', 'EntryController@updateEntrantProfile');
+
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
     Route::get('/keys/{key}', 'KeyController@show');

@@ -117,6 +117,10 @@ return [
 
     'entries' => [
 
+        'defaults' => [
+            'with' => ['users', 'activity'],
+        ],
+
         'selectable' => [
             'name', 'agency', 'address', 'phone', 'city', 'stage', 'status',
         ],

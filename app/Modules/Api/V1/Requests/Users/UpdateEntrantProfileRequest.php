@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Api\V1\Requests\Entries;
+namespace App\Modules\Api\V1\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EntryUpdateRequest extends FormRequest
+class UpdateEntrantProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,10 +13,8 @@ class EntryUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = $this->user();
-        $entry = $this->route('entry');
-
-        return  $user->isAdmin() || $user->hasKey('put-entries');
+        return $this->user()->isEntrant() && 
+            $this->route('entry')->id === $this->user()->entry->id;
     }
 
     /**
@@ -38,6 +36,7 @@ class EntryUpdateRequest extends FormRequest
             'users.*.birthdate' => 'date_format:Y-m-d|nullable',
             'users.*.address' => 'string|nullable',
             'users.*.phone' => 'string|max:20|nullable',
+            'users.*.photo' => 'string|nullable',
         ];
     }
 }

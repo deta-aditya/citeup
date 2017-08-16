@@ -8,7 +8,11 @@ import VueRouter from 'vue-router';
 import Root from './components/views/Root.vue';
 import Config from './components/views/Config.vue';
 import Profile from './components/views/users/Profile.vue';
+import ProfileUpdate from './components/views/users/EntrantsProfileUpdate.vue';
 import ChangePassword from './components/views/users/ChangePassword.vue';
+import EntrantsIndex from './components/views/users/EntrantsIndex.vue';
+import EntrantsView from './components/views/users/EntrantsView.vue';
+import EntrantsUpdate from './components/views/users/EntrantsUpdate.vue';
 import CommitteesIndex from './components/views/users/CommitteesIndex.vue';
 import CommitteesCreate from './components/views/users/CommitteesCreate.vue';
 import CommitteesUpdate from './components/views/users/CommitteesUpdate.vue';
@@ -47,7 +51,11 @@ const router = new VueRouter({
         { path: '/', name: 'Dasbor', component: Root },
         { path: '/settings', name: 'Konfigurasi', component: Config },
         { path: '/profile', name: 'Profil', component: Profile },
+        { path: '/profile/update', name: 'Profil.Sunting', component: ProfileUpdate },
         { path: '/change-password', name: 'Ubah Kata Sandi', component: ChangePassword },
+        { path: '/entrants', name: 'Peserta', component: EntrantsIndex },
+        { path: '/entrants/:id', name: 'Peserta.Lihat', component: EntrantsView, props: true },
+        { path: '/entrants/:id/update', name: 'Peserta.Sunting', component: EntrantsUpdate, props: true },
         { path: '/committees', name: 'Panitia', component: CommitteesIndex },
         { path: '/committees/:id', name: 'Panitia.Lihat', component: CommitteesView, props: true },
         { path: '/committees/:id/update', name: 'Panitia.Sunting', component: CommitteesUpdate, props: true },

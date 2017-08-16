@@ -5,20 +5,16 @@
             <slot></slot>
         </label>
         <div :class="[controlColumn]">
-            <div ref="datetimepicker" class="input-group date">
-                <input
-                    type="text" 
-                    class="form-control"
-                    :id="name"
-                    :name="name" 
-                    :value="value" 
-                    :required="required"
-                    :disabled="disabled"
-                    :autofocus="autofocus">
-                <span class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </span>
-            </div>
+            <input
+                ref="datetimepicker"
+                type="text" 
+                class="form-control"
+                :id="name"
+                :name="name" 
+                :value="value" 
+                :required="required"
+                :disabled="disabled"
+                :autofocus="autofocus">
         </div>
     </div>
 </template>
@@ -56,6 +52,11 @@
             disabled: {
                 type: Boolean,
                 default: false
+            },
+
+            format: {
+                type: String,
+                default: DEFAULT_FORMAT,
             },
 
             labeled: {
@@ -103,13 +104,13 @@
 
             prepareComponent() {
                 this.datetimepicker = $(this.$refs.datetimepicker).datetimepicker({
-                    format: DEFAULT_FORMAT
+                    format: this.format
                 })
                 this.datetimepicker.on('dp.change', this.input)
             },
 
             input(e) {
-                this.$emit('input', e.date.format(DEFAULT_FORMAT))
+                this.$emit('input', e.date.format(this.format))
             },
 
         },

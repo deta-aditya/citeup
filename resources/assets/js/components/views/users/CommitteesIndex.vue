@@ -1,6 +1,6 @@
 
 <template>
-    <div id="users-index">
+    <div id="committees-index">
         <data-panel ref="dataPanel" v-model="users" :expandable="true" :deletable="true">
             Daftar Panitia
             <data-panel-addon slot="control" :refresh="getUsers" :create="{ name: 'Panitia.Buat' }"></data-panel-addon>
@@ -25,7 +25,6 @@
                 <div class="panel panel-default delete-preview">
                     <div class="panel-body">
                         <h4><small>#{{ props.data.id }}</small> <img :src="props.data.photo | assetify" class="img-circle user-img"> {{ props.data.name }}</h4>
-                        <div>{{ props.data.short_description }}</div>
                         <div><small class="text-muted">
                             Terdaftar sejak {{ props.data.created_at | normalize }}.
                         </small></div>
@@ -41,14 +40,14 @@
     import _ from 'lodash'
     import moment from 'moment'
     import Citeup from '../../../citeup'
-    import UsersMixin from './UsersMixin'
+    import AdminGuardMixin from '../../guards/AdminGuardMixin'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
     export default {
 
-        mixins: [UsersMixin],
+        mixins: [AdminGuardMixin],
 
         data() {
             return {

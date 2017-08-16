@@ -3,6 +3,7 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Modules\Models\Entry;
+use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Submissions\SubmissionService;
 use App\Modules\Electrons\Testimonials\TestimonialService;
@@ -17,6 +18,7 @@ use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
 use App\Modules\Api\V1\Requests\Entries\AddTestimonialRequest;
 use App\Modules\Api\V1\Requests\Entries\StartAttemptRequest;
+use App\Modules\Api\V1\Requests\Users\UpdateEntrantProfileRequest;
 use App\Modules\Api\V1\Requests\Submissions\SubmissionIndexRequest;
 use App\Modules\Api\V1\Requests\Documents\DocumentIndexRequest;
 use App\Modules\Api\V1\Requests\Testimonials\TestimonialIndexRequest;
@@ -93,13 +95,29 @@ class EntryController extends Controller
      * Update a entry data.
      *
      * @param  EntryUpdateRequest  $request
+     * @param  UserService         $users
      * @param  Entry               $entry
-     * @param  RoleService        $roles
-     * @param  ProfileService     $profiles
+     * @param  RoleService         $roles
+     * @param  ProfileService      $profiles
      * @return Response
      */
-    public function update(EntryUpdateRequest $request, Entry $entry)
+    public function update(EntryUpdateRequest $request, UserService $users, Entry $entry)
     {
+        foreach ($request->input('users') as $user) {
+            $users->updateById($user['id'], $user);
+        }
+
+        $this->entries->update($entry, $request->all());
+
+        return $this->respondJson(['entry' => $entry]);
+    }
+
+    public function updateEntrantProfile(UpdateEntrantProfileRequest $request, UserService $users, Entry $entry)
+    {
+        foreach ($request->input('users') as $user) {
+            $users->updateById($user['id'], $user);
+        }
+
         $this->entries->update($entry, $request->all());
 
         return $this->respondJson(['entry' => $entry]);

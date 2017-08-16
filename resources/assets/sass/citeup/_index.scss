@@ -237,6 +237,23 @@
         margin-bottom: 0;
     }
 
+    .gutterless {
+        & > div {
+            padding-left: 0;
+            padding-right: 0;
+            border-right: 1px solid #dddddd;
+
+            &:first-child {
+                padding-left: 15px;
+            }
+
+            &:last-child {
+                padding-right: 15px;
+                border-right: none;
+            }
+        }
+    }
+
     .form-control {
         @extend %no-border-radius;
     }

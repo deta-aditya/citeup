@@ -13759,7 +13759,6 @@ trix-editor .attachment progress {
 }
 
 #register-page .registration-form .panel-body.panel-body-form {
-  max-width: 700px;
   border-bottom: none;
 }
 
@@ -14033,6 +14032,21 @@ trix-editor .attachment progress {
 
 .form-panel .panel-group {
   margin-bottom: 0;
+}
+
+.form-panel .gutterless > div {
+  padding-left: 0;
+  padding-right: 0;
+  border-right: 1px solid #dddddd;
+}
+
+.form-panel .gutterless > div:first-child {
+  padding-left: 15px;
+}
+
+.form-panel .gutterless > div:last-child {
+  padding-right: 15px;
+  border-right: none;
 }
 
 .data-panel .panel-body {

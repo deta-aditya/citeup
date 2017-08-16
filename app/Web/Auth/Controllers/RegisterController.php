@@ -31,6 +31,12 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
 
+        // $this->middleware('recaptcha')->only([
+        //     'registerLombaLogika', 
+        //     'registerLombaDesain',
+        //     'registerSeminarIt',
+        // ]);
+
         // Apply password grant middleware to register method
         // $this->middleware('grant')->only('register');
     }
@@ -100,8 +106,8 @@ class RegisterController extends Controller
         $entry = $this->createEntry($entries, $entryData, 1);
         
         $leader = $this->registerUser($users, $roles, $leaderData, $entry->id, false);
-        $this->registerUser($users, $roles, $crew1Data, $entry->id, false);
-        $this->registerUser($users, $roles, $crew2Data, $entry->id, false);
+        $this->registerUser($users, $roles, $crew1Data, $entry->id, true);
+        $this->registerUser($users, $roles, $crew2Data, $entry->id, true);
 
         return $this->postRegistration($leader);
     }

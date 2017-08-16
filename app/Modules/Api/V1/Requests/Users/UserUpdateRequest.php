@@ -17,7 +17,8 @@ class UserUpdateRequest extends FormRequest
         $user = $this->route('user');
 
         return $accessor->isAdmin() || 
-            $accessor->hasKey('put-users') || 
+            ($accessor->isCommittee() && $accessor->hasKey('put-users')) || 
+            ($accessor->isEntrant() && $accessor->entry->id === $user->entry_id) || 
             $accessor->id === $user->id;
     }
 

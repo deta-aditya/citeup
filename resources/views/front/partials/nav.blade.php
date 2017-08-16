@@ -34,9 +34,10 @@
 
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    @unless (value(config('web.stage'))->name === 'Pra-Pendaftaran' || value(config('web.stage'))->name === 'Paska Acara')
-                        <li class="{{ request()->is('login') ? 'active' : '' }}"><a class="login-link" href="{{ route('login.form') }}">Daftar / Login</a></li>
-                    @endunless
+                    {{-- @unless (value(config('web.stage'))->name === 'Pra-Pendaftaran' || value(config('web.stage'))->name === 'Paska Acara') --}}
+                        <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="{{ route('login.form') }}">Login</a></li>
+                        <li class="{{ request()->is('register*') ? 'active' : '' }}"><a class="login-link" href="{{ route('register.index') }}">Daftar</a></li>
+                    {{-- @endunless --}}
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -57,12 +57,6 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-4"><strong>Kata Sandi</strong></div>
-                                <div class="col-sm-8"><a href="#">Ubah Kata Sandi</a></div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
                                 <div class="col-sm-4"><strong>Posisi Kepanitiaan</strong></div>
                                 <div class="col-sm-8">{{ committee.section }}</div>
                             </div>
@@ -107,9 +101,9 @@
 
     import moment from 'moment'
     import Citeup from '../../../citeup'
-    import UsersMixin from './UsersMixin'
     import KeyMapper from '../../keys/KeyMapper'
     import MessageBox from '../../kits/MessageBox.vue'
+    import AdminGuardMixin from '../../guards/AdminGuardMixin'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
@@ -117,7 +111,7 @@
 
     export default {
 
-        mixins: [UsersMixin, KeyMapper],
+        mixins: [AdminGuardMixin, KeyMapper],
 
         props: {
 

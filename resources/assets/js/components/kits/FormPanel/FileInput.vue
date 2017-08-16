@@ -36,7 +36,7 @@
             :disabled="disabled"
             @input="prepareInput($event.target)">
 
-        <message-box ref="messageBox" name="cropbox" v-if="acceptIsImage && crop">
+        <message-box ref="messageBox" :name="'cropbox-' + name" v-if="acceptIsImage && crop">
             <span slot="title">Crop Image</span>
             <div class="crop-container">
                 <img ref="croppable">

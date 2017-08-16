@@ -20,10 +20,12 @@ class RegisterLombaDesainRequest extends FormRequest
             'name' => 'required|string|max:191',
             'entry_agency' => 'required|string|max:191',
             'entry_city' => 'required|string|max:191',
-            'entry_address' => 'required|string',
-            'entry_phone' => 'required|string|max:20',
             'user_email' => 'required|string|email|max:191',
-            'user_password' => 'required|string|min:6',
+            'user_password' => 'required|string|min:6|confirmed',
+            'user_birthplace' => 'required|string|max:191',
+            'user_birthdate' => 'required|date_format:Y-m-d',
+            'user_address' => 'required|string',
+            'user_phone' => 'required|string|max:20',
         ];
     }
 }

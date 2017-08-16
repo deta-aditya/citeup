@@ -25,6 +25,11 @@
 
     <!-- Favicon -->
     <link href="{{ asset('images/web/favicon.png') }}" rel="shortcut icon" type="image/png">
+
+    @if (false)
+        <meta name="recaptcha-sitekey" content="{{ config('recaptcha.sitekey') }}">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
 </head>
 <body>
     <div id="app-front">
