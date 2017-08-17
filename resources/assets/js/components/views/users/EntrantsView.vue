@@ -22,14 +22,15 @@
 
 <template>
     <div id="entrants-view">
-        <message-box ref="disqualifier" name="disqualifier-box" backdrop="static" :dismissable="false">
-            <!-- <template slot="title">{{ confirmation.title }} Akses</template>
-            <p>Anda akan {{ confirmation.text }} akses <strong>{{ confirmation.key.slug | translateKeyName }}</strong> pada pengguna ini.</p>
-            <p class="help-block"><strong>Kunci:</strong> {{ confirmation.key.items | joinSlugs }}</p>
+        <message-box ref="confirmation" name="confirmation-box" backdrop="static" :dismissable="false">
+            <template slot="title">{{ confirmation.disqualify ? 'Diskualifikasi' : 'Aktifkan' }} Peserta</template>
+            <p>Anda akan {{ confirmation.disqualify ? 'mendiskualifikasi' : 'mengaktifkan kembali' }} peserta {{ confirmation.entry.activity.name }} dengan nama "{{ confirmation.entry.name }}".</p>
+            <p>Peserta yang terlibat:</p>
+            <ul><li v-for="entrant in confirmation.entry.users">{{ entrant.name }}</li></ul>
             <template slot="buttons">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" @click="confirm">OK</button>
-            </template> -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" @click="cancelConfirm">Batal</button>
+                <button type="button" class="btn btn-primary" @click="confirm(() => { getEntry(id) })">OK</button>
+            </template>
         </message-box>
         <div class="form-panel">
             <div class="panel panel-default">
@@ -167,8 +168,8 @@
                 </div>
                 <div class="panel-body panel-foot">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default" v-if="entry.status === 1">Diskualifikasi</button>
-                        <button type="button" class="btn btn-default" v-else-if="entry.status === 0">Aktifkan</button>
+                        <button type="button" class="btn btn-default" v-if="entry.status === 1" @click="preConfirm(entry, true)">Diskualifikasi</button>
+                        <button type="button" class="btn btn-default" v-else-if="entry.status === 0" @click="preConfirm(entry, false)">Aktifkan</button>
                     </div>
                     <p>Peserta ini terdaftar sejak {{ entry.created_at | normalize }}.</p>
                 </div>
@@ -184,6 +185,7 @@
     import UsersMixin from './UsersMixin'
     import StageTranslator from './StageTranslator'
     import MessageBox from '../../kits/MessageBox.vue'
+    import EntrantDisqualifier from './EntrantDisqualifier'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
@@ -191,7 +193,7 @@
 
     export default {
 
-        mixins: [UsersMixin, StageTranslator],
+        mixins: [UsersMixin, StageTranslator, EntrantDisqualifier],
 
         props: {
 
@@ -205,8 +207,7 @@
         data() {
             return {
                 formPanel: null,
-                disqualifierBox: null,
-                entry: { activity: {}, users: [ {} ] },
+                entry: { activity: { id: 0 }, users: [ {} ], stage: 0 },
             }
         },
 
@@ -238,7 +239,7 @@
 
             prepareComponent() {
                 this.formPanel = this.$refs.formPanel
-                this.disqualifierBox = this.$refs.disqualifier
+                this.referConfirmationBox(this.$refs.confirmation)
             },
 
             getEntry(id) {

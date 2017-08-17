@@ -14,6 +14,8 @@ use App\Modules\Api\V1\Requests\Entries\EntryShowRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryInsertRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryUpdateRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryDeleteRequest;
+use App\Modules\Api\V1\Requests\Entries\EntrantQualifyRequest;
+use App\Modules\Api\V1\Requests\Entries\EntrantDisqualifyRequest;
 use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
 use App\Modules\Api\V1\Requests\Entries\AddTestimonialRequest;
@@ -112,6 +114,10 @@ class EntryController extends Controller
         return $this->respondJson(['entry' => $entry]);
     }
 
+    /**
+     * Actually same as above but this method receives different request. 
+     * This is why we need to use service pattern.
+     */
     public function updateEntrantProfile(UpdateEntrantProfileRequest $request, UserService $users, Entry $entry)
     {
         foreach ($request->input('users') as $user) {
@@ -121,6 +127,24 @@ class EntryController extends Controller
         $this->entries->update($entry, $request->all());
 
         return $this->respondJson(['entry' => $entry]);
+    }
+
+    /**
+     * Disqualify entrant.
+     */
+    public function disqualify(EntrantDisqualifyRequest $request, Entry $entry)
+    {
+        $this->entries->changeStatus($entry->id, EntryService::STATUS_SUSPENDED);
+
+        return $this->respondJson(['entry' => $entry]);
+    }
+
+    /**
+     * Qualify entrant.
+     */
+    public function qualify(EntrantQualifyRequest $request, Entry $entry)
+    {
+        $this->entries->changeStatus($entry->id, EntryService::STATUS_ACTIVE);
     }
 
     /**

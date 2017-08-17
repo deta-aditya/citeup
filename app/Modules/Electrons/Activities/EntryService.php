@@ -146,6 +146,23 @@ class EntryService extends Service
     }
 
     /**
+     * Change the status of an entry with the given ID.
+     */
+    public function changeStatus($id, $status)
+    {
+        if (! ($status === self::STATUS_SUSPENDED || $status === self::STATUS_ACTIVE)) {
+            // Normally I would call an exception here
+            abort(422, 'Unknown status code. Please use the existing EntryService\'s status code constants.');
+        }
+
+        $entry = Entry::find($id);
+        $entry->status = $status;
+        $entry->save();
+
+        return $this;
+    }
+
+    /**
      * Remove an entry from the database.
      *
      * @param  Entry  $entry

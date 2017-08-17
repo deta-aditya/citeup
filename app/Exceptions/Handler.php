@@ -44,9 +44,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (
-            (
-                $exception instanceof ModelNotFoundException 
+        if ($request->expectsJson()) {
+            return response()->json(
+                ['message' => $exception->getMessage()], $this->getHttpStatusCode($exception)
+            );
+        }
+
+        if (($exception instanceof ModelNotFoundException 
                 || $exception instanceof NotFoundHttpException
             ) && auth('web')->check()
         ) {
@@ -54,6 +58,13 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
+    }
+
+    protected function getHttpStatusCode(Exception $exception)
+    {
+        // Not all Exceptions have a http status code.
+        // We will give Error 500 if none found.
+        return method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
     }
 
     /**
