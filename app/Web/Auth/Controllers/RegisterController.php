@@ -209,17 +209,17 @@ class RegisterController extends Controller
             $userData['crew'] = $crew;
         }
 
-        $user =  $userService->create($userData);
+        $user = $userService->create($userData);
 
         $roleService->associate($user, Roles::ROLE_ENTRANT);
+        
+        event(new Registered($user));
 
         return $user;
     }
 
     protected function postRegistration($user)
     {
-        event(new Registered($user));
-
         $this->guard()->login($user);
 
         $this->passport();

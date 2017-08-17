@@ -12249,6 +12249,30 @@ trix-editor .attachment progress {
   padding: 7.5px 2px;
 }
 
+#front-nav .navbar-nav li li.login-link-wrapper-first.active a, #front-nav .navbar-nav li li.login-link-wrapper-last.active a {
+  background-color: #cb6a1f;
+  color: #fff;
+}
+
+#front-nav .navbar-nav li.login-link-wrapper-first {
+  padding-right: 0;
+}
+
+#front-nav .navbar-nav li.login-link-wrapper-first a {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #cb6a1f;
+}
+
+#front-nav .navbar-nav li.login-link-wrapper-last {
+  padding-left: 0;
+}
+
+#front-nav .navbar-nav li.login-link-wrapper-last a {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 #front-nav .navbar-nav .dropdown-menu > li {
   padding: 0;
 }

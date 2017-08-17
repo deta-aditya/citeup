@@ -14,7 +14,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Modules\Events\EditWasMade' => [
-            'App\Modules\Listeners\LogEdit'
+            'App\Modules\Listeners\LogEdit',
+        ],
+        'Illuminate\Auth\Events\Registered' => [
+            'App\Modules\Listeners\CreateDocumentForUser',
         ],
     ];
 

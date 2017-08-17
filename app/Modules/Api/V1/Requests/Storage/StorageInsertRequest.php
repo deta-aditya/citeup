@@ -36,9 +36,7 @@ class StorageInsertRequest extends FormRequest
                 ($this->input('object_type') === 'submit' && $user->submissions->search(function ($item, $key) {
                     $item->id == $this->input('object_id');
                 }) !== false) ||
-                ($this->input('object_type') === 'document' && $user->documents->search(function ($item, $key) {
-                    $item->id == $this->input('object_id');
-                }) !== false)
+                ($this->input('object_type') === 'document' && $user->entry->id == $this->input('object_id'))
             )) ||
             $user->isAdmin();
     }

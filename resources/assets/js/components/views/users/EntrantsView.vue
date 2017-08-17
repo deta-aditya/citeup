@@ -167,7 +167,7 @@
                     </template>
                 </div>
                 <div class="panel-body panel-foot">
-                    <div class="pull-right">
+                    <div class="pull-right" v-if="entry.activity.id !== 3">
                         <button type="button" class="btn btn-default" v-if="entry.status === 1" @click="preConfirm(entry, true)">Diskualifikasi</button>
                         <button type="button" class="btn btn-default" v-else-if="entry.status === 0" @click="preConfirm(entry, false)">Aktifkan</button>
                     </div>

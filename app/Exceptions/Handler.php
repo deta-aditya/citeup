@@ -44,11 +44,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->expectsJson()) {
-            return response()->json(
-                ['message' => $exception->getMessage()], $this->getHttpStatusCode($exception)
-            );
-        }
+        // if ($request->expectsJson()) {
+        //     return response()->json(
+        //         ['message' => $exception->getMessage()], $this->getHttpStatusCode($exception)
+        //     );
+        // }
 
         if (($exception instanceof ModelNotFoundException 
                 || $exception instanceof NotFoundHttpException

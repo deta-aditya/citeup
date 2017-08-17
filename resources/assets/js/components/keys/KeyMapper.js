@@ -38,7 +38,7 @@ export default {
                 let sliced = item.slug.split('-').slice(1)
                 let joined = sliced.join('-')
 
-                if (sliced.length === 2 && ! (joined === 'contact-people' || joined === 'html-contents'))
+                if (sliced.length === 2 && ! (joined === 'contact-people' || joined === 'html-contents') || item.slug.endsWith('users'))
                     continue
 
                 if (item.slug.endsWith(prefix)) {

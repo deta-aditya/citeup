@@ -18,7 +18,7 @@ class DocumentUpdateRequest extends FormRequest
 
         return $user->isAdmin() || $user->hasKey('put-documents') || (
                 $user->isEntrant() && 
-                ($user->entry->id === $document->entry->id)
+                ($user->entry->id === $document->user->entry->id)
             );
     }
 
