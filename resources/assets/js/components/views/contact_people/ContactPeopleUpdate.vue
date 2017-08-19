@@ -9,14 +9,8 @@
             <text-input name="name" :required="true" :label-width="2" :control-width="10" v-model="contact_person.name">
                 Nama
             </text-input>
-            <text-input name="email" :required="true" :label-width="2" :control-width="10" v-model="contact_person.email">
-                Email
-            </text-input>
             <text-input name="phone" :label-width="2" :control-width="10" v-model="contact_person.phone">
                 Nomor Telepon
-            </text-input>
-            <text-input name="line" :label-width="2" :control-width="10" v-model="contact_person.line">
-                LINE ID
             </text-input>
             <template slot="footer-control">
                 <div class="text-right">

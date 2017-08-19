@@ -82454,12 +82454,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -82520,7 +82514,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__);
-//
 //
 //
 //
@@ -82635,12 +82628,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_TextInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__kits_FormPanel_TextInput_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RichInput_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RichInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__kits_FormPanel_RichInput_vue__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -92047,7 +92034,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, [_c('template', {
           slot: "title"
-        }, [_vm._v("\n                    " + _vm._s(props.data.name) + " "), _c('small', [_vm._v(_vm._s(props.data.email))])]), _vm._v(" "), _c('div', [_vm._v(_vm._s(props.data.phone) + " | " + _vm._s(props.data.line))]), _vm._v(" "), _c('p', [_c('small', {
+        }, [_vm._v("\n                    " + _vm._s(props.data.name) + " "), _c('small', [_vm._v(_vm._s(props.data.phone))])]), _vm._v(" "), _c('p', [_c('small', {
           staticClass: "text-muted"
         }, [_vm._v("\n                        Dibuat pada " + _vm._s(_vm._f("normalize")(props.data.created_at)) + ". Terakhir disunting pada " + _vm._s(_vm._f("normalize")(props.data.updated_at)) + "\n                    ")])])], 2)]
       }
@@ -92910,20 +92897,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n            Nama\n        ")]), _vm._v(" "), _c('text-input', {
     attrs: {
-      "name": "email",
-      "required": true,
-      "label-width": 2,
-      "control-width": 10
-    },
-    model: {
-      value: (_vm.contact_person.email),
-      callback: function($$v) {
-        _vm.contact_person.email = $$v
-      },
-      expression: "contact_person.email"
-    }
-  }, [_vm._v("\n            Email\n        ")]), _vm._v(" "), _c('text-input', {
-    attrs: {
       "name": "phone",
       "label-width": 2,
       "control-width": 10
@@ -92935,20 +92908,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "contact_person.phone"
     }
-  }, [_vm._v("\n            Nomor Telepon\n        ")]), _vm._v(" "), _c('text-input', {
-    attrs: {
-      "name": "line",
-      "label-width": 2,
-      "control-width": 10
-    },
-    model: {
-      value: (_vm.contact_person.line),
-      callback: function($$v) {
-        _vm.contact_person.line = $$v
-      },
-      expression: "contact_person.line"
-    }
-  }, [_vm._v("\n            LINE ID\n        ")]), _vm._v(" "), _c('template', {
+  }, [_vm._v("\n            Nomor Telepon\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"
@@ -94705,20 +94665,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n            Nama\n        ")]), _vm._v(" "), _c('text-input', {
     attrs: {
-      "name": "email",
-      "required": true,
-      "label-width": 2,
-      "control-width": 10
-    },
-    model: {
-      value: (_vm.contact_person.email),
-      callback: function($$v) {
-        _vm.contact_person.email = $$v
-      },
-      expression: "contact_person.email"
-    }
-  }, [_vm._v("\n            Email\n        ")]), _vm._v(" "), _c('text-input', {
-    attrs: {
       "name": "phone",
       "label-width": 2,
       "control-width": 10
@@ -94730,20 +94676,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "contact_person.phone"
     }
-  }, [_vm._v("\n            Nomor Telepon\n        ")]), _vm._v(" "), _c('text-input', {
-    attrs: {
-      "name": "line",
-      "label-width": 2,
-      "control-width": 10
-    },
-    model: {
-      value: (_vm.contact_person.line),
-      callback: function($$v) {
-        _vm.contact_person.line = $$v
-      },
-      expression: "contact_person.line"
-    }
-  }, [_vm._v("\n            LINE ID\n        ")]), _vm._v(" "), _c('template', {
+  }, [_vm._v("\n            Nomor Telepon\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"

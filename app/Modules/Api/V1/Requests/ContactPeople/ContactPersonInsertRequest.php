@@ -28,9 +28,7 @@ class ContactPersonInsertRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:191',
-            'email' => 'required|email|max:191',
-            'phone' => 'string|max:191',
-            'line' => 'string|max:191',
+            'phone' => 'required|string|max:191',
         ];
     }
 }

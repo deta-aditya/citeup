@@ -296,8 +296,6 @@
                             <dl>
                                 <dt>{{ $contact['name'] }}</dt>
                                 <dd>{{ $contact['phone'] }}</dd>
-                                <dd class="email">{{ $contact['email'] }}</dd>
-                                <dd><a href="http://line.me/ti/p/~{{ $contact['line'] }}" target="_blank">{{ $contact['line'] }}</a></dd>
                             </dl>      
                         </div>
                     @endforeach

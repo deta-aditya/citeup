@@ -8,9 +8,8 @@
             <template slot="list" scope="props">
                 <data-panel-list-item :id="props.data.id" :update="{ name: 'Contact Person.Sunting', params: { id: props.data.id }}" :delete="'/contact-people/' + props.data.id">
                     <template slot="title">
-                        {{ props.data.name }} <small>{{ props.data.email }}</small>
+                        {{ props.data.name }} <small>{{ props.data.phone }}</small>
                     </template>
-                    <div>{{ props.data.phone }} | {{ props.data.line }}</div>
                     <p>
                         
                         <small class="text-muted">

@@ -27,10 +27,8 @@ class ContactPersonUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:191',
-            'email' => 'email|max:191',
-            'phone' => 'string|max:191',
-            'line' => 'string|max:191',
+            'name' => 'string|max:191|nullable',
+            'phone' => 'string|max:191|nullable',
         ];
     }
 }
