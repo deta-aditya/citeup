@@ -171,7 +171,7 @@
                         <button type="button" class="btn btn-default" v-if="entry.status === 1" @click="preConfirm(entry, true)">Diskualifikasi</button>
                         <button type="button" class="btn btn-default" v-else-if="entry.status === 0" @click="preConfirm(entry, false)">Aktifkan</button>
                     </div>
-                    <p>Peserta ini terdaftar sejak {{ entry.created_at | normalize }}.</p>
+                    <p>Peserta ini terdaftar sejak {{ entry.users[0].created_at | normalize }}.</p>
                 </div>
             </div>
         </div>

@@ -14315,6 +14315,43 @@ trix-editor .attachment progress {
   font-size: 10.5pt;
 }
 
+.quick-nav.panel-body {
+  padding: 0;
+}
+
+.quick-nav .row {
+  margin: 0;
+}
+
+.quick-nav .quick-nav-item {
+  width: 20%;
+  padding: 25px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.quick-nav .quick-nav-icon {
+  font-size: 28pt;
+  margin-bottom: 5px;
+}
+
+.panel-nav .panel-nav-item {
+  text-align: center;
+}
+
+.panel-nav .panel-nav-item .panel-body {
+  padding: 30px 15px;
+}
+
+.panel-nav .panel-nav-icon {
+  font-size: 40pt;
+  margin-bottom: 20px;
+}
+
+.panel-nav .panel-nav-title {
+  font-size: 13.5pt;
+}
+
 .btn-circle {
   border-radius: 50%;
   padding: 13px 10px;

@@ -11,4 +11,14 @@ function getRelatedEntrants(entryId) {
     })
 }
 
-export { getRelatedEntrants }
+function countOf(activityId) {
+    return new Promise((resolve, reject) => {
+        let data = { activity: activityId }
+
+        Citeup.get('/entries', data).then(response => {
+            resolve(response.data.data.entries.length)
+        })
+    })
+}
+
+export { getRelatedEntrants, countOf }

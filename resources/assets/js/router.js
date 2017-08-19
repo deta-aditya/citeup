@@ -54,7 +54,7 @@ const router = new VueRouter({
         { path: '/profile', name: 'Profil', component: Profile },
         { path: '/profile/update', name: 'Profil.Sunting', component: ProfileUpdate },
         { path: '/change-password', name: 'Ubah Kata Sandi', component: ChangePassword },
-        { path: '/entrants', name: 'Peserta', component: EntrantsIndex },
+        { path: '/entrants', name: 'Peserta', component: EntrantsIndex, props: true },
         { path: '/entrants/:id', name: 'Peserta.Lihat', component: EntrantsView, props: true },
         { path: '/entrants/:id/update', name: 'Peserta.Sunting', component: EntrantsUpdate, props: true },
         { path: '/committees', name: 'Panitia', component: CommitteesIndex },

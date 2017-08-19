@@ -155,7 +155,7 @@
                 </template>
             </div>
             <div class="panel-body panel-foot">
-                Anda terdaftar sebagai peserta {{ entry.activity.name }} sejak {{ entry.created_at | normalize }}.
+                Anda terdaftar sebagai peserta {{ entry.activity.name }} sejak {{ user.created_at | normalize }}.
             </div>
         </div>
     </div>

@@ -38,14 +38,7 @@ class EntryIndexRequest extends ApiIndexRequest
     protected function additional()
     {
         return [
-            'role' => 'exists:roles,id',
-            'name' => 'string',
-            'section' => 'string',
             'activity' => 'exists:activities,id',
-            'activities' => 'string',
-            'stage' => 'int|between:0,5',
-            'keys' => 'string',
-            'alert' => 'exists:alerts,id',
         ];
     }
 }

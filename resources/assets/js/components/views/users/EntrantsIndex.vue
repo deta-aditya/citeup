@@ -14,7 +14,7 @@
         <data-panel ref="dataPanel" v-model="entries" :expandable="true" :deletable="true">
             Daftar Peserta
             <data-panel-addon slot="control">
-                <radio-button name="activity" :list="activities" v-model="activity">
+                <radio-button name="activity" :list="activities" v-model="selected">
                     <template slot="list" scope="props">{{ props.data }}</template>
                 </radio-button>
             </data-panel-addon>
@@ -25,6 +25,7 @@
                     </template>
                     <p class="text-danger" v-if="props.data.status === 0">
                         Peserta ini didiskualifikasi.
+                
                     </p>
                     <p>
                         <small class="text-muted">
@@ -69,12 +70,19 @@
 
         mixins: [UsersMixin, EntrantDisqualifier],
 
+        props: {
+            activity: {
+                type: Number,
+                default: 0,
+            },
+        },
+
         data() {
             return {
                 entries: [],
                 dataPanel: null,
                 activities: ACTIVITIES,
-                activity: 0,
+                selected: this.activity,
             }
         },
 
@@ -91,7 +99,7 @@
         },
 
         watch: {
-            activity(newVal) {
+            selected(newVal) {
                 this.getEntries(newVal)
             },
         },
