@@ -15,11 +15,11 @@
                 <div class="col-sm-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="pull-right">
+                            <div class="pull-right" v-if="user.admin">
                                 <router-link class="btn btn-default" :to="{ name: 'Acara' }">Indeks</router-link>
                                 <router-link class="btn btn-default" :to="{ name: 'Acara.Sunting', params: { id: id }}">Sunting</router-link>
                             </div>
-                            <h1 class="page-title">{{ activity.name }} <small>Acara / #{{ id }}</small></h1>
+                            <h1 class="page-title">{{ activity.name }} <small v-if="user.admin">Acara / #{{ id }}</small></h1>
                         </div>
                         <div class="panel-body">
                             <img :src="activity.icon | assetify" class="pull-left img-circle activity-icon">
@@ -28,7 +28,7 @@
                         </div>
                         <table class="table">
                             <tbody>
-                                <tr>
+                                <tr v-if="user.admin">
                                     <th>Urutan</th><td>{{ activity.order }}</td>
                                 </tr>
                                 <tr>
@@ -42,17 +42,17 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="panel-body">
+                        <div class="panel-body" v-if="user.admin">
                             Dibuat pada {{ activity.created_at | normalize }}, terakhir disunting pada {{ activity.updated_at | normalize }}
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <data-panel ref="dataPanel" v-model="activity.schedules" :deletable="true">
+                    <data-panel ref="dataPanel" v-model="activity.schedules" :deletable="user.admin">
                         Jadwal Acara
-                        <data-panel-addon slot="control" :create="{ name: 'Acara.Lihat.Buat Jadwal' }"></data-panel-addon>
+                        <data-panel-addon slot="control" :create="{ name: 'Acara.Lihat.Buat Jadwal' }" v-if="user.admin"></data-panel-addon>
                         <template slot="list" scope="props">
-                            <data-panel-list-item :id="props.data.id" :update="{ name: 'Acara.Lihat.Sunting Jadwal', params: { id: id, schedule: props.data.id }}" :delete="'/schedules/' + props.data.id">
+                            <data-panel-list-item :id="props.data.id" :update="{ name: 'Acara.Lihat.Sunting Jadwal', params: { id: id, schedule: props.data.id }}" :delete="'/schedules/' + props.data.id" v-if="user.admin">
                                 <template slot="title">{{ props.data.held_at | humanize }}</template>
                                 <p>{{ props.data.description }}</p>
                                 <p>
@@ -60,6 +60,10 @@
                                         <i class="fa fa-pencil-square-o"></i> {{ props.data.updated_at | normalize }}
                                     </small>
                                 </p>
+                            </data-panel-list-item>
+                            <data-panel-list-item :id="props.data.id" :controls="false" :show-id="false" v-else>
+                                <template slot="title">{{ props.data.held_at | humanize }}</template>
+                                <p>{{ props.data.description }}</p>
                             </data-panel-list-item>
                         </template>
                         <template slot="delete-preview" scope="props">
@@ -83,7 +87,7 @@
 
     import moment from 'moment'
     import Citeup from '../../../citeup'
-    import ActivitiesMixin from './ActivitiesMixin'
+    import CurrentUser from '../../mixins/CurrentUser'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
@@ -91,7 +95,7 @@
 
     export default {
 
-        mixins: [ActivitiesMixin],
+        mixins: [CurrentUser],
 
         props: {
 

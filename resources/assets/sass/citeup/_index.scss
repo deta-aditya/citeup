@@ -254,6 +254,34 @@
         }
     }
 
+    .nav-wrapper {
+        padding: 0;
+        font-size: 12pt;
+        border-bottom: none;
+
+        li.active a {
+            border-top: none;            
+            border-bottom: none;
+            background-color: #fff;
+        }
+
+        li.active:first-of-type a {
+            border-left: none;
+        }
+
+        a {
+            margin-bottom: -2px;
+            margin-left: 0;
+            margin-right: 0;
+            @extend %no-border-radius;
+        }
+    }
+
+    .limited-height {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
     .form-control {
         @extend %no-border-radius;
     }
@@ -401,15 +429,16 @@
 .countdown {
 
     .unit-item {
+        display: inline-block;
         margin: 0 15px;
     }
 
     .unit-number {
-        font-size: 40pt;
+        font-size: 30pt;
     }
 
     .unit-info {
-        font-size: 14pt;
+        font-size: 11pt;
     }
 
 }
@@ -484,6 +513,76 @@
 
     .btn-browse {
         margin-right: 10px;
+    }
+
+}
+
+.trackdown-box {
+
+    $completed-background-color: #d9edf7;
+
+    $current-background-color: darken(#428bca, 6.5%);
+    $current-color: #fff;
+
+    &.trackdown-current {
+
+        .panel {
+            background-color: $current-background-color;
+            color: $current-color;
+        }
+
+        .btn-link {
+            color: $current-color;
+        }
+    }
+
+    &.trackdown-completed {
+        
+        .panel {
+            background-color: $completed-background-color;
+        }
+
+    }
+
+    .panel {
+        height: 180px;
+    }
+
+    .trackdown-title {
+        font-size: 10.5pt;
+        text-transform: uppercase;        
+    }
+
+    .trackdown-number {
+        font-size: 28pt;
+        font-weight: 300;
+    }
+
+    .trackdown-standout {
+        font-size: 12pt;
+        font-weight: 300;
+        margin: 5px 0;
+    }
+
+    .trackdown-icon {
+        float: left;
+        margin-right: 25px;
+        font-size: 58pt;
+    }
+    
+    .countdown {
+        
+        .unit-item {
+            margin: 5px 10px;
+        }
+
+        .unit-number {
+            font-size: 24pt;
+        }
+
+        .unit-info {
+            font-size: 10.5pt;
+        }
     }
 
 }

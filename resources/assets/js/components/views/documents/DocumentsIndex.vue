@@ -23,7 +23,7 @@
                 <data-panel-list-item :id="props.data.id" :controls="false" @click="viewDocument(props.data)">
                     <template slot="title">
                         <div class="pull-right">
-                            <span v-if="complete(props.data.users)" class="text-primary">Peserta ini sudah melengkapi dokumennya.</span>
+                            <span v-if="documentsComplete(props.data.users)" class="text-primary">Peserta ini sudah melengkapi dokumennya.</span>
                             <template v-else>Peserta ini belum melengkapi dokumennya.</template>
                         </div>
                         {{ props.data.name }} <small>{{ props.data.activity.name }}</small>
@@ -42,6 +42,7 @@
     import MessageBox from '../../kits/MessageBox.vue'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
+    import DocumentsChecker from '../../mixins/DocumentsChecker'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
     import RadioButton from '../../kits/FormPanel/RadioButton/UngroupedList.vue'
 
@@ -53,6 +54,8 @@
     }
     
     export default {
+
+        mixins: [DocumentsChecker],
 
         data() {
             return {
@@ -115,12 +118,6 @@
                 this.documentView.box = this.$refs.documentView
             },
 
-            complete(users) {
-                return this.reduceDocuments(users).filter(item => {
-                    return item.file === Citeup.defaultImageClean
-                }).length === 0
-            },
-
             viewDocument(entry) {
                 this.documentView.name = entry.name
                 this.documentView.data = this.reduceDocuments(entry.users).map(item => {
@@ -128,14 +125,6 @@
                 })
 
                 this.documentView.box.open()
-            },
-
-            reduceDocuments(users) {
-                return users.map(item => {
-                    return item.documents
-                }).reduce((total, item) => {
-                    return total.concat(item)
-                })
             },
 
         },

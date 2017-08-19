@@ -92,6 +92,7 @@ const dashboardViewModel = new Vue({
 
     created() {
         this.updateConfigFromApi()
+        this.loadStages()
         this.updateRoute(this.$route)
     },
 
@@ -113,6 +114,7 @@ const dashboardViewModel = new Vue({
 
         'updateUserFromApi',
         'updateConfigFromApi',
+        'loadStages',
 
     ]), {
 

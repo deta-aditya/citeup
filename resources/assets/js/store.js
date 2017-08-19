@@ -30,7 +30,9 @@ export default {
             //
         ],
 
-        loading: 100
+        loading: 100,
+
+        stages: [],
 
     },
 
@@ -81,6 +83,10 @@ export default {
             state.loading = payload
         },
 
+        setStages(state, payload) {
+            state.stages = payload.stages;            
+        },
+
     },
 
     actions: {
@@ -94,6 +100,12 @@ export default {
         updateConfigFromApi(context) {
             Citeup.get('/config').then(response => {
                 context.commit('updateConfig', response.data.data.config)
+            })
+        },
+
+        loadStages(context) {
+            Citeup.get('/stages').then(response => {
+                context.commit('setStages', response.data.data)
             })
         },
 

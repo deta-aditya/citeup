@@ -170,6 +170,8 @@ Route::group([
     Route::get('/html-contents/{content}/edits', 'HtmlContentController@edits');
     
     Route::get('/edits', 'EditController@index');
+
+    Route::get('/stages', 'StageController@index');
     
     /*
      * Storage Routes

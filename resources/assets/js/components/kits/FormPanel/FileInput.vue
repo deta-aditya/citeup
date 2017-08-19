@@ -19,7 +19,7 @@
                 </div>
                 <div class="button-container">
                     <button type="button" class="btn btn-default btn-browse" @click="$refs.realInput.click()" v-show="fileIsMutable">Browse</button>
-                    <button type="button" class="btn btn-link" @click="removeFile" v-show="fileIsFinished">Remove File</button>
+                    <button type="button" class="btn btn-link" @click="removeFile" v-show="fileIsFinished">Change File</button>
                     {{ filePath | nameOnly }}
                 </div>
             </div>
@@ -36,7 +36,7 @@
             :disabled="disabled"
             @input="prepareInput($event.target)">
 
-        <message-box ref="messageBox" :name="'cropbox-' + name" v-if="acceptIsImage && crop">
+        <message-box ref="messageBox" :name="'cropbox-' + name" v-if="acceptIsImage && crop" :dismissable="false">
             <span slot="title">Crop Image</span>
             <div class="crop-container">
                 <img ref="croppable">

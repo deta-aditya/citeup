@@ -97,8 +97,8 @@
             },
 
             shorten(value) {
-                if (value !== undefined && value.length > 300) {
-                    return value.substring(0, 299) + '...'
+                if (value !== undefined && value.length > 100) {
+                    return value.substring(0, 99) + '...'
                 }
 
                 return value

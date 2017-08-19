@@ -10,11 +10,11 @@
         <div class="form-panel">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="pull-right">
+                    <div class="pull-right" v-if="user.admin">
                         <router-link class="btn btn-default" :to="{ name: 'Berita' }">Indeks</router-link>
                         <router-link class="btn btn-default" :to="{ name: 'Berita.Sunting', params: { id: id }}">Sunting</router-link>
                     </div>
-                    <h1 class="page-title">{{ news.title }} <small>Berita / #{{ id }}</small></h1>
+                    <h1 class="page-title">{{ news.title }} <small v-if="user.admin">Berita / #{{ id }}</small></h1>
                 </div>
                 <div class="panel-body text-center">
                     <img :src="news.picture | assetify" class="news-picture">
@@ -33,12 +33,12 @@
 <script>
 
     import moment from 'moment'
-    import NewsMixin from './NewsMixin'
     import Citeup from '../../../citeup'
+    import CurrentUser from '../../mixins/CurrentUser'
 
     export default {
 
-        mixins: [NewsMixin],
+        mixins: [CurrentUser],
 
         props: {
 

@@ -17,7 +17,7 @@
                     <h1 class="page-title">Kelola Dokumen Saya</h1>
                 </div>
                 <div class="panel-body">
-                    Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'penyisihan' : 'seminar' }}.
+                    Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'seminar' : 'penyisihan' }}.
                 </div>
             </div>
         </div>

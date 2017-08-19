@@ -1,22 +1,18 @@
 
 <template>
-    <div>
-        Halo!
-    </div>
+    <entrant-dashboard v-if="user.entrant"></entrant-dashboard>
 </template>
 
 <script>
 
-    import { mapState } from 'vuex'
-
-    const STATES = [
-        'config'
-    ]
+    import CurrentUser from '../mixins/CurrentUser'
+    import EntrantDashboard from './dashboard/EntrantDashboard.vue'
 
     export default {
-        
-        computed: mapState(STATES),
-
+        mixins: [CurrentUser],
+        components: {
+            'entrant-dashboard': EntrantDashboard,
+        },
     }
 
 </script>

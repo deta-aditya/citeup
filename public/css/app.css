@@ -12474,6 +12474,9 @@ trix-editor .attachment progress {
   #front-welcometron .notice {
     font-size: 14pt;
   }
+  #front-welcometron .countdown .unit-item {
+    margin: 0 5px;
+  }
   #front-welcometron .countdown .unit-number {
     width: 100px;
     text-align: center;
@@ -13868,7 +13871,7 @@ trix-editor .attachment progress {
   margin-left: 20px;
 }
 
-#about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
+#about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .nav-wrapper a, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
   border-radius: 0;
 }
 
@@ -14073,6 +14076,33 @@ trix-editor .attachment progress {
   border-right: none;
 }
 
+.form-panel .nav-wrapper {
+  padding: 0;
+  font-size: 12pt;
+  border-bottom: none;
+}
+
+.form-panel .nav-wrapper li.active a {
+  border-top: none;
+  border-bottom: none;
+  background-color: #fff;
+}
+
+.form-panel .nav-wrapper li.active:first-of-type a {
+  border-left: none;
+}
+
+.form-panel .nav-wrapper a {
+  margin-bottom: -2px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-panel .limited-height {
+  height: 400px;
+  overflow-y: scroll;
+}
+
 .data-panel .panel-body {
   border-bottom: none;
   padding: 18px;
@@ -14173,15 +14203,16 @@ trix-editor .attachment progress {
 }
 
 .countdown .unit-item {
+  display: inline-block;
   margin: 0 15px;
 }
 
 .countdown .unit-number {
-  font-size: 40pt;
+  font-size: 30pt;
 }
 
 .countdown .unit-info {
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 .draggable-list .draggable-list-item small {
@@ -14231,6 +14262,57 @@ trix-editor .attachment progress {
 
 .file-uploader-group .btn-browse {
   margin-right: 10px;
+}
+
+.trackdown-box.trackdown-current .panel {
+  background-color: #337ab7;
+  color: #fff;
+}
+
+.trackdown-box.trackdown-current .btn-link {
+  color: #fff;
+}
+
+.trackdown-box.trackdown-completed .panel {
+  background-color: #d9edf7;
+}
+
+.trackdown-box .panel {
+  height: 180px;
+}
+
+.trackdown-box .trackdown-title {
+  font-size: 10.5pt;
+  text-transform: uppercase;
+}
+
+.trackdown-box .trackdown-number {
+  font-size: 28pt;
+  font-weight: 300;
+}
+
+.trackdown-box .trackdown-standout {
+  font-size: 12pt;
+  font-weight: 300;
+  margin: 5px 0;
+}
+
+.trackdown-box .trackdown-icon {
+  float: left;
+  margin-right: 25px;
+  font-size: 58pt;
+}
+
+.trackdown-box .countdown .unit-item {
+  margin: 5px 10px;
+}
+
+.trackdown-box .countdown .unit-number {
+  font-size: 24pt;
+}
+
+.trackdown-box .countdown .unit-info {
+  font-size: 10.5pt;
 }
 
 .btn-circle {

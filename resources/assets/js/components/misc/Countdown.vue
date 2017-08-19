@@ -1,14 +1,6 @@
 
 <style lang="scss" scoped>
 
-    .countdown {
-
-        .unit-item {
-            display: inline-block;
-            margin: 0 5px;
-        }
-
-    }
 
 </style>
 
@@ -42,13 +34,6 @@
 
     export default {
 
-        data() {
-            return {
-                timer: null,
-                duration: null,
-            }
-        },
-
         props: {
 
             done: {
@@ -66,6 +51,13 @@
                 default: true,
             },
 
+        },
+
+        data() {
+            return {
+                timer: null,
+                duration: null,
+            }
         },
 
         computed: {
@@ -137,19 +129,15 @@
         },
 
         created() {
-
             this.interval = setInterval(this.setDuration, this.tick)
-
         },
 
         methods: {
-
             setDuration() {
                 this.duration = moment.duration(
                     moment(this.done).diff(moment())
                 )
             },
-
         },
 
     }
