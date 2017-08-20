@@ -34,10 +34,12 @@
 
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    {{-- @unless (value(config('web.stage'))->name === 'Pra-Pendaftaran' || value(config('web.stage'))->name === 'Paska Acara') --}}
+                    @unless ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION))
                         <li class="{{ request()->is('login') ? 'active' : '' }} login-link-wrapper-first"><a class="login-link" href="{{ route('login.form') }}">Login</a></li>
-                        <li class="{{ request()->is('register*') ? 'active' : '' }} login-link-wrapper-last"><a class="login-link" href="{{ route('register.index') }}">Daftar</a></li>
-                    {{-- @endunless --}}
+                        @unless ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_POST_EVENT))
+                            <li class="{{ request()->is('register*') ? 'active' : '' }} login-link-wrapper-last"><a class="login-link" href="{{ route('register.index') }}">Daftar</a></li>
+                        @endunless
+                    @endunless
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

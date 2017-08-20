@@ -1,119 +1,225 @@
 
 #front-welcometron {
 
-    $welcometron-bg: #2a2a2a;
-    $welcometron-color: $light-text-color;
+    .pre-registration {
 
-    height: 450px;
-    background-color: $welcometron-bg;
-    background-image: url(../images/web/bg_welcometron.png);
-    background-position-x: center; 
-    background-position-y: bottom;
-    background-repeat: no-repeat;
-    background-size: 500px;
+        $welcometron-bg: #2a2a2a;
+        $welcometron-color: $light-text-color;
 
-    .logo-placeholder {
-        margin-top: 60px;
+        height: 450px;
+        background-color: $welcometron-bg;
+        background-image: url(../images/web/bg_welcometron.png);
+        background-position-x: center; 
+        background-position-y: bottom;
+        background-repeat: no-repeat;
+        background-size: 500px;
 
-        img {
-            width: 200px;
-        }
-    }
+        .logo-placeholder {
+            margin-top: 60px;
 
-    .text-placeholder {
-        margin-top: 140px;
-        color: #161616;
-        font-weight: 700;
-    }
-
-    .title {
-        width: 500px;
-    }
-
-    .notice {
-        margin-bottom: 0; 
-        font-size: 9pt;
-    }
-
-    .countdown {
-
-        .unit-number {
-            width: 35px;
-            text-align: center;
-            font-size: 20pt;
+            img {
+                width: 200px;
+            }
         }
 
-        .unit-info {
+        .text-placeholder {
+            margin-top: 140px;
+            color: #161616;
+            font-weight: 700;
+        }
+
+        .title {
+            width: 500px;
+        }
+
+        .notice {
+            margin-bottom: 0; 
             font-size: 9pt;
         }
 
-    }
-
-    @media (min-width: $screen-xs-min) {
-
-        height: 550px;
-        background-size: 650px;
-        
-        .logo-placeholder {
-            img {
-                width: 300px;
-            }
-        }
-
-        .text-placeholder {
-            margin-top: 155px;
-        }
-
-        .notice {
-            font-size: 11pt;
-        }
-
         .countdown {
 
             .unit-number {
-                width: 60px;
-                font-size: 30pt;
+                width: 35px;
+                text-align: center;
+                font-size: 20pt;
             }
 
             .unit-info {
+                font-size: 9pt;
+            }
+
+        }
+
+        @media (min-width: $screen-xs-min) {
+
+            height: 550px;
+            background-size: 650px;
+            
+            .logo-placeholder {
+                img {
+                    width: 300px;
+                }
+            }
+
+            .text-placeholder {
+                margin-top: 155px;
+            }
+
+            .notice {
                 font-size: 11pt;
             }
 
+            .countdown {
+
+                .unit-number {
+                    width: 60px;
+                    font-size: 30pt;
+                }
+
+                .unit-info {
+                    font-size: 11pt;
+                }
+
+            }
+
+        }
+
+        @media (min-width: $screen-sm-min) {
+
+            height: 750px;
+            background-size: auto;
+
+            .text-placeholder {
+                margin-top: 225px;
+            }
+
+            .notice {
+                font-size: 14pt;
+            }
+
+            .countdown {
+
+                .unit-item {
+                    margin: 0 5px;
+                }
+
+                .unit-number {
+                    width: 100px;
+                    text-align: center;
+                    font-size: 48pt;
+                }
+
+                .unit-info {
+                    font-size: 12pt;
+                }
+
+            }
+            
         }
 
     }
 
-    @media (min-width: $screen-sm-min) {
+    .registration-competition {
 
-        height: 750px;
-        background-size: auto;
+        $welcometron-bg: $signature-lighter;
+        $welcometron-color: $signature-dark;
 
-        .text-placeholder {
-            margin-top: 225px;
+        background-color: $welcometron-bg;
+        background-image: url(../images/web/bg_welcometron_bottom.png);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        background-size: 900px;
+
+        .logo-holder {
+            display: none;
+            position: absolute;
+            width: 100%;
+            margin-top: 60px;
+            padding: 0 20px;
+
+            img {
+                width: 150px;
+            }
         }
 
-        .notice {
-            font-size: 14pt;
+        .welcome-text {
+            padding: 20px 0;
+            font-size: 10pt;
+            font-weight: 600;
+            background-image: url(../images/web/text_bg.png);
+            background-repeat: no-repeat;
+            background-position: center -1px;
+            background-size: 300px;
+            color: $welcometron-color;
         }
 
-        .countdown {
-
-            .unit-item {
-                margin: 0 5px;
-            }
-
-            .unit-number {
-                width: 100px;
-                text-align: center;
-                font-size: 48pt;
-            }
-
-            .unit-info {
-                font-size: 12pt;
-            }
-
+        .illustration {
+            width: 100%;
+            margin-left: -10px;
+            margin-top: 10px;
+            margin-bottom: 50px;
         }
-        
+
+        @media (min-width: $screen-xs-min) {
+            .welcome-text {
+                padding: 30px 0;
+                background-size: 410px;
+
+                div:first-child {
+                    font-size: 12pt;
+                }
+
+                div:nth-child(2) {
+                    font-size: 15pt;
+                }
+
+                div:nth-child(3) {
+                    font-size: 13pt;
+                }
+            }
+
+            .illustration {
+                width: 475px;
+            }
+        }
+
+        @media (min-width: $screen-sm-min) {
+            .illustration {
+                width: 700px;
+                margin-left: -20px;
+                margin-top: 20px;
+            }
+
+            .logo-holder {
+                display: block;
+            }
+        }
+
+        @media (min-width: $screen-md-min) {
+            .logo-holder {
+                padding: 0 80px;
+
+                img {
+                    width: 200px;
+                }
+            }
+        }
+
+        @media (min-width: $screen-lg-min) {
+            
+            .logo-holder {
+                img {
+                    width: 250px;
+                }
+            }
+
+            .illustration {
+                width: 912px;
+                margin-left: -40px;
+            }
+        }
+
     }
 
 }

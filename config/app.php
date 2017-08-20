@@ -189,6 +189,7 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Modules\Providers\SettingsServiceProvider::class,
+        App\Modules\Providers\CurrentStageServiceProvider::class,
         App\Modules\Providers\ComposerServiceProvider::class,
     ],
 

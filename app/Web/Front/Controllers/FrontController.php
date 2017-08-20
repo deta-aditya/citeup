@@ -8,6 +8,7 @@ use App\Modules\Electrons\ContactPeople\ContactPersonService as ContactPeople;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\ScheduleService as Schedules;
 use App\Modules\Electrons\Sponsors\SponsorService as Sponsors;
+use App\Modules\Electrons\Stages\StageService as Stages;
 use App\Modules\Electrons\News\NewsService as News;
 use App\Modules\Electrons\Faqs\FaqService as Faqs;
 
@@ -49,11 +50,11 @@ class FrontController extends Controller
     protected $contacts;
 
     /**
-     * The navigation theme.
+     * The stages service instance.
      *
-     * @var string
+     * @var Stages
      */
-    protected $navtheme = 'dark';
+    protected $stages;
 
     /**
      * The view name.
@@ -93,13 +94,14 @@ class FrontController extends Controller
      * @return void
      */
     public function __construct(Activities $activities, Faqs $faqs, News $news, 
-        Sponsors $sponsors, ContactPeople $contacts)
+        Sponsors $sponsors, ContactPeople $contacts, Stages $stages)
     {
         $this->activities = $activities;
         $this->faqs = $faqs;
         $this->news = $news;
         $this->sponsors = $sponsors;
         $this->contacts = $contacts;
+        $this->stages = $stages;
     }
 
     /**
@@ -127,7 +129,20 @@ class FrontController extends Controller
             'sponsors'      => $this->sponsors->getMultiple(['type' => Sponsors::TYPE_SPONSOR]),
             'media_partners'=> $this->sponsors->getMultiple(['type' => Sponsors::TYPE_MEDIA_PARTNER]),
             'contact_people'=> $this->contacts->multiple(['take' => 4]),
-            'nav'           => $this->navtheme,
+            'nav'           => $this->navTheme(Stages::current()->id),
         ];
+    }
+
+    /**
+     * Get the nav theme based on the given stage.
+     */
+    protected function navTheme($stage) 
+    {
+        switch ($stage) {
+            case Stages::STAGE_PRE_REGISTRATION:
+                return 'dark';
+            default:
+                return 'white';
+        }
     }
 }

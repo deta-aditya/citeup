@@ -4,6 +4,7 @@ namespace App\Web\Front\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Modules\Electrons\Stages\StageService;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 
 class ActivitiesController extends Controller
@@ -105,11 +106,11 @@ class ActivitiesController extends Controller
      */
     protected function getRegsCondition()
     {
-        $stage = value(config('web.stage'))->name;
+        $stage = resolve('stage.current');
 
         return [
-            'competition' => $stage === 'Pendaftaran',
-            'non_competition' => ! ($stage === 'Pra-Pendaftaran' || $stage === 'Paska Acara'),
+            'competition' => $stage->isOn(StageService::STAGE_REGISTRATION),
+            'non_competition' => ! ($stage->isOn(StageService::STAGE_PRE_REGISTRATION) || $stage->isOn(StageService::STAGE_POST_EVENT)),
         ];
     }
 

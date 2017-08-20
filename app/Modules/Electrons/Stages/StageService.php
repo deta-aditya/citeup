@@ -11,6 +11,38 @@ use Carbon\Carbon;
 class StageService extends Service
 {
     /**
+     * The before registration stage.
+     */
+    const STAGE_PRE_REGISTRATION = 1;
+
+    /**
+     * The competition registration stage.
+     */
+    const STAGE_REGISTRATION = 2;
+
+    /**
+     * The before elimination - after registration stage. 
+     * Also elimination stage for lomba desain.
+     */
+    const STAGE_PRE_ELIMINATION = 3;
+
+    /**
+     * The elimination stage for lomba logika.
+     */
+    const STAGE_ELIMINATION = 4;
+
+    /**
+     * The after elimination and final stage.
+     * Finishes after the main event finishes.
+     */
+    const STAGE_FINAL = 5;
+
+    /**
+     * The post event stage.
+     */
+    const STAGE_POST_EVENT = 6;
+
+    /**
      * The main model for the service.
      *
      * @var Stage

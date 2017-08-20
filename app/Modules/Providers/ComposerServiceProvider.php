@@ -17,6 +17,8 @@ class ComposerServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) use ($settings) {
             $view->with('settings', $settings);
+
+            $view->with('stage', $this->app->make('stage.current'));
         });
     }
 }

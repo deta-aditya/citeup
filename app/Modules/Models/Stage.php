@@ -17,6 +17,13 @@ class Stage extends Model
     ];
 
     /**
+     * Check whether the stage is currently in the given argument ID.
+     */
+    public function isOn($id) {
+        return $this->id === $id;
+    }
+
+    /**
      * Scope a query to only include the current scope.
      *
      * @param  Builder  $query

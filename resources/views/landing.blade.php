@@ -3,20 +3,43 @@
 @section('content')
 
 @if ($settings->show->welcometron)
-<!-- Welcome Carousel -->
+<!-- Welcometron -->
 <div id="front-welcometron">
 
-    <div class="container text-center">
-        <div class="logo-placeholder">
-            <img src="{{ asset('images/web/logo_white_lg.png') }}">
+    @if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION))
+        <div class="pre-registration">
+            <div class="container text-center">
+                <div class="logo-placeholder">
+                    <img src="{{ asset('images/web/logo_white_lg.png') }}">
+                </div>
+                <div class="text-placeholder">
+                    @if ($settings->countdown->active)
+                        <p class="notice">{{ $settings->countdown->text }}</p>
+                        <countdown done="{{ $settings->countdown->off }}"></countdown>
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="text-placeholder">
-            @if ($settings->countdown->active)
-                <p class="notice">{{ $settings->countdown->text }}</p>
-                <countdown done="{{ $settings->countdown->off }}"></countdown>
-            @endif
+    @else
+        <div class="registration-competition">
+            <div class="clouds-holder">
+                <div class="container logo-holder">
+                    <img src="{{ asset('images/web/focs_white_sm.png') }}" class="pull-left">
+                    <img src="{{ asset('images/web/logoup_white_sm.png') }}" class="pull-right">
+                </div>
+                <div class="welcome-text">
+                    <div class="container text-center">
+                        <div>Program Studi Ilmu Komputer</div>
+                        <div>Universitas Pertamina</div>
+                        <div>Mempersembahkan</div>
+                    </div>
+                </div>
+                <div class="container text-center">
+                    <img src="{{ asset('images/web/main_illustration.png') }}" class="illustration">
+                </div>
+            </div>
         </div>
-    </div>
+    @endif
 
 </div>
 @endif
@@ -330,6 +353,15 @@
                 @unless (is_null($sponsor->url)) </a> @endunless
             @endforeach
         </div>
+    </div>
+</div>
+@endif
+
+@if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_REGISTRATION))
+<div id="front-reg-button">
+    <div class="container">
+        <p>Ayo daftarkan dirimu sekarang juga!</p>
+        <button type="button" class="btn btn-lg btn-default">Daftar</button>
     </div>
 </div>
 @endif

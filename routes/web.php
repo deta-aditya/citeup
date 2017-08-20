@@ -55,7 +55,7 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Auth\Controllers'], function () {
 
-        Route::get('/secretloginroute', 'LoginController@form')->name('login.form');
+        Route::get('/login', 'LoginController@form')->name('login.form');
         Route::post('/login', 'LoginController@login')->name('login');
         Route::get('/register/{id}/{name?}', 'RegisterController@form')->name('register.form');
         Route::get('/register', 'RegisterController@index')->name('register.index');
