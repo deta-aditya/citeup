@@ -3,9 +3,13 @@
  * This contains the whole application global state.
  */
 
+import Vue from 'vue'
+import Vuex from 'vuex'
 import Citeup from './citeup';
 
-export default {
+Vue.use(Vuex)
+
+export default new Vuex.Store({
     
     state: {
 
@@ -34,6 +38,11 @@ export default {
 
         stages: [],
 
+        error: {
+            status: 0,
+            messages: {},            
+        },
+
     },
 
     getters: {
@@ -52,6 +61,12 @@ export default {
 
         isLoading(state) {
             return state.loading < 100
+        },
+
+        getErrorMessagesOf(state) {
+            return function(name) {
+                return state.error.messages[name] || []
+            }
         },
 
     },
@@ -87,6 +102,17 @@ export default {
             state.stages = payload.stages;            
         },
 
+        setError(state, payload) {
+            state.error = payload
+        },
+
+        clearError(state) {
+            state.error = {
+                status: 0,
+                messages: [],            
+            }
+        },
+
     },
 
     actions: {
@@ -110,4 +136,4 @@ export default {
         },
 
     }
-};
+});

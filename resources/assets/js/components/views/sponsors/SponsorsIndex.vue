@@ -2,7 +2,7 @@
 <template>
     <div id="sponsors-index">
 
-        <data-panel ref="dataPanel" v-model="sponsors" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="sponsors" :expandable="true" :deletable="true">
             Daftar Sponsor
             <data-panel-addon slot="control" :refresh="getSponsors" :create="{ name: 'Sponsor.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">

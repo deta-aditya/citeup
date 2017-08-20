@@ -2,7 +2,7 @@
 <template>
     <div id="news-index">
 
-        <data-panel ref="dataPanel" v-model="news" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="news" :expandable="true" :deletable="true">
             Daftar Berita
             <data-panel-addon slot="control" :refresh="getFaqs" :create="{ name: 'Berita.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">

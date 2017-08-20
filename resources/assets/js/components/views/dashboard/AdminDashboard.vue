@@ -111,7 +111,7 @@
                             <h2 class="page-title small-title">Pendaftaran Akan Ditutup Dalam:</h2>
                         </div>
                         <div class="panel-body text-center">
-                            <countdown :done="stageGetter[$options.STAGE_REGISTRATION].finished_at"></countdown>
+                            <countdown :done="registrationDone"></countdown>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,9 @@
         },
 
         computed: {
-            //
+            registrationDone() {
+                return this.stageGetter[this.$options.STAGE_REGISTRATION].finished_at || moment().format('YYYY-MM-DD HH:mm:ss')
+            }
         },
 
         filters: {

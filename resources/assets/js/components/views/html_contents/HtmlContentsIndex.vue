@@ -2,7 +2,7 @@
 <template>
     <div id="html-contents-index">
 
-        <data-panel ref="dataPanel" v-model="html_contents" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="html_contents" :expandable="true" :deletable="true">
             Daftar Konten
             <data-panel-addon slot="control" :refresh="getHtmlContents" :create="{ name: 'Konten.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">

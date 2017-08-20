@@ -3,7 +3,10 @@
  * This contains the router object and its configurations.
  */
 
+import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
 
 import Root from './components/views/Root.vue';
 import Config from './components/views/Config.vue';
@@ -20,7 +23,6 @@ import CommitteesView from './components/views/users/CommitteesView.vue';
 import Documents from './components/views/documents/Documents.vue';
 import ActivitiesIndex from './components/views/activities/ActivitiesIndex.vue';
 import ActivitiesView from './components/views/activities/ActivitiesView.vue';
-import ActivitiesCreate from './components/views/activities/ActivitiesCreate.vue';
 import ActivitiesUpdate from './components/views/activities/ActivitiesUpdate.vue';
 import SchedulesCreate from './components/views/activities/schedules/SchedulesCreate.vue';
 import SchedulesUpdate from './components/views/activities/schedules/SchedulesUpdate.vue';
@@ -43,7 +45,6 @@ import HtmlContentsCreate from './components/views/html_contents/HtmlContentsCre
 import HtmlContentsUpdate from './components/views/html_contents/HtmlContentsUpdate.vue';
 import Logout from './components/views/Logout.vue';
 import ErrorPage from './components/views/Error.vue';
-import CompleteProfile from './components/views/profiles/CompleteProfile.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -58,23 +59,22 @@ const router = new VueRouter({
         { path: '/entrants/:id', name: 'Peserta.Lihat', component: EntrantsView, props: true },
         { path: '/entrants/:id/update', name: 'Peserta.Sunting', component: EntrantsUpdate, props: true },
         { path: '/committees', name: 'Panitia', component: CommitteesIndex },
+        { path: '/committees/create', name: 'Panitia.Buat', component: CommitteesCreate },
         { path: '/committees/:id', name: 'Panitia.Lihat', component: CommitteesView, props: true },
         { path: '/committees/:id/update', name: 'Panitia.Sunting', component: CommitteesUpdate, props: true },
-        { path: '/committees/create', name: 'Panitia.Buat', component: CommitteesCreate },
         { path: '/documents', name: 'Dokumen', component: Documents },
         { path: '/activities', name: 'Acara', component: ActivitiesIndex },
         { path: '/activities/:id', name: 'Acara.Lihat', component: ActivitiesView, props: true },
         { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },
         { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: SchedulesUpdate, props: true },
         { path: '/activities/:id/update', name: 'Acara.Sunting', component: ActivitiesUpdate, props: true },
-        { path: '/activities/create', name: 'Acara.Buat', component: ActivitiesCreate },
         { path: '/faqs', name: 'FAQ', component: FaqsIndex },
         { path: '/faqs/create', name: 'FAQ.Buat', component: FaqsCreate },
         { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: FaqsUpdate, props: true },
         { path: '/news', name: 'Berita', component: NewsIndex },
+        { path: '/news/create', name: 'Berita.Buat', component: NewsCreate },
         { path: '/news/:id', name: 'Berita.Lihat', component: NewsView, props: true },
         { path: '/news/:id/update', name: 'Berita.Sunting', component: NewsUpdate, props: true },
-        { path: '/news/create', name: 'Berita.Buat', component: NewsCreate },
         { path: '/sponsors', name: 'Sponsor', component: SponsorsIndex },
         { path: '/sponsors/create', name: 'Sponsor.Buat', component: SponsorsCreate },
         { path: '/sponsors/:id/update', name: 'Sponsor.Sunting', component: SponsorsUpdate, props: true },
@@ -82,11 +82,10 @@ const router = new VueRouter({
         { path: '/contact-people/:id/update', name: 'Contact Person.Sunting', component: ContactPeopleUpdate, props: true },
         { path: '/contact-people/create', name: 'Contact Person.Buat', component: ContactPeopleCreate },
         { path: '/html-contents', name: 'Konten', component: HtmlContentsIndex },
+        { path: '/html-contents/create', name: 'Konten.Buat', component: HtmlContentsCreate },
         { path: '/html-contents/:id', name: 'Konten.Lihat', component: HtmlContentsView, props: true },
         { path: '/html-contents/:id/update', name: 'Konten.Sunting', component: HtmlContentsUpdate, props: true },
-        { path: '/html-contents/create', name: 'Konten.Buat', component: HtmlContentsCreate },
         { path: '/error/:status', name: 'Error', component: ErrorPage, props: true },
-        { path: '/finishing', name: 'Pelengkapan Profil', component: CompleteProfile },
         { path: '/logout', name: 'Logout', component: Logout },
         { path: '*', component: ErrorPage, props: { status: 404 }}
     ]

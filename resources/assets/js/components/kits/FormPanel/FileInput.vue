@@ -305,6 +305,10 @@
             },
 
             receiveValue(value) {
+                if (this.acceptIsImage && value === Citeup.defaultImageClean) {
+                    return
+                }
+
                 this.status = FILE_FINISHED;
                 this.filePath = value;
 

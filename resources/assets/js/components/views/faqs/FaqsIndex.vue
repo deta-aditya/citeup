@@ -2,7 +2,7 @@
 <template>
     <div id="faqs-index">
 
-        <data-panel ref="dataPanel" v-model="faqs" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="faqs" :expandable="true" :deletable="true">
             Daftar FAQ
             <data-panel-addon slot="control" :refresh="getFaqs" :create="{ name: 'FAQ.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">

@@ -2,9 +2,9 @@
 <template>
     <div id="activities-index">
 
-        <data-panel ref="dataPanel" v-model="activities" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="activities" :expandable="true" :deletable="true">
             Daftar Acara
-            <data-panel-addon slot="control" :refresh="getActivities" :create="{ name: 'Acara.Buat' }"></data-panel-addon>
+            <data-panel-addon slot="control" :refresh="getActivities"></data-panel-addon>
             <template slot="list" scope="props">
                 <data-panel-list-item :id="props.data.id" :update="{ name: 'Acara.Sunting', params: { id: props.data.id }}" :delete="props.data.id > 3 ? '/activities/' + props.data.id : false">
                     <template slot="title">

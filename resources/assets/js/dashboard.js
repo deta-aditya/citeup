@@ -7,14 +7,8 @@
 
 require('./bootstrap');
 
-import Citeup from './citeup';
-
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VueRouter from 'vue-router';
-
-Vue.use(Vuex);
-Vue.use(VueRouter);
 
 /**
  * Components to be available in the root application.
@@ -28,10 +22,8 @@ import Spacer from './components/misc/Spacer.vue';
 /**
  * Import the store and router here.
  */
-import storeData from './store.js';
+import store from './store.js'
 import router from './router.js';
-
-const store = new Vuex.Store(storeData);
 
 /**
  * Initialize the before each hook.

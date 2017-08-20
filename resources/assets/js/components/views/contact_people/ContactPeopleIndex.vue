@@ -2,7 +2,7 @@
 <template>
     <div id="contact-people-index">
 
-        <data-panel ref="dataPanel" v-model="contact_people" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="contact_people" :expandable="true" :deletable="true">
             Daftar <i>Contact Person</i>
             <data-panel-addon slot="control" :refresh="getFaqs" :create="{ name: 'Contact Person.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">

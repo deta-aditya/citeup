@@ -28,7 +28,7 @@ class UserInsertRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:users',
-            'password' => 'string|confirmed',
+            'password' => 'required|string|confirmed',
             'role' => 'required|int|exists:roles,id',
             'name' => 'required|string|max:191',
             'entry' => 'required_if:role,'. RoleService::ROLE_ENTRANT .'|int|exists:entries,id',
