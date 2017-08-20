@@ -8,50 +8,47 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </div>
         </message-box>
-        <div class="form-panel">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-primary" @click="save">Simpan Perubahan</button>
-                    </div>
-                    <h1 class="page-title">Kelola Dokumen Saya</h1>
+        <cloaked-panel ref="header">
+            <div class="panel-body">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" @click="save">Simpan Perubahan</button>
                 </div>
-                <div class="panel-body">
-                    Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'seminar' : 'penyisihan' }}.
-                </div>
+                <h1 class="page-title">Kelola Dokumen Saya</h1>
             </div>
-        </div>
-        <div class="form-panel">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2 class="page-title small-title">
-                                <i>Scan</i> Kartu Tanda {{ seminar ? 'Penduduk' : 'Pelajar' }}
-                            </h2>
-                        </div>
-                        <div class="panel-body" v-for="(doc, index) in idCards">
-                            <h3 class="subtitle" v-if="multiuser">{{ entry.users.find(item => item.id === doc.user_id).name }}</h3>
-                            <file-input :name="'user-'+ doc.id +'-id-card'" :object-id="entry.id" object-type="document" :crop="false" :store-immediately="true" accept="image/*" v-model="idCards[index].file">
-                                Unggah Dokumen
-                            </file-input>
-                        </div>
+            <div class="panel-body">
+                Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'seminar' : 'penyisihan' }}.
+            </div>
+        </cloaked-panel>
+        </cloaked-panel>
+        <div class="row">
+            <div class="col-sm-6">
+                <cloaked-panel ref="idCards">
+                    <div class="panel-body">
+                        <h2 class="page-title small-title">
+                            <i>Scan</i> Kartu Tanda {{ seminar ? 'Penduduk' : 'Pelajar' }}
+                        </h2>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2 class="page-title small-title">
-                                <i>Scan</i> Bukti Pembayaran Pendaftaran Lomba
-                            </h2>
-                        </div>
-                        <div class="panel-body">
-                            <file-input :name="'user-'+ user.id +'-payment-proof'" :object-id="entry.id" object-type="document" :crop="false" :store-immediately="true" accept="image/*" v-model="paymentProof.file">
-                                Unggah Dokumen
-                            </file-input>
-                        </div>
+                    <div class="panel-body" v-for="(doc, index) in idCards">
+                        <h3 class="subtitle" v-if="multiuser">{{ entry.users.find(item => item.id === doc.user_id).name }}</h3>
+                        <file-input :name="'user-'+ doc.id +'-id-card'" :object-id="entry.id" object-type="document" :crop="false" :store-immediately="true" accept="image/*" v-model="idCards[index].file">
+                            Unggah Dokumen
+                        </file-input>
                     </div>
-                </div>
+                </cloaked-panel>
+            </div>
+            <div class="col-sm-6">
+                <cloaked-panel ref="paymentProof">
+                    <div class="panel-body">
+                        <h2 class="page-title small-title">
+                            <i>Scan</i> Bukti Pembayaran Pendaftaran Lomba
+                        </h2>
+                    </div>
+                    <div class="panel-body">
+                        <file-input :name="'user-'+ user.id +'-payment-proof'" :object-id="entry.id" object-type="document" :crop="false" :store-immediately="true" accept="image/*" v-model="paymentProof.file">
+                            Unggah Dokumen
+                        </file-input>
+                    </div>
+                </cloaked-panel>
             </div>
         </div>
     </div>
@@ -62,6 +59,7 @@
     import _ from 'lodash'
     import { mapState } from 'vuex'
     import Citeup from '../../../citeup'
+    import CloakedPanel from '../../misc/CloakedPanel'
     import MessageBox from '../../kits/MessageBox.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
 
@@ -108,7 +106,20 @@
         },
 
         mounted() {
+            this.$refs.idCards.cloaking = true
+            this.$refs.paymentProof.cloaking = true
             this.prepareComponent()
+        },
+
+        watch: {
+            idCards(newVal) {
+                this.$refs.idCards.cloaking = 
+                    ! ((newVal.length === this.entry.users.length) && (this.entry.id > 0))
+            },
+            paymentProof(newVal) {
+                console.log(newVal)
+                this.$refs.paymentProof.cloaking = newVal.id === 0
+            }
         },
 
         methods: {
@@ -127,7 +138,6 @@
             },
 
             getDocuments(userId) {
-
                 Citeup.get('/documents', {user: userId}).then(response => {
                     let idCardIndex = response.data.data.documents.findIndex(item => item.type === 0)
                     let paymentProofIndex = response.data.data.documents.findIndex(item => item.type === 1)
@@ -143,6 +153,7 @@
             },
 
             save() {
+                this.$refs.header.cloaking = true
                 for (let doc of this.saveData) {
                     this.putDocument(doc.id, doc)
                 }
@@ -154,6 +165,7 @@
 
                     if (counter === this.saveData.length) {
                         this.noticeBox.open()
+                        this.$refs.header.cloaking = false
                         counter = 0
                     } 
 
@@ -164,6 +176,7 @@
         components: {
             'file-input': FileInput,
             'message-box': MessageBox,
+            'cloaked-panel': CloakedPanel,
         },
     }
 

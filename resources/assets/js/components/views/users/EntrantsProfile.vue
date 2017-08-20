@@ -22,7 +22,7 @@
 
 <template>
     <div id="entrants-profile">
-        <div class="form-panel panel panel-default">
+        <cloaked-panel ref="profile"> 
             <div class="panel-body">
                 <div class="pull-right">
                     <router-link class="btn btn-primary" :to="{ name: 'Profil.Sunting' }">Sunting Profil</router-link>
@@ -157,7 +157,7 @@
             <div class="panel-body panel-foot">
                 Anda terdaftar sebagai peserta {{ entry.activity.name }} sejak {{ user.created_at | normalize }}.
             </div>
-        </div>
+        </cloaked-panel>
     </div>
 </template>
 
@@ -168,6 +168,7 @@
     import Citeup from '../../../citeup'
     import { mapState, mapActions } from 'vuex'
     import StageTranslator from './StageTranslator'
+    import CloakedPanel from '../../misc/CloakedPanel'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
@@ -224,11 +225,13 @@
 
             prepareComponent() {
                 this.form = this.$refs.form
+                this.$refs.profile.cloaking = true
             },
 
             getEntry(id) {
                 Citeup.get('/entries/' + id).then(response => {
                     this.entry = response.data.data.entry
+                    this.$refs.profile.cloaking = false
                 })
             },
 
@@ -252,6 +255,7 @@
             'text-input': TextInput,
             'file-input': FileInput,
             'email-input': EmailInput,
+            'cloaked-panel': CloakedPanel,
         },
 
     }

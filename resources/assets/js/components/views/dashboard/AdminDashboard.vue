@@ -31,57 +31,36 @@
         <div class="row">
             
             <div class="col-sm-4">
-                <div :class="{'form-panel': true, 'trackdown-box': true, 'trackdown-completed': lombaLogikaNumber >= lombaLogikaTarget}">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <i :class="['fa', decideProgressClass(lombaLogikaNumber, lombaLogikaTarget), 'trackdown-icon']"></i>
-                            <div class="trackdown-title">Peserta Lomba Logika</div>
-                            <div class="trackdown-number">{{ lombaLogikaNumber }} / {{ lombaLogikaTarget }}</div>
-                            <div class="trackdown-standout">
-                                {{ lombaLogikaNumber >= lombaLogikaTarget ? 'Sudah Mencapai Target!' : (lombaLogikaTarget - lombaLogikaNumber) + ' Peserta Lagi!' }}
-                            </div>
-                            <div class="text-right">
-                                <router-link class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 1 } }">Lihat</router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <trackdown-box :completed="lombaLogikaNumber >= lombaLogikaTarget" :icon="decideProgressClass(lombaLogikaNumber, lombaLogikaTarget)">
+                    <template slot="title">Peserta Lomba Logika</template>
+                    <template slot="number">{{ lombaLogikaNumber }} / {{ lombaLogikaTarget }}</template>
+                    <template slot="standout">
+                        {{ lombaLogikaNumber >= lombaLogikaTarget ? 'Sudah Mencapai Target!' : (lombaLogikaTarget - lombaLogikaNumber) + ' Peserta Lagi!' }}
+                    </template>
+                    <router-link slot="link" class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 1 } }">Lihat</router-link>
+                </trackdown-box>
             </div>
             
             <div class="col-sm-4">
-                <div :class="{'form-panel': true, 'trackdown-box': true, 'trackdown-completed': lombaDesainNumber >= lombaDesainTarget}">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <i :class="['fa', decideProgressClass(lombaDesainNumber, lombaDesainTarget), 'trackdown-icon']"></i>
-                            <div class="trackdown-title">Peserta Lomba Desain</div>
-                            <div class="trackdown-number">{{ lombaDesainNumber }} / {{ lombaDesainTarget }}</div>
-                            <div class="trackdown-standout">
-                                {{ lombaDesainNumber >= lombaDesainTarget ? 'Sudah Mencapai Target!' : (lombaDesainTarget - lombaDesainNumber) + ' Peserta Lagi!' }}
-                            </div>
-                            <div class="text-right">
-                                <router-link class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 2 } }">Lihat</router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <trackdown-box :completed="lombaDesainNumber >= lombaDesainTarget" :icon="decideProgressClass(lombaDesainNumber, lombaDesainTarget)">
+                    <template slot="title">Peserta Lomba Desain</template>
+                    <template slot="number">{{ lombaDesainNumber }} / {{ lombaDesainTarget }}</template>
+                    <template slot="standout">
+                        {{ lombaDesainNumber >= lombaDesainTarget ? 'Sudah Mencapai Target!' : (lombaDesainTarget - lombaDesainNumber) + ' Peserta Lagi!' }}
+                    </template>
+                    <router-link slot="link" class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 2 } }">Lihat</router-link>
+                </trackdown-box>
             </div>
             
             <div class="col-sm-4">
-                <div :class="{'form-panel': true, 'trackdown-box': true, 'trackdown-completed': seminarItNumber >= seminarItTarget}">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <i :class="['fa', decideProgressClass(seminarItNumber, seminarItTarget), 'trackdown-icon']"></i>
-                            <div class="trackdown-title">Peserta Seminar IT</div>
-                            <div class="trackdown-number">{{ seminarItNumber }} / {{ seminarItTarget }}</div>
-                            <div class="trackdown-standout">
-                                {{ seminarItNumber >= seminarItTarget ? 'Sudah Mencapai Target!' : (seminarItTarget - seminarItNumber) + ' Peserta Lagi!' }}
-                            </div>
-                            <div class="text-right">
-                                <router-link class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 3 } }">Lihat</router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <trackdown-box :completed="seminarItNumber >= seminarItTarget" :icon="decideProgressClass(seminarItNumber, seminarItTarget)">
+                    <template slot="title">Peserta Lomba Logika</template>
+                    <template slot="number">{{ seminarItNumber }} / {{ seminarItTarget }}</template>
+                    <template slot="standout">
+                        {{ seminarItNumber >= seminarItTarget ? 'Sudah Mencapai Target!' : (seminarItTarget - seminarItNumber) + ' Peserta Lagi!' }}
+                    </template>
+                    <router-link slot="link" class="btn btn-link" :to="{ name: 'Peserta', props: { activity: 3 } }">Lihat</router-link>
+                </trackdown-box>
             </div>
 
         </div>
@@ -126,6 +105,7 @@
     import moment from 'moment'
     import Countdown from '../../misc/Countdown.vue'
     import CurrentUser from '../../mixins/CurrentUser'
+    import TrackdownBox from '../../misc/TrackdownBox.vue'
     import { countOf } from '../../Citeup/Entrant/EntrantRepo'
     import ApplicationStages from '../../mixins/ApplicationStages'
 
@@ -187,21 +167,22 @@
             },
             decideProgressClass(number, target) {
                 if (number / target >= 1) {
-                    return 'fa-battery-full'
+                    return 'battery-full'
                 } else if (number / target >= 0.75) {
-                    return 'fa-battery-three-quarters'
+                    return 'battery-three-quarters'
                 } else if (number / target >= 0.5) {
-                    return 'fa-battery-half'
+                    return 'battery-half'
                 } else if (number / target >= 0.25) {
-                    return 'fa-battery-quarter'
+                    return 'battery-quarter'
                 } else {
-                    return 'fa-battery-empty'
+                    return 'battery-empty'
                 }
             },
         },
 
         components: {
             'countdown': Countdown,
+            'trackdown-box': TrackdownBox,
         },
     }
 

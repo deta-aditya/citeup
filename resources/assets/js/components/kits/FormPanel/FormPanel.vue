@@ -1,6 +1,6 @@
 
 <template>
-    <div :class="{'form-panel': true, 'form-horizontal': horizontal}">
+    <div :class="{'form-panel': true, 'form-horizontal': horizontal}" ref="cloakable">
         <div class="panel panel-default">
             <slot v-if="bodiless && formless">
             </slot>
@@ -30,9 +30,12 @@
 
 <script>
 
+    import HasCloak from '../../mixins/HasCloak'
     import ApiForm from '../../forms/ApiForm.vue'
 
     export default {
+
+        mixins: [HasCloak],
 
         props: {
 
@@ -110,7 +113,11 @@
                 }
 
                 this.apiForm.$on('submitting', payload => this.$emit('submitting', payload))
-                this.apiForm.$on('submitted', payload => this.$emit('submitted', payload))
+
+                this.apiForm.$on('submitted', payload => {
+                    this.cloaking = false
+                    this.$emit('submitted', payload)
+                })
             },
 
             submit() {
@@ -119,6 +126,9 @@
                     return
                 }
 
+                console.log(this.cloaking)
+
+                this.cloaking = true
                 this.apiForm.submit()
             },
 

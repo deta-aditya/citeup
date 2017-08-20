@@ -14468,6 +14468,17 @@ trix-editor .attachment progress {
   font-size: 13.5pt;
 }
 
+.cloak {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 10;
+}
+
+.cloak .cloak-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .btn-circle {
   border-radius: 50%;
   padding: 13px 10px;

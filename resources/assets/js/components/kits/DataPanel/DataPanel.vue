@@ -12,7 +12,7 @@
             </template>
         </message-box>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" ref="cloakable">
             <div class="panel-body" v-if="headed">
                 <div class="pull-right panel-control">
                     <slot name="control"></slot>
@@ -40,8 +40,11 @@
 
     import Citeup from '../../../citeup'
     import MessageBox from '../MessageBox.vue'
+    import HasCloak from '../../mixins/HasCloak'
 
     export default {
+
+        mixins: [HasCloak],
 
         props: {
 

@@ -125,11 +125,13 @@
 
             prepareComponent() {
                 this.formPanel = this.$refs.formPanel
+                this.formPanel.cloaking = true
             },
 
             getEntry(id) {
                 Citeup.get('/entries/' + id).then(response => {
                     this.entry = response.data.data.entry
+                    this.formPanel.cloaking = false
                 })
             },
 
