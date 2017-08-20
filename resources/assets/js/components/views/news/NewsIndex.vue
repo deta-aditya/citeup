@@ -2,7 +2,7 @@
 <template>
     <div id="news-index">
 
-        <data-panel ref="dataPanel" v-model="news" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="news" :expandable="true" :deletable="true">
             Daftar Berita
             <data-panel-addon slot="control" :refresh="getFaqs" :create="{ name: 'Berita.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">
@@ -47,17 +47,15 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
+    import NewsMixin from './NewsMixin'
     import Citeup from '../../../citeup'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
-    const STATES = [
-        'user'
-    ] 
-
     export default {
+
+        mixins: [NewsMixin],
 
         data() {
             return {
@@ -65,8 +63,6 @@
                 news: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 
@@ -101,8 +97,8 @@
             },
 
             shorten(value) {
-                if (value !== undefined && value.length > 300) {
-                    return value.substring(0, 299) + '...'
+                if (value !== undefined && value.length > 100) {
+                    return value.substring(0, 99) + '...'
                 }
 
                 return value

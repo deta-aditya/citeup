@@ -17,7 +17,8 @@ class UserUpdateRequest extends FormRequest
         $user = $this->route('user');
 
         return $accessor->isAdmin() || 
-            $accessor->hasKey('put-users') || 
+            ($accessor->isCommittee() && $accessor->hasKey('put-users')) || 
+            ($accessor->isEntrant() && $accessor->entry->id === $user->entry_id) || 
             $accessor->id === $user->id;
     }
 
@@ -29,13 +30,8 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'email|unique:users',
-            'password' => 'string|confirmed',
-            'role' => 'int|exists:roles,id',
+            'email' => 'email|unique:users|nullable',
             'name' => 'string|max:191',
-            'address' => 'string',
-            'school' => 'string|max:191',
-            'city' => 'string|max:191',
             'photo' => 'string|max:191',
             'phone' => 'string|max:15',
             'section' => 'string|max:191',

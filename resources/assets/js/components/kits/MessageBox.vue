@@ -1,7 +1,7 @@
 
 <template>
     <div :id="boxId" class="modal message-box fade" tabindex="-1" role="dialog">
-        <div :class="['modal-dialog', this.sizeClass]" role="document">
+        <div :class="['modal-dialog', sizeClass]" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-if="dismissable">
@@ -9,10 +9,11 @@
                     </button>
                     <h4 class="modal-title"><slot name="title"></slot></h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" :style="[ bodyAlignmentClass ]">
                     <slot></slot>
+                    <slot name="buttons" v-if="footerless"></slot>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" v-if="! footerless">
                     <slot name="buttons"></slot>
                 </div>
             </div>
@@ -51,6 +52,11 @@
                 default: true,
             },
 
+            footerless: {
+                type: Boolean,
+                default: false,
+            }
+
         },
 
         data() {
@@ -67,6 +73,10 @@
 
             sizeClass() {
                 return this.size === '' ? '' : 'modal-' + this.size
+            },
+
+            bodyAlignmentClass() {
+                return this.footerless ? { textAlign: 'left' } : {}
             },
 
             modalOptions() {
@@ -91,6 +101,7 @@
 
             registerEvents() {
                 $(this.modalElement).on('shown.bs.modal', e => this.$emit('shown', e))
+                $(this.modalElement).on('hidden.bs.modal', e => this.$emit('hidden', e))
             },
 
             open() {

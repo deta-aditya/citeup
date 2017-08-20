@@ -3,15 +3,18 @@
  * This contains the whole application global state.
  */
 
+import Vue from 'vue'
+import Vuex from 'vuex'
 import Citeup from './citeup';
 
-export default {
+Vue.use(Vuex)
+
+export default new Vuex.Store({
     
     state: {
 
         user: {
             id: 0,
-            profile: {},
             entry: {},
             role: {},
             alerts: [],
@@ -31,7 +34,14 @@ export default {
             //
         ],
 
-        loading: 100
+        loading: 100,
+
+        stages: [],
+
+        error: {
+            status: 0,
+            messages: {},            
+        },
 
     },
 
@@ -53,20 +63,18 @@ export default {
             return state.loading < 100
         },
 
+        getErrorMessagesOf(state) {
+            return function(name) {
+                return state.error.messages[name] || []
+            }
+        },
+
     },
 
     mutations: {
 
         updateUser(state, payload) {
-
-            let user = payload.user;
-            
-            user.admin = user.rolename === 'Administrator';
-            user.committee = user.rolename === 'Committee';
-            user.entrant = user.rolename === 'Entrant';
-
-            state.user = user;
-            
+            state.user = payload.user;            
         },
 
         updateConfig(state, payload) {
@@ -90,6 +98,21 @@ export default {
             state.loading = payload
         },
 
+        setStages(state, payload) {
+            state.stages = payload.stages;            
+        },
+
+        setError(state, payload) {
+            state.error = payload
+        },
+
+        clearError(state) {
+            state.error = {
+                status: 0,
+                messages: [],            
+            }
+        },
+
     },
 
     actions: {
@@ -106,5 +129,11 @@ export default {
             })
         },
 
+        loadStages(context) {
+            Citeup.get('/stages').then(response => {
+                context.commit('setStages', response.data.data)
+            })
+        },
+
     }
-};
+});

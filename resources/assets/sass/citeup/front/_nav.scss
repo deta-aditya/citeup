@@ -65,6 +65,42 @@
 
         li {
             padding: 7.5px 2px;
+
+            %login-link-wrapper-active {
+                a {
+                    background-color: darken($signature-dark, 4%);
+                    color: #fff;
+                }
+            }
+
+            &.login-link-wrapper-first {
+
+                &.active {
+                    @extend %login-link-wrapper-active;
+                }
+            
+                padding-right: 0;
+
+                a {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-right: 1px solid darken($signature-dark, 4%);
+                }
+            }
+
+            &.login-link-wrapper-last {
+
+                &.active {
+                    @extend %login-link-wrapper-active;
+                }
+
+                padding-left: 0;
+                
+                a {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
         }
 
         .dropdown-menu > li {

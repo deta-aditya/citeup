@@ -5,7 +5,7 @@ namespace App\Modules\Testing;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Modules\Electrons\Users\RoleService;
 use App\Modules\Models\Activity;
-use App\Modules\Models\Profile;
+use App\Modules\Models\Entry;
 use App\User;
 
 trait TestAssistant
@@ -103,15 +103,20 @@ trait TestAssistant
             'name' => $faker->name,
         ];
 
-        if ($role === RoleService::ROLE_ENTRANT) {
-            $userData['activity'] = factory(Activity::class)->create()->id;
+        switch ($role) {
+            case RoleService::ROLE_ENTRANT: 
+                $userData['entry'] = factory(Entry::class)->create()->id;
+                break;
+            case RoleService::ROLE_COMMITTEE:
+                $userData['section'] = $faker->word;
+                break;
         }
 
         return $userData;
     }
 
     /**
-     * Create a new user and its profile using factory.
+     * Create a new user using factory.
      *
      * @param  bool  $committee
      * @return User
@@ -123,10 +128,6 @@ trait TestAssistant
                 ['role_id' => RoleService::ROLE_COMMITTEE]
             ) :
             factory(User::class)->create();
-
-        if (! $committee) {
-            $user->profile()->save(factory(Profile::class)->make());
-        }
 
         return $user;
     }

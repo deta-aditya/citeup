@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Users\UserService;
 use App\Modules\Electrons\Users\RoleService;
-use App\Modules\Electrons\Users\ProfileService;
 use App\Modules\Electrons\Activities\EntryService;
 use App\Modules\Electrons\Storage\StorageService;
 use App\Modules\Electrons\Keys\KeyService;
@@ -20,10 +19,12 @@ use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
 use App\Modules\Api\V1\Requests\Users\UserDeleteRequest;
 use App\Modules\Api\V1\Requests\Users\GrantKeysRequest;
 use App\Modules\Api\V1\Requests\Users\SeeAlertRequest;
+use App\Modules\Api\V1\Requests\Users\ChangePasswordRequest;
 use App\Modules\Api\V1\Requests\Keys\KeyIndexRequest;
 use App\Modules\Api\V1\Requests\Alerts\AlertIndexRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryModifyRequest;
 use App\Modules\Api\V1\Requests\Edits\EditIndexRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -57,7 +58,7 @@ class UserController extends Controller
     public function index(UserIndexRequest $request)
     {
         return $this->respondJson(
-            ['users' => $this->users->getMultiple($request->all())]
+            ['users' => $this->users->multiple($request->all())]
         );
     }
 
@@ -84,20 +85,15 @@ class UserController extends Controller
      * @param  EntryService       $entries
      * @return Response
      */
-    public function insert(
-        UserInsertRequest $request, 
-        RoleService $roles, 
-        ProfileService $profiles,
+    public function insert(UserInsertRequest $request, RoleService $roles, 
         EntryService $entries)
     {
         $user = $this->users->create($request->all());
 
         $roles->associate($user, $request->input('role'));
 
-        $profiles->make($user, $request->all());
-
         if ($user->isEntrant()) {
-            $entries->make($user, $request->input('activity'), $request->all());
+            $entries->associate($user, $request->input('entry'));
         }
 
         return $this->respondJson(['user' => $user]);
@@ -112,17 +108,9 @@ class UserController extends Controller
      * @param  ProfileService     $profiles
      * @return Response
      */
-    public function update(
-        UserUpdateRequest $request, 
-        User $user,
-        RoleService $roles, 
-        ProfileService $profiles)
+    public function update(UserUpdateRequest $request, User $user)
     {
         $this->users->update($user, $request->all());
-
-        $roles->associate($user, $request->input('role', $user->role));
-
-        $profiles->update($user, $request->all());
 
         return $this->respondJson(['user' => $user]);
     }
@@ -151,8 +139,8 @@ class UserController extends Controller
      * Get keys owned by the given user.
      *
      * @param  KeyIndexRequest  $request
-     * @param  User              $user
-     * @param  KeyService        $keys
+     * @param  User             $user
+     * @param  KeyService       $keys
      * @return Response
      */
     public function keys(KeyIndexRequest $request, User $user, KeyService $keys)
@@ -220,24 +208,6 @@ class UserController extends Controller
     }
 
     /**
-     * Modify the entry of the given user.
-     *
-     * @param  EntryModifyRequest  $request
-     * @param  User                $user
-     * @param  EntryService        $entries
-     * @return Response
-     */
-    public function modifyEntry(EntryModifyRequest $request, User $user, EntryService $entries)
-    {
-        $entry = $user->entry;
-
-        $entries->modifyStage($entry, $request->input('stage', null))
-                ->modifyStatus($entry, $request->input('status', null));
-
-        return $this->respondJson(['entry' => $entry]);
-    }
-
-    /**
      * Get edits performed by the given user.
      *
      * @param  EditIndexRequest   $request
@@ -254,5 +224,19 @@ class UserController extends Controller
         return $this->respondJson(
             ['edits' => $edits->getMultiple($queries)]
         );
+    }
+
+    /**
+     * Perform a change password action
+     */
+    public function changePassword(ChangePasswordRequest $request, User $user)
+    {
+        if (! Hash::check($request->input('password_old'), $user->password)) {
+            return response()->json(['password_old' => 'Wrong old password'], 422);
+        }
+
+        $this->users->update($user, $request->all());
+
+        return $this->respondJson(['user' => $user]);
     }
 }

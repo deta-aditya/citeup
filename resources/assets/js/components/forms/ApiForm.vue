@@ -31,8 +31,12 @@
 </template>
 
 <script>
-    import CsrfInput from './CsrfInput.vue';
+    import _ from 'lodash';
+    import { mapMutations } from 'vuex';
     import Citeup from '../../citeup';
+    import CsrfInput from './CsrfInput.vue';
+
+    const MUTATIONS = ['setError', 'clearError']
 
     export default {
 
@@ -74,7 +78,7 @@
             this.prepareComponent();
         },
 
-        methods: {
+        methods: _.merge(mapMutations(MUTATIONS), {
             prepareComponent() {
                 if (this.multipart) {
                     this.$refs.realForm.setAttribute('enctype', 'multipart/form-data')
@@ -82,13 +86,18 @@
             },
 
             submit() {
+                
                 this.$emit('submitting', this.model)
+
+                this.clearError()
 
                 Citeup[this.method](this.action, this.model).then((response) => {
                     this.$emit('submitted', response.data.data)
+                }).catch((error) => {
+                    this.setError({ status: error.response.status, messages: error.response.data })
                 })
             }
-        },
+        }),
 
         components: {
             'csrf-input': CsrfInput,

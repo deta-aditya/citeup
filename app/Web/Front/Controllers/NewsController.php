@@ -145,7 +145,7 @@ class NewsController extends Controller
     protected function itemData(News $news)
     {
         return [
-            'news' => $news->load('edits.user.profile'),
+            'news' => $news->load('edits.user'),
             'nav' => $this->navtheme,
         ];
     }

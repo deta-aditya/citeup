@@ -1,0 +1,144 @@
+
+#register-page {
+
+    padding-bottom: 60px;
+
+    .page-title-container {
+        background: $signature-light;
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .page-title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 22.5pt;
+    }
+
+    .content-container {
+
+        background-image: url(../images/web/bg_about.png);
+        background-repeat: repeat-x;
+        background-size: 700px;
+
+        .container {
+            margin-bottom: 0;
+        }
+    }
+    
+    .logo-container {
+
+        .logo {
+            width: 250px;
+        }
+    } 
+
+    .activity-item {
+        border: none;
+        display: block;
+        color: $original-text-color !important;
+        box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+        height: auto;
+        margin: 0 0 10px;
+        transition: 0.2s;
+
+        &:hover {
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    .activity-title {
+        font-size: 12pt;
+        margin-top: 0;
+    }
+
+    .registration-form {
+
+        $border-color: #d3e0e9;
+
+        .form-title {
+            font-size: 16pt;
+            margin: 0;
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0px 0px 10px 1px rgba(221,115,34,0.5);
+        }
+
+        .panel-body {
+            padding: 25px;
+            border-bottom: 1px solid $border-color;
+
+            &.panel-body-form {
+                border-bottom: none;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .btn-submit {
+            background-color: $signature-light;
+            border-color: $signature-dark;
+            font-size: 18pt;
+
+            &:hover, &:focus {
+                background-color: $signature-dark;
+            }
+        }
+
+    }
+
+    .icon-holder {
+        border-radius: 4px 4px 0 0;
+        padding: 0;
+        background: $signature-dark;
+    }
+        
+    .activity-icon {
+        height: 75px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+
+        .activity-icon {
+            height: 150px;
+        }
+
+        .activity-item {
+            margin: 0 5px;
+            height: 360px;
+        }
+
+    }
+
+    @media (min-width: $screen-md-min) {
+
+        .activity-item {
+            margin: 0 25px;
+            height: 400px;
+        }
+
+        .activity-title {
+            font-size: 14pt;
+            margin-top: 10px;
+        }
+        
+        .activity-icon {
+            height: 200px;
+        }
+
+    }
+    
+    @media (min-width: $screen-lg-min) {
+
+        .activity-title {
+            font-size: 18pt;
+        } 
+
+    }
+
+}

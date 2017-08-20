@@ -43,7 +43,7 @@ return [
 
         'defaults' => [
         
-            'with' => ['profile', 'entry'],
+            'with' => ['entry'],
 
         ],
 
@@ -53,19 +53,19 @@ return [
         ],
 
         'selectable' => [
-            'email',
+            'name', 'email', 'photo', 'section', 'crew',
         ],
 
         'sortable' => [
-            'email',
+            'name', 'email', 'section', 'crew',
         ],
 
         'comparable' => [
-            'email', 'role_id',
+            'name', 'email', 'section', 'crew', 'role_id', 'entry_id',
         ],
 
         'loadable' => [
-            'profile', 'entry', 'keys', 'alerts', 'activity', 'edits',
+            'entry', 'keys', 'alerts', 'activity', 'documents', 'edits',
         ],
 
     ],
@@ -110,6 +110,31 @@ return [
 
         'loadable' => [
             'users',
+        ],
+
+    ],
+
+
+    'entries' => [
+
+        'defaults' => [
+            'with' => ['users', 'activity'],
+        ],
+
+        'selectable' => [
+            'name', 'agency', 'address', 'phone', 'city', 'stage', 'status',
+        ],
+
+        'sortable' => [
+            'name', 'agency', 'stage', 'status',
+        ],
+
+        'comparable' => [
+            'name', 'agency', 'phone', 'city', 'stage', 'status', 'activity_id', 
+        ],
+
+        'loadable' => [
+            'users', 'users.documents', 'activity', 'attempts', 'submissions', 'testimonials',
         ],
 
     ],
@@ -181,7 +206,7 @@ return [
         ],
 
         'loadable' => [
-            'entry',
+            'user',
         ],
 
     ],
@@ -334,6 +359,46 @@ return [
 
         'loadable' => [
             'editable', 'user',
+        ],
+
+    ],
+
+    'contact_people' => [
+
+        'selectable' => [
+            'name', 'email', 'phone', 'line',
+        ],
+
+        'sortable' => [
+            'name', 'email',
+        ],
+
+        'comparable' => [
+            'name', 'email', 'phone', 'line',
+        ],
+
+        'loadable' => [
+            //
+        ],
+
+    ],
+
+    'html_contents' => [
+
+        'selectable' => [
+            'name', 'content',
+        ],
+
+        'sortable' => [
+            'name',
+        ],
+
+        'comparable' => [
+            'name',
+        ],
+
+        'loadable' => [
+            'edits',
         ],
 
     ],

@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="col-md-4 col-right-side">
                                             @if (! auth()->check() && (($activity->isCompetition() && $regs_condition['competition']) || (! $activity->isCompetition() && $regs_condition['non_competition']))) 
-                                                <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-primary btn-register">Daftar</a> 
+                                                <a href="{{ route('register.form', ['id' => $activity->id, 'name' => kebab_case($activity->name)]) }}" class="btn btn-lg btn-block btn-primary btn-register">Daftar</a> 
                                             @endif
                                             @if ($activity->isCompetition())
                                                 <div class="panel panel-default panel-prizes">

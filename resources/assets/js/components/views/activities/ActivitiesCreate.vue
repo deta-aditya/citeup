@@ -42,6 +42,7 @@
 
 <script>
 
+    import ActivitiesMixin from './ActivitiesMixin'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import RichInput from '../../kits/FormPanel/RichInput.vue'
@@ -50,6 +51,8 @@
     import MultilineInput from '../../kits/FormPanel/MultilineInput.vue'
 
     export default {
+        
+        mixins: [ActivitiesMixin],
 
         data() {
             return {

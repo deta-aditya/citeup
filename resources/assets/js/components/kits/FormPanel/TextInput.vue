@@ -1,6 +1,6 @@
 
 <template>
-    <div :class="{'form-group': grouped}">
+    <div :class="{'form-group': grouped, 'has-error': hasError}">
         <label v-if="labeled" :for="name" :class="['control-label', labelColumn]">
             <slot></slot>
         </label>
@@ -13,9 +13,13 @@
                 :value="value" 
                 :required="required"
                 :disabled="disabled"
+                :placeholder="placeholder"
                 :autofocus="autofocus"
                 :maxlength="maxlength"
                 @input="input($event.target.value)">
+            <span class="help-block" v-show="hasError">
+                <strong>{{ localError.message }}</strong>
+            </span>
             <slot name="help-block"></slot>
         </div>
     </div>
@@ -23,7 +27,11 @@
 
 <script>
 
+    import CanShowError from '../../Citeup/Error/CanShowError'
+
     export default {
+
+        mixins: [CanShowError],
 
         props: {
 
@@ -55,6 +63,11 @@
             labeled: {
                 type: Boolean,
                 default: true
+            },
+
+            placeholder: {
+                type: String,
+                default: ''
             },
 
             maxlength: {

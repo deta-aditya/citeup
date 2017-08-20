@@ -19,7 +19,7 @@
                 </div>
                 <div class="button-container">
                     <button type="button" class="btn btn-default btn-browse" @click="$refs.realInput.click()" v-show="fileIsMutable">Browse</button>
-                    <button type="button" class="btn btn-link" @click="removeFile" v-show="fileIsFinished">Remove File</button>
+                    <button type="button" class="btn btn-link" @click="removeFile" v-show="fileIsFinished">Change File</button>
                     {{ filePath | nameOnly }}
                 </div>
             </div>
@@ -36,7 +36,7 @@
             :disabled="disabled"
             @input="prepareInput($event.target)">
 
-        <message-box ref="messageBox" name="cropbox" v-if="acceptIsImage && crop">
+        <message-box ref="messageBox" :name="'cropbox-' + name" v-if="acceptIsImage && crop" :dismissable="false">
             <span slot="title">Crop Image</span>
             <div class="crop-container">
                 <img ref="croppable">
@@ -235,12 +235,7 @@
 
             value(val) {
                 if (val) {
-                    this.status = FILE_FINISHED;
-                    this.filePath = val;
-
-                    if (this.acceptIsImage) {
-                        this.modifyPreviewImage(Citeup.appPath + '/' + this.filePath);
-                    }
+                    this.receiveValue(val)
                 }
             }
 
@@ -263,6 +258,10 @@
                 var self = this;
 
                 this.messageBox = this.$refs.messageBox
+
+                if (this.value) {
+                    this.receiveValue(this.value)
+                }
 
                 if (this.acceptIsImage && this.crop) {
 
@@ -303,6 +302,19 @@
 
                 } 
 
+            },
+
+            receiveValue(value) {
+                if (this.acceptIsImage && value === Citeup.defaultImageClean) {
+                    return
+                }
+
+                this.status = FILE_FINISHED;
+                this.filePath = value;
+
+                if (this.acceptIsImage) {
+                    this.modifyPreviewImage(Citeup.appPath + '/' + value);
+                }
             },
 
             prepareInput(target) {
@@ -450,7 +462,7 @@
                     alert('Internal Server Error');
                 }
 
-                this.$router.push({ name: 'error', params: {
+                this.$router.push({ name: 'Error', params: {
                     status: error.response.status
                 }});
             },

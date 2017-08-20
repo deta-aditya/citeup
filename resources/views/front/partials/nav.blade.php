@@ -1,5 +1,3 @@
-@inject('config' ,'App\Modules\Electrons\Config\Config')
-
 <nav id="front-nav" class="navbar navbar-default navbar-{{ $nav }} navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -36,8 +34,11 @@
 
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    @unless ($config->get('stage')['name'] === 'Pra-Pendaftaran' || $config->get('stage')['name'] === 'Paska Acara')
-                        <li class="{{ request()->is('login') ? 'active' : '' }}"><a class="login-link" href="{{ route('login.form') }}">Daftar / Login</a></li>
+                    @unless ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION))
+                        <li class="{{ request()->is('login') ? 'active' : '' }} login-link-wrapper-first"><a class="login-link" href="{{ route('login.form') }}">Login</a></li>
+                        @unless ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_POST_EVENT))
+                            <li class="{{ request()->is('register*') ? 'active' : '' }} login-link-wrapper-last"><a class="login-link" href="{{ route('register.index') }}">Daftar</a></li>
+                        @endunless
                     @endunless
                 @else
                     <li class="dropdown">

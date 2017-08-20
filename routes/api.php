@@ -30,8 +30,12 @@ Route::group([
     Route::post('/users/{user}/keys', 'UserController@grantKeys');
     Route::get('/users/{user}/alerts', 'UserController@alerts');
     Route::post('/users/{user}/alerts', 'UserController@seeAlerts');
-    Route::post('/users/{user}/entries', 'UserController@modifyEntry');
     Route::get('/users/{user}/edits', 'UserController@edits');
+    Route::post('/users/{user}/password', 'UserController@changePassword');
+
+    Route::put('/entrants/{entry}', 'EntryController@updateEntrantProfile');
+    Route::post('/entrants/{entry}/disqualify', 'EntryController@disqualify');
+    Route::post('/entrants/{entry}/qualify', 'EntryController@qualify');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
@@ -66,12 +70,13 @@ Route::group([
     Route::delete('/schedules/{schedule}', 'ScheduleController@remove');
     Route::get('/schedules/{schedule}/edits', 'ScheduleController@edits');
 
+    Route::get('/entries', 'EntryController@index');
+    Route::post('/entries', 'EntryController@insert');
     Route::get('/entries/{entry}', 'EntryController@show');
-    Route::post('/entries/{entry}', 'EntryController@modify');
+    Route::put('/entries/{entry}', 'EntryController@update');
+    Route::delete('/entries/{entry}', 'EntryController@remove');
     Route::get('/entries/{entry}/submissions', 'EntryController@submissions');
     Route::post('/entries/{entry}/submissions', 'EntryController@addSubmission');
-    Route::get('/entries/{entry}/documents', 'EntryController@documents');
-    Route::post('/entries/{entry}/documents', 'EntryController@addDocument');
     Route::get('/entries/{entry}/testimonials', 'EntryController@testimonials');
     Route::post('/entries/{entry}/testimonials', 'EntryController@addTestimonial');
     Route::get('/entries/{entry}/attempts', 'EntryController@attempts');
@@ -150,8 +155,23 @@ Route::group([
     Route::put('/faqs/{faq}', 'FaqController@update');
     Route::delete('/faqs/{faq}', 'FaqController@remove');
     Route::get('/faqs/{faq}/edits', 'FaqController@edits');
+
+    Route::get('/contact-people', 'ContactPersonController@index');
+    Route::post('/contact-people', 'ContactPersonController@insert');
+    Route::get('/contact-people/{contact}', 'ContactPersonController@show');
+    Route::put('/contact-people/{contact}', 'ContactPersonController@update');
+    Route::delete('/contact-people/{contact}', 'ContactPersonController@remove');
+
+    Route::get('/html-contents', 'HtmlContentController@index');
+    Route::post('/html-contents', 'HtmlContentController@insert');
+    Route::get('/html-contents/{content}', 'HtmlContentController@show');
+    Route::put('/html-contents/{content}', 'HtmlContentController@update');
+    Route::delete('/html-contents/{content}', 'HtmlContentController@remove');
+    Route::get('/html-contents/{content}/edits', 'HtmlContentController@edits');
     
     Route::get('/edits', 'EditController@index');
+
+    Route::get('/stages', 'StageController@index');
     
     /*
      * Storage Routes

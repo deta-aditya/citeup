@@ -26,8 +26,8 @@ class KeyService extends Service
     protected $keys = [
 
         // "Users" Keys
-        'Get Users', 'View Users', 'Post Users', 'Put Users', 'Delete Users', 
-        'Post Users Alerts', 'Post Users Entries',
+        'Get Users', 'View Users', 'Post Users', 
+        'Put Users', 'Delete Users', 'Post Users Alerts',
 
         // "Alerts" Keys
         'Get Alerts', 'View Alerts', 'Post Alerts', 
@@ -42,9 +42,9 @@ class KeyService extends Service
         'Put Schedules', 'Delete Schedules', 
 
         // "Entries" Keys
-        'Get Entries', 'Post Entries', 'Post Entries Submissions', 
-        'Post Entries Documents', 'Post Entries Testimonials',
-        'Post Entries Attempts', 
+        'Get Entries', 'View Entries', 'Post Entries', 
+        'Put Entries', 'Delete Entries', 'Post Entries Submissions', 
+        'Post Entries Testimonials', 'Post Entries Attempts', 
 
         // "Submissions" Keys
         'Get Submissions', 'View Submissions', 'Post Submissions', 
@@ -88,6 +88,14 @@ class KeyService extends Service
         // "Faqs" Keys
         'Get Faqs', 'View Faqs', 'Post Faqs', 
         'Put Faqs', 'Delete Faqs',
+
+        // "Contact People" Keys
+        'Get Contact People', 'View Contact People', 'Post Contact People', 
+        'Put Contact People', 'Delete Contact People',
+
+        // "Html Contents" Keys
+        'Get Html Contents', 'View Html Contents', 'Post Html Contents', 
+        'Put Html Contents', 'Delete Html Contents',
 
         // "Edits" Keys
         'Get Edits',

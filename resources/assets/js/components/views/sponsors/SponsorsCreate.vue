@@ -34,6 +34,7 @@
 <script>
 
     import Citeup from '../../../citeup'    
+    import SponsorsMixin from './SponsorsMixin'
     import FormPanel from '../../kits/FormPanel/FormPanel.vue'
     import TextInput from '../../kits/FormPanel/TextInput.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
@@ -42,6 +43,8 @@
     const RADIO_BUTTONS = { 1: 'Sponsor', 2: 'Media Partner' }
 
     export default {
+
+        mixins: [SponsorsMixin],
 
         data() {
             return {

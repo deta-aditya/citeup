@@ -2,7 +2,7 @@
 <template>
     <div id="faqs-index">
 
-        <data-panel ref="dataPanel" v-model="faqs" :checkable="true" :expandable="true" :deletable="true">
+        <data-panel ref="dataPanel" v-model="faqs" :expandable="true" :deletable="true">
             Daftar FAQ
             <data-panel-addon slot="control" :refresh="getFaqs" :create="{ name: 'FAQ.Buat' }"></data-panel-addon>
             <template slot="list" scope="props">
@@ -38,17 +38,15 @@
 
     import _ from 'lodash'
     import moment from 'moment'
-    import { mapState } from 'vuex'
+    import FaqsMixin from './FaqsMixin'
     import Citeup from '../../../citeup'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
 
-    const STATES = [
-        'user'
-    ] 
-
     export default {
+
+        mixins: [FaqsMixin],
 
         data() {
             return {
@@ -56,8 +54,6 @@
                 faqs: [],
             }
         },
-
-        computed: mapState(STATES),
 
         filters: {
 

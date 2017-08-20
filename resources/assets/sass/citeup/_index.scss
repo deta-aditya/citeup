@@ -237,6 +237,51 @@
         margin-bottom: 0;
     }
 
+    .gutterless {
+        & > div {
+            padding-left: 0;
+            padding-right: 0;
+            border-right: 1px solid #dddddd;
+
+            &:first-child {
+                padding-left: 15px;
+            }
+
+            &:last-child {
+                padding-right: 15px;
+                border-right: none;
+            }
+        }
+    }
+
+    .nav-wrapper {
+        padding: 0;
+        font-size: 12pt;
+        border-bottom: none;
+
+        li.active a {
+            border-top: none;            
+            border-bottom: none;
+            background-color: #fff;
+        }
+
+        li.active:first-of-type a {
+            border-left: none;
+        }
+
+        a {
+            margin-bottom: -2px;
+            margin-left: 0;
+            margin-right: 0;
+            @extend %no-border-radius;
+        }
+    }
+
+    .limited-height {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
     .form-control {
         @extend %no-border-radius;
     }
@@ -298,6 +343,10 @@
         font-size: 16pt;
         padding-top: 6px;
         margin: 0;
+    }
+
+    .small-title {
+        font-size: 14pt;
     }
 
     .user-img {
@@ -380,15 +429,16 @@
 .countdown {
 
     .unit-item {
+        display: inline-block;
         margin: 0 15px;
     }
 
     .unit-number {
-        font-size: 40pt;
+        font-size: 30pt;
     }
 
     .unit-info {
-        font-size: 14pt;
+        font-size: 11pt;
     }
 
 }
@@ -465,6 +515,133 @@
         margin-right: 10px;
     }
 
+}
+
+.trackdown-box {
+
+    $completed-background-color: #d9edf7;
+
+    $current-background-color: darken(#428bca, 6.5%);
+    $current-color: #fff;
+
+    &.trackdown-current {
+
+        .panel {
+            background-color: $current-background-color;
+            color: $current-color;
+        }
+
+        .btn-link {
+            color: $current-color;
+        }
+    }
+
+    &.trackdown-completed {
+        
+        .panel {
+            background-color: $completed-background-color;
+        }
+
+    }
+
+    .panel {
+        height: 180px;
+    }
+
+    .trackdown-title {
+        font-size: 10.5pt;
+        text-transform: uppercase;        
+    }
+
+    .trackdown-number {
+        font-size: 28pt;
+        font-weight: 300;
+    }
+
+    .trackdown-standout {
+        font-size: 12pt;
+        font-weight: 300;
+        margin: 5px 0;
+    }
+
+    .trackdown-icon {
+        float: left;
+        margin-right: 25px;
+        font-size: 58pt;
+    }
+    
+    .countdown {
+        
+        .unit-item {
+            margin: 5px 10px;
+        }
+
+        .unit-number {
+            font-size: 24pt;
+        }
+
+        .unit-info {
+            font-size: 10.5pt;
+        }
+    }
+
+}
+
+.quick-nav {
+
+    &.panel-body {
+        padding: 0;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .quick-nav-item {
+        width: 20%;
+        padding: 25px 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .quick-nav-icon {
+        font-size: 28pt;
+        margin-bottom: 5px;
+    }
+
+}
+
+.panel-nav {
+
+    .panel-nav-item {
+
+        .panel-body {
+            padding: 30px 15px;
+        }
+
+        text-align: center;
+    }
+    
+    .panel-nav-icon {
+        font-size: 40pt;
+        margin-bottom: 20px;
+    }
+
+    .panel-nav-title {
+        font-size: 13.5pt;
+    }
+
+}
+
+.cloak {
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+    z-index: 10;
+
+    .cloak-content {
+        display: table-cell;
+        vertical-align: middle;
+    }
 }
 
 .btn-circle {

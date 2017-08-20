@@ -12,12 +12,12 @@
             </template>
         </message-box>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" ref="cloakable">
             <div class="panel-body" v-if="headed">
                 <div class="pull-right panel-control">
                     <slot name="control"></slot>
                 </div>
-                <h1 class="page-title">
+                <h1 :class="{'page-title': true, 'small-title': smallTitle}">
                     <slot></slot>
                 </h1>
             </div>
@@ -40,8 +40,11 @@
 
     import Citeup from '../../../citeup'
     import MessageBox from '../MessageBox.vue'
+    import HasCloak from '../../mixins/HasCloak'
 
     export default {
+
+        mixins: [HasCloak],
 
         props: {
 
@@ -68,6 +71,11 @@
             model: {
                 type: Array,
                 required: true,
+            },
+
+            smallTitle: {
+                type: Boolean,
+                default: false,
             },
 
         },

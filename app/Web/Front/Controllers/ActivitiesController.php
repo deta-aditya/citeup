@@ -4,9 +4,8 @@ namespace App\Web\Front\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modules\Electrons\Config\Config;
+use App\Modules\Electrons\Stages\StageService;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
-use App\Modules\Electrons\Activities\ScheduleService as Schedules;
 
 class ActivitiesController extends Controller
 {
@@ -16,20 +15,6 @@ class ActivitiesController extends Controller
      * @var Activities
      */
     protected $activities;
-
-    /**
-     * The schedule service instance.
-     *
-     * @var Schedules
-     */
-    protected $schedule;
-
-    /**
-     * The web config instance.
-     *
-     * @var Config
-     */
-    protected $config;
 
     /**
      * The navigation theme.
@@ -49,14 +34,11 @@ class ActivitiesController extends Controller
      * Create a new controller instance.
      *
      * @param  Activities  $activities
-     * @param  Config      $config
      * @return void
      */
-    public function __construct(Activities $activities, Schedules $schedules, Config $config)
+    public function __construct(Activities $activities)
     {
         $this->activities = $activities;
-        $this->schedules = $schedules;
-        $this->config = $config;
     }
 
     /**
@@ -80,7 +62,6 @@ class ActivitiesController extends Controller
     protected function data($type)
     {
         return [
-            'config'        => $this->config->all(),
             'activities'    => $this->getActivities(),
             'regs_condition'=> $this->getRegsCondition(),
             'nav'           => $this->navtheme,
@@ -125,11 +106,11 @@ class ActivitiesController extends Controller
      */
     protected function getRegsCondition()
     {
-        $stage = $this->config->get('stage')['name'];
+        $stage = resolve('stage.current');
 
         return [
-            'competition' => $stage === 'Pendaftaran',
-            'non_competition' => ! ($stage === 'Pra-Pendaftaran' || $stage === 'Paska Acara'),
+            'competition' => $stage->isOn(StageService::STAGE_REGISTRATION),
+            'non_competition' => ! ($stage->isOn(StageService::STAGE_PRE_REGISTRATION) || $stage->isOn(StageService::STAGE_POST_EVENT)),
         ];
     }
 

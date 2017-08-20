@@ -55,9 +55,13 @@ Route::group(['namespace' => 'App\Web'], function () {
      */
     Route::group(['namespace' => 'Auth\Controllers'], function () {
 
-        Route::get('/secretloginroute', 'LoginController@form')->name('login.form');
+        Route::get('/login', 'LoginController@form')->name('login.form');
         Route::post('/login', 'LoginController@login')->name('login');
-        // Route::get('/register', 'RegisterController@form')->name('register.form');
+        Route::get('/register/{id}/{name?}', 'RegisterController@form')->name('register.form');
+        Route::get('/register', 'RegisterController@index')->name('register.index');
+        Route::post('/register/lomba-logika', 'RegisterController@registerLombaLogika')->name('register.lomba-logika');
+        Route::post('/register/lomba-desain', 'RegisterController@registerLombaDesain')->name('register.lomba-desain');
+        Route::post('/register/seminar-i-t', 'RegisterController@registerSeminarIt')->name('register.seminar-it');
         // Route::post('/register', 'RegisterController@register')->name('register');
 
     });

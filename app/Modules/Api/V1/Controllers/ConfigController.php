@@ -3,7 +3,7 @@
 namespace App\Modules\Api\V1\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Electrons\Config\Config;
+use App\Modules\Electrons\Settings\Settings;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Config\ConfigIndexRequest;
 use App\Modules\Api\V1\Requests\Config\ConfigInsertRequest;
@@ -14,21 +14,21 @@ class ConfigController extends Controller
     use JsonApiController;
 
     /**
-     * A storage service instance.
+     * A settings instance.
      *
-     * @var Config
+     * @var Settings
      */
-    protected $config;
+    protected $settings;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Config  $config
+     * @param  Settings  $settings
      * @return void
      */
-    public function __construct(Config $config)
+    public function __construct(Settings $settings)
     {
-        $this->config = $config;
+        $this->settings = $settings;
     }
     
     /**
@@ -40,9 +40,7 @@ class ConfigController extends Controller
     public function index(ConfigIndexRequest $request)
     {
         return $this->respondJson([
-            'config' => $this->config->get(
-                $request->input('path'), $this->config->all()
-            )
+            'config' => $this->settings->all()
         ]);
     }
     
@@ -54,9 +52,7 @@ class ConfigController extends Controller
      */
     public function insert(ConfigInsertRequest $request)
     {
-        $this->config->set(
-            $this->config->decode($request->input('value'))
-        );
+        $this->settings->editInJson($request->input('value'));
 
         return $this->respondJson([]);
     }

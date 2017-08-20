@@ -22,11 +22,11 @@ class DashboardController extends Controller
      * Show the dashboard page.
      * The whole part here will be controller by vue-router.
      *
-     * @param  string  $additional
      * @param  Users   $users
+     * @param  string  $vue
      * @return Response
      */
-    public function index(Users $users)
+    public function index(Users $users, $vue = '')
     {
         $user = auth()->user();
 

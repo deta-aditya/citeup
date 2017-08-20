@@ -6,7 +6,7 @@
         </label>
         <div :class="[controlColumn]">
             <div class="btn-group">
-                <item v-for="(data, id, index) in list" :key="index" :id="id" :state="id == passableValue" @check="input">
+                <item v-for="(data, id, index) in list" :key="index" :id="id" :disabled="disabled" :state="id == passableValue" @check="input">
                     <slot name="list" :data="data" :id="id"></slot>
                 </item>
             </div>
@@ -41,6 +41,11 @@
             labeled: {
                 type: Boolean,
                 default: true
+            },
+
+            disabled: {
+                type: Boolean,
+                default: false,
             },
 
             labelWidth: {

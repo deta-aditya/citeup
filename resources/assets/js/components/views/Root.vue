@@ -1,22 +1,24 @@
 
 <template>
-    <div>
-        Halo!
-    </div>
+    <entrant-dashboard v-if="user.entrant"></entrant-dashboard>
+    <committee-dashboard v-else-if="user.committee"></committee-dashboard>
+    <admin-dashboard v-else-if="user.admin"></admin-dashboard>
 </template>
 
 <script>
 
-    import { mapState } from 'vuex'
-
-    const STATES = [
-        'config'
-    ]
+    import CurrentUser from '../mixins/CurrentUser'
+    import AdminDashboard from './dashboard/AdminDashboard.vue'
+    import EntrantDashboard from './dashboard/EntrantDashboard.vue'
+    import CommitteeDashboard from './dashboard/CommitteeDashboard.vue'
 
     export default {
-        
-        computed: mapState(STATES),
-
+        mixins: [CurrentUser],
+        components: {
+            'admin-dashboard': AdminDashboard,
+            'committee-dashboard': CommitteeDashboard,
+            'entrant-dashboard': EntrantDashboard,
+        },
     }
 
 </script>

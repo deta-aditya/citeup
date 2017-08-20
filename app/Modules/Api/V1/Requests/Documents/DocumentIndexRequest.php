@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Documents;
 
+use App\User;
 use App\Modules\Models\Document;
 use App\Modules\Electrons\Shared\Requests\ApiIndexRequest;
 
@@ -23,12 +24,10 @@ class DocumentIndexRequest extends ApiIndexRequest
     {
         $user = $this->user();
 
-        $entry = strpos($this->url(), 'entries/') !== false ?
-            $this->route('entry')->id :
-            $this->input('entry', null);
+        $target = $this->input('user', null);
 
         return $user->isAdmin() || $user->hasKey('get-documents') || 
-            ($user->isEntrant() && $user->entry->id == $entry);
+            ($user->isEntrant() && $user->entry->id === User::find($target)->entry->id);
     }
 
     /**

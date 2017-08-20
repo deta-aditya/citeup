@@ -1,6 +1,6 @@
 
 <template>
-    <button type="button" ref="element" :class="[ 'btn', stateClass ]" @click="check">
+    <button type="button" ref="element" :class="[ 'btn', stateClass ]" @click="check" :disabled="disabled">
         <slot></slot>
     </button>
 </template>
@@ -16,6 +16,11 @@
             },
 
             state: {
+                type: Boolean,
+                default: false,
+            },
+
+            disabled: {
                 type: Boolean,
                 default: false,
             },
@@ -57,6 +62,10 @@
             },
 
             check() {
+                if (this.disabled) {
+                    return
+                }
+
                 this.$emit('check', this.id)
             },
 

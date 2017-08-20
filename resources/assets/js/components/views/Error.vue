@@ -37,7 +37,8 @@
     }
 
     const DETAILED_TEXTS = {
-        404: 'Waduh! Anda mencoba mengakses halaman yang tidak tersedia di web ini.'
+        403: 'Stop! Anda tidak memiliki izin untuk mengakses fitur ini.',
+        404: 'Waduh! Anda mencoba mengakses halaman yang tidak tersedia di aplikasi ini.',
     }
 
     export default {

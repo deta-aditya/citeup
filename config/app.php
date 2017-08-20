@@ -14,6 +14,8 @@ return [
 
     'name' => env('APP_NAME', 'CITE UP'),
 
+    'version' => '0.9.0 (Beta)',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -186,6 +188,9 @@ return [
          * Others...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Modules\Providers\SettingsServiceProvider::class,
+        App\Modules\Providers\CurrentStageServiceProvider::class,
+        App\Modules\Providers\ComposerServiceProvider::class,
     ],
 
     /*

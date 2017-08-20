@@ -2,6 +2,7 @@
 
 namespace App\Modules\Api\V1\Requests\Storage;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorageDeleteRequest extends FormRequest
@@ -21,6 +22,10 @@ class StorageDeleteRequest extends FormRequest
 
         return
             ($objType === 'profiles' && $objId === $user->id) ||
+            ($user->isEntrant() && (
+                ($objType === 'profiles' && User::find($objId)->entry->id === $user->entry->id) ||
+                ($objType === 'documents' && $objId == $user->entry->id)
+            )) ||
             ($user->isCommittee() && (
                 ($objType === 'profiles' && ($user->hasKey('delete-users') || $user->hasKey('put-users'))) ||
                 ($objType === 'activities' && ($user->hasKey('delete-activities') || $user->hasKey('put-activities'))) ||

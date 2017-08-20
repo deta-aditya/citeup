@@ -2,26 +2,49 @@
 
 @section('content')
 
-@if ($config['landing']['show']['welcometron'])
-<!-- Welcome Carousel -->
+@if ($settings->show->welcometron)
+<!-- Welcometron -->
 <div id="front-welcometron">
 
-    <div class="container text-center">
-        <div class="logo-placeholder">
-            <img src="{{ asset('images/web/logo_white_lg.png') }}">
+    @if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION))
+        <div class="pre-registration">
+            <div class="container text-center">
+                <div class="logo-placeholder">
+                    <img src="{{ asset('images/web/logo_white_lg.png') }}">
+                </div>
+                <div class="text-placeholder">
+                    @if ($settings->countdown->active)
+                        <p class="notice">{{ $settings->countdown->text }}</p>
+                        <countdown done="{{ $settings->countdown->off }}"></countdown>
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="text-placeholder">
-            @if ($config['landing']['countdown']['active'])
-                <p class="notice">{{ $config['landing']['countdown']['text'] }}</p>
-                <countdown done="{{ $config['landing']['countdown']['off'] }}"></countdown>
-            @endif
+    @else
+        <div class="registration-competition">
+            <div class="clouds-holder">
+                <div class="container logo-holder">
+                    <img src="{{ asset('images/web/focs_white_sm.png') }}" class="pull-left">
+                    <img src="{{ asset('images/web/logoup_white_sm.png') }}" class="pull-right">
+                </div>
+                <div class="welcome-text">
+                    <div class="container text-center">
+                        <div>Program Studi Ilmu Komputer</div>
+                        <div>Universitas Pertamina</div>
+                        <div>Mempersembahkan</div>
+                    </div>
+                </div>
+                <div class="container text-center">
+                    <img src="{{ asset('images/web/main_illustration.png') }}" class="illustration">
+                </div>
+            </div>
         </div>
-    </div>
+    @endif
 
 </div>
 @endif
 
-@if ($config['landing']['show']['activities'])
+@if ($settings->show->activities)
 <!-- About Div -->
 <div id="front-about" class="text-center">
     <div class="container">
@@ -55,7 +78,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['prizes'])
+@if ($settings->show->prizes)
 <!-- Prizes Div -->
 <div id="front-prizes">
     <div class="container-container">
@@ -91,7 +114,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['map'])
+@if ($settings->show->map)
 <!-- Map Div -->
 <div id="front-map">
 
@@ -100,8 +123,8 @@
     </div>
 
     <!-- Google Map -->
-    <gmap-map class="map-content" :center="{{ json_encode($config['address']['location']) }}" :zoom="15" :options="gmapOptions">
-        <gmap-marker :position="{{ json_encode($config['address']['location']) }}"></gmap-marker>
+    <gmap-map class="map-content" :center="{{ $settings->location->toJson() }}" :zoom="15" :options="gmapOptions">
+        <gmap-marker :position="{{ $settings->location->toJson() }}"></gmap-marker>
     </gmap-map>
 
     <!-- Info -->
@@ -125,7 +148,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['faqs'])
+@if ($settings->show->faqs)
 <!-- FAQ Div -->
 <div id="front-faq">
     <div class="container">
@@ -153,7 +176,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['news'])
+@if ($settings->show->news)
 <hr class="short-middle-bar center-block">
 
 <!-- News Div -->
@@ -176,7 +199,7 @@
                         <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                         <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                             <div>{{ $item->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -192,7 +215,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p class="news-content">{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -209,7 +232,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -228,7 +251,7 @@
                         <h3><a href="{{ route('news.item', ['news' => $first->id, 'slug' => kebab_case($first->title)]) }}">{{ $first->title }}</a></h3>
                         <p>{{ str_limit(strip_tags($first->content, 150)) }}</p>
                         <div class="editor-placeholder text-muted clearfix">
-                            <img src="{{ asset(is_null($first->edits->last()->user->profile) ? '/images/default.jpg' : $first->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                            <img src="{{ asset($first->edits->last()->user->photo) }}" class="img-circle pull-left">
                             <div>{{ $first->edits->last()->user->name }}</div>
                             <small>{{ \Carbon\Carbon::parse($first->updated_at)->format('j M, H:i') }}</small>
                         </div>
@@ -244,7 +267,7 @@
                             <h3><a href="{{ route('news.item', ['news' => $item->id, 'slug' => kebab_case($item->title)]) }}">{{ $item->title }}</a></h3>
                             <p>{{ str_limit(strip_tags($item->content, 150)) }}</p>
                             <div class="editor-placeholder text-muted clearfix">
-                                <img src="{{ asset(is_null($item->edits->last()->user->profile) ? '/images/default.jpg' : $item->edits->last()->user->profile->photo) }}" class="img-circle pull-left">
+                                <img src="{{ asset($item->edits->last()->user->photo) }}" class="img-circle pull-left">
                                 <div>{{ $item->edits->last()->user->name }}</div>
                                 <small>{{ \Carbon\Carbon::parse($item->updated_at)->format('j M, H:i') }}</small>
                             </div>    
@@ -260,7 +283,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['galleries'])
+@if ($settings->show->galleries)
 <!-- Galleries Div -->
 <div id="front-galleries" style="margin:20px 0 40px;">
     <div class="container">
@@ -281,7 +304,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['contact'])
+@if ($settings->show->contact)
 <div id="front-contact-us">
     
     <div class="container text-center">
@@ -291,22 +314,14 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <dl>
-                            <dt>Adam Marsono Putra</dt>
-                            <dd>082133022618</dd>
-                            <dd class="email">a.putra@universitaspertamina.ac.id</dd>
-                            <dd><a href="http://line.me/ti/p/~damanotra" target="_blank">damanotra</a></dd>
-                        </dl>      
-                    </div>
-                    <div class="col-sm-6">
-                        <dl>
-                            <dt>Aries Dwi Prasetiyo</dt>
-                            <dd>081230102023</dd>
-                            <dd class="email">ariesdwiprasetiyo4@gmail.com</dd>
-                            <dd><a href="http://line.me/ti/p/~aries0" target="_blank">aries0</a></dd>
-                        </dl>
-                    </div>
+                    @foreach ($contact_people as $contact)
+                        <div class="col-sm-{{ 12 / $contact_people->count() }}">
+                            <dl>
+                                <dt>{{ $contact['name'] }}</dt>
+                                <dd>{{ $contact['phone'] }}</dd>
+                            </dl>      
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -315,7 +330,7 @@
 </div>
 @endif
 
-@if ($config['landing']['show']['sponsors'] && ($sponsors->count() > 0 || $media_partners->count() > 0))
+@if ($settings->show->sponsors && ($sponsors->count() > 0 || $media_partners->count() > 0))
 <!-- Sponsors Div -->
 <div id="front-sponsors">
     <div class="container text-center sponsors-container">
@@ -342,4 +357,25 @@
 </div>
 @endif
 
+@if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_REGISTRATION))
+<div id="front-reg-button">
+    <div class="container">
+        <p>Ayo daftarkan dirimu sekarang juga!</p>
+        <button type="button" class="btn btn-lg btn-default">Daftar</button>
+    </div>
+</div>
+@endif
+
+@endsection
+
+@section('scripts')
+<!-- Google Analytics -->
+<script> 
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ 
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), 
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) 
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); 
+  ga('create', 'UA-104788505-1', 'auto'); 
+  ga('send', 'pageview'); 
+</script>
 @endsection

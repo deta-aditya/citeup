@@ -1,12 +1,13 @@
 
 <template>
     <div class="data-panel-addon">
+        <slot></slot>
         <input type="text" class="form-control" placeholder="Cari..." v-if="searchable">
         <div class="btn-group" v-if="checkable">
             <button type="button" class="btn btn-default" @click="checkAll">{{ checkBtnText }}</button>
             <dropdown variant="default" align="right">
                 <template slot="menu">
-                    <slot></slot>
+                    <slot name="check-menu"></slot>
                 </template>
             </dropdown>
         </div>

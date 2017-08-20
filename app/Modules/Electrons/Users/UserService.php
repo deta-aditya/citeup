@@ -9,13 +9,22 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UserService extends Service
 {
     /**
+     * The default photo.
+     *
+     * @var string
+     */
+    protected $defaultPhoto = 'images/default.jpg';
+
+    /**
      * Data for creating starter admin user.
      *
      * @var array
      */
     protected $starterAdmin = [
+        'name' => 'Administrator',
         'email' => 'admin@citeup.web.id',
         'password' => 'rahasia',
+        'photo' => 'images/default.jpg',
     ];
 
     /**
@@ -24,8 +33,10 @@ class UserService extends Service
      * @var array
      */
     protected $exampleEntrant = [
+        'name' => 'Peserta',
         'email' => 'peserta@citeup.web.id',
         'password' => 'rahasia',
+        'photo' => 'images/default.jpg',
     ];
 
     /**
@@ -34,8 +45,10 @@ class UserService extends Service
      * @var array
      */
     protected $exampleCommittee = [
+        'name' => 'Panitia',
         'email' => 'panitia@citeup.web.id',
         'password' => 'rahasia',
+        'photo' => 'images/default.jpg',
     ];
 
     /**
@@ -51,7 +64,7 @@ class UserService extends Service
      * @param  array  $params
      * @return array
      */
-    public function getMultiple(array $params)
+    public function multiple(array $params = [])
     {
         return $this->getMultipleCustomQuery($this->getModel()->query(), $params);
     }
@@ -114,9 +127,29 @@ class UserService extends Service
     {
         $cleaned = $this->cryptPassword($this->clean($data));
 
+        if (! array_has($cleaned, 'photo')) {
+            $cleaned['photo'] = $this->defaultPhoto;
+        }
+
+        if (array_has($data, 'entry')) {
+            $cleaned['entry_id'] = $data['entry'];
+        }
+
         $user = User::create($cleaned);
 
         return $user;
+    }
+
+    /**
+     * Update a user by id.
+     *
+     * @param  int    $userId
+     * @param  array  $data
+     * @return this
+     */
+    public function updateById($id, array $data)
+    {
+        return $this->update(User::find($id), $data);
     }
 
     /**
@@ -128,7 +161,7 @@ class UserService extends Service
      */
     public function update(User $user, array $data)
     {
-        $cleaned = $this->cryptPassword($this->clean($data));
+        $cleaned = $this->cryptPassword($this->cleanForUpdate($data));
 
         foreach ($cleaned as $field => $value) {
             $user->{$field} = $value;
@@ -160,10 +193,12 @@ class UserService extends Service
      */
     public function loadRelationships(User $user)
     {
-        $user->load('role', 'profile');
+        $user->load('role');
 
         if ($user->isEntrant()) {
-            $user->load('entry', 'activity', 'alerts');
+            $user->load('entry', 'entry.activity');
+        } else if ($user->isCommittee()) {
+            $user->load('keys');
         }
 
         return $this;
@@ -232,6 +267,25 @@ class UserService extends Service
     public function createExampleCommittee()
     {
         return $this->create($this->exampleCommittee);
+    }
+
+    /**
+     * Filter an array so it is eligible for updation.
+     *
+     * @param  array  $data
+     * @return array
+     */
+    protected function cleanForUpdate(array $data)
+    {
+        $cleaned = $this->clean($data);
+
+        array_forget($cleaned, ['role', 'role_id', 'entry', 'entry_id', 'crew']);
+
+        if (array_has($cleaned, 'email') && empty($cleaned['email'])) {
+            array_forget($cleaned, 'email');
+        }
+
+        return $cleaned;
     }
 
     /**

@@ -16,7 +16,7 @@ class UserInsertRequest extends FormRequest
     {
         $accessor = $this->user();
 
-        return $accessor->isAdmin() || $accessor->hasKey('post-users');;
+        return $accessor->isAdmin() || $accessor->hasKey('post-users');
     }
 
     /**
@@ -30,14 +30,11 @@ class UserInsertRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|string|confirmed',
             'role' => 'required|int|exists:roles,id',
-            'activity' => 'required_if:role,'. RoleService::ROLE_ENTRANT .'|int|exists:activities,id',
             'name' => 'required|string|max:191',
-            'address' => 'string',
-            'school' => 'string|max:191',
-            'city' => 'string|max:191',
+            'entry' => 'required_if:role,'. RoleService::ROLE_ENTRANT .'|int|exists:entries,id',
+            'crew' => 'boolean',
             'photo' => 'string|max:191',
-            'phone' => 'string|max:15',
-            'section' => 'string|max:191',
+            'section' => 'required_if:role,'. RoleService::ROLE_COMMITTEE .'string|max:191',
         ];
     }
 }
