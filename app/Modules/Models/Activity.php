@@ -32,7 +32,7 @@ class Activity extends Model implements Editable
      */
     protected $fillable = [
         'name', 'description', 'short_description', 'icon', 
-        'order', 'prize_first', 'prize_second', 'prize_third',
+        'order', 'prize_first', 'prize_second', 'prize_third', 'guide',
     ];
 
     /**

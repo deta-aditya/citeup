@@ -32,6 +32,9 @@
                 Ikon
                 <p class="help-block" slot="help-block">Gunakan gambar dengan ukuran 512 x 512 dengan latar belakang berwarna <span style="color:#dd7322">jingga tua (#DD7322)</span>.</p>
             </file-input>
+            <file-input name="guide" :label-width="2" :control-width="10" :object-id="activity.id" object-type="activity" accept="*" :store-immediately="true" :crop="false" v-model="activity.guide">
+                Panduan Peserta
+            </file-input>
             <template slot="footer-control">
                 <div class="text-right">
                     <button type="button" class="btn btn-primary" @click="submit">
