@@ -107,7 +107,7 @@ class ActivitiesController extends Controller
     protected function getRegsCondition()
     {
         $stage = resolve('stage.current');
-
+        
         return [
             'competition' => $stage->isOn(StageService::STAGE_REGISTRATION),
             'non_competition' => ! ($stage->isOn(StageService::STAGE_PRE_REGISTRATION) || $stage->isOn(StageService::STAGE_POST_EVENT)),

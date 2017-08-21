@@ -18,6 +18,7 @@
                             <div class="pull-right" v-if="user.admin">
                                 <router-link class="btn btn-default" :to="{ name: 'Acara' }">Indeks</router-link>
                                 <router-link class="btn btn-default" :to="{ name: 'Acara.Sunting', params: { id: id }}">Sunting</router-link>
+                                <a :href="activity.guide | assetify" class="btn btn-default" target="_blank" v-if="activity.guide">Panduan</a>
                             </div>
                             <h1 class="page-title">{{ activity.name }} <small v-if="user.admin">Acara / #{{ id }}</small></h1>
                         </div>

@@ -21,6 +21,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="pull-right">
+                        <template v-if="activity.guide"><a :href="activity.guide | assetify" target="_blank">Panduan</a> &middot;</template>
                         <router-link :to="{ name: 'Profil' }">Profil</router-link> &middot;
                         <router-link :to="{ name: 'Logout' }">Logout</router-link>
                     </div>

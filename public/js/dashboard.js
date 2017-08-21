@@ -75561,6 +75561,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -75652,6 +75655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_Addon_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__kits_DataPanel_ListItem_vue__);
+//
 //
 //
 //
@@ -76707,6 +76711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Citeup_News_NewsRepo__ = __webpack_require__(410);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Citeup_Activity_ActivityRepo__ = __webpack_require__(408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__ = __webpack_require__(321);
+//
 //
 //
 //
@@ -89951,7 +89956,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }, [_vm._v("Sunting")])], 1) : _vm._e(), _vm._v(" "), _c('h1', {
+  }, [_vm._v("Sunting")]), _vm._v(" "), (_vm.activity.guide) ? _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": _vm._f("assetify")(_vm.activity.guide),
+      "target": "_blank"
+    }
+  }, [_vm._v("Panduan")]) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('h1', {
     staticClass: "page-title"
   }, [_vm._v(_vm._s(_vm.activity.name) + " "), (_vm.user.admin) ? _c('small', [_vm._v("Acara / #" + _vm._s(_vm.id))]) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
@@ -90248,7 +90259,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "pull-right"
-  }, [_c('router-link', {
+  }, [(_vm.activity.guide) ? [_c('a', {
+    attrs: {
+      "href": _vm._f("assetify")(_vm.activity.guide),
+      "target": "_blank"
+    }
+  }, [_vm._v("Panduan")]), _vm._v(" ·")] : _vm._e(), _vm._v(" "), _c('router-link', {
     attrs: {
       "to": {
         name: 'Profil'
@@ -90260,7 +90276,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: 'Logout'
       }
     }
-  }, [_vm._v("Logout")])], 1), _vm._v(" "), _c('h1', {
+  }, [_vm._v("Logout")])], 2), _vm._v(" "), _c('h1', {
     staticClass: "page-title"
   }, [_vm._v("Selamat Datang " + _vm._s(_vm.user.name) + "!")])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
@@ -90861,7 +90877,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "color": "#dd7322"
     }
-  }, [_vm._v("jingga tua (#DD7322)")]), _vm._v(".")])]), _vm._v(" "), _c('template', {
+  }, [_vm._v("jingga tua (#DD7322)")]), _vm._v(".")])]), _vm._v(" "), _c('file-input', {
+    attrs: {
+      "name": "guide",
+      "label-width": 2,
+      "control-width": 10,
+      "object-id": _vm.activity.id,
+      "object-type": "activity",
+      "accept": "*",
+      "store-immediately": true,
+      "crop": false
+    },
+    model: {
+      value: (_vm.activity.guide),
+      callback: function($$v) {
+        _vm.activity.guide = $$v
+      },
+      expression: "activity.guide"
+    }
+  }, [_vm._v("\n            Panduan Peserta\n        ")]), _vm._v(" "), _c('template', {
     slot: "footer-control"
   }, [_c('div', {
     staticClass: "text-right"
