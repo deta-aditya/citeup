@@ -361,7 +361,7 @@
 <div id="front-reg-button">
     <div class="container">
         <p>Ayo daftarkan dirimu sekarang juga!</p>
-        <button type="button" class="btn btn-lg btn-default">Daftar</button>
+        <a href="{{ route('register.index') }}" class="btn btn-lg btn-default">Daftar</a>
     </div>
 </div>
 @endif
