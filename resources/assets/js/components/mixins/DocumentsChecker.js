@@ -17,7 +17,14 @@ export default {
         },
 
         submittedDocuments(users) {
-            return this.reduceDocuments(users).filter(item => {
+
+            let reduced = this.reduceDocuments(users)
+
+            if (reduced.length === 0) {
+                return -1
+            }
+
+            return reduced.filter(item => {
                 return item.file !== Citeup.defaultImageClean
             }).length
         },

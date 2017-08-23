@@ -71379,7 +71379,14 @@ function shortenPreview(value) {
             return activityId === 1 ? 4 : 2;
         },
         submittedDocuments: function submittedDocuments(users) {
-            return this.reduceDocuments(users).filter(function (item) {
+
+            var reduced = this.reduceDocuments(users);
+
+            if (reduced.length === 0) {
+                return -1;
+            }
+
+            return reduced.filter(function (item) {
                 return item.file !== __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].defaultImageClean;
             }).length;
         },
@@ -77173,7 +77180,6 @@ var counter = 0;
             this.$refs.idCards.cloaking = !(newVal.length === this.entry.users.length && this.entry.id > 0);
         },
         paymentProof: function paymentProof(newVal) {
-            console.log(newVal);
             this.$refs.paymentProof.cloaking = newVal.id === 0;
         }
     },
@@ -88468,7 +88474,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('template', {
     slot: "title"
-  }, [_vm._v("Peserta Lomba Logika")]), _vm._v(" "), _c('template', {
+  }, [_vm._v("Peserta Seminar IT")]), _vm._v(" "), _c('template', {
     slot: "number"
   }, [_vm._v(_vm._s(_vm.seminarItNumber) + " / " + _vm._s(_vm.seminarItTarget))]), _vm._v(" "), _c('template', {
     slot: "standout"

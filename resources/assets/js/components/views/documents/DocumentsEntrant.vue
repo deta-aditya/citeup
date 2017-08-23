@@ -117,7 +117,6 @@
                     ! ((newVal.length === this.entry.users.length) && (this.entry.id > 0))
             },
             paymentProof(newVal) {
-                console.log(newVal)
                 this.$refs.paymentProof.cloaking = newVal.id === 0
             }
         },
