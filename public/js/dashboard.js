@@ -76870,6 +76870,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -76903,7 +76905,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             related: [{ documents: [] }],
             activity: { id: 0, schedules: [] },
             news: [],
-            faqs: []
+            faqs: [],
+            hasDoneLoading: {
+                activity: false,
+                news: false,
+                faqs: false
+            }
         };
     },
 
@@ -76975,6 +76982,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__Citeup_Activity_ActivityRepo__["a" /* findById */])(id).then(function (activity) {
                 _this.activity = activity;
+                _this.hasDoneLoading.activity = true;
                 _this.elements.switchTab.cloaking = !_this.switchTabCompleted();
                 _this.elements.dataPanelSchedules.cloaking = false;
             });
@@ -76991,6 +76999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__Citeup_News_NewsRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (news) {
                 _this3.news = news;
+                _this3.hasDoneLoading.news = true;
                 _this3.elements.switchTab.cloaking = !_this3.switchTabCompleted();
             });
         },
@@ -76999,11 +77008,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__Citeup_Faq_FaqRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (faqs) {
                 _this4.faqs = faqs;
+                _this4.hasDoneLoading.faqs = true;
                 _this4.elements.switchTab.cloaking = !_this4.switchTabCompleted();
             });
         },
         switchTabCompleted: function switchTabCompleted() {
-            return this.activity.id > 0 && this.news.length > 0 && this.faqs.length;
+            return this.hasDoneLoading.activity && this.hasDoneLoading.news && this.hasDoneLoading.faqs;
         },
 
         shortenPreview: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["e" /* shortenPreview */]
@@ -90455,7 +90465,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "panel-body limited-height"
-  }, _vm._l((_vm.news), function(item) {
+  }, [(_vm.news.length === 0) ? _c('div', {
+    staticClass: "text-center"
+  }, [_vm._v("Tidak Ada Berita")]) : _vm._e(), _vm._v(" "), _vm._l((_vm.news), function(item) {
     return _c('div', {
       staticClass: "media"
     }, [_c('div', {
@@ -90485,7 +90497,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('div', {
       staticClass: "help-block"
     }, [_vm._v("Diposting pada " + _vm._s(_vm._f("formatDateShort")(item.created_at)))])])])
-  }))]), _vm._v(" "), _c('div', {
+  })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "tab-pane",
     attrs: {
       "role": "tabpanel",
@@ -90493,7 +90505,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "panel-body limited-height"
-  }, _vm._l((_vm.faqs), function(item) {
+  }, [(_vm.faqs.length === 0) ? _c('div', {
+    staticClass: "text-center"
+  }, [_vm._v("Tidak Ada FAQs")]) : _vm._e(), _vm._v(" "), _vm._l((_vm.faqs), function(item) {
     return _c('div', {
       staticClass: "media"
     }, [_c('div', {
@@ -90505,7 +90519,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "innerHTML": _vm._s(item.answer)
       }
     })])])
-  }))])])])], 1), _vm._v(" "), _c('div', {
+  })], 2)])])])], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-4"
   }, [_c('data-panel', {
     ref: "dataPanelSchedules",
