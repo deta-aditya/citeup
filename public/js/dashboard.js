@@ -71879,7 +71879,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
 
 
-    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].mapMutations(['updateUser', 'updateRoute']), __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
+    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].mapMutations(['updateUser', 'updateRoute', 'setViewScrollMaxed']), __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
 
         /**
          * Store the user information from server.
@@ -71887,6 +71887,11 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         storeUserInfo: function storeUserInfo() {
 
             this.updateUser(this.$refs.info);
+        },
+        detectMaxScrollHeight: function detectMaxScrollHeight(view) {
+            if (view.scrollHeight - window.innerHeight === view.scrollTop - 38) {
+                this.setViewScrollMaxed(true);
+            }
         }
     })
 
@@ -72156,6 +72161,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MessageBox_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MessageBox_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_HasCloak__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_HasViewScroll__ = __webpack_require__(566);
 //
 //
 //
@@ -72194,6 +72200,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -72202,7 +72209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_HasCloak__["a" /* default */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_HasCloak__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_HasViewScroll__["a" /* default */]],
 
     props: {
 
@@ -72340,6 +72347,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.deleteData = {};
             this.deleteLink = null;
+        },
+        onScrollMaxChange: function onScrollMaxChange(status) {
+
+            if (status === false) {
+                return;
+            }
+
+            this.$emit('maxed-scroll', status);
+            this.setViewScrollMaxed(false);
         }
     },
 
@@ -81258,7 +81274,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         error: {
             status: 0,
             messages: {}
-        }
+        },
+
+        viewScrollMaxed: false
 
     },
 
@@ -81313,6 +81331,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                 status: 0,
                 messages: []
             };
+        },
+        setViewScrollMaxed: function setViewScrollMaxed(state, payload) {
+            state.viewScrollMaxed = payload;
         }
     },
 
@@ -96163,6 +96184,33 @@ module.exports = __webpack_amd_options__;
 
 module.exports = __webpack_require__(335);
 
+
+/***/ }),
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(12);
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])(['viewScrollMaxed']),
+    watch: {
+        viewScrollMaxed: function viewScrollMaxed(newVal) {}
+    },
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(['setViewScrollMaxed']), {
+        onScrollMaxChange: function onScrollMaxChange(newVal) {
+            //
+        }
+    })
+});
 
 /***/ })
 /******/ ]);

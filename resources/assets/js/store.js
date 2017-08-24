@@ -43,6 +43,8 @@ export default new Vuex.Store({
             messages: {},            
         },
 
+        viewScrollMaxed: false,
+
     },
 
     getters: {
@@ -111,6 +113,10 @@ export default new Vuex.Store({
                 status: 0,
                 messages: [],            
             }
+        },
+
+        setViewScrollMaxed(state, payload) {
+            state.viewScrollMaxed = payload
         },
 
     },

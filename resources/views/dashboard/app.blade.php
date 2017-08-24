@@ -32,7 +32,9 @@
             <app-sidebar v-if="hasNav"></app-sidebar>
             <div id="app-page">
                 <spacer :vertical="topbarHeight"></spacer>
-                <router-view class="app-view"></router-view>
+                <div class="app-view" ref="appView" @scroll="detectMaxScrollHeight($event.target)">
+                    <router-view></router-view>
+                </div>
             </div>
         </div>
     </div>
