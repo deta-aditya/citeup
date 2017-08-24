@@ -3,6 +3,7 @@
 namespace App\Modules\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\Modules\Contracts\Models\Editable;
 use App\Modules\Events\EditWasMade;
 
@@ -26,6 +27,20 @@ class Schedule extends Model implements Editable
     protected $fillable = [
         'activity_id', 'held_at', 'description',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('standard_sorting', function (Builder $builder) {
+            $builder->orderBy('held_at', 'asc');
+        });
+    }
 
     /**
      * Get the activity of the schedule.
