@@ -71998,6 +71998,7 @@ var MUTATIONS = ['setError', 'clearError'];
             __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */][this.method](this.action, this.model).then(function (response) {
                 _this.$emit('submitted', response.data.data);
             }).catch(function (error) {
+                _this.$emit('error', error.response);
                 _this.setError({ status: error.response.status, messages: error.response.data });
             });
         }
@@ -73667,14 +73668,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.cloaking = false;
                 _this.$emit('submitted', payload);
             });
+
+            this.apiForm.$on('error', function (payload) {
+                _this.cloaking = false;
+                _this.$emit('error', payload);
+            });
         },
         submit: function submit() {
 
             if (this.formless) {
                 return;
             }
-
-            console.log(this.cloaking);
 
             this.cloaking = true;
             this.apiForm.submit();
