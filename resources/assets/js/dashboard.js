@@ -101,6 +101,7 @@ const dashboardViewModel = new Vue({
 
         'updateUser',
         'updateRoute',
+        'setViewScrollMaxed',
 
     ]), Vuex.mapActions([
 
@@ -117,6 +118,12 @@ const dashboardViewModel = new Vue({
             
             this.updateUser(this.$refs.info);
 
+        },
+
+        detectMaxScrollHeight(view) {
+            if (view.scrollHeight - window.innerHeight === view.scrollTop - 38) {
+                this.setViewScrollMaxed(true)
+            }
         },
 
     })

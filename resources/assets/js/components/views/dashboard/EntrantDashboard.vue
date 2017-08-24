@@ -108,6 +108,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="news">
                             <div class="panel-body limited-height">
+                                <div class="text-center" v-if="news.length === 0">Tidak Ada Berita</div>
                                 <div class="media" v-for="item in news">
                                     <div class="media-left">
                                         <img class="media-object news-icon" :src="item.picture | assetify">
@@ -124,6 +125,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="faqs">
                             <div class="panel-body limited-height">
+                                <div class="text-center" v-if="faqs.length === 0">Tidak Ada FAQs</div>
                                 <div class="media" v-for="item in faqs">
                                     <div class="media-body">
                                         <h4 class="media-heading">{{ item.question }}</h4>
@@ -187,6 +189,11 @@
                 activity: { id: 0, schedules: [] },
                 news: [],
                 faqs: [],
+                hasDoneLoading: {
+                    activity: false,
+                    news: false,
+                    faqs: false,
+                }
             }
         },
 
@@ -254,6 +261,7 @@
             getActivity(id) {
                 getActivity(id).then(activity => {
                     this.activity = activity
+                    this.hasDoneLoading.activity = true
                     this.elements.switchTab.cloaking = ! this.switchTabCompleted()
                     this.elements.dataPanelSchedules.cloaking = false
                 })
@@ -264,17 +272,19 @@
             getNews(skip, take) {
                 getNews(skip, take).then(news => {
                     this.news = news 
+                    this.hasDoneLoading.news = true
                     this.elements.switchTab.cloaking = ! this.switchTabCompleted()
                 })
             },
             getFaqs(skip, take) {
                 getFaqs(skip, take).then(faqs => {
                     this.faqs = faqs
+                    this.hasDoneLoading.faqs = true
                     this.elements.switchTab.cloaking = ! this.switchTabCompleted()
                 })
             },
             switchTabCompleted() {
-                return this.activity.id > 0 && this.news.length > 0 && this.faqs.length
+                return this.hasDoneLoading.activity && this.hasDoneLoading.news && this.hasDoneLoading.faqs
             },
             shortenPreview: shortenPreview,
         },

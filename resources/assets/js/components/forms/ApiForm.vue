@@ -94,6 +94,7 @@
                 Citeup[this.method](this.action, this.model).then((response) => {
                     this.$emit('submitted', response.data.data)
                 }).catch((error) => {
+                    this.$emit('error', error.response)
                     this.setError({ status: error.response.status, messages: error.response.data })
                 })
             }

@@ -118,6 +118,11 @@
                     this.cloaking = false
                     this.$emit('submitted', payload)
                 })
+
+                this.apiForm.$on('error', payload => {
+                    this.cloaking = false
+                    this.$emit('error', payload)
+                })
             },
 
             submit() {
@@ -125,8 +130,6 @@
                 if (this.formless) {
                     return
                 }
-
-                console.log(this.cloaking)
 
                 this.cloaking = true
                 this.apiForm.submit()

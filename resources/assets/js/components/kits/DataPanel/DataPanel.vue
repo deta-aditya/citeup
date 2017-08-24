@@ -41,10 +41,11 @@
     import Citeup from '../../../citeup'
     import MessageBox from '../MessageBox.vue'
     import HasCloak from '../../mixins/HasCloak'
+    import HasViewScroll from '../../mixins/HasViewScroll'
 
     export default {
 
-        mixins: [HasCloak],
+        mixins: [HasCloak, HasViewScroll],
 
         props: {
 
@@ -178,6 +179,16 @@
                 this.deleteData = {}
                 this.deleteLink = null
 
+            },
+
+            onScrollMaxChange(status) {
+
+                if (status === false) {
+                    return
+                }
+
+                this.$emit('maxed-scroll', status)
+                this.setViewScrollMaxed(false) 
             },
 
         },

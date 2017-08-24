@@ -54,7 +54,7 @@
             
             <div class="col-sm-4">
                 <trackdown-box :completed="seminarItNumber >= seminarItTarget" :icon="decideProgressClass(seminarItNumber, seminarItTarget)">
-                    <template slot="title">Peserta Lomba Logika</template>
+                    <template slot="title">Peserta Seminar IT</template>
                     <template slot="number">{{ seminarItNumber }} / {{ seminarItTarget }}</template>
                     <template slot="standout">
                         {{ seminarItNumber >= seminarItTarget ? 'Sudah Mencapai Target!' : (seminarItTarget - seminarItNumber) + ' Peserta Lagi!' }}

@@ -34,7 +34,7 @@ class ActivityUpdateRequest extends FormRequest
             'prize_first' => 'int|min:0|nullable',
             'prize_second' => 'int|min:0|nullable',
             'prize_third' => 'int|min:0|nullable',
-            'guide' => 'string',
+            'guide' => 'string|nullable',
         ];
     }
 }
