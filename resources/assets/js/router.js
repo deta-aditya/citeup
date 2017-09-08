@@ -21,6 +21,7 @@ import CommitteesCreate from './components/views/users/CommitteesCreate.vue';
 import CommitteesUpdate from './components/views/users/CommitteesUpdate.vue';
 import CommitteesView from './components/views/users/CommitteesView.vue';
 import Documents from './components/views/documents/Documents.vue';
+import DocumentsView from './components/views/documents/DocumentsView.vue';
 import ActivitiesIndex from './components/views/activities/ActivitiesIndex.vue';
 import ActivitiesView from './components/views/activities/ActivitiesView.vue';
 import ActivitiesUpdate from './components/views/activities/ActivitiesUpdate.vue';
@@ -58,6 +59,7 @@ const router = new VueRouter({
         { path: '/entrants', name: 'Peserta', component: EntrantsIndex, props: true },
         { path: '/entrants/:id', name: 'Peserta.Lihat', component: EntrantsView, props: true },
         { path: '/entrants/:id/update', name: 'Peserta.Sunting', component: EntrantsUpdate, props: true },
+        { path: '/entrants/:id/documents', name: 'Peserta.Dokumen', component: DocumentsView, props: true },
         { path: '/committees', name: 'Panitia', component: CommitteesIndex },
         { path: '/committees/create', name: 'Panitia.Buat', component: CommitteesCreate },
         { path: '/committees/:id', name: 'Panitia.Lihat', component: CommitteesView, props: true },

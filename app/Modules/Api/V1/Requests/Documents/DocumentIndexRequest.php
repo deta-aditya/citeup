@@ -38,6 +38,7 @@ class DocumentIndexRequest extends ApiIndexRequest
     protected function additional()
     {
         return [
+            'user' => 'int|exists:users,id',
             'entry' => 'int|exists:entries,id',
             'type' => 'int|between:0,9',
         ];

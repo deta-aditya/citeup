@@ -7,7 +7,7 @@ const DICTIONARY = {
     'schedules':        { keyName: 'Kelola Jadwal' },
     'entries':          { keyName: 'Kelola Peserta', navName: 'Peserta', icon: 'user' },
     'submissions':      { keyName: 'Kelola Submisi', navName: 'Submisi', icon: 'paper-plane' },
-    'documents':        { keyName: 'Kelola Dokumen', navName: 'Dokumen', icon: 'folder' },
+    'documents':        { keyName: 'Kelola Dokumen' },
     'testimonials':     { keyName: 'Kelola Testimoni', navName: 'Testimoni', icon: 'star' },
     'attempts':         { keyName: 'Kelola Percobaan (Quiz)' },
     'questions':        { keyName: 'Kelola Pertanyaan (Quiz)', navName: 'Quiz', icon: 'map-signs' },

@@ -25,10 +25,6 @@
                         <i class="fa fa-fw fa-user"></i>
                         Peserta
                     </router-link>
-                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Dokumen') >= 0 }" :to="{ name: 'Dokumen' }">
-                        <i class="fa fa-fw fa-folder"></i>
-                        Dokumen
-                    </router-link>
                     <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Acara') >= 0 }" :to="{ name: 'Acara' }">
                         <i class="fa fa-fw fa-bullhorn"></i>
                         Acara

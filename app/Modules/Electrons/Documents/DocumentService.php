@@ -45,6 +45,10 @@ class DocumentService extends Service
             $query->ofUser($params['user']);
         }
 
+        if (array_has($params, 'entry')) {
+            $query->ofEntry($params['entry']);
+        }
+
         if (array_has($params, 'type')) {
             $query->ofType($params['type']);
         }

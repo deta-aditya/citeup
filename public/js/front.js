@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 563);
+/******/ 	return __webpack_require__(__webpack_require__.s = 565);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22194,76 +22194,6 @@ module.exports = {
 /***/ }),
 /* 8 */,
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(221),
-  /* template */
-  __webpack_require__(263),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\kits\\FormPanel\\TextInput.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] TextInput.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8d3fb63c", Component.options)
-  } else {
-    hotAPI.reload("data-v-8d3fb63c", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _lodash = __webpack_require__(2);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  methods: {
-    getPropsValues: function getPropsValues() {
-      var _this = this;
-
-      return _lodash2.default.mapValues(this.$options.props, function (v, k) {
-        return _this[k];
-      });
-    }
-  }
-};
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-var core = module.exports = {version: '1.2.6'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ }),
-/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23076,6 +23006,76 @@ var index_esm = {
 
 
 /***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(221),
+  /* template */
+  __webpack_require__(263),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\chores\\_citeup\\app\\citeup\\resources\\assets\\js\\components\\kits\\FormPanel\\TextInput.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TextInput.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8d3fb63c", Component.options)
+  } else {
+    hotAPI.reload("data-v-8d3fb63c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = __webpack_require__(2);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  methods: {
+    getPropsValues: function getPropsValues() {
+      var _this = this;
+
+      return _lodash2.default.mapValues(this.$options.props, function (v, k) {
+        return _this[k];
+      });
+    }
+  }
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+var core = module.exports = {version: '1.2.6'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23804,7 +23804,7 @@ module.exports = !__webpack_require__(48)(function(){
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(14)
-  , core      = __webpack_require__(11)
+  , core      = __webpack_require__(12)
   , ctx       = __webpack_require__(25)
   , PROTOTYPE = 'prototype';
 
@@ -24488,7 +24488,7 @@ module.exports = defaults;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
 
 
 
@@ -56583,7 +56583,7 @@ module.exports = function(key){
 var classof   = __webpack_require__(46)
   , ITERATOR  = __webpack_require__(5)('iterator')
   , Iterators = __webpack_require__(22);
-module.exports = __webpack_require__(11).getIteratorMethod = function(it){
+module.exports = __webpack_require__(12).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -58554,7 +58554,7 @@ var _simulateArrowDown = __webpack_require__(182);
 
 var _simulateArrowDown2 = _interopRequireDefault(_simulateArrowDown);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -58791,7 +58791,7 @@ var _propsBinder = __webpack_require__(6);
 
 var _propsBinder2 = _interopRequireDefault(_propsBinder);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -58979,7 +58979,7 @@ var _simulateArrowDown = __webpack_require__(182);
 
 var _simulateArrowDown2 = _interopRequireDefault(_simulateArrowDown);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -59099,7 +59099,7 @@ var _propsBinder = __webpack_require__(6);
 
 var _propsBinder2 = _interopRequireDefault(_propsBinder);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -68490,7 +68490,7 @@ var _mapElementMixin = __webpack_require__(17);
 
 var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -68594,7 +68594,7 @@ var _mapElementMixin = __webpack_require__(17);
 
 var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -68702,7 +68702,7 @@ var _propsBinder = __webpack_require__(6);
 
 var _propsBinder2 = _interopRequireDefault(_propsBinder);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -68866,7 +68866,7 @@ var _mapElementMixin = __webpack_require__(17);
 
 var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -69040,7 +69040,7 @@ var _mapElementMixin = __webpack_require__(17);
 
 var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -69160,7 +69160,7 @@ var _mapElementMixin = __webpack_require__(17);
 
 var _mapElementMixin2 = _interopRequireDefault(_mapElementMixin);
 
-var _getPropsValuesMixin = __webpack_require__(10);
+var _getPropsValuesMixin = __webpack_require__(11);
 
 var _getPropsValuesMixin2 = _interopRequireDefault(_getPropsValuesMixin);
 
@@ -69403,7 +69403,7 @@ module.exports = __webpack_require__(315);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(317);
-module.exports = __webpack_require__(11).Object.keys;
+module.exports = __webpack_require__(12).Object.keys;
 
 /***/ }),
 /* 285 */
@@ -69413,7 +69413,7 @@ __webpack_require__(189);
 __webpack_require__(54);
 __webpack_require__(55);
 __webpack_require__(318);
-module.exports = __webpack_require__(11).Promise;
+module.exports = __webpack_require__(12).Promise;
 
 /***/ }),
 /* 286 */
@@ -69421,7 +69421,7 @@ module.exports = __webpack_require__(11).Promise;
 
 __webpack_require__(319);
 __webpack_require__(189);
-module.exports = __webpack_require__(11).Symbol;
+module.exports = __webpack_require__(12).Symbol;
 
 /***/ }),
 /* 287 */
@@ -69729,7 +69729,7 @@ module.exports = function asap(fn){
 
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(33)
-  , core    = __webpack_require__(11)
+  , core    = __webpack_require__(12)
   , fails   = __webpack_require__(48);
 module.exports = function(KEY, exec){
   var fn  = (core.Object || {})[KEY] || Object[KEY]
@@ -69794,7 +69794,7 @@ module.exports = {
 
 "use strict";
 
-var core        = __webpack_require__(11)
+var core        = __webpack_require__(12)
   , $           = __webpack_require__(7)
   , DESCRIPTORS = __webpack_require__(32)
   , SPECIES     = __webpack_require__(5)('species');
@@ -69958,7 +69958,7 @@ module.exports = function(it){
 
 var anObject = __webpack_require__(18)
   , get      = __webpack_require__(188);
-module.exports = __webpack_require__(11).getIterator = function(it){
+module.exports = __webpack_require__(12).getIterator = function(it){
   var iterFn = get(it);
   if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
   return anObject(iterFn.call(it));
@@ -69971,7 +69971,7 @@ module.exports = __webpack_require__(11).getIterator = function(it){
 var classof   = __webpack_require__(46)
   , ITERATOR  = __webpack_require__(5)('iterator')
   , Iterators = __webpack_require__(22);
-module.exports = __webpack_require__(11).isIterable = function(it){
+module.exports = __webpack_require__(12).isIterable = function(it){
   var O = Object(it);
   return O[ITERATOR] !== undefined
     || '@@iterator' in O
@@ -70264,7 +70264,7 @@ if(!USE_NATIVE){
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
 __webpack_require__(35)(P, PROMISE);
 __webpack_require__(307)(PROMISE);
-Wrapper = __webpack_require__(11)[PROMISE];
+Wrapper = __webpack_require__(12)[PROMISE];
 
 // statics
 $export($export.S + $export.F * !USE_NATIVE, PROMISE, {
@@ -70587,7 +70587,7 @@ setToStringTag(global.JSON, 'JSON', true);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_misc_Countdown_vue__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_misc_Countdown_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_kits_FormPanel_TextInput__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_kits_FormPanel_TextInput__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_kits_FormPanel_TextInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_kits_FormPanel_TextInput__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_kits_FormPanel_EmailInput__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_kits_FormPanel_EmailInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_kits_FormPanel_EmailInput__);
@@ -70937,7 +70937,9 @@ var frontViewModel = new Vue({
 /* 560 */,
 /* 561 */,
 /* 562 */,
-/* 563 */
+/* 563 */,
+/* 564 */,
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(336);

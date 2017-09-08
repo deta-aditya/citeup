@@ -36,6 +36,7 @@ Route::group([
     Route::put('/entrants/{entry}', 'EntryController@updateEntrantProfile');
     Route::post('/entrants/{entry}/disqualify', 'EntryController@disqualify');
     Route::post('/entrants/{entry}/qualify', 'EntryController@qualify');
+    Route::post('/entrants/{entry}/approve', 'EntryController@approve');
 
     Route::get('/keys', 'KeyController@index');
     Route::post('/keys', 'KeyController@insert');
