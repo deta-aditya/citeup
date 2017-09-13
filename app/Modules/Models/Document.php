@@ -24,7 +24,7 @@ class Document extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+
     /**
      * Scope a query to only include documents of the given user.
      *
@@ -36,6 +36,22 @@ class Document extends Model
     {
         return $query->whereHas('user', function ($query) use ($user) {
             $query->where('user_id', $user);
+        });
+    }
+
+    /**
+     * Scope a query to only include documents of the given entry.
+     *
+     * @param  Builder  $query
+     * @param  int      $entry
+     * @return Builder
+     */
+    public function scopeOfEntry($query, $entry)
+    {
+        return $query->whereHas('user', function ($query) use ($entry) {
+            $query->whereHas('entry', function ($query) use ($entry) {
+                $query->where('entry_id', $entry);
+            });
         });
     }
     

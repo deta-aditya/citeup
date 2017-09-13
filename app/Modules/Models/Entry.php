@@ -73,6 +73,18 @@ class Entry extends Model
     }    
 
     /**
+     * Scope a query to only include entries with the given stage.
+     *
+     * @param  Builder  $query
+     * @param  int      $stage
+     * @return Builder
+     */
+    public function scopeOfStage($query, $stage)
+    {
+        return $query->where('stage', $stage);
+    }  
+
+    /**
      * Scope a query to only include entries who enter the given activity.
      *
      * @param  Builder  $query

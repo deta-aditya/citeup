@@ -15,6 +15,7 @@ use App\Modules\Api\V1\Requests\Entries\EntryInsertRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryUpdateRequest;
 use App\Modules\Api\V1\Requests\Entries\EntryDeleteRequest;
 use App\Modules\Api\V1\Requests\Entries\EntrantQualifyRequest;
+use App\Modules\Api\V1\Requests\Entries\EntrantApproveRequest;
 use App\Modules\Api\V1\Requests\Entries\EntrantDisqualifyRequest;
 use App\Modules\Api\V1\Requests\Entries\AddSubmissionRequest;
 use App\Modules\Api\V1\Requests\Entries\AddDocumentRequest;
@@ -145,6 +146,14 @@ class EntryController extends Controller
     public function qualify(EntrantQualifyRequest $request, Entry $entry)
     {
         $this->entries->changeStatus($entry->id, EntryService::STATUS_ACTIVE);
+    }
+
+    /**
+     * Approve entrant.
+     */
+    public function approve(EntrantApproveRequest $request, Entry $entry)
+    {
+        $this->entries->changeStage($entry->id, EntryService::STAGE_APPROVED_ENTRANT);
     }
 
     /**

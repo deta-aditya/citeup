@@ -5,7 +5,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Citeup from './citeup';
+import Citeup from './citeup'
 
 Vue.use(Vuex)
 

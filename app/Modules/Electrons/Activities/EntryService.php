@@ -14,9 +14,9 @@ class EntryService extends Service
     const STAGE_REGISTERED_ENTRANT = 0;
 
     /**
-     * The completed document stage.
+     * The aprroved document stage.
      */
-    const STAGE_COMPLETED_ENTRANT = 1;
+    const STAGE_APPROVED_ENTRANT = 1;
 
     /**
      * The done test stage.
@@ -143,6 +143,18 @@ class EntryService extends Service
         $entry->save();
 
         return $this;
+    }
+
+    /**
+     * Change the stage of an entry with the given ID.
+     */
+    public function changeStage($id, $stage)
+    {
+        $entry = Entry::find($id);
+        $entry->stage = $stage;
+        $entry->save();
+
+        return $this;        
     }
 
     /**

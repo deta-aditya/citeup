@@ -22,10 +22,14 @@
                 <data-panel-list-item :id="props.data.id" :update="{ name: 'Peserta.Sunting', params: { id: props.data.id }}">
                     <template slot="title">
                         {{ props.data.name }} <small>{{ props.data.activity.name }}</small>
+                        <div class="pull-right">
+                            <span v-if="props.data.stage === 1" class="text-success">Dokumen peserta ini sudah disetujui.</span>
+                            <span v-else-if="documentsComplete(props.data.users)" class="text-primary">Peserta ini sudah melengkapi dokumennya.</span>
+                            <template v-else>Peserta ini belum melengkapi dokumennya.</template> 
+                        </div>
                     </template>
                     <p class="text-danger" v-if="props.data.status === 0">
                         Peserta ini didiskualifikasi.
-                
                     </p>
                     <p>
                         <small class="text-muted">
@@ -56,6 +60,7 @@
     import EntrantDisqualifier from './EntrantDisqualifier'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'
     import DataPanelAddon from '../../kits/DataPanel/Addon.vue'
+    import DocumentsChecker from '../../mixins/DocumentsChecker'
     import DataPanelListItem from '../../kits/DataPanel/ListItem.vue'
     import RadioButton from '../../kits/FormPanel/RadioButton/UngroupedList.vue'
 
@@ -68,7 +73,7 @@
 
     export default {
 
-        mixins: [UsersMixin, EntrantDisqualifier],
+        mixins: [UsersMixin, EntrantDisqualifier, DocumentsChecker],
 
         props: {
             activity: {
@@ -117,6 +122,8 @@
             getEntries(activity = 0) {
 
                 let data = {}
+
+                data.with = 'users.documents,activity'
 
                 if (activity > 0) {
                     data.activity = activity

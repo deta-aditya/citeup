@@ -37,6 +37,7 @@
                 <div class="panel-body">
                     <div class="pull-right">
                         <router-link class="btn btn-default" :to="{ name: 'Peserta' }">Indeks</router-link>
+                        <router-link class="btn btn-default" :to="{ name: 'Peserta.Dokumen', params: { id: id } }">Lihat Dokumen</router-link>
                         <router-link class="btn btn-primary" :to="{ name: 'Peserta.Sunting', params: { id: id }}">Sunting</router-link>
                     </div>
                     <h1 class="page-title">{{ entry.name }} <small>Peserta {{ entry.activity.name }} / #{{ id }}</small></h1>
