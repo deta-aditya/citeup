@@ -16,7 +16,9 @@
                 <h1 class="page-title">Kelola Dokumen Saya</h1>
             </div>
             <div class="panel-body">
-                Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'seminar' : 'penyisihan' }}.
+                <template v-if="approved">Dokumen Anda telah disetujui oleh panitia.</template>
+                <template v-else-if="completed">Anda telah melengkapi dokumen-dokumen Anda. Silahkan tunggu persetujuan dari panitia.</template>
+                <template v-else>Setiap peserta diwajibkan untuk mengunggah dokumen-dokumen berikut terlebih dahulu agar dapat mengikuti {{ seminar ? 'seminar' : 'penyisihan' }}.</template>
             </div>
         </cloaked-panel>
         </cloaked-panel>
@@ -62,6 +64,7 @@
     import CloakedPanel from '../../misc/CloakedPanel'
     import MessageBox from '../../kits/MessageBox.vue'
     import FileInput from '../../kits/FormPanel/FileInput.vue'
+    import DocumentsChecker from '../../mixins/DocumentsChecker'
 
     const STATES = [
         'user',
@@ -70,6 +73,8 @@
     var counter = 0
 
     export default {
+
+        mixins: [DocumentsChecker],
 
         data() {
             return {
@@ -92,6 +97,14 @@
             multiuser() {
                 return this.user.entry.activity.id === 1
             },
+
+            completed() {
+                return this.documentsComplete(this.entry.users)
+            },
+
+            approved() {
+                return this.entry.stage === 1
+            }
 
         }),
 

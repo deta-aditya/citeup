@@ -33,18 +33,20 @@
         <div class="row">
             
             <div class="col-sm-4">
-                <trackdown-box :current="! documentFinished" :completed="documentFinished" icon="folder" ref="trackdownBoxDocument">
+                <trackdown-box :current="! (documentFinished || documentApproved)" :completed="documentFinished" icon="folder" ref="trackdownBoxDocument">
                     <template slot="title">#1 Kelengkapan Dokumen</template>
                     <template slot="number">{{ numberOfSubmittedDocuments }} / {{ numberOfPossibleDocuments }}</template>
                     <template slot="standout">
-                        {{ documentFinished ? 'Anda Telah Melengkapi Dokumen.' : 'Segera Lengkapi Dokumen Anda!' }}
+                        <template v-if="documentApproved">Dokumen Anda Telah Disetujui!</template>
+                        <template v-else-if="documentFinished">Silahkan Tunggu Persetujuan Panitia.</template>
+                        <template v-else>Segera Lengkapi Dokumen Anda!</template>
                     </template>
                     <router-link slot="link" class="btn btn-link" :to="{ name: 'Dokumen' }">{{ documentFinished ? 'Lihat' : 'Lengkapi' }}</router-link>
                 </trackdown-box>
             </div>
             
             <div class="col-sm-4">
-                <trackdown-box :current="documentFinished && ! hasDoneSelection" :completed="hasDoneSelection" icon="map-signs" v-if="user.entry.activity.id !== 3" ref="trackdownBoxSelection">
+                <trackdown-box :current="documentApproved && ! hasDoneSelection" :completed="hasDoneSelection" icon="map-signs" v-if="user.entry.activity.id !== 3" ref="trackdownBoxSelection">
                     <template slot="title">#2 TAHAP SELEKSI</template>
                     <template slot="number">{{ stageGetter[$options.STAGE_ELIMINATION].started_at | fromNow }} Hari Lagi</template>
                     <template slot="standout">
@@ -198,6 +200,9 @@
         },
 
         computed: {
+            documentApproved() {
+                return this.user.entry.stage === 1
+            },
             documentFinished() {
                 return this.documentsComplete(this.related)
             },

@@ -34,7 +34,7 @@
             :accept="accept" 
             :required="required" 
             :disabled="disabled"
-            @input="prepareInput($event.target)">
+            @change="prepareInput($event.target)">
 
         <message-box ref="messageBox" :name="'cropbox-' + name" v-if="acceptIsImage && crop" :dismissable="false">
             <span slot="title">Crop Image</span>
@@ -327,6 +327,8 @@
 
                 this.status = FILE_INPUTTED;
 
+                console.log('Preparing input...', this.filePath)
+
                 if (this.acceptIsImage && this.crop) {
                     this.openCropper();
                 }
@@ -399,6 +401,8 @@
 
             upload() {
 
+                console.log('Uploading...')
+
                 this.status = FILE_STORING;
 
                 if (! this.crop) {
@@ -413,6 +417,8 @@
                 
                 var form = new FormData();
                 var self = this;
+
+                console.log('Start Uploading...')
 
                 form.append('object_id', this.objectId);
                 form.append('object_type', this.objectType);
