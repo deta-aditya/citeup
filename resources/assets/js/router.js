@@ -30,6 +30,7 @@ import SchedulesUpdate from './components/views/activities/schedules/SchedulesUp
 import SponsorsIndex from './components/views/sponsors/SponsorsIndex.vue';
 import SponsorsCreate from './components/views/sponsors/SponsorsCreate.vue';
 import SponsorsUpdate from './components/views/sponsors/SponsorsUpdate.vue';
+import Elimination from './components/views/Elimination.vue';
 import FaqsIndex from './components/views/faqs/FaqsIndex.vue';
 import FaqsCreate from './components/views/faqs/FaqsCreate.vue';
 import FaqsUpdate from './components/views/faqs/FaqsUpdate.vue';
@@ -70,6 +71,7 @@ const router = new VueRouter({
         { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },
         { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: SchedulesUpdate, props: true },
         { path: '/activities/:id/update', name: 'Acara.Sunting', component: ActivitiesUpdate, props: true },
+        { path: '/elimination', name: 'Seleksi', component: Elimination },
         { path: '/faqs', name: 'FAQ', component: FaqsIndex },
         { path: '/faqs/create', name: 'FAQ.Buat', component: FaqsCreate },
         { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: FaqsUpdate, props: true },

@@ -3,7 +3,7 @@
     <div :id="boxId" class="modal message-box fade" tabindex="-1" role="dialog">
         <div :class="['modal-dialog', sizeClass]" role="document">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-body" v-if="! headerless">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-if="dismissable">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -52,10 +52,15 @@
                 default: true,
             },
 
+            headerless: {
+                type: Boolean,
+                default: false,
+            },
+
             footerless: {
                 type: Boolean,
                 default: false,
-            }
+            },
 
         },
 

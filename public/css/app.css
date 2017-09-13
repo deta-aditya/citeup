@@ -13987,6 +13987,332 @@ trix-editor .attachment progress {
   margin-left: 20px;
 }
 
+#app-elimination {
+  background-color: #fff;
+}
+
+#app-elimination a:not(.btn), #app-elimination .btn-link {
+  color: #f49e26;
+}
+
+#app-elimination .form-control:focus {
+  border-color: #f49e26;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(244, 158, 38, 0.4);
+}
+
+#app-elimination .btn-primary {
+  background-color: #f49e26;
+  border-color: #f39717;
+}
+
+#app-elimination .btn-primary:hover {
+  background-color: #f5a535;
+}
+
+#app-elimination .grad-top {
+  height: 5px;
+  background-image: linear-gradient(to right, #f49e26, #ffc533);
+}
+
+#app-elimination .sticky-chat {
+  position: fixed;
+  background: linear-gradient(to bottom, #ffc533, #ffe299);
+  bottom: -488px;
+  right: 20px;
+  z-index: 90;
+  width: 400px;
+  box-shadow: 0 0 5px 0px #ffc533;
+  border-radius: 6px 6px 0 0;
+  transition: 0.5s;
+}
+
+#app-elimination .sticky-chat.open {
+  bottom: 0px;
+}
+
+#app-elimination .sticky-chat .chat-toggler {
+  font-size: 12pt;
+  background: #fff;
+  color: #dd7322;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#app-elimination .sticky-chat .chat-toggler:hover {
+  background: #f0f0f0;
+}
+
+#app-elimination .sticky-chat .chat-body {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+#app-elimination .sticky-chat .chat-message-text {
+  padding: 5px 7px;
+  border-radius: 6px;
+  max-width: 350px;
+}
+
+#app-elimination .sticky-chat .chat-caret {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+#app-elimination .sticky-chat .chat-sender {
+  padding: 7px;
+  background-color: #fff;
+  border-top: 1px solid #d3e0e9;
+}
+
+#app-elimination .sticky-chat .chat-message {
+  margin: 9px 7px;
+}
+
+#app-elimination .sticky-chat .chat-message.chat-message-me .chat-message-text {
+  background-color: #f49e26;
+  border-top-right-radius: 0px;
+  color: #fff;
+  float: right;
+}
+
+#app-elimination .sticky-chat .chat-message.chat-message-me .chat-caret {
+  border-width: 7px 7px 0 0;
+  border-color: #f49e26 transparent transparent;
+  float: right;
+}
+
+#app-elimination .sticky-chat .chat-message.chat-message-other .chat-message-text {
+  background-color: #fff;
+  border-top-left-radius: 0px;
+  float: left;
+}
+
+#app-elimination .sticky-chat .chat-message.chat-message-other .chat-caret {
+  border-width: 0 7px 7px 0;
+  border-color: transparent #fff transparent;
+  float: left;
+}
+
+#app-elimination #app-header {
+  padding: 40px 0;
+  border-bottom: 1px solid #d3e0e9;
+  font-family: Quicksand, Open Sans, sans-serif;
+}
+
+#app-elimination #app-header .app-logo {
+  width: 200px;
+}
+
+#app-elimination #app-header #subtitle {
+  margin-top: 15px;
+  font-size: 14pt;
+  font-weight: 700;
+  color: #aaa;
+}
+
+#app-elimination #app-header #app-nav {
+  margin-top: 30px;
+  margin-bottom: 0;
+  font-size: 14pt;
+  font-weight: 600;
+}
+
+#app-elimination #app-main-view {
+  padding: 40px 0;
+}
+
+#app-elimination .greeting-text, #app-elimination #question-view .question-title {
+  font-size: 18pt;
+  font-weight: 600;
+  font-family: Quicksand, Open Sans, sans-serif;
+  padding: 10px 0 40px;
+  text-align: center;
+}
+
+#app-elimination .countdown-begin {
+  background-image: linear-gradient(70deg, #333, #aaa);
+  color: #fff;
+  text-align: center;
+  font-family: Quicksand, Open Sans, sans-serif;
+  padding: 40px 0;
+}
+
+#app-elimination .countdown-begin .countdown-title {
+  font-size: 14pt;
+}
+
+#app-elimination .countdown-begin .countdown .unit-item {
+  margin: 0 5px;
+}
+
+#app-elimination .countdown-begin .countdown .unit-number {
+  width: 100px;
+  text-align: center;
+  font-size: 48pt;
+}
+
+#app-elimination .countdown-begin .countdown .unit-info {
+  font-size: 12pt;
+  font-weight: 600;
+}
+
+#app-elimination .view-title {
+  text-align: center;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-size: 28pt;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+#app-elimination .super-list .super-list-item {
+  display: block;
+  margin-bottom: 20px;
+}
+
+#app-elimination .super-list .super-list-item .super-list-number, #app-elimination .super-list .super-list-item .super-list-content {
+  display: table-cell;
+}
+
+#app-elimination .super-list .super-list-item .super-list-number span {
+  width: 52px;
+  text-align: center;
+  font-size: 16pt;
+  background-color: #ffc533;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 700;
+  color: #fff;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+#app-elimination .super-list .super-list-item .super-list-content {
+  padding-top: 15px;
+  vertical-align: top;
+  font-size: 12pt;
+}
+
+#app-elimination .super-list .super-list-item .super-list-content img {
+  max-width: 100%;
+  margin: 10px 0;
+}
+
+#app-elimination .app-help {
+  background-image: linear-gradient(30deg, #ffc533, #dd7322);
+  padding: 40px 0;
+  font-weight: 700;
+  font-size: 16pt;
+  font-family: Quicksand, Open Sans, sans-serif;
+  text-align: center;
+  color: #fff;
+}
+
+#app-elimination .app-help a {
+  color: #fff;
+}
+
+#app-elimination .app-footer {
+  padding: 20px 0;
+}
+
+#app-elimination #question-select .question-answered {
+  font-size: 14pt;
+  padding: 10px 0 40px;
+  text-align: center;
+}
+
+#app-elimination #question-select .question-list {
+  margin: 20px 0;
+}
+
+#app-elimination #question-select .question-item-placeholder {
+  text-align: center;
+}
+
+#app-elimination #question-select .question-item {
+  width: 60px;
+  text-align: center;
+  font-size: 18pt;
+  background-color: #f49e26;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 700;
+  color: #fff;
+  padding: 12px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  transition: 0.2s;
+}
+
+#app-elimination #question-select .question-item:hover {
+  background-color: #ffc533;
+  text-decoration: none;
+}
+
+#app-elimination #question-select .btn-done {
+  font-size: 18pt;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+#app-elimination #question-view .question-title {
+  text-align: center;
+  font-size: 21.5pt;
+}
+
+#app-elimination #question-view .question-content {
+  text-align: center;
+  font-size: 12pt;
+}
+
+#app-elimination #question-view .question-choices {
+  margin-top: 30px;
+}
+
+#app-elimination #question-view .question-navs {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+#app-elimination #question-view .question-navs:first-child {
+  margin-top: 0;
+}
+
+#app-elimination #question-view .question-navigate {
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-size: 16pt;
+}
+
+#app-elimination #question-view .question-img-placeholder {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#app-elimination #question-view .question-img-placeholder .question-img {
+  max-width: 100%;
+}
+
+#app-elimination #question-view .choice-item {
+  margin: 0;
+  transition: 0.75s;
+}
+
+#app-elimination #question-view .choice-item.chosen {
+  color: #fff;
+  background-image: linear-gradient(to right, #f49e26, #ffc533);
+}
+
+#app-elimination #question-view .choice-item.chosen .super-list-number span {
+  background-color: transparent;
+}
+
 #about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .nav-wrapper a, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
   border-radius: 0;
 }

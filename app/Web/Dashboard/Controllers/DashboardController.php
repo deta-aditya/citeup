@@ -5,6 +5,7 @@ namespace App\Web\Dashboard\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Users\UserService as Users;
+use App\Modules\Electrons\Stages\StageService as Stages;
 
 class DashboardController extends Controller
 {
@@ -34,6 +35,19 @@ class DashboardController extends Controller
 
         return view('dashboard.app', [
             'user' => $user
+        ]);
+    }
+
+    /**
+     * Show the elimination page.
+     *
+     * @return Response
+     */
+    public function elimination(Stages $stages)
+    {
+        return view('elimination.app', [
+            'entrant' => auth()->user()->entry,
+            'elimination' => $stages->get(Stages::STAGE_ELIMINATION)
         ]);
     }
 }

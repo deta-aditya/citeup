@@ -137,6 +137,10 @@
                 this.duration = moment.duration(
                     moment(this.done).diff(moment())
                 )
+
+                if (this.duration.asMilliseconds() <= 0) {
+                    this.$emit('done');
+                }
             },
         },
 

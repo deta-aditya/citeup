@@ -69,6 +69,10 @@
                         <i class="fa fa-fw fa-folder"></i>
                         Dokumen
                     </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Seleksi') >= 0 }" :to="{ name: 'Seleksi' }" v-if="canSeeElimmLink">
+                        <i class="fa fa-fw fa-pencil"></i>
+                        Seleksi
+                    </router-link>
                 </template>
             </div>
         </div>
@@ -78,10 +82,12 @@
 <script>
 
     import _ from 'lodash'
+    import moment from 'moment'
     import { mapState } from 'vuex'
     import Citeup from '../../citeup'
     import Spacer from '../misc/Spacer.vue'
     import KeyMapper from '../keys/KeyMapper'
+    import ApplicationStages from '../mixins/ApplicationStages'
 
     const STATES = [
         'user',
@@ -91,7 +97,7 @@
 
     export default {
 
-        mixins: [KeyMapper],
+        mixins: [KeyMapper, ApplicationStages],
     
         computed: _.merge(mapState(STATES), {
 
@@ -124,6 +130,10 @@
             navs() {
                 return this.user.committee ? this.getNavs(this.user.keys) : []
             },
+
+            canSeeElimmLink() {
+                return moment().diff(moment(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION]).started_at) >= 0
+            }
 
         }),
 
