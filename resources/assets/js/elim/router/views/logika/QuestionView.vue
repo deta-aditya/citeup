@@ -8,7 +8,7 @@
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - 1 }}" v-if="id > 1">&laquo; Sebelumnya</router-link>
                     </div>
                     <div class="col-sm-6">
-                        <router-link class="btn btn-link question-navigate" :to="{ name: 'Root' }"><b>Pilih Soal</b></router-link>
+                        <router-link class="btn btn-link question-navigate" :to="linkToQuestionSelect"><b>Pilih Soal</b></router-link>
                     </div>
                     <div class="col-sm-3">
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - (-1) }}" v-if="id < 50">Selanjutnya &raquo;</router-link>
@@ -58,7 +58,7 @@
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - 1 }}" v-if="id > 1">&laquo; Sebelumnya</router-link>
                     </div>
                     <div class="col-sm-6">
-                        <router-link class="btn btn-link question-navigate" :to="{ name: 'Root' }"><b>Pilih Soal</b></router-link>
+                        <router-link class="btn btn-link question-navigate" :to="linkToQuestionSelect"><b>Pilih Soal</b></router-link>
                     </div>
                     <div class="col-sm-3">
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - (-1) }}" v-if="id < 50">Selanjutnya &raquo;</router-link>
@@ -71,7 +71,10 @@
 
 <script>
 
+import { mapGetters } from 'vuex'
 import LogikaGuard from './LogikaGuard'
+
+const GETTERS_STAGE = ['finished']
 
 export default {
 
@@ -83,6 +86,12 @@ export default {
             required: true,
         }
     },
+
+    computed: _.merge(mapGetters('stage', GETTERS_STAGE), {
+        linkToQuestionSelect() {
+            return { name: this.finished ? 'Answers' : 'Root' }
+        },
+    }),
 
     methods: {
         choose(target) { // Later change to only accept id and use store

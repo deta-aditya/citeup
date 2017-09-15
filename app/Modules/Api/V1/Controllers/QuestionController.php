@@ -62,6 +62,8 @@ class QuestionController extends Controller
      */
     public function show(QuestionShowRequest $request, Question $question)
     {
+        $question->load('choices');
+
         return $this->respondJson(['question' => $question]);   
     }
 
@@ -71,9 +73,13 @@ class QuestionController extends Controller
      * @param  QuestionInsertRequest  $request
      * @return Response
      */
-    public function insert(QuestionInsertRequest $request)
+    public function insert(QuestionInsertRequest $request, ChoiceService $choices)
     {
         $question = $this->questions->create($request->all());
+
+        $choices->createMultiple($question->id, $request->input('choices'));
+
+        $question->load('choices');
 
         return $this->respondJson(['question' => $question]);
     }
@@ -85,9 +91,11 @@ class QuestionController extends Controller
      * @param  Question               $question
      * @return Response
      */
-    public function update(QuestionUpdateRequest $request, Question $question)
+    public function update(QuestionUpdateRequest $request, Question $question, ChoiceService $choices)
     {
         $this->questions->update($question, $request->all());
+
+        $choices->updateMultiple($request->input('choices'));
 
         return $this->respondJson(['question' => $question]);
     }

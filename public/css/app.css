@@ -14203,6 +14203,15 @@ trix-editor .attachment progress {
   margin: 10px 0;
 }
 
+#app-elimination .signature-holder {
+  margin-bottom: 35px;
+}
+
+#app-elimination .signature-holder .fa {
+  font-size: 102pt;
+  color: rgba(255, 197, 51, 0.5);
+}
+
 #app-elimination .app-help {
   background-image: linear-gradient(30deg, #ffc533, #dd7322);
   padding: 40px 0;
@@ -14255,13 +14264,6 @@ trix-editor .attachment progress {
   text-decoration: none;
 }
 
-#app-elimination #question-select .btn-done {
-  font-size: 18pt;
-  font-family: Quicksand, Open Sans, sans-serif;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-
 #app-elimination #question-view .question-title {
   text-align: center;
   font-size: 21.5pt;
@@ -14311,6 +14313,44 @@ trix-editor .attachment progress {
 
 #app-elimination #question-view .choice-item.chosen .super-list-number span {
   background-color: transparent;
+}
+
+#app-elimination .modal-title {
+  text-align: center;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 600;
+}
+
+#app-elimination .finish-box-title {
+  font-size: 21.5pt;
+  font-weight: 600;
+  font-family: Quicksand, Open Sans, sans-serif;
+}
+
+#app-elimination .finish-box-subtitle {
+  font-size: 14pt;
+  font-family: Quicksand, Open Sans, sans-serif;
+}
+
+#app-elimination .timebar {
+  border-radius: 0;
+  box-shadow: none;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #d3e0e9;
+}
+
+#app-elimination .timebar .progress-bar {
+  background-image: linear-gradient(to right, #ffc533, #dd7322);
+  background-color: transparent;
+  border-radius: 0 50px 50px 0;
+  box-shadow: none;
+}
+
+#app-elimination .btn-done {
+  font-size: 18pt;
+  font-family: Quicksand, Open Sans, sans-serif;
+  font-weight: 600;
+  margin-bottom: 30px;
 }
 
 #about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .nav-wrapper a, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {

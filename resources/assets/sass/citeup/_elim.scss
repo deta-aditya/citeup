@@ -239,6 +239,15 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
         }
     }
 
+    .signature-holder {
+        margin-bottom: 35px;
+
+        .fa {
+            font-size: 102pt;
+            color: transparentize($signature-lighter, 0.5);
+        }
+    }
+
     .app-help {
         background-image: linear-gradient(30deg, $signature-lighter, $signature-dark);
         padding: 40px 0;
@@ -291,13 +300,6 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
                 background-color: $signature-lighter;
                 text-decoration: none;
             }
-        }
-
-        .btn-done {
-            font-size: 18pt;
-            font-family: $title-font-family;
-            font-weight: 600;
-            margin-bottom: 30px;
         }
 
     }
@@ -356,5 +358,43 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
             }
         }
 
+    }
+
+    .modal-title {
+        text-align: center;
+        font-family: $title-font-family;
+        font-weight: 600;
+    }
+
+    .finish-box-title {
+        font-size: 21.5pt;
+        font-weight: 600;
+        font-family: $title-font-family;
+    }
+
+    .finish-box-subtitle {
+        font-size: 14pt;
+        font-family: $title-font-family;
+    }
+
+    .timebar {
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #f0f0f0;
+        border-bottom: 1px solid $border-color;
+
+        .progress-bar {
+            background-image: linear-gradient(to right, $signature-lighter, $signature-dark);
+            background-color: transparent;
+            border-radius: 0 50px 50px 0;
+            box-shadow: none;
+        }
+    }
+
+    .btn-done {
+        font-size: 18pt;
+        font-family: $title-font-family;
+        font-weight: 600;
+        margin-bottom: 30px;
     }
 }

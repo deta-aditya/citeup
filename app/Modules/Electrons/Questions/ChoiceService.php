@@ -90,6 +90,19 @@ class ChoiceService extends Service
     }
 
     /**
+     * Update multiple choices.
+     *
+     * @param  array  $data
+     * @return this
+     */
+    public function updateMultiple(array $data)
+    {
+        foreach ($data as $choice) {
+            $this->update(Choice::find($choice['id']), array_except($choice, ['id']));
+        }
+    }
+
+    /**
      * Remove a choice from the database.
      *
      * @param  Choice  $choice

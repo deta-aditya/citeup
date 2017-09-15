@@ -94,6 +94,7 @@
                 <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
             </div>
         @endif
+        @if (true) <timebar></timebar> @endif
         <div id="app-main-view">
             <div class="container">
                 {{-- @if (time() < strtotime($elimination->started_at)) --}}
