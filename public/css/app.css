@@ -14259,6 +14259,10 @@ trix-editor .attachment progress {
   transition: 0.2s;
 }
 
+#app-elimination #question-select .question-item.answered {
+  background-color: #dd7322;
+}
+
 #app-elimination #question-select .question-item:hover {
   background-color: #ffc533;
   text-decoration: none;

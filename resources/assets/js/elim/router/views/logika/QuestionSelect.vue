@@ -10,14 +10,18 @@
                 <button type="button" class="btn btn-primary" @click="finish">Selesai</button>
             </div>
         </message-box>
-        <div class="greeting-text">{{ finished ? 'Pilih Soal' : 'Pilih Soal yang Akan Dikerjakan' }} </div>
+        <div class="greeting-text">{{ finished ? 'Pilih Soal yang Akan Dilihat Jawabannya' : 'Pilih Soal yang Akan Dikerjakan' }} </div>
         <div class="question-answered">
             <template v-if="! finished">Anda telah menjawab 19 dari 50 soal.</template>
             <template v-else>Anda menyelesaikan seleksi pada 10:59:59.</template>
         </div>
         <div class="row question-list">
-            <div class="col-sm-1 question-item-placeholder" v-for="number in 50">
-                <router-link :to="{ name: 'QuestionView', params: { id: number }}" class="question-item">{{ number }}</router-link>
+            <div class="text-center cloak-content" :style="{ height: '200px' }" v-if="repoIsEmpty">
+                <p class="lead">Memuat Soal</p>
+                <i class="fa fa-spinner fa-pulse fa-3x"></i>
+            </div>
+            <div class="col-sm-1 question-item-placeholder" v-for="(question, index) in questions">
+                <a href="#" @click.prevent="toView(question.number)" :class="{ 'question-item': true, 'answered': hasAnsweredQuestion(question.id) }">{{ question.number }}</a>
             </div>
         </div>
         <div class="text-center">
@@ -30,25 +34,53 @@
 <script>
 
     import _ from 'lodash'
-    import { mapGetters, mapActions } from 'vuex'
+    import { mapState, mapGetters, mapActions } from 'vuex'
     import MessageBox from '../../../../components/kits/MessageBox.vue'
 
     const GETTERS_STAGE = ['finished']
     const ACTIONS_STAGE = ['toFinish']
 
+    const STATE_QUESTIONS = {
+        questions: state => state.repo
+    }
+
+    const GETTERS_QUESTIONS = ['repoIsEmpty']
+    const ACTIONS_QUESTONS = ['loadQuestions', 'setCurrent']
+
+    const GETTERS_ANSWERS = ['hasAnsweredQuestion']
+
     export default {
         data() {
             return {}
         },
-        computed: _.merge(mapGetters('stage', GETTERS_STAGE)),
-        methods: _.merge(mapActions('stage', ACTIONS_STAGE), {
+        created() {
+            this.loadQuestionsRepo()
+        },
+        computed: _.merge(
+            mapState('questions', STATE_QUESTIONS),
+            mapGetters('stage', GETTERS_STAGE),
+            mapGetters('questions', GETTERS_QUESTIONS),
+            mapGetters('answers', GETTERS_ANSWERS),
+        ),
+        methods: _.merge(
+            mapActions('stage', ACTIONS_STAGE), 
+            mapActions('questions', ACTIONS_QUESTONS), {
+            loadQuestionsRepo() {
+                if (this.repoIsEmpty) {
+                    this.loadQuestions()
+                }
+            },
             openFinishBox() {
                 this.$refs.finishBox.open()
             },
             finish() {
                 this.$refs.finishBox.close()
                 this.toFinish()
+                this.$router.push({ name: 'Root' })
             },
+            toView(id) {
+                this.$router.push({ name: 'QuestionView', params: { id }})
+            }
         }),
         components: {
             'message-box': MessageBox,

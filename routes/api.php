@@ -23,6 +23,7 @@ Route::group([
      */
     Route::get('/users', 'UserController@index');
     Route::post('/users', 'UserController@insert');
+    Route::get('/users/current', 'UserController@current');
     Route::get('/users/{user}', 'UserController@show');
     Route::put('/users/{user}', 'UserController@update');
     Route::delete('/users/{user}', 'UserController@remove');
@@ -173,6 +174,7 @@ Route::group([
     Route::get('/edits', 'EditController@index');
 
     Route::get('/stages', 'StageController@index');
+    Route::get('/stages/current', 'StageController@current');
     
     /*
      * Storage Routes

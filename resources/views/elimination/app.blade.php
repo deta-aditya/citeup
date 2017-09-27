@@ -79,82 +79,23 @@
                 <div id="subtitle">Online Elimination</div>
                 <ul id="app-nav" class="list-inline text-center">
                     {{-- @if ($stage->id === $elimination->id) --}}
-                    @if (true)
+                    <template v-if="! countdown">
                         <li><a href="#" @click.prevent="$refs.rulesBox.open">Peraturan</a></li>
                         <li><a href="#" @click.prevent="$refs.guideBox.open">Panduan</a></li>
-                    @endif
+                    </template>
                     <li><a href="{{ route('dashboard') }}">Keluar</a></li>
                 </ul>
             </div>
         </div>
-        {{-- @if (time() < strtotime($elimination->started_at)) --}}
-        @if (false)
-            <div class="countdown-begin">
-                <div class="countdown-title">Seleksi akan dimulai dalam</div>
-                <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
-            </div>
-        @endif
-        @if (true) <timebar></timebar> @endif
+        <div class="countdown-begin" v-if="countdown">
+            <div class="countdown-title">Seleksi akan dimulai dalam</div>
+            <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
+        </div>
+        {{-- <timebar v-if="working" finish="{{ $elimination->finished_at }}"></timebar> --}}
+        <timebar v-if="working" finish="2017-09-27 21:04:00"></timebar>
         <div id="app-main-view">
             <div class="container">
-                {{-- @if (time() < strtotime($elimination->started_at)) --}}
-                @if (false)
-                    <div class="greeting-text">Halo {{ $entrant->name }}. Sudah Siapkah Anda?</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2 class="view-title">Peraturan</h2>
-                            <div class="super-list">
-                                <div class="super-list-item">
-                                    <div class="super-list-number">
-                                        <span>1</span>
-                                    </div>
-                                    <div class="super-list-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.</p>
-                                        <p>Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.</p>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.</p>
-                                        <p>Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.</p>
-                                        <p>Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.</p>
-                                    </div>
-                                </div>
-                                <div class="super-list-item">
-                                    <div class="super-list-number">
-                                        <span>2</span>
-                                    </div>
-                                    <div class="super-list-content">
-                                        Godspeed.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <h2 class="view-title">Panduan</h2>
-                            <div class="super-list">
-                                <div class="super-list-item">
-                                    <div class="super-list-number">
-                                        <span>1</span>
-                                    </div>
-                                    <div class="super-list-content">
-                                        <p>Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.</p>
-                                        <p>Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.</p>
-                                    </div>
-                                </div>
-                                <div class="super-list-item">
-                                    <div class="super-list-number">
-                                        <span>2</span>
-                                    </div>
-                                    <div class="super-list-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.</p>
-                                        <p>Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.</p>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.</p>
-                                        <div class="text-center"><img src="{{ asset('images/default.jpg') }}" class="img-rounded"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <router-view></router-view>
-                @endif
+                <router-view></router-view>
             </div>
         </div>
         <div class="app-help">

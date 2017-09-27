@@ -9,7 +9,7 @@
 
     export default {
         mounted() {
-            window.location.replace(Citeup.appPath + '/elimination');
+            window.location.replace(Citeup.appPath + '/elimination/')
         },
     }
 

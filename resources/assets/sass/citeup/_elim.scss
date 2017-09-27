@@ -296,6 +296,10 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
             margin-bottom: 30px;
             transition: 0.2s;
 
+            &.answered {
+                background-color: $signature-dark;
+            }
+
             &:hover {
                 background-color: $signature-lighter;
                 text-decoration: none;
