@@ -65350,7 +65350,7 @@ __webpack_require__(203);
 var GETTERS_STAGE = ['countdown', 'working', 'finished'];
 
 var ACTIONS_USER = ['loadCurrentUser'];
-var ACTIONS_STAGE = ['loadCurrentStage'];
+var ACTIONS_STAGE = ['loadCurrentStage', 'toFinish'];
 var ACTIONS_ANSWERS = ['loadOrStartAttempt'];
 
 var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({

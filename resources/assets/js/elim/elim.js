@@ -15,7 +15,7 @@ import MessageBox from '../components/kits/MessageBox.vue'
 const GETTERS_STAGE = ['countdown', 'working', 'finished']
 
 const ACTIONS_USER = ['loadCurrentUser']
-const ACTIONS_STAGE = ['loadCurrentStage']
+const ACTIONS_STAGE = ['loadCurrentStage', 'toFinish']
 const ACTIONS_ANSWERS = ['loadOrStartAttempt']
 
 const vm = new Vue({

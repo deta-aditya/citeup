@@ -92,7 +92,7 @@
             <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
         </div>
         {{-- <timebar v-if="working" finish="{{ $elimination->finished_at }}"></timebar> --}}
-        <timebar v-if="working" finish="2017-09-27 21:04:00"></timebar>
+        <timebar v-if="working" finish="2017-09-27 21:05:59" @done="toFinish"></timebar>
         <div id="app-main-view">
             <div class="container">
                 <router-view></router-view>
