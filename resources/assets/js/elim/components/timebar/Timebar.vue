@@ -61,7 +61,7 @@
 
             },
             left() {
-                return this.duration === null ? '0%' : (Math.floor(this.duration.asSeconds()) / 7200 * 100) + '%'
+                return this.duration === null ? '0%' : (100 - Math.floor(this.duration.asSeconds()) / 7200 * 100) + '%'
             },
         },
 
