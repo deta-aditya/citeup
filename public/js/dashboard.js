@@ -22058,10 +22058,10 @@ module.exports = {
 
 "use strict";
 /* unused harmony export Store */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return mapMutations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapGetters; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapActions; });
 /**
  * vuex v2.3.0
  * (c) 2017 Evan You
@@ -22862,7 +22862,7 @@ var index_esm = {
   mapActions: mapActions
 };
 
-/* harmony default export */ __webpack_exports__["d"] = (index_esm);
+/* harmony default export */ __webpack_exports__["e"] = (index_esm);
 
 
 /***/ }),
@@ -34235,7 +34235,7 @@ module.exports = function(fn, that, length){
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(['user']),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user']),
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
         next(function (vm) {
             if (__WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].hasKey(vm.user, vm.$options.group)) {
@@ -56319,7 +56319,7 @@ var objectKeys = Object.keys || function (obj) {
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(['error']), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])(['getErrorMessagesOf']), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['error']), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])(['getErrorMessagesOf']), {
         hasError: function hasError() {
             return this.localError.status !== 0;
         }
@@ -56631,7 +56631,7 @@ Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])(['user'])
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* mapState */])(['user'])
 });
 
 /***/ }),
@@ -57894,7 +57894,7 @@ axiosRetry(window.axios, {
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(['user']),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user']),
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
         next(function (vm) {
             if (vm.user.admin) {
@@ -64415,11 +64415,12 @@ module.exports = __webpack_require__(14).getIteratorMethod = function(it){
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__citeup__ = __webpack_require__(3);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return monetize; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return assetify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return formatDateComplete; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return formatDateShort; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return shortenPreview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return monetize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return assetify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return formatDateComplete; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return formatDateStandard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return formatDateShort; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return shortenPreview; });
 
 
 
@@ -64452,6 +64453,10 @@ function monetize() {
 
 function assetify(value) {
     return __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].appPath + '/' + value;
+}
+
+function formatDateStandard(value) {
+    return __WEBPACK_IMPORTED_MODULE_0_moment___default()(value).format('D MMMM YYYY, HH:mm:ss');
 }
 
 function formatDateComplete(value) {
@@ -66254,7 +66259,7 @@ exports.default = {
     STAGE_FINAL: 5,
     STAGE_POST_EVENT: 6,
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(['stages']), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['stages']), {
         stageGetter: function stageGetter() {
             var obj = { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} };
 
@@ -74509,7 +74514,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     router: __WEBPACK_IMPORTED_MODULE_8__router_js__["a" /* default */],
 
-    computed: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapState(['topbarHeight']), __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapGetters({
+    computed: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapState(['topbarHeight']), __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapGetters({
 
         hasNav: 'routeHasNav',
         userUpdatable: 'routeWantsUserUpdation'
@@ -74553,7 +74558,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
 
 
-    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapMutations(['updateUser', 'updateRoute', 'setViewScrollMaxed']), __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
+    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapMutations(['updateUser', 'updateRoute', 'setViewScrollMaxed']), __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
 
         /**
          * Store the user information from server.
@@ -74662,7 +74667,7 @@ var MUTATIONS = ['setError', 'clearError'];
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(MUTATIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(MUTATIONS), {
         prepareComponent: function prepareComponent() {
             if (this.multipart) {
                 this.$refs.realForm.setAttribute('enctype', 'multipart/form-data');
@@ -77325,7 +77330,7 @@ var STATES = ['user', 'route', 'topbarHeight'];
 
     mixins: [__WEBPACK_IMPORTED_MODULE_5__keys_KeyMapper__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__mixins_ApplicationStages__["a" /* default */]],
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])(STATES), {
         userSignature: function userSignature() {
             return this.user.photo ? __WEBPACK_IMPORTED_MODULE_3__citeup__["a" /* default */].appPath + '/' + this.user.photo : __WEBPACK_IMPORTED_MODULE_3__citeup__["a" /* default */].defaultImage;
         },
@@ -77476,7 +77481,7 @@ var MUTATIONS = ['setTopbarHeight', 'loadSomething'];
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(STATES), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])(GETTERS)),
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(STATES), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])(GETTERS)),
 
     watch: {
         loading: function loading(newVal) {
@@ -77504,7 +77509,7 @@ var MUTATIONS = ['setTopbarHeight', 'loadSomething'];
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(MUTATIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(MUTATIONS), {
         prepareComponent: function prepareComponent() {
 
             this.setTopbarHeight(this.$refs.navbar.offsetHeight);
@@ -77741,7 +77746,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vue2
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])(STATES), {
         formModel: function formModel() {
             return { value: JSON.stringify(this.value) };
         }
@@ -79157,7 +79162,7 @@ var QUICK_NAVS = {
             return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()(value).diff(__WEBPACK_IMPORTED_MODULE_0_moment___default()())).asDays());
         },
 
-        formatDateComplete: __WEBPACK_IMPORTED_MODULE_6__Citeup_Helper__["d" /* formatDateComplete */]
+        formatDateComplete: __WEBPACK_IMPORTED_MODULE_6__Citeup_Helper__["e" /* formatDateComplete */]
     },
 
     created: function created() {
@@ -79557,10 +79562,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()(value).diff(__WEBPACK_IMPORTED_MODULE_0_moment___default()())).asDays());
         },
 
-        monetize: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["b" /* monetize */],
-        assetify: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["a" /* assetify */],
-        formatDateShort: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["c" /* formatDateShort */],
-        formatDateComplete: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["d" /* formatDateComplete */]
+        monetize: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["c" /* monetize */],
+        assetify: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["b" /* assetify */],
+        formatDateShort: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["d" /* formatDateShort */],
+        formatDateComplete: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["e" /* formatDateComplete */]
     },
 
     created: function created() {
@@ -79623,7 +79628,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.hasDoneLoading.activity && this.hasDoneLoading.news && this.hasDoneLoading.faqs;
         },
 
-        shortenPreview: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["e" /* shortenPreview */]
+        shortenPreview: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["f" /* shortenPreview */]
     },
 
     components: {
@@ -79656,7 +79661,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])(['user']),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* mapState */])(['user']),
 
     components: {
         'entrant-view': __WEBPACK_IMPORTED_MODULE_1__DocumentsEntrant_vue___default.a
@@ -79759,7 +79764,7 @@ var counter = 0;
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(STATES), {
         saveData: function saveData() {
             return [this.paymentProof].concat(this.idCards);
         },
@@ -82033,7 +82038,7 @@ var STATES = ['user'];
     },
 
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])(STATES),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* mapState */])(STATES),
 
     mounted: function mounted() {
         this.prepareComponent();
@@ -82547,7 +82552,7 @@ var ACTIONS = {
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["a" /* mapState */])(STATES), {
         keys: function keys() {
             return this.mapKeys(this.user.keys);
         }
@@ -82567,7 +82572,7 @@ var ACTIONS = {
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapActions */])(ACTIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])(ACTIONS), {
         prepareComponent: function prepareComponent() {
             this.form = this.$refs.form;
         },
@@ -83292,7 +83297,7 @@ var ACTIONS = {
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["a" /* mapState */])(STATES), {
         keys: function keys() {
             return this.mapKeys(this.user.keys);
         }
@@ -83317,7 +83322,7 @@ var ACTIONS = {
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapActions */])(ACTIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapActions */])(ACTIONS), {
         prepareComponent: function prepareComponent() {
             this.form = this.$refs.form;
             this.$refs.profile.cloaking = true;
@@ -83465,7 +83470,7 @@ var ACTIONS = {
     },
 
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])(STATES), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])(STATES), {
         forModel: function forModel() {
             return {
                 name: this.entry.name,
@@ -83494,7 +83499,7 @@ var ACTIONS = {
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])(ACTIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])(ACTIONS), {
         prepareComponent: function prepareComponent() {
             this.formPanel = this.$refs.formPanel;
             this.formPanel.cloaking = true;
@@ -83998,7 +84003,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])(['user']),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* mapState */])(['user']),
 
     components: {
         'committees-profile': __WEBPACK_IMPORTED_MODULE_1__CommitteesProfile_vue___default.a,
@@ -84094,11 +84099,11 @@ function listInfiniteScroll() {
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])(['viewScrollMaxed']),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['viewScrollMaxed']),
     watch: {
         viewScrollMaxed: function viewScrollMaxed(newVal) {}
     },
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(['setViewScrollMaxed']), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(['setViewScrollMaxed']), {
         onScrollMaxChange: function onScrollMaxChange(newVal) {
             //
         }
@@ -84302,9 +84307,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store({
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store({
 
     state: {
 

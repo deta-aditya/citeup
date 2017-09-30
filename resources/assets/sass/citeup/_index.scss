@@ -7,6 +7,10 @@
     border-radius: 0;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 #app-main {
 
     $sidebar-width: 250px;

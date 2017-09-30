@@ -22058,10 +22058,10 @@ module.exports = {
 
 "use strict";
 /* unused harmony export Store */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return mapMutations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapGetters; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapActions; });
 /**
  * vuex v2.3.0
  * (c) 2017 Evan You
@@ -22862,7 +22862,7 @@ var index_esm = {
   mapActions: mapActions
 };
 
-/* harmony default export */ __webpack_exports__["d"] = (index_esm);
+/* harmony default export */ __webpack_exports__["e"] = (index_esm);
 
 
 /***/ }),
@@ -62383,11 +62383,12 @@ module.exports = function listToStyles (parentId, list) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__citeup__ = __webpack_require__(3);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return monetize; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return assetify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return formatDateComplete; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return formatDateShort; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return shortenPreview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return monetize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return assetify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return formatDateComplete; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return formatDateStandard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return formatDateShort; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return shortenPreview; });
 
 
 
@@ -62420,6 +62421,10 @@ function monetize() {
 
 function assetify(value) {
     return __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].appPath + '/' + value;
+}
+
+function formatDateStandard(value) {
+    return __WEBPACK_IMPORTED_MODULE_0_moment___default()(value).format('D MMMM YYYY, HH:mm:ss');
 }
 
 function formatDateComplete(value) {
@@ -65324,15 +65329,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_index__ = __webpack_require__(431);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue__ = __webpack_require__(518);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_kits_MessageBox_vue__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_kits_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_kits_MessageBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_chat_Chat_vue__ = __webpack_require__(518);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_chat_Chat_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_chat_Chat_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_misc_Countdown_vue__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_misc_Countdown_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_kits_MessageBox_vue__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_kits_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_kits_MessageBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vuex__ = __webpack_require__(5);
 
 __webpack_require__(203);
 
@@ -65347,35 +65352,64 @@ __webpack_require__(203);
 
 
 
+var STATE_ANSWERS = {
+    attempt: function attempt(state) {
+        return state.attempt;
+    }
+};
+
 var GETTERS_STAGE = ['countdown', 'working', 'finished'];
 
 var ACTIONS_USER = ['loadCurrentUser'];
-var ACTIONS_STAGE = ['loadCurrentStage', 'toFinish'];
+var ACTIONS_STAGE = ['loadCurrentStage', 'toFinish', 'persistFinish'];
 var ACTIONS_ANSWERS = ['loadOrStartAttempt'];
+
+var MUTATIONS_ANSWERS = {
+    setAttempt: 'ANSWERS_SET_ATTEMPT'
+};
 
 var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     store: __WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */],
     router: __WEBPACK_IMPORTED_MODULE_2__router_index__["a" /* default */],
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["a" /* mapGetters */])('stage', GETTERS_STAGE),
+    data: function data() {
+        return {
+            isLoading: true
+        };
+    },
+
+    computed: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["a" /* mapState */])('answers', STATE_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE)),
     created: function created() {
         var _this = this;
 
-        this.loadCurrentStage();
         this.loadCurrentUser().then(function (user) {
-            _this.loadOrStartAttempt(user.entry.id);
+            _this.loadOrStartAttempt(user.entry.id).then(function (attempt) {
+                if (attempt.finished_at !== null) {
+                    _this.toFinish();
+                }
+                _this.loadCurrentStage().then(function () {
+                    _this.isLoading = false;
+                });
+            });
         });
     },
 
-    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapActions */])('answers', ACTIONS_ANSWERS), {
+    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('answers', ACTIONS_ANSWERS), {
         reload: function reload() {
             window.location.reload(false);
+        },
+        finish: function finish() {
+            var _this2 = this;
+
+            this.persistFinish(this.attempt.id).then(function (attempt) {
+                _this2.setAttempt(attempt);
+            });
         }
     }),
     components: {
-        'timebar': __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue___default.a,
-        'sticky-chat': __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue___default.a,
-        'countdown': __WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue___default.a,
-        'message-box': __WEBPACK_IMPORTED_MODULE_8__components_kits_MessageBox_vue___default.a
+        'timebar': __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue___default.a,
+        'sticky-chat': __WEBPACK_IMPORTED_MODULE_4__components_chat_Chat_vue___default.a,
+        'countdown': __WEBPACK_IMPORTED_MODULE_6__components_misc_Countdown_vue___default.a,
+        'message-box': __WEBPACK_IMPORTED_MODULE_7__components_kits_MessageBox_vue___default.a
     }
 }).$mount('#app-elimination');
 
@@ -65653,7 +65687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var GETTERS_STAGE = ['working', 'finished'];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])('stage', GETTERS_STAGE),
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE),
     components: {
         'timebar': __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue___default.a,
         'finished-view': __WEBPACK_IMPORTED_MODULE_2__logika_FinishedView_vue___default.a,
@@ -65763,7 +65797,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var STATE_USER = { 'user': 'data' };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])('user', STATE_USER), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])('user', STATE_USER), {
         defaultImage: function defaultImage() {
             return __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].defaultImage;
         }
@@ -65812,9 +65846,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_kits_MessageBox_vue__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_kits_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_kits_MessageBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_kits_MessageBox_vue__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_kits_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_kits_MessageBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Citeup_Helper__ = __webpack_require__(223);
 //
 //
 //
@@ -65848,6 +65883,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -65855,7 +65891,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var GETTERS_STAGE = ['finished'];
-var ACTIONS_STAGE = ['toFinish'];
+var ACTIONS_STAGE = ['persistFinish'];
 
 var STATE_QUESTIONS = {
     questions: function questions(state) {
@@ -65866,7 +65902,11 @@ var STATE_QUESTIONS = {
 var GETTERS_QUESTIONS = ['repoIsEmpty'];
 var ACTIONS_QUESTONS = ['loadQuestions', 'setCurrent'];
 
+var STATE_ANSWERS = ['attempt'];
 var GETTERS_ANSWERS = ['hasAnsweredQuestion'];
+var MUTATIONS_ANSWERS = {
+    setAttempt: 'ANSWERS_SET_ATTEMPT'
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65876,8 +65916,11 @@ var GETTERS_ANSWERS = ['hasAnsweredQuestion'];
         this.loadQuestionsRepo();
     },
 
-    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])('questions', STATE_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])('stage', GETTERS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])('questions', GETTERS_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapGetters */])('answers', GETTERS_ANSWERS)),
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('questions', ACTIONS_QUESTONS), {
+    computed: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])('answers', STATE_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])('questions', STATE_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])('questions', GETTERS_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])('answers', GETTERS_ANSWERS)),
+    filters: {
+        formatDateStandard: __WEBPACK_IMPORTED_MODULE_3__components_Citeup_Helper__["a" /* formatDateStandard */]
+    },
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])('questions', ACTIONS_QUESTONS), {
         loadQuestionsRepo: function loadQuestionsRepo() {
             if (this.repoIsEmpty) {
                 this.loadQuestions();
@@ -65887,16 +65930,20 @@ var GETTERS_ANSWERS = ['hasAnsweredQuestion'];
             this.$refs.finishBox.open();
         },
         finish: function finish() {
+            var _this = this;
+
             this.$refs.finishBox.close();
-            this.toFinish();
-            this.$router.push({ name: 'Root' });
+            this.persistFinish(this.attempt.id).then(function (attempt) {
+                _this.setAttempt(attempt);
+                _this.$router.push({ name: 'Root' });
+            });
         },
         toView: function toView(id) {
             this.$router.push({ name: 'QuestionView', params: { id: id } });
         }
     }),
     components: {
-        'message-box': __WEBPACK_IMPORTED_MODULE_2__components_kits_MessageBox_vue___default.a
+        'message-box': __WEBPACK_IMPORTED_MODULE_1__components_kits_MessageBox_vue___default.a
     }
 });
 
@@ -65989,7 +66036,7 @@ var ACTIONS_ANSWERS = ['answer', 'persistAnswers'];
         }
     },
 
-    computed: _.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])('questions', STATE_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapGetters */])('stage', GETTERS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapGetters */])('answers', GETTERS_ANSWERS), {
+    computed: _.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* mapState */])('questions', STATE_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])('answers', GETTERS_ANSWERS), {
         linkToQuestionSelect: function linkToQuestionSelect() {
             return { name: this.finished ? 'Answers' : 'Root' };
         }
@@ -66011,7 +66058,7 @@ var ACTIONS_ANSWERS = ['answer', 'persistAnswers'];
             }
         },
 
-        assetify: __WEBPACK_IMPORTED_MODULE_0__components_Citeup_Helper__["a" /* assetify */]
+        assetify: __WEBPACK_IMPORTED_MODULE_0__components_Citeup_Helper__["b" /* assetify */]
     },
 
     created: function created() {
@@ -66032,7 +66079,7 @@ var ACTIONS_ANSWERS = ['answer', 'persistAnswers'];
     },
 
 
-    methods: _.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('questions', ACTIONS_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('answers', ACTIONS_ANSWERS), {
+    methods: _.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])('questions', ACTIONS_QUESTIONS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapActions */])('answers', ACTIONS_ANSWERS), {
         choose: function choose(choice) {
             if (this.finished) {
                 return;
@@ -66176,20 +66223,23 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
             var dispatch = _ref.dispatch,
                 commit = _ref.commit;
 
-            __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/attempts', { entry: entry, with: 'answers' }).then(function (response) {
-                if (response.data.data.attempts.length > 0) {
-                    commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempts[0] });
-                    dispatch('loadChoices', response.data.data.attempts[0].answers.map(function (item) {
-                        return item.choice_id;
-                    }));
-                    return;
-                }
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/attempts', { entry: entry, with: 'answers' }).then(function (response) {
+                    if (response.data.data.attempts.length > 0) {
+                        commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempts[0] });
+                        dispatch('loadChoices', response.data.data.attempts[0].answers.map(function (item) {
+                            return item.choice_id;
+                        }));
+                        return resolve(response.data.data.attempts[0]);
+                    }
 
-                __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].post('/attempts', {
-                    entry: entry,
-                    started_at: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD HH:mm:ss')
-                }).then(function (response) {
-                    commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempt });
+                    __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].post('/attempts', {
+                        entry: entry,
+                        started_at: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD HH:mm:ss')
+                    }).then(function (response) {
+                        commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempt });
+                        resolve(response.data.data.attempt);
+                    });
                 });
             });
         },
@@ -66246,9 +66296,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
 /* 436 */
@@ -66363,10 +66413,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(3);
-var _mutations;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__citeup__ = __webpack_require__(3);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -66386,28 +66436,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return state.status === 2;
         }
     },
-    mutations: (_mutations = {}, _defineProperty(_mutations, 'STAGE_SET_STATUS', function STAGE_SET_STATUS(state, context) {
-        state.status = context.status;
-    }), _defineProperty(_mutations, 'STAGE_STATUS_FINISH', function STAGE_STATUS_FINISH(state) {
-        state.status = 2;
-    }), _mutations),
+    mutations: {
+        'STAGE_SET_STATUS': function STAGE_SET_STATUS(state, context) {
+            state.status = context.status;
+        },
+        'STAGE_STATUS_FINISH': function STAGE_STATUS_FINISH(state) {
+            state.status = 2;
+        }
+    },
     actions: {
-        toFinish: function toFinish(_ref) {
-            var commit = _ref.commit;
+        persistFinish: function persistFinish(_ref, attemptId) {
+            var dispatch = _ref.dispatch;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].put('/attempts/' + attemptId, {
+                    finished_at: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD HH:mm:ss')
+                }).then(function (response) {
+                    dispatch('toFinish');
+                    resolve(response.data.data.attempt);
+                });
+            });
+        },
+        toFinish: function toFinish(_ref2) {
+            var commit = _ref2.commit;
 
             commit('STAGE_STATUS_FINISH');
         },
-        loadCurrentStage: function loadCurrentStage(_ref2) {
-            var commit = _ref2.commit;
+        loadCurrentStage: function loadCurrentStage(_ref3) {
+            var commit = _ref3.commit;
 
-            return commit('STAGE_SET_STATUS', { status: 1 });
-            __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/stages/current').then(function (response) {
-                switch (response.data.data.stage.id) {
-                    case 4:
-                        commit('STAGE_SET_STATUS', { status: 1 });break;
-                    case 5:
-                        commit('STAGE_STATUS_FINISH');break;
-                }
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_1__citeup__["a" /* default */].get('/stages/current').then(function (response) {
+                    switch (response.data.data.stage.id) {
+                        case 4:
+                            commit('STAGE_SET_STATUS', { status: 1 });break;
+                        case 5:
+                            commit('STAGE_STATUS_FINISH');break;
+                    }
+                });
+                resolve();
             });
         }
     }
@@ -67074,7 +67141,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "finish-box-title"
   }, [_vm._v("Yakin Selesai?")]), _vm._v(" "), _c('p', {
     staticClass: "finish-box-subtitle"
-  }, [_vm._v("Waktu tersisa sebanyak 54 menit lagi.")]), _vm._v(" "), _c('p', [_vm._v("Silahkan periksa ulang pekerjaan Anda. Perlu diingat bahwa Anda tidak akan dapat menjawab soal apapun setelah menekan tombol selesai!")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Masih tersisa waktu sebelum seleksi berakhir.")]), _vm._v(" "), _c('p', [_vm._v("Silahkan periksa ulang pekerjaan Anda. Perlu diingat bahwa Anda tidak akan dapat menjawab soal apapun setelah menekan tombol selesai!")]), _vm._v(" "), _c('div', {
     staticClass: "text-right",
     slot: "buttons"
   }, [_c('button', {
@@ -67095,7 +67162,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "greeting-text"
   }, [_vm._v(_vm._s(_vm.finished ? 'Pilih Soal yang Akan Dilihat Jawabannya' : 'Pilih Soal yang Akan Dikerjakan') + " ")]), _vm._v(" "), _c('div', {
     staticClass: "question-answered"
-  }, [(!_vm.finished) ? [_vm._v("Anda telah menjawab 19 dari 50 soal.")] : [_vm._v("Anda menyelesaikan seleksi pada 10:59:59.")]], 2), _vm._v(" "), _c('div', {
+  }, [(!_vm.finished) ? [_vm._v("Anda telah menjawab 19 dari 50 soal.")] : [_vm._v("Anda menyelesaikan seleksi pada " + _vm._s(_vm._f("formatDateStandard")(_vm.attempt.finished_at)) + ".")]], 2), _vm._v(" "), _c('div', {
     staticClass: "row question-list"
   }, [(_vm.repoIsEmpty) ? _c('div', {
     staticClass: "text-center cloak-content",

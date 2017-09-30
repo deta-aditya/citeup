@@ -50,18 +50,21 @@ export default {
     },
     actions: {
         loadOrStartAttempt({ dispatch, commit }, entry) {
-            Citeup.get('/attempts', { entry, with: 'answers' }).then(response => {
-                if (response.data.data.attempts.length > 0) {
-                    commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempts[0] })
-                    dispatch('loadChoices', response.data.data.attempts[0].answers.map(item => item.choice_id))
-                    return
-                }
+            return new Promise((resolve, reject) => {
+                Citeup.get('/attempts', { entry, with: 'answers' }).then(response => {
+                    if (response.data.data.attempts.length > 0) {
+                        commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempts[0] })
+                        dispatch('loadChoices', response.data.data.attempts[0].answers.map(item => item.choice_id))
+                        return resolve(response.data.data.attempts[0])
+                    }
 
-                Citeup.post('/attempts', { 
-                    entry, 
-                    started_at: moment().format('YYYY-MM-DD HH:mm:ss') 
-                }).then(response => {
-                    commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempt })
+                    Citeup.post('/attempts', { 
+                        entry, 
+                        started_at: moment().format('YYYY-MM-DD HH:mm:ss') 
+                    }).then(response => {
+                        commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempt })
+                        resolve(response.data.data.attempt)
+                    })
                 })
             })
         },

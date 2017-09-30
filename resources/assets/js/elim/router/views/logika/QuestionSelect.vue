@@ -3,7 +3,7 @@
     <div id="question-select">
         <message-box ref="finishBox" name="finish-box" class="text-center" :headerless="true">
             <h2 class="finish-box-title">Yakin Selesai?</h2>
-            <p class="finish-box-subtitle">Waktu tersisa sebanyak 54 menit lagi.</p>
+            <p class="finish-box-subtitle">Masih tersisa waktu sebelum seleksi berakhir.</p>
             <p>Silahkan periksa ulang pekerjaan Anda. Perlu diingat bahwa Anda tidak akan dapat menjawab soal apapun setelah menekan tombol selesai!</p>
             <div slot="buttons" class="text-right">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Periksa Kembali</button>
@@ -13,7 +13,7 @@
         <div class="greeting-text">{{ finished ? 'Pilih Soal yang Akan Dilihat Jawabannya' : 'Pilih Soal yang Akan Dikerjakan' }} </div>
         <div class="question-answered">
             <template v-if="! finished">Anda telah menjawab 19 dari 50 soal.</template>
-            <template v-else>Anda menyelesaikan seleksi pada 10:59:59.</template>
+            <template v-else>Anda menyelesaikan seleksi pada {{ attempt.finished_at | formatDateStandard }}.</template>
         </div>
         <div class="row question-list">
             <div class="text-center cloak-content" :style="{ height: '200px' }" v-if="repoIsEmpty">
@@ -34,11 +34,12 @@
 <script>
 
     import _ from 'lodash'
-    import { mapState, mapGetters, mapActions } from 'vuex'
     import MessageBox from '../../../../components/kits/MessageBox.vue'
+    import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+    import { formatDateStandard } from '../../../../components/Citeup/Helper'
 
     const GETTERS_STAGE = ['finished']
-    const ACTIONS_STAGE = ['toFinish']
+    const ACTIONS_STAGE = ['persistFinish']
 
     const STATE_QUESTIONS = {
         questions: state => state.repo
@@ -47,7 +48,11 @@
     const GETTERS_QUESTIONS = ['repoIsEmpty']
     const ACTIONS_QUESTONS = ['loadQuestions', 'setCurrent']
 
+    const STATE_ANSWERS = ['attempt']
     const GETTERS_ANSWERS = ['hasAnsweredQuestion']
+    const MUTATIONS_ANSWERS = {
+        setAttempt: 'ANSWERS_SET_ATTEMPT'
+    }
 
     export default {
         data() {
@@ -57,13 +62,18 @@
             this.loadQuestionsRepo()
         },
         computed: _.merge(
+            mapState('answers', STATE_ANSWERS),
             mapState('questions', STATE_QUESTIONS),
             mapGetters('stage', GETTERS_STAGE),
             mapGetters('questions', GETTERS_QUESTIONS),
             mapGetters('answers', GETTERS_ANSWERS),
         ),
+        filters: {
+            formatDateStandard,
+        },
         methods: _.merge(
             mapActions('stage', ACTIONS_STAGE), 
+            mapMutations('answers', MUTATIONS_ANSWERS),
             mapActions('questions', ACTIONS_QUESTONS), {
             loadQuestionsRepo() {
                 if (this.repoIsEmpty) {
@@ -75,8 +85,10 @@
             },
             finish() {
                 this.$refs.finishBox.close()
-                this.toFinish()
-                this.$router.push({ name: 'Root' })
+                this.persistFinish(this.attempt.id).then(attempt => {
+                    this.setAttempt(attempt)
+                    this.$router.push({ name: 'Root' })
+                })
             },
             toView(id) {
                 this.$router.push({ name: 'QuestionView', params: { id }})
