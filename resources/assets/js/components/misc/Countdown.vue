@@ -140,6 +140,7 @@
 
                 if (this.duration.asMilliseconds() <= 0) {
                     this.$emit('done');
+                    clearInterval(this.interval)
                 }
             },
         },

@@ -12,7 +12,7 @@
         </message-box>
         <div class="greeting-text">{{ finished ? 'Pilih Soal yang Akan Dilihat Jawabannya' : 'Pilih Soal yang Akan Dikerjakan' }} </div>
         <div class="question-answered">
-            <template v-if="! finished">Anda telah menjawab 19 dari 50 soal.</template>
+            <template v-if="! finished">Anda telah menjawab {{ answers.length }} dari {{ questions.length }} soal.</template>
             <template v-else>Anda menyelesaikan seleksi pada {{ attempt.finished_at | formatDateStandard }}.</template>
         </div>
         <div class="row question-list">
@@ -48,7 +48,7 @@
     const GETTERS_QUESTIONS = ['repoIsEmpty']
     const ACTIONS_QUESTONS = ['loadQuestions', 'setCurrent']
 
-    const STATE_ANSWERS = ['attempt']
+    const STATE_ANSWERS = ['attempt', 'answers']
     const GETTERS_ANSWERS = ['hasAnsweredQuestion']
     const MUTATIONS_ANSWERS = {
         setAttempt: 'ANSWERS_SET_ATTEMPT'
@@ -86,7 +86,7 @@
             finish() {
                 this.$refs.finishBox.close()
                 this.persistFinish(this.attempt.id).then(attempt => {
-                    this.setAttempt(attempt)
+                    this.setAttempt({ attempt })
                     this.$router.push({ name: 'Root' })
                 })
             },

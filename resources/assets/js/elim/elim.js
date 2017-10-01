@@ -12,9 +12,9 @@ import Countdown from '../components/misc/Countdown.vue'
 import MessageBox from '../components/kits/MessageBox.vue'
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 
-const STATE_ANSWERS = {
-    attempt: state => state.attempt
-}
+
+const STATE_ANSWERS = ['attempt']
+const STATE_STAGE = ['timebarFinish']
 
 const GETTERS_STAGE = ['countdown', 'working', 'finished']
 
@@ -24,6 +24,10 @@ const ACTIONS_ANSWERS = ['loadOrStartAttempt']
 
 const MUTATIONS_ANSWERS = {
     setAttempt: 'ANSWERS_SET_ATTEMPT'
+}
+
+const MUTATIONS_STAGE = {
+    'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH',
 }
 
 const vm = new Vue({
@@ -36,21 +40,31 @@ const vm = new Vue({
     },
     computed: _.merge(
         mapState('answers', STATE_ANSWERS),
+        mapState('stage', STATE_STAGE),
         mapGetters('stage', GETTERS_STAGE),
     ),
     created() {
         this.loadCurrentUser().then(user => {
             this.loadOrStartAttempt(user.entry.id).then(attempt => {
-                if (attempt.finished_at !== null) {
+                if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
                     this.toFinish()
                 }
-                this.loadCurrentStage().then(() => { this.isLoading = false })
+
+                this.loadCurrentStage().then((stage) => {
+                    if (stage.id === 4) {
+                        this.setTimebarFinish({ at: stage.finished_at })
+                        alert('Elimination Start')
+                    }
+
+                    this.isLoading = false 
+                })
             })
         })
     },
     methods: _.merge(
         mapActions('user', ACTIONS_USER),
         mapActions('stage', ACTIONS_STAGE),
+        mapMutations('stage', MUTATIONS_STAGE), 
         mapMutations('answers', MUTATIONS_ANSWERS), 
         mapActions('answers', ACTIONS_ANSWERS), {
         reload() {

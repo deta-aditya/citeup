@@ -6,6 +6,7 @@ export default {
     namespaced: true,
     state: {
         status: 0,
+        timebarFinish: moment(),
     }, 
     getters: {
         countdown(state) {
@@ -19,6 +20,9 @@ export default {
         },
     },
     mutations: {
+        'STAGE_SET_TIMEBAR_FINISH' (state, context) {
+            state.timebarFinish = moment(context.at)
+        },
         'STAGE_SET_STATUS' (state, context) {
             state.status = context.status
         },
@@ -47,8 +51,8 @@ export default {
                         case 4: commit('STAGE_SET_STATUS', { status: 1 }); break
                         case 5: commit('STAGE_STATUS_FINISH'); break
                     }
+                    resolve(response.data.data.stage)
                 })
-                resolve()
             })
         }
     },

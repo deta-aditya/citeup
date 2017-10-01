@@ -63,7 +63,7 @@ export default {
                         started_at: moment().format('YYYY-MM-DD HH:mm:ss') 
                     }).then(response => {
                         commit('ANSWERS_SET_ATTEMPT', { attempt: response.data.data.attempt })
-                        resolve(response.data.data.attempt)
+                        return resolve(response.data.data.attempt)
                     })
                 })
             })

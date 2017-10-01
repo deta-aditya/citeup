@@ -73,7 +73,7 @@
                         <i class="fa fa-fw fa-folder"></i>
                         Dokumen
                     </router-link>
-                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Seleksi') >= 0 }" :to="{ name: 'Seleksi' }" v-if="canSeeElimmLink">
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Seleksi') >= 0 }" :to="{ name: 'Seleksi' }" v-if="canSeeElimLink">
                         <i class="fa fa-fw fa-pencil"></i>
                         Seleksi
                     </router-link>
@@ -95,6 +95,7 @@
 
     const STATES = [
         'user',
+        'config',
         'route',
         'topbarHeight',
     ]
@@ -135,8 +136,9 @@
                 return this.user.committee ? this.getNavs(this.user.keys) : []
             },
 
-            canSeeElimmLink() {
-                return moment().diff(moment(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION]).started_at) >= 0
+            canSeeElimLink() {
+                return moment().diff(moment(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION].started_at)) >= 0 ||
+                    (this.config && moment().diff(moment(this.config.warming.start)) >= 0 && moment().diff(moment(this.config.warming.finish)) < 0)
             }
 
         }),
@@ -148,7 +150,7 @@
         methods: {
 
             prepareComponent() {
-                //
+
             },
 
         },

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app-elimination">
-        <div class="text-center cloak-content" :style="{ height: '100vh', paddingTop: '300px' }" v-if="isLoading">
+        <div class="text-center cloak-content" style="height:100vh;padding-top:300px" v-if="isLoading">
             <i class="fa fa-spinner fa-pulse fa-3x"></i>
         </div>
         <template v-else>
@@ -95,8 +95,7 @@
                 <div class="countdown-title">Seleksi akan dimulai dalam</div>
                 <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
             </div>
-            {{-- <timebar v-if="working" finish="{{ $elimination->finished_at }}"></timebar> --}}
-            <timebar v-if="working" finish="2017-10-01 00:48:40" @done="finish"></timebar>
+            <timebar v-if="working" :finish="timebarFinish" @done="finish"></timebar>
             <div id="app-main-view">
                 <div class="container">
                     <router-view></router-view>

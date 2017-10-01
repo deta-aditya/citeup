@@ -20,7 +20,9 @@ export default new Vuex.Store({
             alerts: [],
         },
 
-        config: {},
+        config: {
+            warming: {}
+        },
 
         topbarHeight: 0,
 

@@ -54,22 +54,50 @@
                 </div>
             </div>
         </div>
+        <div class="text-center" v-if="isWarmingUp">
+            <button type="button" class="btn btn-lg btn-primary btn-done" @click="warmUp">Uji Coba</button>
+        </div>
     </div>
 </template>
 
 <script>
 
     import _ from 'lodash'
-    import { mapState } from 'vuex'
+    import moment from 'moment'
+    import { mapState, mapMutations } from 'vuex'
     import Citeup from '../../../../citeup'
 
     const STATE_USER = {'user': 'data'}
+    const MUTATIONS_STAGE = {
+        'setStatus': 'STAGE_SET_STATUS',
+        'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH',
+    }
 
     export default {
+        data() {
+            return {
+                warming: {}
+            }
+        },
         computed: _.merge(mapState('user', STATE_USER), {
             defaultImage() {
                 return Citeup.defaultImage
-            }
+            },
+            isWarmingUp() {
+                return moment().diff(moment(this.warming.start)) >= 0 
+                    && moment().diff(moment(this.warming.finish)) < 0
+            },
+        }),
+        created() {
+            Citeup.get('/config').then(response => {
+                this.warming = response.data.data.config.warming
+            })
+        },
+        methods: _.merge(mapMutations('stage', MUTATIONS_STAGE), {
+            warmUp() {
+                this.setStatus({ status: 1 })
+                this.setTimebarFinish({ at: this.warming.finish })
+            },
         }),
     }
 

@@ -16,7 +16,7 @@
     export default {
         props: {
             finish: {
-                type: String,
+                type: [String, Object],
                 required: true,
             },
         },
@@ -93,6 +93,7 @@
 
                 if (this.duration.asMilliseconds() <= 0) {
                     this.$emit('done')
+                    clearInterval(this.interval)
                 }
             },
         }
