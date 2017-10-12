@@ -65354,7 +65354,7 @@ __webpack_require__(203);
 
 
 var STATE_ANSWERS = ['attempt'];
-var STATE_STAGE = ['timebarFinish'];
+var STATE_STAGE = ['timebarStart', 'timebarFinish'];
 
 var GETTERS_STAGE = ['countdown', 'working', 'finished'];
 
@@ -65367,7 +65367,7 @@ var MUTATIONS_ANSWERS = {
 };
 
 var MUTATIONS_STAGE = {
-    'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH'
+    'setTimebarInfo': 'STAGE_SET_TIMEBAR_INFO'
 };
 
 var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -65391,8 +65391,10 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
                 _this.loadCurrentStage().then(function (stage) {
                     if (stage.id === 4) {
-                        _this.setTimebarFinish({ at: stage.finished_at });
-                        alert('Elimination Start');
+                        _this.setTimebarInfo({
+                            start: stage.started_at,
+                            finish: stage.finished_at
+                        });
                     }
 
                     _this.isLoading = false;
@@ -65582,6 +65584,10 @@ var EMPTY_DURATION = 'XX';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
+        start: {
+            type: [String, Object],
+            required: true
+        },
         finish: {
             type: [String, Object],
             required: true
@@ -65626,7 +65632,10 @@ var EMPTY_DURATION = 'XX';
             return this.duration.seconds();
         },
         left: function left() {
-            return this.duration === null ? '0%' : 100 - Math.floor(this.duration.asSeconds()) / 7200 * 100 + '%';
+            return this.duration === null ? '0%' : 100 - Math.floor(this.duration.asSeconds()) / this.maxDuration * 100 + '%';
+        },
+        maxDuration: function maxDuration() {
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()(this.finish).diff(this.start)).asSeconds();
         }
     },
 
@@ -65812,7 +65821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var STATE_USER = { 'user': 'data' };
 var MUTATIONS_STAGE = {
     'setStatus': 'STAGE_SET_STATUS',
-    'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH'
+    'setTimebarInfo': 'STAGE_SET_TIMEBAR_INFO'
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -65841,7 +65850,10 @@ var MUTATIONS_STAGE = {
     methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), {
         warmUp: function warmUp() {
             this.setStatus({ status: 1 });
-            this.setTimebarFinish({ at: this.warming.finish });
+            this.setTimebarInfo({
+                start: this.warming.start,
+                finish: this.warming.finish
+            });
         }
     })
 });
@@ -66466,6 +66478,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     namespaced: true,
     state: {
         status: 0,
+        timebarStart: __WEBPACK_IMPORTED_MODULE_0_moment___default()(),
         timebarFinish: __WEBPACK_IMPORTED_MODULE_0_moment___default()()
     },
     getters: {
@@ -66480,8 +66493,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
     },
     mutations: {
-        'STAGE_SET_TIMEBAR_FINISH': function STAGE_SET_TIMEBAR_FINISH(state, context) {
-            state.timebarFinish = __WEBPACK_IMPORTED_MODULE_0_moment___default()(context.at);
+        'STAGE_SET_TIMEBAR_INFO': function STAGE_SET_TIMEBAR_INFO(state, context) {
+            state.timebarStart = __WEBPACK_IMPORTED_MODULE_0_moment___default()(context.start);
+            state.timebarFinish = __WEBPACK_IMPORTED_MODULE_0_moment___default()(context.finish);
         },
         'STAGE_SET_STATUS': function STAGE_SET_STATUS(state, context) {
             state.status = context.status;

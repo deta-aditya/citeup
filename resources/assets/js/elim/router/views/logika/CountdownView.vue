@@ -70,7 +70,7 @@
     const STATE_USER = {'user': 'data'}
     const MUTATIONS_STAGE = {
         'setStatus': 'STAGE_SET_STATUS',
-        'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH',
+        'setTimebarInfo': 'STAGE_SET_TIMEBAR_INFO',
     }
 
     export default {
@@ -96,7 +96,10 @@
         methods: _.merge(mapMutations('stage', MUTATIONS_STAGE), {
             warmUp() {
                 this.setStatus({ status: 1 })
-                this.setTimebarFinish({ at: this.warming.finish })
+                this.setTimebarInfo({ 
+                    start: this.warming.start, 
+                    finish: this.warming.finish,
+                })
             },
         }),
     }

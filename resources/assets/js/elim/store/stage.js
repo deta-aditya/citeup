@@ -6,6 +6,7 @@ export default {
     namespaced: true,
     state: {
         status: 0,
+        timebarStart: moment(),
         timebarFinish: moment(),
     }, 
     getters: {
@@ -20,8 +21,9 @@ export default {
         },
     },
     mutations: {
-        'STAGE_SET_TIMEBAR_FINISH' (state, context) {
-            state.timebarFinish = moment(context.at)
+        'STAGE_SET_TIMEBAR_INFO' (state, context) {
+            state.timebarStart = moment(context.start)
+            state.timebarFinish = moment(context.finish)
         },
         'STAGE_SET_STATUS' (state, context) {
             state.status = context.status

@@ -14,7 +14,7 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 
 
 const STATE_ANSWERS = ['attempt']
-const STATE_STAGE = ['timebarFinish']
+const STATE_STAGE = ['timebarStart', 'timebarFinish']
 
 const GETTERS_STAGE = ['countdown', 'working', 'finished']
 
@@ -27,7 +27,7 @@ const MUTATIONS_ANSWERS = {
 }
 
 const MUTATIONS_STAGE = {
-    'setTimebarFinish': 'STAGE_SET_TIMEBAR_FINISH',
+    'setTimebarInfo': 'STAGE_SET_TIMEBAR_INFO',
 }
 
 const vm = new Vue({
@@ -52,8 +52,10 @@ const vm = new Vue({
 
                 this.loadCurrentStage().then((stage) => {
                     if (stage.id === 4) {
-                        this.setTimebarFinish({ at: stage.finished_at })
-                        alert('Elimination Start')
+                        this.setTimebarInfo({
+                            start: stage.started_at,
+                            finish: stage.finished_at,
+                        })
                     }
 
                     this.isLoading = false 

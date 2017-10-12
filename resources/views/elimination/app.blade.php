@@ -95,7 +95,7 @@
                 <div class="countdown-title">Seleksi akan dimulai dalam</div>
                 <countdown done="{{ $elimination->started_at }}" @done="reload"></countdown>
             </div>
-            <timebar v-if="working" :finish="timebarFinish" @done="finish"></timebar>
+            <timebar v-if="working" :start="timebarStart" :finish="timebarFinish" @done="finish"></timebar>
             <div id="app-main-view">
                 <div class="container">
                     <router-view></router-view>

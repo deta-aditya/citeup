@@ -15,6 +15,10 @@
 
     export default {
         props: {
+            start: {
+                type: [String, Object],
+                required: true,
+            },
             finish: {
                 type: [String, Object],
                 required: true,
@@ -61,8 +65,11 @@
 
             },
             left() {
-                return this.duration === null ? '0%' : (100 - Math.floor(this.duration.asSeconds()) / 7200 * 100) + '%'
+                return this.duration === null ? '0%' : (100 - Math.floor(this.duration.asSeconds()) / this.maxDuration * 100) + '%'
             },
+            maxDuration() {
+                return moment.duration(moment(this.finish).diff(this.start)).asSeconds()
+            }
         },
 
         filters: {
