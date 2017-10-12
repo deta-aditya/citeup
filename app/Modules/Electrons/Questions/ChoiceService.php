@@ -61,6 +61,10 @@ class ChoiceService extends Service
 
         foreach ($choices as $choice) {
 
+            if (! isset($choice['content'])) {
+                continue;
+            }
+
             $choice['question'] = $questionId;
 
             array_push($final, $this->create($choice));
