@@ -6,7 +6,7 @@
 <!-- Welcometron -->
 <div id="front-welcometron">
 
-    @if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION))
+    @if ($stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_PRE_REGISTRATION) || $settings->countdown->active)
         <div class="pre-registration">
             <div class="container text-center">
                 <div class="logo-placeholder">
