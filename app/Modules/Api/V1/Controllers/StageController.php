@@ -31,7 +31,7 @@ class StageController extends Controller
     }
     
     /**
-     * Get a configuration data.
+     * Get stages data.
      *
      * @param  StageIndexRequest  $request
      * @return Response
@@ -40,6 +40,18 @@ class StageController extends Controller
     {
         return $this->respondJson([
             'stages' => $this->stages->multiple()
+        ]);
+    }
+
+    /**
+     * Get the current stage data.
+     *
+     * @return Response
+     */
+    public function current()
+    {
+        return $this->respondJson([
+            'stage' => $this->stages->current()
         ]);
     }
 

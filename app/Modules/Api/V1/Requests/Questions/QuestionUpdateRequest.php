@@ -27,7 +27,10 @@ class QuestionUpdateRequest extends FormRequest
     {
         return [
             'content' => 'string',
-            'picture' => 'string|max:191',
+            'picture' => 'string|max:191|nullable',
+            'choices' => 'array',
+            'choices.*.id' => 'sometimes|required|integer|exists:choices,id',
+            'choices.*.content' => 'string',
         ];
     }
 }

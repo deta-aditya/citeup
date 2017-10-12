@@ -123,6 +123,17 @@ class StageService extends Service
     }
 
     /**
+     * Get a stage based by the given constant ID.
+     *
+     * @param  int  $id
+     * @return Stage
+     */
+    public function get($id)
+    {
+        return Stage::find($id);
+    }
+
+    /**
      * Update a stage with new data.
      *
      * @param  int|Stage  $stage

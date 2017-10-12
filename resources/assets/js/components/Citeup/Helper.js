@@ -30,6 +30,10 @@ function assetify(value) {
     return Citeup.appPath + '/' + value
 }
 
+function formatDateStandard(value) {
+    return moment(value).format('D MMMM YYYY, HH:mm:ss')
+}
+
 function formatDateComplete(value, withHours = true) {
     return moment(value).format('D MMMM YYYY' + (withHours ? ', HH:mm' : ''))
 }
@@ -47,6 +51,6 @@ function shortenPreview(value, maxlength = 150) {
 }
 
 export { 
-    monetize, assetify, formatDateComplete, 
+    monetize, assetify, formatDateComplete, formatDateStandard,
     formatDateShort, shortenPreview 
 }

@@ -3,6 +3,7 @@
 namespace App\Modules\Electrons\Questions;
 
 use App\Modules\Models\Answer;
+use App\Modules\Models\Choice;
 use App\Modules\Nucleons\Service;
 
 class AnswerService extends Service
@@ -48,6 +49,8 @@ class AnswerService extends Service
      */
     public function create($attemptId, $choiceId)
     {
+        $this->free($attemptId, $choiceId);
+
         $answer = Answer::create([
             'attempt_id' => $attemptId,
             'choice_id' => $choiceId,
@@ -72,6 +75,22 @@ class AnswerService extends Service
         }
 
         return $final;
+    }
+
+    /**
+     * Free the question of the current choice.
+     *
+     * @param  int  $attemptId
+     * @param  int  $choiceId
+     * @return this
+     */
+    public function free($attemptId, $choiceId)
+    {
+        Answer::ofQuestion(Choice::find($choiceId)->question_id)
+            ->ofAttempt($attemptId)
+            ->delete();
+
+        return $this;
     }
 
     /**

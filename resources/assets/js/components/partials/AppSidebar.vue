@@ -29,6 +29,10 @@
                         <i class="fa fa-fw fa-bullhorn"></i>
                         Acara
                     </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Pertanyaan Quiz') >= 0 }" :to="{ name: 'Pertanyaan Quiz' }">
+                        <i class="fa fa-fw fa-map-signs"></i>
+                        Pertanyaan Quiz
+                    </router-link>
                     <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
                         <i class="fa fa-fw fa-question-circle"></i>
                         FAQ
@@ -69,6 +73,10 @@
                         <i class="fa fa-fw fa-folder"></i>
                         Dokumen
                     </router-link>
+                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Seleksi') >= 0 }" :to="{ name: 'Seleksi' }" v-if="canSeeElimLink">
+                        <i class="fa fa-fw fa-pencil"></i>
+                        Seleksi
+                    </router-link>
                 </template>
             </div>
         </div>
@@ -78,20 +86,23 @@
 <script>
 
     import _ from 'lodash'
+    import moment from 'moment'
     import { mapState } from 'vuex'
     import Citeup from '../../citeup'
     import Spacer from '../misc/Spacer.vue'
     import KeyMapper from '../keys/KeyMapper'
+    import ApplicationStages from '../mixins/ApplicationStages'
 
     const STATES = [
         'user',
+        'config',
         'route',
         'topbarHeight',
     ]
 
     export default {
 
-        mixins: [KeyMapper],
+        mixins: [KeyMapper, ApplicationStages],
     
         computed: _.merge(mapState(STATES), {
 
@@ -125,6 +136,13 @@
                 return this.user.committee ? this.getNavs(this.user.keys) : []
             },
 
+            canSeeElimLink() {
+                return moment().diff(moment(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION].started_at)) >= 0 ||
+                    (this.config && this.user.entry.activity.id === 1 &&
+                        moment().diff(moment(this.config.warming.start)) >= 0 && 
+                        moment().diff(moment(this.config.warming.finish)) < 0)
+            }
+
         }),
 
         mounted() {
@@ -134,7 +152,7 @@
         methods: {
 
             prepareComponent() {
-                //
+
             },
 
         },
