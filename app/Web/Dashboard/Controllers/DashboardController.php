@@ -39,12 +39,18 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the elimination page.
+     * Show the elimination page for Lomba Logika.
      *
      * @return Response
      */
     public function elimination(Stages $stages)
     {
+        $user = auth()->user();
+
+        if (! $user->isEntrant() || $user->isEntrant() && $user->entry->activity_id != 1) {
+            return redirect()->route('dashboard');
+        }
+
         return view('elimination.app', [
             'entrant' => auth()->user()->entry,
             'elimination' => $stages->get(Stages::STAGE_ELIMINATION)

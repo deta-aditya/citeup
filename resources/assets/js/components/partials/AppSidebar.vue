@@ -138,7 +138,9 @@
 
             canSeeElimLink() {
                 return moment().diff(moment(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION].started_at)) >= 0 ||
-                    (this.config && moment().diff(moment(this.config.warming.start)) >= 0 && moment().diff(moment(this.config.warming.finish)) < 0)
+                    (this.config && this.user.entry.activity.id === 1 &&
+                        moment().diff(moment(this.config.warming.start)) >= 0 && 
+                        moment().diff(moment(this.config.warming.finish)) < 0)
             }
 
         }),

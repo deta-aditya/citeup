@@ -77355,7 +77355,7 @@ var STATES = ['user', 'config', 'route', 'topbarHeight'];
             return this.user.committee ? this.getNavs(this.user.keys) : [];
         },
         canSeeElimLink: function canSeeElimLink() {
-            return __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION].started_at)) >= 0 || this.config && __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.config.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.config.warming.finish)) < 0;
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.stageGetter[this.$options.STAGE_PRE_ELIMINATION].started_at)) >= 0 || this.config && this.user.entry.activity.id === 1 && __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.config.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_1_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment___default()(this.config.warming.finish)) < 0;
         }
     }),
 

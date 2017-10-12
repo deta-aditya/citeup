@@ -65381,10 +65381,16 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     computed: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["a" /* mapState */])('answers', STATE_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["a" /* mapState */])('stage', STATE_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE)),
     created: function created() {
-        var _this = this;
-
         this.loadCurrentUser().then(function (user) {
-            _this.loadOrStartAttempt(user.entry.id).then(function (attempt) {
+            return prepareQuiz(user);
+        });
+    },
+
+    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('answers', ACTIONS_ANSWERS), {
+        prepareQuiz: function prepareQuiz(user) {
+            var _this = this;
+
+            this.loadOrStartAttempt(user.entry.id).then(function (attempt) {
                 if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
                     _this.toFinish();
                 }
@@ -65400,10 +65406,7 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     _this.isLoading = false;
                 });
             });
-        });
-    },
-
-    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('answers', ACTIONS_ANSWERS), {
+        },
         reload: function reload() {
             window.location.reload(false);
         },

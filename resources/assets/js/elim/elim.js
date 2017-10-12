@@ -44,7 +44,15 @@ const vm = new Vue({
         mapGetters('stage', GETTERS_STAGE),
     ),
     created() {
-        this.loadCurrentUser().then(user => {
+        this.loadCurrentUser().then(user => prepareQuiz(user))
+    },
+    methods: _.merge(
+        mapActions('user', ACTIONS_USER),
+        mapActions('stage', ACTIONS_STAGE),
+        mapMutations('stage', MUTATIONS_STAGE), 
+        mapMutations('answers', MUTATIONS_ANSWERS), 
+        mapActions('answers', ACTIONS_ANSWERS), {
+        prepareQuiz(user) {
             this.loadOrStartAttempt(user.entry.id).then(attempt => {
                 if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
                     this.toFinish()
@@ -61,14 +69,7 @@ const vm = new Vue({
                     this.isLoading = false 
                 })
             })
-        })
-    },
-    methods: _.merge(
-        mapActions('user', ACTIONS_USER),
-        mapActions('stage', ACTIONS_STAGE),
-        mapMutations('stage', MUTATIONS_STAGE), 
-        mapMutations('answers', MUTATIONS_ANSWERS), 
-        mapActions('answers', ACTIONS_ANSWERS), {
+        },
         reload() {
             window.location.reload(false)
         },
