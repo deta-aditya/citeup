@@ -25,6 +25,7 @@
                         <div class="pull-right">
                             <span v-if="props.data.stage === 1" class="text-success">Dokumen peserta ini sudah disetujui.</span>
                             <span v-else-if="documentsComplete(props.data.users)" class="text-primary">Peserta ini sudah melengkapi dokumennya.</span>
+                            <span v-else-if="hasPaid(props.data.users)" class="text-info">Peserta ini sudah membayar.</span>
                             <template v-else>Peserta ini belum melengkapi dokumennya.</template> 
                         </div>
                     </template>
