@@ -44,7 +44,7 @@ const vm = new Vue({
         mapGetters('stage', GETTERS_STAGE),
     ),
     created() {
-        this.loadCurrentUser().then(user => prepareQuiz(user))
+        this.loadCurrentUser().then(user => this.prepareQuiz(user))
     },
     methods: _.merge(
         mapActions('user', ACTIONS_USER),

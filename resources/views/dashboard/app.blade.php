@@ -21,22 +21,28 @@
 </head>
 <body>
     <div id="app-dashboard">
+        
+        <div class="text-center cloak-content" style="height:100vh;padding-top:200px" v-if="isLoading">
+            <img src="{{ asset('images/web/logo_simple_sm.png') }}" style="height:60px;padding-bottom:30px">
+            <div><i class="fa fa-spinner fa-pulse fa-3x"></i></div>
+        </div>
+        <template v-else>
+            <app-topbar v-if="hasNav">
+                <template slot="brand">{{ config('app.name', 'CiteUP') }}</template>
+            </app-topbar>
 
-        <app-info ref="info" :user="{{ $user->toJson() }}"></app-info>
-
-        <app-topbar v-if="hasNav">
-            <template slot="brand">{{ config('app.name', 'CiteUP') }}</template>
-        </app-topbar>
-
-        <div id="app-main">
-            <app-sidebar v-if="hasNav"></app-sidebar>
-            <div id="app-page">
-                <spacer :vertical="topbarHeight"></spacer>
-                <div class="app-view" ref="appView" @scroll="detectMaxScrollHeight($event.target)">
-                    <router-view></router-view>
+            <div id="app-main">
+                <app-sidebar v-if="hasNav"></app-sidebar>
+                <div id="app-page">
+                    <spacer :vertical="topbarHeight"></spacer>
+                    <div class="app-view" ref="appView" @scroll="detectMaxScrollHeight($event.target)">
+                        <router-view></router-view>
+                    </div>
                 </div>
             </div>
-        </div>
+        </template>
+        
+        <app-info ref="info" :user="{{ $user->toJson() }}"></app-info>
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/dashboard.js') }}"></script>

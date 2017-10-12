@@ -48,6 +48,12 @@ const dashboardViewModel = new Vue({
     
     router: router,
 
+    data() {
+        return {
+            isLoading: true,
+        }
+    },
+
     computed: _.merge(Vuex.mapState([
         
         'topbarHeight'
@@ -94,6 +100,7 @@ const dashboardViewModel = new Vue({
     mounted() {
 
         this.storeUserInfo();
+        this.isLoading = false;
 
     },
 

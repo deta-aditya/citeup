@@ -65381,29 +65381,31 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     computed: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["a" /* mapState */])('answers', STATE_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["a" /* mapState */])('stage', STATE_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["b" /* mapGetters */])('stage', GETTERS_STAGE)),
     created: function created() {
+        var _this = this;
+
         this.loadCurrentUser().then(function (user) {
-            return prepareQuiz(user);
+            return _this.prepareQuiz(user);
         });
     },
 
     methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vuex__["c" /* mapActions */])('answers', ACTIONS_ANSWERS), {
         prepareQuiz: function prepareQuiz(user) {
-            var _this = this;
+            var _this2 = this;
 
             this.loadOrStartAttempt(user.entry.id).then(function (attempt) {
                 if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
-                    _this.toFinish();
+                    _this2.toFinish();
                 }
 
-                _this.loadCurrentStage().then(function (stage) {
+                _this2.loadCurrentStage().then(function (stage) {
                     if (stage.id === 4) {
-                        _this.setTimebarInfo({
+                        _this2.setTimebarInfo({
                             start: stage.started_at,
                             finish: stage.finished_at
                         });
                     }
 
-                    _this.isLoading = false;
+                    _this2.isLoading = false;
                 });
             });
         },
@@ -65411,10 +65413,10 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             window.location.reload(false);
         },
         finish: function finish() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.persistFinish(this.attempt.id).then(function (attempt) {
-                _this2.setAttempt(attempt);
+                _this3.setAttempt(attempt);
             });
         }
     }),

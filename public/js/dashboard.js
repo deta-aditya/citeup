@@ -74515,6 +74515,13 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     router: __WEBPACK_IMPORTED_MODULE_8__router_js__["a" /* default */],
 
+    data: function data() {
+        return {
+            isLoading: true
+        };
+    },
+
+
     computed: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapState(['topbarHeight']), __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapGetters({
 
         hasNav: 'routeHasNav',
@@ -74556,6 +74563,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     mounted: function mounted() {
 
         this.storeUserInfo();
+        this.isLoading = false;
     },
 
 
