@@ -9,7 +9,7 @@ return [
             'sort' => ['id' => 'asc'],
             'criteria' => [],
             'skip' => 0,
-            'take' => 25,
+            'take' => 999,
             'random' => false,
             'with' => [],
             'clean' => false,

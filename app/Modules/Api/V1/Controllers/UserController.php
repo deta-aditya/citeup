@@ -14,6 +14,7 @@ use App\Modules\Electrons\Edits\EditService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Users\UserIndexRequest;
 use App\Modules\Api\V1\Requests\Users\UserShowRequest;
+use App\Modules\Api\V1\Requests\Users\UserCurrentRequest;
 use App\Modules\Api\V1\Requests\Users\UserInsertRequest;
 use App\Modules\Api\V1\Requests\Users\UserUpdateRequest;
 use App\Modules\Api\V1\Requests\Users\UserDeleteRequest;
@@ -71,6 +72,21 @@ class UserController extends Controller
      */
     public function show(UserShowRequest $request, User $user)
     {
+        $this->users->loadRelationships($user);
+
+        return $this->respondJson(['user' => $user]);   
+    }
+
+    /**
+     * Get the current user data.
+     *
+     * @param  UserCurrentRequest  $request
+     * @return Response
+     */
+    public function current(UserCurrentRequest $request)
+    {
+        $user = auth()->user();
+
         $this->users->loadRelationships($user);
 
         return $this->respondJson(['user' => $user]);   

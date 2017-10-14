@@ -1,0 +1,404 @@
+
+$signature-lighter: #ffc533;
+$signature-light: #f49e26;
+$signature-dark: #dd7322;
+
+$border-color: #d3e0e9;
+
+$title-font-family: Quicksand, Open Sans, sans-serif;
+
+#app-elimination {
+    background-color: #fff;
+
+    a:not(.btn), .btn-link {
+        color: $signature-light;
+    }
+
+    .form-control:focus {
+        border-color: $signature-light;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 
+                    0 0 8px transparentize($signature-light, 0.6);
+    }
+
+    .btn-primary {
+        background-color: $signature-light;
+        border-color: darken($signature-light, 3%);
+
+        &:hover {
+            background-color: lighten($signature-light, 3%);
+        }
+    }
+
+    .grad-top {
+        height: 3px;
+        background-image: linear-gradient(to right, $signature-light, $signature-lighter);
+    }
+
+    .sticky-chat {
+        position: fixed;
+        background: linear-gradient(to bottom, $signature-lighter, lighten($signature-lighter, 20%));
+        bottom: -488px;
+        right: 20px;
+        z-index: 90;
+        width: 400px;
+        box-shadow: 0 0 5px 0px $signature-lighter;
+        border-radius: 6px 6px 0 0;
+        transition: 0.5s;
+
+        &.open {
+            bottom: 0px;
+        }
+
+        .chat-toggler {
+            font-size: 12pt;
+            background: #fff;
+            color: $signature-dark;
+            font-family: $title-font-family;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+                background: #f0f0f0;
+            }
+        }
+
+        .chat-body {
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        .chat-message-text {
+            padding: 5px 7px;
+            border-radius: 6px;
+            max-width: 350px;
+        }
+
+        .chat-caret {
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .chat-sender {
+            padding: 7px;
+            background-color: #fff;
+            border-top: 1px solid $border-color;
+        }
+
+        .chat-message {
+            margin: 9px 7px;
+
+            &.chat-message-me {
+                
+                .chat-message-text {
+                    background-color: $signature-light;
+                    border-top-right-radius: 0px;
+                    color: #fff;
+                    float: right;
+                }
+
+                .chat-caret {
+                    border-width: 7px 7px 0 0;
+                    border-color: $signature-light transparent transparent;
+                    float: right;
+                }
+
+            }
+
+            &.chat-message-other {
+                
+                .chat-message-text {
+                    background-color: #fff;
+                    border-top-left-radius: 0px;
+                    float: left;
+                }
+
+                .chat-caret {
+                    border-width: 0 7px 7px 0;
+                    border-color: transparent #fff transparent;
+                    float: left;
+                }
+
+            }
+        }
+    }
+
+    #app-header {
+        padding: 30px 0;
+        border-bottom: 1px solid $border-color;
+        font-family: $title-font-family;
+
+        .app-logo {
+            width: 150px;
+        }
+
+        #subtitle {
+            margin-top: 10px;
+            font-size: 12pt;
+            font-weight: 700;
+            color: #aaa;
+        }
+
+        #app-nav {
+            margin-top: 30px;
+            margin-bottom: 0;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+
+    }
+
+    #app-main-view {
+        padding: 40px 0;
+    }
+
+    .greeting-text {
+        font-size: 18pt;
+        font-weight: 600;
+        font-family: $title-font-family;
+        padding: 10px 0 40px;
+        text-align: center;
+    }
+
+    .countdown-begin {
+        background-image: linear-gradient(70deg, #333, #aaa);
+        color: #fff;
+        text-align: center;
+        font-family: $title-font-family;
+        padding: 40px 0;
+
+        .countdown-title { 
+            font-size: 14pt;
+        }
+
+        .countdown {
+
+            .unit-item {
+                margin: 0 5px;
+            }
+
+            .unit-number {
+                width: 100px;
+                text-align: center;
+                font-size: 48pt;
+            }
+
+            .unit-info {
+                font-size: 12pt;
+                font-weight: 600;
+            }
+
+        }
+    }  
+
+    .view-title {
+        text-align: center;
+        font-family: $title-font-family;
+        font-size: 28pt;
+        margin-top: 25px;   
+        margin-bottom: 35px;
+    }
+
+    .super-list {
+
+        .super-list-item {
+            display: block;
+            margin-bottom: 20px;
+
+            .super-list-number, .super-list-content {
+                display: table-cell;
+            }
+
+            .super-list-number span {
+                width: 52px;
+                text-align: center;
+                font-size: 16pt;
+                background-color: $signature-lighter;
+                font-family: $title-font-family;
+                font-weight: 700;
+                color: #fff;
+                display: inline-block;
+                padding: 10px;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+
+            .super-list-content {
+                padding-top: 15px;
+                vertical-align: top;
+                font-size: 12pt;
+
+                img {
+                    max-width: 100%;
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+
+    .signature-holder {
+        margin-bottom: 35px;
+
+        .fa {
+            font-size: 102pt;
+            color: transparentize($signature-lighter, 0.5);
+        }
+    }
+
+    .app-help {
+        background-image: linear-gradient(30deg, $signature-lighter, $signature-dark);
+        padding: 40px 0;
+        font-weight: 700;
+        font-size: 16pt;
+        font-family: $title-font-family;
+        text-align: center;
+        color: #fff;
+
+        a {
+            color: #fff;
+        }
+    }
+
+    .app-footer {
+        padding: 20px 0;
+    }
+
+    #question-select {
+
+        .question-answered {
+            font-size: 14pt;
+            padding: 10px 0 40px;
+            text-align: center;
+        }
+
+        .question-list {
+            margin: 20px 0;
+        }
+
+        .question-item-placeholder {
+            text-align: center
+        }
+
+        .question-item {
+            width: 60px;
+            text-align: center;
+            font-size: 18pt;
+            background-color: $signature-light;
+            font-family: $title-font-family;
+            font-weight: 700;
+            color: #fff;
+            padding: 12px;
+            display: inline-block;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            transition: 0.2s;
+
+            &.answered {
+                background-color: $signature-dark;
+            }
+
+            &:hover {
+                background-color: $signature-lighter;
+                text-decoration: none;
+            }
+        }
+
+    }
+
+    #question-view {
+
+        .question-title {
+            @extend .greeting-text;
+            text-align: center;
+            font-size: 21.5pt;
+        }
+
+        .question-content {
+            text-align: center;
+            font-size: 12pt;
+        }
+
+        .question-choices {
+            margin-top: 30px;
+        }
+
+        .question-navs {
+            margin-top: 50px;
+            margin-bottom: 30px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        .question-navigate {
+            font-family: $title-font-family;
+            font-size: 16pt;
+        }
+
+        .question-img-placeholder {
+            margin-top: 30px;
+            text-align: center;
+
+            .question-img {
+                max-width: 100%;
+            }
+        }
+
+        .choice-item {
+            margin: 0;
+            transition: 0.75s;
+
+            &.chosen {
+                color: #fff;
+                background-image: linear-gradient(to right, $signature-light, $signature-lighter);
+
+                .super-list-number span {
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
+
+    .modal-title {
+        text-align: center;
+        font-family: $title-font-family;
+        font-weight: 600;
+    }
+
+    .finish-box-title {
+        font-size: 21.5pt;
+        font-weight: 600;
+        font-family: $title-font-family;
+    }
+
+    .finish-box-subtitle {
+        font-size: 14pt;
+        font-family: $title-font-family;
+    }
+
+    .timebar {
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #f0f0f0;
+        border-bottom: 1px solid $border-color;
+
+        .progress-bar {
+            background-image: linear-gradient(to right, $signature-lighter, $signature-dark);
+            background-color: transparent;
+            border-radius: 0 50px 50px 0;
+            box-shadow: none;
+        }
+    }
+
+    .btn-done {
+        font-size: 18pt;
+        font-family: $title-font-family;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+}

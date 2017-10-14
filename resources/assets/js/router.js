@@ -30,6 +30,7 @@ import SchedulesUpdate from './components/views/activities/schedules/SchedulesUp
 import SponsorsIndex from './components/views/sponsors/SponsorsIndex.vue';
 import SponsorsCreate from './components/views/sponsors/SponsorsCreate.vue';
 import SponsorsUpdate from './components/views/sponsors/SponsorsUpdate.vue';
+import Elimination from './components/views/Elimination.vue';
 import FaqsIndex from './components/views/faqs/FaqsIndex.vue';
 import FaqsCreate from './components/views/faqs/FaqsCreate.vue';
 import FaqsUpdate from './components/views/faqs/FaqsUpdate.vue';
@@ -37,6 +38,10 @@ import NewsIndex from './components/views/news/NewsIndex.vue';
 import NewsView from './components/views/news/NewsView.vue';
 import NewsCreate from './components/views/news/NewsCreate.vue';
 import NewsUpdate from './components/views/news/NewsUpdate.vue';
+import QuestionsIndex from './components/views/quiz/QuestionsIndex.vue';
+import QuestionsCreate from './components/views/quiz/QuestionsCreate.vue';
+import QuestionsView from './components/views/quiz/QuestionsView.vue';
+import QuestionsUpdate from './components/views/quiz/QuestionsUpdate.vue';
 import ContactPeopleIndex from './components/views/contact_people/ContactPeopleIndex.vue';
 import ContactPeopleCreate from './components/views/contact_people/ContactPeopleCreate.vue';
 import ContactPeopleUpdate from './components/views/contact_people/ContactPeopleUpdate.vue';
@@ -70,6 +75,11 @@ const router = new VueRouter({
         { path: '/activities/:id/schedules/create', name: 'Acara.Lihat.Buat Jadwal', component: SchedulesCreate, props: true },
         { path: '/activities/:id/schedules/:schedule/update', name: 'Acara.Lihat.Sunting Jadwal', component: SchedulesUpdate, props: true },
         { path: '/activities/:id/update', name: 'Acara.Sunting', component: ActivitiesUpdate, props: true },
+        { path: '/elimination', name: 'Seleksi', component: Elimination },
+        { path: '/questions', name: 'Pertanyaan Quiz', component: QuestionsIndex },
+        { path: '/questions/create', name: 'Pertanyaan Quiz.Buat', component: QuestionsCreate },
+        { path: '/questions/:id', name: 'Pertanyaan Quiz.Lihat', component: QuestionsView, props: true },
+        { path: '/questions/:id/update', name: 'Pertanyaan Quiz.Sunting', component: QuestionsUpdate, props: true },
         { path: '/faqs', name: 'FAQ', component: FaqsIndex },
         { path: '/faqs/create', name: 'FAQ.Buat', component: FaqsCreate },
         { path: '/faqs/:id/update', name: 'FAQ.Sunting', component: FaqsUpdate, props: true },

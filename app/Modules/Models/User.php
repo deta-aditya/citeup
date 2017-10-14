@@ -75,6 +75,16 @@ trait User
     }
 
     /**
+     * Get the attempts of the user.
+     *
+     * @return BelongsTo
+     */
+    public function attempts()
+    {
+        return $this->entry->attempts();
+    }
+
+    /**
      * Get the alerts that are announced for the user.
      *
      * @return BelongsToMany

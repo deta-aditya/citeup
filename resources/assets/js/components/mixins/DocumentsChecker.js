@@ -12,6 +12,12 @@ export default {
             }).length === 0
         },
 
+        hasPaid(users) {
+            return this.reduceDocuments(users).filter(item => {
+                return item.type === 1 && item.file !== Citeup.defaultImageClean
+            }).length > 0
+        },
+
         possibleDocuments(activityId) {
             return activityId === 1 ? 4 : 2
         },

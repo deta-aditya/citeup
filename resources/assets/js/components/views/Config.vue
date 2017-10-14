@@ -50,6 +50,19 @@
                             </check-list>
                         </div>
                     </form-panel>
+                    <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
+                        <div class="panel-body">
+                            <h2 class="page-title small-title">Pemanasan Lomba Logika</h2>
+                        </div>
+                        <div class="panel-body">
+                            <date-time-input name="warming-start" :label-width="4" :control-width="8" v-model="value.warming.start">
+                                Dimulai Dari
+                            </date-time-input>
+                            <date-time-input name="warming-finish" :label-width="4" :control-width="8" v-model="value.warming.finish">
+                                Selesai Hingga
+                            </date-time-input>
+                        </div>
+                    </form-panel>
                     <!-- <form-panel :formless="true" :horizontal="true" :bodiless="true" :footerless="true">
                         <div class="panel-body">
                             <h2 class="page-title small-title">Tahap Aplikasi</h2>

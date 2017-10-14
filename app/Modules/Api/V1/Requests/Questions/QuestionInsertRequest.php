@@ -28,7 +28,8 @@ class QuestionInsertRequest extends FormRequest
     {
         return [
             'content' => 'required|string',
-            'picture' => 'string|max:191',
+            'choices' => 'array',
+            'choices.*.content' => 'string',
         ];
     }
 }

@@ -138,6 +138,10 @@ class FrontController extends Controller
      */
     protected function navTheme($stage) 
     {
+        if (app('App\Modules\Electrons\Settings\Settings')->countdown->active) {
+            return 'dark';
+        }
+
         switch ($stage) {
             case Stages::STAGE_PRE_REGISTRATION:
                 return 'dark';

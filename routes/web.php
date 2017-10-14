@@ -62,7 +62,6 @@ Route::group(['namespace' => 'App\Web'], function () {
         Route::post('/register/lomba-logika', 'RegisterController@registerLombaLogika')->name('register.lomba-logika');
         Route::post('/register/lomba-desain', 'RegisterController@registerLombaDesain')->name('register.lomba-desain');
         Route::post('/register/seminar-i-t', 'RegisterController@registerSeminarIt')->name('register.seminar-it');
-        // Route::post('/register', 'RegisterController@register')->name('register');
 
     });
 
@@ -72,6 +71,7 @@ Route::group(['namespace' => 'App\Web'], function () {
     Route::group(['namespace' => 'Dashboard\Controllers'], function () {
         
         Route::get('/panel/{vue?}', 'DashboardController@index')->name('dashboard')->where('vue', '[\/\w\.-]*');
+        Route::get('/elimination', 'DashboardController@elimination')->name('elimination');
         
     });
 

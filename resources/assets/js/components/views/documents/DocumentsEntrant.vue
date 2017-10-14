@@ -42,7 +42,7 @@
                 <cloaked-panel ref="paymentProof">
                     <div class="panel-body">
                         <h2 class="page-title small-title">
-                            <i>Scan</i> Bukti Pembayaran Pendaftaran Lomba
+                            <i>Scan</i> Bukti Pembayaran Pendaftaran
                         </h2>
                     </div>
                     <div class="panel-body">
@@ -99,7 +99,7 @@
             },
 
             completed() {
-                return this.documentsComplete(this.entry.users)
+                return this.entry.users.length > 0 ? this.documentsComplete(this.entry.users) : false
             },
 
             approved() {

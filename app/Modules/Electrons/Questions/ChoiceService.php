@@ -61,6 +61,10 @@ class ChoiceService extends Service
 
         foreach ($choices as $choice) {
 
+            if (! isset($choice['content'])) {
+                continue;
+            }
+
             $choice['question'] = $questionId;
 
             array_push($final, $this->create($choice));
@@ -87,6 +91,19 @@ class ChoiceService extends Service
         $choice->save();
 
         return $this;
+    }
+
+    /**
+     * Update multiple choices.
+     *
+     * @param  array  $data
+     * @return this
+     */
+    public function updateMultiple(array $data)
+    {
+        foreach ($data as $choice) {
+            $this->update(Choice::find($choice['id']), array_except($choice, ['id']));
+        }
     }
 
     /**

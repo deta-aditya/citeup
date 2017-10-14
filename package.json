@@ -26,8 +26,12 @@
     "trix": "^0.10.2",
     "vue": "^2.1.10",
     "vue-router": "^2.7.0",
+    "vue-socket.io": "^2.1.1-a",
     "vue2-google-maps": "^0.7.10",
     "vuedraggable": "^2.14.1",
     "vuex": "^2.3.1"
+  },
+  "dependencies": {
+    "socket.io": "^2.0.3"
   }
 }
