@@ -277,7 +277,7 @@
 
         filters: {
             fromNow(value) {
-                return Math.floor(moment.duration(moment(stageGetter[$options.STAGE_ELIMINATION].started_at).diff(moment())).asDays())
+                return Math.floor(moment.duration(moment(value).diff(moment())).asDays())
             },
             monetize: monetize,
             assetify: assetify,

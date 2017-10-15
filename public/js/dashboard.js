@@ -79698,7 +79698,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     filters: {
         fromNow: function fromNow(value) {
-            return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(stageGetter[$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asDays());
+            return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(value).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asDays());
         },
 
         monetize: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["c" /* monetize */],
