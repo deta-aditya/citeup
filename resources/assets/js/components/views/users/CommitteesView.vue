@@ -99,7 +99,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Citeup from '../../../citeup'
     import KeyMapper from '../../keys/KeyMapper'
     import MessageBox from '../../kits/MessageBox.vue'

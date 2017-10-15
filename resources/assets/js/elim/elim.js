@@ -6,6 +6,7 @@ import store from './store/index'
 import router from './router/index'
 
 import _ from 'lodash'
+import moment from 'moment-timezone'
 import Chat from './components/chat/Chat.vue'
 import Timebar from './components/timebar/Timebar.vue'
 import Countdown from '../components/misc/Countdown.vue'
@@ -54,15 +55,14 @@ const vm = new Vue({
         mapActions('answers', ACTIONS_ANSWERS), {
         prepareQuiz(user) {
             this.loadOrStartAttempt(user.entry.id).then(attempt => {
-                if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
-                    this.toFinish()
-                }
+                this.loadCurrentStage().then(stage => {
 
-                this.loadCurrentStage().then((stage) => {
-                    if (stage.id === 4) {
+                    if (attempt.finished_at !== null && attempt.finished_at !== undefined) {
+                        this.toFinish()
+                    } else if (stage.id === 4) {
                         this.setTimebarInfo({
                             start: stage.started_at,
-                            finish: stage.finished_at,
+                            finish: moment(stage.started_at).add(2, 'hours').format('YYYY-MM-DD HH:mm:ss')
                         })
                     }
 

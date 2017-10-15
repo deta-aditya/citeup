@@ -48,11 +48,32 @@
             <div class="col-sm-4">
                 <trackdown-box :current="documentApproved && ! hasDoneSelection" :completed="hasDoneSelection" icon="map-signs" v-if="user.entry.activity.id !== 3" ref="trackdownBoxSelection">
                     <template slot="title">#2 TAHAP SELEKSI</template>
-                    <template slot="number">{{ stageGetter[$options.STAGE_ELIMINATION].started_at | fromNow }} Hari Lagi</template>
-                    <template slot="standout">
-                        {{ documentFinished ? 'Persiapkan Diri Anda!' : 'Silahkan Selesaikan Tahap Sebelumnya.' }}
+                    <template slot="number">
+                        <template v-if="eliminationDay > 0">
+                            {{ stageGetter[$options.STAGE_ELIMINATION].started_at | fromNow }} Hari Lagi
+                        </template>
+                        <template v-else-if="afterElimination">
+                            Selesai
+                        </template>
+                        <template v-else-if="eliminationDay <= 0">
+                            Hari ini!
+                        </template>
                     </template>
-                    <router-link slot="link" class="btn btn-link" :to="activityLink">{{ documentApproved ? 'Ke Halaman Seleksi' : 'Detail Acara' }}</router-link>
+                    <template slot="standout">
+                        <template v-if="! documentFinished">
+                            Silahkan Selesaikan Tahap Sebelumnya.
+                        </template>
+                        <template v-if="eliminationDay > 0">
+                            Persiapkan Diri Anda!
+                        </template>
+                        <template v-else-if="afterElimination">
+                            Tahap Seleksi Telah Selesai.
+                        </template>
+                        <template v-else-if="eliminationDay <= 0">
+                            Silahkan Menuju Halaman Seleksi.
+                        </template>
+                    </template>
+                    <router-link slot="link" :class="{'btn': true, 'btn-link': true, 'disabled': afterElimination}" :to="activityLink">{{ documentApproved ? 'Ke Halaman Seleksi' : 'Detail Acara' }}</router-link>
                 </trackdown-box>
                 <trackdown-box :current="documentFinished && ! postEvent" :completed="postEvent" icon="microphone" v-else ref="trackdownBoxSelection">
                     <template slot="title">#2 ACARA SEMINAR</template>
@@ -156,7 +177,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Countdown from '../../misc/Countdown.vue'
     import CloakedPanel from '../../misc/CloakedPanel'
     import CurrentUser from '../../mixins/CurrentUser'
@@ -221,6 +242,23 @@
             hasTestimonial() {
                 return false // to do 
             },
+            eliminationDay() {
+                return Math.floor(moment.duration(
+                    moment(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(moment())
+                ).asDays())
+            },
+            afterElimination() {
+                if (this.user.entry.activity_id === 1) {
+                    return Math.floor(moment.duration(
+                        moment(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(moment())
+                    ).asHours()) <= -2
+                } else if (this.user.entry.activity_id === 2) {
+                    return Math.floor(moment.duration(
+                        moment(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(moment())
+                    ).asDays()) <= 0
+                }
+            },
+
             activityLink() {
                 return this.documentApproved ? 
                     { name: 'Seleksi' } :
@@ -239,7 +277,7 @@
 
         filters: {
             fromNow(value) {
-                return Math.floor(moment.duration(moment(value).diff(moment())).asDays())
+                return Math.floor(moment.duration(moment(stageGetter[$options.STAGE_ELIMINATION].started_at).diff(moment())).asDays())
             },
             monetize: monetize,
             assetify: assetify,

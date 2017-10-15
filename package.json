@@ -22,6 +22,7 @@
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "tinymce": "^4.6.4",
     "trix": "^0.10.2",
     "vue": "^2.1.10",
