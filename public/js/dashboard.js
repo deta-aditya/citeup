@@ -83131,6 +83131,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -83218,6 +83221,13 @@ var ACTIVITIES = {
         prepareComponent: function prepareComponent() {
             this.dataPanel = this.$refs.dataPanel;
             this.referConfirmationBox(this.$refs.confirmation);
+        },
+        approve: function approve(id) {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].post('/entrants/' + id + '/approve').then(function (response) {
+                _this2.getEntries();
+            });
         }
     },
 
@@ -95793,7 +95803,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "text-primary"
         }, [_vm._v("Peserta ini sudah melengkapi dokumennya.")]) : (_vm.hasPaid(props.data.users)) ? _c('span', {
           staticClass: "text-info"
-        }, [_vm._v("Peserta ini sudah membayar.")]) : [_vm._v("Peserta ini belum melengkapi dokumennya.")]], 2)]), _vm._v(" "), (props.data.status === 0) ? _c('p', {
+        }, [_vm._v("Peserta ini sudah mengirim bukti pembayaran.")]) : [_vm._v("Peserta ini belum melengkapi dokumennya.")]], 2)]), _vm._v(" "), (props.data.status === 0) ? _c('p', {
           staticClass: "text-danger"
         }, [_vm._v("\n                    Peserta ini didiskualifikasi.\n                ")]) : _vm._e(), _vm._v(" "), _c('p', [_c('small', {
           staticClass: "text-muted"
@@ -95814,7 +95824,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               }
             }
           }
-        }, [_c('a', [_vm._v("Lihat Detail")])]), _vm._v(" "), (props.data.activity.id !== 3) ? [(props.data.status === 0) ? _c('li', [_c('a', {
+        }, [_c('a', [_vm._v("Lihat Detail")])]), _vm._v(" "), (_vm.documentsComplete(props.data.users)) ? _c('router-link', {
+          attrs: {
+            "tag": "li",
+            "to": {
+              name: 'Peserta.Dokumen',
+              params: {
+                id: props.data.id
+              }
+            }
+          }
+        }, [_c('a', [_vm._v("Lihat Dokumen")])]) : _vm._e(), _vm._v(" "), (props.data.activity.id !== 3) ? [_c('li', {
+          staticClass: "divider",
+          attrs: {
+            "role": "separator"
+          }
+        }), _vm._v(" "), (props.data.status === 0) ? _c('li', [_c('a', {
           attrs: {
             "href": "#"
           },
@@ -95834,7 +95859,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.preConfirm(props.data, true)
             }
           }
-        }, [_vm._v("Diskualifikasi")])]) : _vm._e()] : _vm._e()], 2)], 2)]
+        }, [_vm._v("Diskualifikasi")])]) : _vm._e()] : _vm._e(), _vm._v(" "), (_vm.documentsComplete(props.data.users) && props.data.stage !== 1) ? _c('li', [_c('a', {
+          attrs: {
+            "href": "#"
+          },
+          on: {
+            "click": function($event) {
+              $event.preventDefault();
+              _vm.approve(props.data.id)
+            }
+          }
+        }, [_vm._v("Setujui Dokumen")])]) : _vm._e()], 2)], 2)]
       }
     }]),
     model: {

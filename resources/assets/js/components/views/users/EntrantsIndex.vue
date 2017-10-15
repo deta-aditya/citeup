@@ -25,7 +25,7 @@
                         <div class="pull-right">
                             <span v-if="props.data.stage === 1" class="text-success">Dokumen peserta ini sudah disetujui.</span>
                             <span v-else-if="documentsComplete(props.data.users)" class="text-primary">Peserta ini sudah melengkapi dokumennya.</span>
-                            <span v-else-if="hasPaid(props.data.users)" class="text-info">Peserta ini sudah membayar.</span>
+                            <span v-else-if="hasPaid(props.data.users)" class="text-info">Peserta ini sudah mengirim bukti pembayaran.</span>
                             <template v-else>Peserta ini belum melengkapi dokumennya.</template> 
                         </div>
                     </template>
@@ -40,10 +40,13 @@
                     <template slot="actions">
                         <li role="separator" class="divider"></li>
                         <router-link tag="li" :to="{ name: 'Peserta.Lihat', params: { id: props.data.id }}"><a>Lihat Detail</a></router-link>
+                        <router-link v-if="documentsComplete(props.data.users)" tag="li" :to="{ name: 'Peserta.Dokumen', params: { id: props.data.id }}"><a>Lihat Dokumen</a></router-link>
                         <template v-if="props.data.activity.id !== 3">
+                            <li role="separator" class="divider"></li>
                             <li v-if="props.data.status === 0"><a href="#" @click.prevent="preConfirm(props.data, false)">Aktifkan</a></li>
                             <li v-else-if="props.data.status === 1"><a href="#" @click.prevent="preConfirm(props.data, true)">Diskualifikasi</a></li>
                         </template>
+                        <li v-if="documentsComplete(props.data.users) && props.data.stage !== 1"><a href="#" @click.prevent="approve(props.data.id)">Setujui Dokumen</a></li>
                     </template>
                 </data-panel-list-item>
             </template>
@@ -138,6 +141,12 @@
             prepareComponent() {
                 this.dataPanel = this.$refs.dataPanel
                 this.referConfirmationBox(this.$refs.confirmation)
+            },
+
+            approve(id) {
+                Citeup.post('/entrants/' + id + '/approve').then(response => {
+                    this.getEntries()
+                })
             },
 
         },
