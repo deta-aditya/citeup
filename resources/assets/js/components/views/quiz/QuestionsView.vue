@@ -39,7 +39,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Citeup from '../../../citeup'
     import QuestionsMixin from './QuestionsMixin'
 

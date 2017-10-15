@@ -2,6 +2,8 @@
 
 namespace App\Modules\Models;
 
+use App\Modules\Electrons\Activities\EntryService;
+
 trait User
 {
     /**
@@ -42,6 +44,16 @@ trait User
     public function getAdminAttribute()
     {
         return $this->isAdmin();
+    }
+
+    /**
+     * Get the user's status of whether it can join the elimination stage.
+     *
+     * @return bool
+     */
+    public function getEliminationAttribute()
+    {
+        return $this->canJoinElimination();
     }
 
     /**
@@ -168,6 +180,21 @@ trait User
     public function canAuth()
     {
         return ! ($this->crew || is_null($this->password));
+    }
+
+    /**
+     * Determine whether the user can join the elimination stage.
+     *
+     * @return bool
+     */
+    public function canJoinElimination()
+    {
+        if (! $this->isEntrant()) {
+            return true;
+        }
+
+        return $this->entry->stage === EntryService::STAGE_APPROVED_ENTRANT
+            && $this->entry->status === EntryService::STATUS_ACTIVE;
     }
 
     /**

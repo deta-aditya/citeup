@@ -43,7 +43,7 @@
 <script>
 
     import _ from 'lodash'
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Citeup from '../../../citeup'
     import ActivitiesMixin from './ActivitiesMixin'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'

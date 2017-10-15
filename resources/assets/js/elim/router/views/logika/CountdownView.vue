@@ -11,11 +11,7 @@
                             <span>1</span>
                         </div>
                         <div class="super-list-content">
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.</p>
-                            <p>Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.</p>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.</p>
-                            <p>Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.</p>
-                            <p>Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.</p>
+                            Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 11:00 WIB.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -23,7 +19,71 @@
                             <span>2</span>
                         </div>
                         <div class="super-list-content">
-                            Godspeed.
+                            Peserta diharuskan untuk mengakses halaman ini beberapa menit sebelum seleksi dimulai.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>3</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta diharuskan untuk terkoneksi pada jaringan internet cepat agar tidak terputus pada rentang waktu tersebut. Apabila koneksi peserta terputus, peserta dapat mengakses kembali halaman ini dan melanjutkan tahap penyisihan tanpa diberikan tambahan waktu.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>4</span>
+                        </div>
+                        <div class="super-list-content">
+                            Panitia memiliki hak untuk mendiskualifikasi peserta yang terindikasi melakukan pelanggaran.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>5</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta dapat menekan tombol “Selesai” atau menunggu hingga waktu selesai untuk mengakhiri seleksi.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>6</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>7</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta akan diberikan sebanyak 50 soal logika berbentuk pilihan ganda.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>8</span>
+                        </div>
+                        <div class="super-list-content">
+                            Segala jenis aktifitas peserta seperti memilih soal, memilih jawaban, dan menyelesaikan seleksi terekam oleh panitia.
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>9</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta yang bertanya kepada panitia diharuskan untuk menuliskan pertanyaannya dengan singkat dan jelas. 
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>10</span>
+                        </div>
+                        <div class="super-list-content">
+                            Peserta diperbolehkan untuk mengakses kembali soal-soal dan melihat jawabannya masing-masing setelah selesai melaksanakan tahap seleksi. 
                         </div>
                     </div>
                 </div>
@@ -36,8 +96,8 @@
                             <span>1</span>
                         </div>
                         <div class="super-list-content">
-                            <p>Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.</p>
-                            <p>Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.</p>
+                            Klik pada tombol yang bertuliskan nomor soal untuk membukanya.
+                            <div><img :src="'images/web/guide1.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -45,16 +105,41 @@
                             <span>2</span>
                         </div>
                         <div class="super-list-content">
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.</p>
-                            <p>Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.</p>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.</p>
-                            <div class="text-center"><img :src="defaultImage" class="img-rounded"></div>
+                            Untuk menjawab soal, klik pada pilihan yang tersedia.
+                            <div><img :src="'images/web/guide2.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>3</span>
+                        </div>
+                        <div class="super-list-content">
+                            Kerjakan semua soal sebelum waktu yang tersedia habis!
+                            <div><img :src="'images/web/guide3.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>4</span>
+                        </div>
+                        <div class="super-list-content">
+                            Sudah yakin dengan jawaban-jawaban Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.
+                            <div><img :src="'images/web/guide4.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                        </div>
+                    </div>
+                    <div class="super-list-item">
+                        <div class="super-list-number">
+                            <span>5</span>
+                        </div>
+                        <div class="super-list-content">
+                            Kebingungan? Tanyakan kejelasan kepada panitia dengan mengklik tombol "Tanya Panitia", lalu ketik pertanyaan Anda.
+                            <div><img :src="'images/web/guide5.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="text-center" v-if="isWarmingUp">
+        <div class="text-center" v-if="isWarmingUp">`
             <button type="button" class="btn btn-lg btn-primary btn-done" @click="warmUp">Uji Coba</button>
         </div>
     </div>
@@ -63,9 +148,10 @@
 <script>
 
     import _ from 'lodash'
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import { mapState, mapMutations } from 'vuex'
     import Citeup from '../../../../citeup'
+    import { assetify } from '../../../../components/Citeup/Helper'
 
     const STATE_USER = {'user': 'data'}
     const MUTATIONS_STAGE = {
@@ -88,6 +174,9 @@
                     && moment().diff(moment(this.warming.finish)) < 0
             },
         }),
+        filters: {
+            assetify,
+        },
         created() {
             Citeup.get('/config').then(response => {
                 this.warming = response.data.data.config.warming

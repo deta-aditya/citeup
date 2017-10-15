@@ -102,7 +102,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Countdown from '../../misc/Countdown.vue'
     import CurrentUser from '../../mixins/CurrentUser'
     import TrackdownBox from '../../misc/TrackdownBox.vue'

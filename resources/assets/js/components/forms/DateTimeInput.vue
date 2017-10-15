@@ -23,7 +23,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
 
     const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 

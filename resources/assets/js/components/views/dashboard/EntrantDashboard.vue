@@ -30,6 +30,10 @@
             </div>
         </div>
 
+        <div class="alert alert-info" v-if="warmingUp">
+            Tahap Uji Coba kini sedang berlangsung! Ayo berpartisipasi sekarang dengan mengklik <router-link :to="{ name: 'Seleksi' }">link ini.</router-link>
+        </div>
+
         <div class="row">
             
             <div class="col-sm-4">
@@ -48,11 +52,32 @@
             <div class="col-sm-4">
                 <trackdown-box :current="documentApproved && ! hasDoneSelection" :completed="hasDoneSelection" icon="map-signs" v-if="user.entry.activity.id !== 3" ref="trackdownBoxSelection">
                     <template slot="title">#2 TAHAP SELEKSI</template>
-                    <template slot="number">{{ stageGetter[$options.STAGE_ELIMINATION].started_at | fromNow }} Hari Lagi</template>
-                    <template slot="standout">
-                        {{ documentFinished ? 'Persiapkan Diri Anda!' : 'Silahkan Selesaikan Tahap Sebelumnya.' }}
+                    <template slot="number">
+                        <template v-if="eliminationDay > 0">
+                            {{ stageGetter[$options.STAGE_ELIMINATION].started_at | fromNow }} Hari Lagi
+                        </template>
+                        <template v-else-if="afterElimination">
+                            Selesai
+                        </template>
+                        <template v-else-if="eliminationDay <= 0">
+                            Hari ini!
+                        </template>
                     </template>
-                    <router-link slot="link" class="btn btn-link" :to="{ name: 'Acara.Lihat', params: { id: user.entry.activity.id }}">Detail Acara</router-link>
+                    <template slot="standout">
+                        <template v-if="! documentFinished">
+                            Silahkan Selesaikan Tahap Sebelumnya.
+                        </template>
+                        <template v-if="eliminationDay > 0">
+                            Persiapkan Diri Anda!
+                        </template>
+                        <template v-else-if="afterElimination">
+                            Tahap Seleksi Telah Selesai.
+                        </template>
+                        <template v-else-if="eliminationDay <= 0">
+                            Silahkan Menuju Halaman Seleksi.
+                        </template>
+                    </template>
+                    <router-link slot="link" :class="{'btn': true, 'btn-link': true, 'disabled': afterElimination}" :to="activityLink">{{ documentApproved ? 'Ke Halaman Seleksi' : 'Detail Acara' }}</router-link>
                 </trackdown-box>
                 <trackdown-box :current="documentFinished && ! postEvent" :completed="postEvent" icon="microphone" v-else ref="trackdownBoxSelection">
                     <template slot="title">#2 ACARA SEMINAR</template>
@@ -156,7 +181,9 @@
 
 <script>
 
-    import moment from 'moment'
+    import { merge } from 'lodash'
+    import { mapState } from 'vuex'
+    import moment from 'moment-timezone'
     import Countdown from '../../misc/Countdown.vue'
     import CloakedPanel from '../../misc/CloakedPanel'
     import CurrentUser from '../../mixins/CurrentUser'
@@ -174,6 +201,8 @@
         monetize, assetify, formatDateComplete, 
         formatDateShort, shortenPreview 
     } from '../../Citeup/Helper'
+
+    const states = mapState(['user', 'config'])
 
     export default {
 
@@ -199,7 +228,7 @@
             }
         },
 
-        computed: {
+        computed: merge(states, {
             documentApproved() {
                 return this.user.entry.stage === 1
             },
@@ -221,7 +250,33 @@
             hasTestimonial() {
                 return false // to do 
             },
-        },
+            eliminationDay() {
+                return Math.floor(moment.duration(
+                    moment(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(moment())
+                ).asDays())
+            },
+            afterElimination() {
+                if (this.user.entry.activity_id === 1) {
+                    return Math.floor(moment.duration(
+                        moment(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(moment())
+                    ).asHours()) <= -2
+                } else if (this.user.entry.activity_id === 2) {
+                    return Math.floor(moment.duration(
+                        moment(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(moment())
+                    ).asDays()) <= 0
+                }
+            },
+            warmingUp() {
+                return this.config && this.user.entry.activity.id === 1 &&
+                        moment().diff(moment(this.config.warming.start)) >= 0 && 
+                        moment().diff(moment(this.config.warming.finish)) < 0
+            },
+            activityLink() {
+                return this.documentApproved ? 
+                    { name: 'Seleksi' } :
+                    { name: 'Acara.Lihat', params: { id: this.user.entry.activity.id }}
+            },
+        }),
 
         watch: {
             stageGetter(newVal) {

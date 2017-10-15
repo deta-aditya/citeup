@@ -2,6 +2,7 @@
 
 namespace App\Web\Dashboard\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Electrons\Users\UserService as Users;
@@ -46,9 +47,17 @@ class DashboardController extends Controller
     public function elimination(Stages $stages)
     {
         $user = auth()->user();
+        $settings = app('App\Modules\Electrons\Settings\Settings');
+
+        $isWarmingUp = Carbon::now()->diffInSeconds(Carbon::parse($settings->warming->start), false) < 0 &&
+                    Carbon::now()->diffInSeconds(Carbon::parse($settings->warming->finish), false) >= 0;
 
         if (! $user->isEntrant() || $user->isEntrant() && $user->entry->activity_id != 1) {
             return redirect()->route('dashboard');
+        }
+
+        if (! ($user->canJoinElimination() || $isWarmingUp)) {
+            return redirect()->route('dashboard', ['vue' => 'elimination']);
         }
 
         return view('elimination.app', [

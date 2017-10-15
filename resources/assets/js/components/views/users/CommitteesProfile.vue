@@ -104,7 +104,7 @@
 <script>
 
     import _ from 'lodash'
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import Citeup from '../../../citeup'
     import { mapState, mapActions } from 'vuex'
     import KeyMapper from '../../keys/KeyMapper'

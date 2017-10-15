@@ -133,7 +133,7 @@
 <script>
 
     import _ from 'lodash'
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import { mapState } from 'vuex'
     import Citeup from '../../../citeup'
     import DataPanel from '../../kits/DataPanel/DataPanel.vue'

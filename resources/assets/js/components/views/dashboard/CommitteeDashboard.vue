@@ -49,7 +49,7 @@
 
 <script>
 
-    import moment from 'moment'
+    import moment from 'moment-timezone'
     import KeyMapper from '../../keys/KeyMapper'
     import CurrentUser from '../../mixins/CurrentUser'
 
