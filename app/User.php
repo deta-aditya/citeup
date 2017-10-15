@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'rolename', 'entrant', 'committee', 'admin',
+        'rolename', 'entrant', 'committee', 'admin', 'elimination',
     ];
 
     /**

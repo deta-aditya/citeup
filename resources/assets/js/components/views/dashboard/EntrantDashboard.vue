@@ -52,7 +52,7 @@
                     <template slot="standout">
                         {{ documentFinished ? 'Persiapkan Diri Anda!' : 'Silahkan Selesaikan Tahap Sebelumnya.' }}
                     </template>
-                    <router-link slot="link" class="btn btn-link" :to="{ name: 'Acara.Lihat', params: { id: user.entry.activity.id }}">Detail Acara</router-link>
+                    <router-link slot="link" class="btn btn-link" :to="activityLink">{{ documentApproved ? 'Ke Halaman Seleksi' : 'Detail Acara' }}</router-link>
                 </trackdown-box>
                 <trackdown-box :current="documentFinished && ! postEvent" :completed="postEvent" icon="microphone" v-else ref="trackdownBoxSelection">
                     <template slot="title">#2 ACARA SEMINAR</template>
@@ -220,6 +220,11 @@
             },
             hasTestimonial() {
                 return false // to do 
+            },
+            activityLink() {
+                return this.documentApproved ? 
+                    { name: 'Seleksi' } :
+                    { name: 'Acara.Lihat', params: { id: user.entry.activity.id }}
             },
         },
 

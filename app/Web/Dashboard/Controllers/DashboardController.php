@@ -51,6 +51,10 @@ class DashboardController extends Controller
             return redirect()->route('dashboard');
         }
 
+        if (! $user->canJoinElimination()) {
+            return redirect()->route('dashboard', ['vue' => 'elimination']);
+        }
+
         return view('elimination.app', [
             'entrant' => auth()->user()->entry,
             'elimination' => $stages->get(Stages::STAGE_ELIMINATION)

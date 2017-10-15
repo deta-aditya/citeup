@@ -74580,11 +74580,6 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         storeUserInfo: function storeUserInfo() {
 
             this.updateUser(this.$refs.info);
-        },
-        detectMaxScrollHeight: function detectMaxScrollHeight(view) {
-            if (view.scrollHeight - window.innerHeight === view.scrollTop - 38) {
-                this.setViewScrollMaxed(true);
-            }
         }
     })
 
@@ -77838,19 +77833,88 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vue2
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__citeup__ = __webpack_require__(3);
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return { contact_people: [] };
+    },
+
+
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user']), {
+        mayContinue: function mayContinue() {
+            return this.user.elimination;
+        },
+        continueLink: function continueLink() {
+            switch (this.user.entry.activity.id) {
+                case 1:
+                    return __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].appPath + '/elimination/';
+                case 2:
+                    return __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].appPath + '/submission/';
+            }
+        }
+    }),
+
+    created: function created() {
+        this.getContactPeople();
+    },
     mounted: function mounted() {
-        window.location.replace(__WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].appPath + '/elimination/');
+        if (this.mayContinue) {
+            window.location.replace(this.continueLink);
+        }
+    },
+
+
+    methods: {
+        getContactPeople: function getContactPeople() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].get('/contact-people').then(function (response) {
+                return _this.contact_people = response.data.data.contact_people;
+            });
+        }
     }
 });
 
@@ -79581,6 +79645,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         hasTestimonial: function hasTestimonial() {
             return false; // to do 
+        },
+        activityLink: function activityLink() {
+            return this.documentApproved ? { name: 'Seleksi' } : { name: 'Acara.Lihat', params: { id: user.entry.activity.id } };
         }
     },
 
@@ -88813,13 +88880,17 @@ module.exports = Component.exports
 /* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(624)
+
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(369),
   /* template */
   __webpack_require__(588),
   /* scopeId */
-  null,
+  "data-v-9b5be364",
   /* cssModules */
   null
 )
@@ -93841,15 +93912,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                    " + _vm._s(_vm.documentFinished ? 'Persiapkan Diri Anda!' : 'Silahkan Selesaikan Tahap Sebelumnya.') + "\n                ")]), _vm._v(" "), _c('router-link', {
     staticClass: "btn btn-link",
     attrs: {
-      "to": {
-        name: 'Acara.Lihat',
-        params: {
-          id: _vm.user.entry.activity.id
-        }
-      }
+      "to": _vm.activityLink
     },
     slot: "link"
-  }, [_vm._v("Detail Acara")])], 2) : _c('trackdown-box', {
+  }, [_vm._v(_vm._s(_vm.documentApproved ? 'Ke Halaman Seleksi' : 'Detail Acara'))])], 2) : _c('trackdown-box', {
     ref: "trackdownBoxSelection",
     attrs: {
       "current": _vm.documentFinished && !_vm.postEvent,
@@ -95584,13 +95650,26 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', {
-    staticClass: "lead text-center",
-    style: ({
-      marginTop: '100px'
-    })
-  }, [_vm._v("Mengalihkan Anda...")])
-},staticRenderFns: []}
+  return _c('div', {
+    staticClass: "elimination"
+  }, [(_vm.mayContinue) ? [_vm._m(0), _vm._v(" "), _c('p', {
+    staticClass: "lead text-center"
+  }, [_vm._v("Mengalihkan Anda...")])] : [_c('div', {
+    staticClass: "text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-5x fa-hand-paper-o"
+  })]), _vm._v(" "), _c('p', {
+    staticClass: "lead text-center"
+  }, [_vm._v("Maaf. Anda tidak dapat mengikuti tahap penyisihan.")]), _vm._v(" "), _c('p', [_vm._v("Berikut adalah alasan-alasan yang mungkin:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("Dokumen Anda tidak diverifikasi oleh panitia.")]), _vm._v(" "), _c('li', [_vm._v("Anda telah didiskualifikasi oleh panitia karena hal tertentu.")])]), _vm._v(" "), _c('p', [_vm._v("Jika Anda merasa tidak berada pada salah satu situasi di atas, diskusikan dengan "), _c('i', [_vm._v("contact person")]), _vm._v(" kami: ")]), _vm._v(" "), _c('ul', _vm._l((_vm.contact_people), function(contact) {
+    return _c('li', [_vm._v(_vm._s(contact.name) + " - " + _vm._s(contact.phone))])
+  }))]], 2)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-5x fa-spin fa-compass"
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -97455,6 +97534,43 @@ module.exports = __webpack_amd_options__;
 
 module.exports = __webpack_require__(340);
 
+
+/***/ }),
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */,
+/* 623 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+exports.push([module.i, "\n.elimination[data-v-9b5be364] {\n  text-align: center;\n  padding-top: 100px;\n}\n.elimination .fa[data-v-9b5be364] {\n    margin-bottom: 50px;\n}\n", ""]);
+
+/***/ }),
+/* 624 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(623);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(11)("26c45ad7", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-9b5be364\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Elimination.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-9b5be364\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Elimination.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

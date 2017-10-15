@@ -127,12 +127,6 @@ const dashboardViewModel = new Vue({
 
         },
 
-        detectMaxScrollHeight(view) {
-            if (view.scrollHeight - window.innerHeight === view.scrollTop - 38) {
-                this.setViewScrollMaxed(true)
-            }
-        },
-
     })
 
 }).$mount('#app-dashboard');
