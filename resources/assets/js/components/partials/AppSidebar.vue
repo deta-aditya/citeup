@@ -145,18 +145,6 @@
 
         }),
 
-        mounted() {
-            this.prepareComponent()
-        },
-
-        methods: {
-
-            prepareComponent() {
-
-            },
-
-        },
-
         components: {
             'spacer': Spacer,
         },

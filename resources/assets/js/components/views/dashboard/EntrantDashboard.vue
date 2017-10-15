@@ -30,6 +30,10 @@
             </div>
         </div>
 
+        <div class="alert alert-info" v-if="warmingUp">
+            Tahap Uji Coba kini sedang berlangsung! Ayo berpartisipasi sekarang dengan mengklik <router-link :to="{ name: 'Seleksi' }">link ini.</router-link>
+        </div>
+
         <div class="row">
             
             <div class="col-sm-4">
@@ -177,6 +181,8 @@
 
 <script>
 
+    import { merge } from 'lodash'
+    import { mapState } from 'vuex'
     import moment from 'moment-timezone'
     import Countdown from '../../misc/Countdown.vue'
     import CloakedPanel from '../../misc/CloakedPanel'
@@ -195,6 +201,8 @@
         monetize, assetify, formatDateComplete, 
         formatDateShort, shortenPreview 
     } from '../../Citeup/Helper'
+
+    const states = mapState(['user', 'config'])
 
     export default {
 
@@ -220,7 +228,7 @@
             }
         },
 
-        computed: {
+        computed: merge(states, {
             documentApproved() {
                 return this.user.entry.stage === 1
             },
@@ -258,13 +266,17 @@
                     ).asDays()) <= 0
                 }
             },
-
+            warmingUp() {
+                return this.config && this.user.entry.activity.id === 1 &&
+                        moment().diff(moment(this.config.warming.start)) >= 0 && 
+                        moment().diff(moment(this.config.warming.finish)) < 0
+            },
             activityLink() {
                 return this.documentApproved ? 
                     { name: 'Seleksi' } :
-                    { name: 'Acara.Lihat', params: { id: user.entry.activity.id }}
+                    { name: 'Acara.Lihat', params: { id: this.user.entry.activity.id }}
             },
-        },
+        }),
 
         watch: {
             stageGetter(newVal) {

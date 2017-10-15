@@ -37,6 +37,9 @@
     import { merge } from 'lodash'
     import { mapState } from 'vuex'
     import Citeup from '../../citeup'
+    import moment from 'moment-timezone'
+
+    const states = mapState(['user', 'config'])
 
     export default {
 
@@ -44,9 +47,12 @@
             return { contact_people: [] }
         },
 
-        computed: merge(mapState(['user']), {
+        computed: merge(states, {
             mayContinue() {
-                return this.user.elimination
+                return this.user.elimination || 
+                    (this.config && this.user.entry.activity.id === 1 &&
+                        moment().diff(moment(this.config.warming.start)) >= 0 && 
+                        moment().diff(moment(this.config.warming.finish)) < 0)
             },
             continueLink() {
                 switch (this.user.entry.activity.id) {
@@ -59,13 +65,11 @@
         }),
 
         created() {
-            this.getContactPeople()
-        },
-
-        mounted() {
             if (this.mayContinue) {
                 window.location.replace(this.continueLink)
             }
+
+            this.getContactPeople()
         },
 
         methods: {

@@ -77378,15 +77378,6 @@ var STATES = ['user', 'config', 'route', 'topbarHeight'];
         }
     }),
 
-    mounted: function mounted() {
-        this.prepareComponent();
-    },
-
-
-    methods: {
-        prepareComponent: function prepareComponent() {}
-    },
-
     components: {
         'spacer': __WEBPACK_IMPORTED_MODULE_4__misc_Spacer_vue___default.a
     }
@@ -77842,6 +77833,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__citeup__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment_timezone__ = __webpack_require__(626);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment_timezone__);
 //
 //
 //
@@ -77881,6 +77874,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+var states = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user', 'config']);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -77888,9 +77884,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user']), {
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(states, {
         mayContinue: function mayContinue() {
-            return this.user.elimination;
+            return this.user.elimination || this.config && this.user.entry.activity.id === 1 && __WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()(this.config.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()(this.config.warming.finish)) < 0;
         },
         continueLink: function continueLink() {
             switch (this.user.entry.activity.id) {
@@ -77903,12 +77899,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }),
 
     created: function created() {
-        this.getContactPeople();
-    },
-    mounted: function mounted() {
         if (this.mayContinue) {
             window.location.replace(this.continueLink);
         }
+
+        this.getContactPeople();
     },
 
 
@@ -79410,26 +79405,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment_timezone__ = __webpack_require__(626);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment_timezone__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__misc_Countdown_vue__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__misc_Countdown_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__misc_CloakedPanel__ = __webpack_require__(261);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__misc_CloakedPanel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__misc_CloakedPanel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_CurrentUser__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__misc_TrackdownBox_vue__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__misc_TrackdownBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__misc_TrackdownBox_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_DataPanel_vue__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_DataPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_DataPanel_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_DocumentsChecker__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mixins_ApplicationStages__ = __webpack_require__(242);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Citeup_Entrant_EntrantRepo__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Citeup_Faq_FaqRepo__ = __webpack_require__(427);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Citeup_News_NewsRepo__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Citeup_Activity_ActivityRepo__ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_timezone__ = __webpack_require__(626);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment_timezone__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__misc_Countdown_vue__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__misc_Countdown_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__misc_CloakedPanel__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__misc_CloakedPanel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__misc_CloakedPanel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_CurrentUser__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__misc_TrackdownBox_vue__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__misc_TrackdownBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__misc_TrackdownBox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_DataPanel_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_DataPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_DataPanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_DocumentsChecker__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mixins_ApplicationStages__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__kits_DataPanel_ListItem_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__kits_DataPanel_ListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__kits_DataPanel_ListItem_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Citeup_Entrant_EntrantRepo__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Citeup_Faq_FaqRepo__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Citeup_News_NewsRepo__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Citeup_Activity_ActivityRepo__ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__ = __webpack_require__(204);
+//
+//
+//
+//
 //
 //
 //
@@ -79624,10 +79626,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+
+var states = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])(['user', 'config']);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    mixins: [__WEBPACK_IMPORTED_MODULE_7__mixins_ApplicationStages__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_CurrentUser__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__mixins_DocumentsChecker__["a" /* default */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_9__mixins_ApplicationStages__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__mixins_CurrentUser__["a" /* default */], __WEBPACK_IMPORTED_MODULE_8__mixins_DocumentsChecker__["a" /* default */]],
 
     data: function data() {
         return {
@@ -79650,7 +79656,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
-    computed: {
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(states, {
         documentApproved: function documentApproved() {
             return this.user.entry.stage === 1;
         },
@@ -79667,25 +79673,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false; // to do
         },
         postEvent: function postEvent() {
-            return __WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(this.stageGetter[this.$options.STAGE_POST_EVENT]).started_at) >= 0;
+            return __WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_POST_EVENT]).started_at) >= 0;
         },
         hasTestimonial: function hasTestimonial() {
             return false; // to do 
         },
         eliminationDay: function eliminationDay() {
-            return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asDays());
+            return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asDays());
         },
         afterElimination: function afterElimination() {
             if (this.user.entry.activity_id === 1) {
-                return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asHours()) <= -2;
+                return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asHours()) <= -2;
             } else if (this.user.entry.activity_id === 2) {
-                return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asDays()) <= 0;
+                return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asDays()) <= 0;
             }
         },
+        warmingUp: function warmingUp() {
+            return this.config && this.user.entry.activity.id === 1 && __WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.config.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.config.warming.finish)) < 0;
+        },
         activityLink: function activityLink() {
-            return this.documentApproved ? { name: 'Seleksi' } : { name: 'Acara.Lihat', params: { id: user.entry.activity.id } };
+            return this.documentApproved ? { name: 'Seleksi' } : { name: 'Acara.Lihat', params: { id: this.user.entry.activity.id } };
         }
-    },
+    }),
 
     watch: {
         stageGetter: function stageGetter(newVal) {
@@ -79698,13 +79707,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     filters: {
         fromNow: function fromNow(value) {
-            return Math.floor(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()(value).diff(__WEBPACK_IMPORTED_MODULE_0_moment_timezone___default()())).asDays());
+            return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(value).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asDays());
         },
 
-        monetize: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["c" /* monetize */],
-        assetify: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["b" /* assetify */],
-        formatDateShort: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["d" /* formatDateShort */],
-        formatDateComplete: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["e" /* formatDateComplete */]
+        monetize: __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__["c" /* monetize */],
+        assetify: __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__["b" /* assetify */],
+        formatDateShort: __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__["d" /* formatDateShort */],
+        formatDateComplete: __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__["e" /* formatDateComplete */]
     },
 
     created: function created() {
@@ -79731,7 +79740,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getActivity: function getActivity(id) {
             var _this = this;
 
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__Citeup_Activity_ActivityRepo__["a" /* findById */])(id).then(function (activity) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__Citeup_Activity_ActivityRepo__["a" /* findById */])(id).then(function (activity) {
                 _this.activity = activity;
                 _this.hasDoneLoading.activity = true;
                 _this.elements.switchTab.cloaking = !_this.switchTabCompleted();
@@ -79741,14 +79750,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getRelatedEntrants: function getRelatedEntrants(id) {
             var _this2 = this;
 
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__Citeup_Entrant_EntrantRepo__["a" /* getRelatedEntrants */])(id).then(function (related) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__Citeup_Entrant_EntrantRepo__["a" /* getRelatedEntrants */])(id).then(function (related) {
                 return _this2.related = related;
             });
         },
         getNews: function getNews(skip, take) {
             var _this3 = this;
 
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__Citeup_News_NewsRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (news) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__Citeup_News_NewsRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (news) {
                 _this3.news = news;
                 _this3.hasDoneLoading.news = true;
                 _this3.elements.switchTab.cloaking = !_this3.switchTabCompleted();
@@ -79757,7 +79766,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getFaqs: function getFaqs(skip, take) {
             var _this4 = this;
 
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__Citeup_Faq_FaqRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (faqs) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__Citeup_Faq_FaqRepo__["a" /* listInfiniteScroll */])(skip, take).then(function (faqs) {
                 _this4.faqs = faqs;
                 _this4.hasDoneLoading.faqs = true;
                 _this4.elements.switchTab.cloaking = !_this4.switchTabCompleted();
@@ -79767,15 +79776,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.hasDoneLoading.activity && this.hasDoneLoading.news && this.hasDoneLoading.faqs;
         },
 
-        shortenPreview: __WEBPACK_IMPORTED_MODULE_13__Citeup_Helper__["f" /* shortenPreview */]
+        shortenPreview: __WEBPACK_IMPORTED_MODULE_15__Citeup_Helper__["f" /* shortenPreview */]
     },
 
     components: {
-        'countdown': __WEBPACK_IMPORTED_MODULE_1__misc_Countdown_vue___default.a,
-        'data-panel': __WEBPACK_IMPORTED_MODULE_5__kits_DataPanel_DataPanel_vue___default.a,
-        'trackdown-box': __WEBPACK_IMPORTED_MODULE_4__misc_TrackdownBox_vue___default.a,
-        'cloaked-panel': __WEBPACK_IMPORTED_MODULE_2__misc_CloakedPanel___default.a,
-        'data-panel-list-item': __WEBPACK_IMPORTED_MODULE_8__kits_DataPanel_ListItem_vue___default.a
+        'countdown': __WEBPACK_IMPORTED_MODULE_3__misc_Countdown_vue___default.a,
+        'data-panel': __WEBPACK_IMPORTED_MODULE_7__kits_DataPanel_DataPanel_vue___default.a,
+        'trackdown-box': __WEBPACK_IMPORTED_MODULE_6__misc_TrackdownBox_vue___default.a,
+        'cloaked-panel': __WEBPACK_IMPORTED_MODULE_4__misc_CloakedPanel___default.a,
+        'data-panel-list-item': __WEBPACK_IMPORTED_MODULE_10__kits_DataPanel_ListItem_vue___default.a
     }
 });
 
@@ -93922,7 +93931,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Logout")])], 2), _vm._v(" "), _c('h1', {
     staticClass: "page-title"
-  }, [_vm._v("Selamat Datang " + _vm._s(_vm.user.name) + "!")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Selamat Datang " + _vm._s(_vm.user.name) + "!")])])])]), _vm._v(" "), (_vm.warmingUp) ? _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("\n        Tahap Uji Coba kini sedang berlangsung! Ayo berpartisipasi sekarang dengan mengklik "), _c('router-link', {
+    attrs: {
+      "to": {
+        name: 'Seleksi'
+      }
+    }
+  }, [_vm._v("link ini.")])], 1) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-sm-4"
