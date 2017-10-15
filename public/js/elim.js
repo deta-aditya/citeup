@@ -65761,6 +65761,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment_timezone__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__citeup__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Citeup_Helper__ = __webpack_require__(204);
 //
 //
 //
@@ -65823,6 +65824,92 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -65851,6 +65938,9 @@ var MUTATIONS_STAGE = {
             return __WEBPACK_IMPORTED_MODULE_1_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment_timezone___default()(this.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_1_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_1_moment_timezone___default()(this.warming.finish)) < 0;
         }
     }),
+    filters: {
+        assetify: __WEBPACK_IMPORTED_MODULE_4__components_Citeup_Helper__["b" /* assetify */]
+    },
     created: function created() {
         var _this = this;
 
@@ -66998,20 +67088,69 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "view-title"
   }, [_vm._v("Panduan")]), _vm._v(" "), _c('div', {
     staticClass: "super-list"
+  }, [_c('div', {
+    staticClass: "super-list-item"
   }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Klik pada tombol yang bertuliskan nomor soal untuk membukanya.\n                        "), _c('div', [_c('img', {
+    staticClass: "img-rounded",
+    style: ({
+      width: '100%'
+    }),
+    attrs: {
+      "src": _vm._f("assetify")('images/web/guide1.png')
+    }
+  })])])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_c('p', [_vm._v("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.")]), _vm._v(" "), _c('p', [_vm._v("Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.")]), _vm._v(" "), _c('p', [_vm._v("Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.")]), _vm._v(" "), _c('div', {
-    staticClass: "text-center"
-  }, [_c('img', {
+  }, [_vm._v("\n                        Untuk menjawab soal, klik pada pilihan yang tersedia.\n                        "), _c('div', [_c('img', {
     staticClass: "img-rounded",
+    style: ({
+      width: '100%'
+    }),
     attrs: {
-      "src": _vm.defaultImage
+      "src": _vm._f("assetify")('images/web/guide2.png')
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Kerjakan semua soal sebelum waktu yang tersedia habis!\n                        "), _c('div', [_c('img', {
+    staticClass: "img-rounded",
+    style: ({
+      width: '100%'
+    }),
+    attrs: {
+      "src": _vm._f("assetify")('images/web/guide3.png')
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Sudah yakin dengan jawaban-jawaban Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.\n                        "), _c('div', [_c('img', {
+    staticClass: "img-rounded",
+    style: ({
+      width: '100%'
+    }),
+    attrs: {
+      "src": _vm._f("assetify")('images/web/guide4.png')
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Kebingungan? Tanyakan kejelasan kepada panitia dengan mengklik tombol \"Tanya Panitia\", lalu ketik pertanyaan Anda.\n                        "), _c('div', [_c('img', {
+    staticClass: "img-rounded",
+    style: ({
+      width: '100%'
+    }),
+    attrs: {
+      "src": _vm._f("assetify")('images/web/guide5.png')
     }
   })])])])])])]), _vm._v(" "), (_vm.isWarmingUp) ? _c('div', {
     staticClass: "text-center"
-  }, [_c('button', {
+  }, [_vm._v("`\n        "), _c('button', {
     staticClass: "btn btn-lg btn-primary btn-done",
     attrs: {
       "type": "button"
@@ -67033,25 +67172,81 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("1")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_c('p', [_vm._v("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.")]), _vm._v(" "), _c('p', [_vm._v("Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.")]), _vm._v(" "), _c('p', [_vm._v("Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.")]), _vm._v(" "), _c('p', [_vm._v("Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.")]), _vm._v(" "), _c('p', [_vm._v("Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 11:00 WIB.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("2")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Godspeed.\n                    ")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_vm._v("\n                        Peserta diharuskan untuk mengakses halaman ini beberapa menit sebelum seleksi dimulai.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
-  }, [_c('span', [_vm._v("1")])]), _vm._v(" "), _c('div', {
+  }, [_c('span', [_vm._v("3")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_c('p', [_vm._v("Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.")]), _vm._v(" "), _c('p', [_vm._v("Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.")])])])
+  }, [_vm._v("\n                        Peserta diharuskan untuk terkoneksi pada jaringan internet cepat agar tidak terputus pada rentang waktu tersebut. Apabila koneksi peserta terputus, peserta dapat mengakses kembali halaman ini dan melanjutkan tahap penyisihan tanpa diberikan tambahan waktu.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("4")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Panitia memiliki hak untuk mendiskualifikasi peserta yang terindikasi melakukan pelanggaran.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("5")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Peserta dapat menekan tombol “Selesai” atau menunggu hingga waktu selesai untuk mengakhiri seleksi.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("6")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("7")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Peserta akan diberikan sebanyak 50 soal logika berbentuk pilihan ganda.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("8")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Segala jenis aktifitas peserta seperti memilih soal, memilih jawaban, dan menyelesaikan seleksi terekam oleh panitia.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("9")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Peserta yang bertanya kepada panitia diharuskan untuk menuliskan pertanyaannya dengan singkat dan jelas. \n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-item"
+  }, [_c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("10")])]), _vm._v(" "), _c('div', {
+    staticClass: "super-list-content"
+  }, [_vm._v("\n                        Peserta diperbolehkan untuk mengakses kembali soal-soal dan melihat jawabannya masing-masing setelah selesai melaksanakan tahap seleksi. \n                    ")])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("1")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("2")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("3")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("4")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "super-list-number"
+  }, [_c('span', [_vm._v("5")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
