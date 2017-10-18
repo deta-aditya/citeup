@@ -12,6 +12,7 @@
 
 <template>
     <div class="elimination">
+        <a ref="redirector" :href="continueLink"></a>
         <template v-if="mayContinue">
             <div class="text-center"><i class="fa fa-5x fa-spin fa-compass"></i></div>
             <p class="lead text-center">Mengalihkan Anda...</p>
@@ -61,11 +62,14 @@
         }),
 
         created() {
-            if (this.mayContinue) {
-                window.location.href = this.continueLink
-            }
 
             this.getContactPeople()
+        },
+
+        mounted() {
+            if (this.mayContinue) {
+                return this.$refs.redirector.click()
+            }
         },
 
         methods: {
