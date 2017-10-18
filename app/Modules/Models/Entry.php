@@ -70,6 +70,16 @@ class Entry extends Model
     public function testimonials()
     {
         return $this->hasMany('App\Modules\Models\Testimonial');
+    }
+
+    /**
+     * Get the chats related to the entry.
+     *
+     * @return HasMany
+     */
+    public function chats()
+    {
+        return $this->hasMany('App\Modules\Models\Chat');
     }    
 
     /**

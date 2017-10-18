@@ -93,7 +93,22 @@ class DashboardController extends Controller
         ]);
     }
 
-    
+    /**
+     * Show the monitor page.
+     *
+     * @return Response
+     */
+    public function monitor($channel)
+    {
+        return view('monitor.app', [
+            'channel' => $channel
+        ]);
+    }
+
+
+    /**
+     * ******* U N I C O R N *******
+     */    
     public function unicorn(Request $request)
     {
         if ($request->user()->isAdmin()) {

@@ -134,7 +134,7 @@ return [
         ],
 
         'loadable' => [
-            'users', 'users.documents', 'activity', 'attempts', 'submissions', 'testimonials',
+            'users', 'users.documents', 'activity', 'attempts', 'submissions', 'testimonials', 'chats',
         ],
 
     ],
@@ -406,15 +406,15 @@ return [
     'chats' => [
 
         'selectable' => [
-            'message', 'channel',
+            'message', 'read_at',
         ],
 
         'sortable' => [
-            'channel',
+            //
         ],
 
         'comparable' => [
-            'channel',
+            //
         ],
 
         'loadable' => [

@@ -5,5 +5,6 @@
   "/js/dashboard.js": "/js/dashboard.js",
   "/mix.js": "/mix.js",
   "/js/elim.js": "/js/elim.js",
-  "/js/submit.js": "/js/submit.js"
+  "/js/submit.js": "/js/submit.js",
+  "/js/monitor.js": "/js/monitor.js"
 }

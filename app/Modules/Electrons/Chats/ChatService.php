@@ -38,19 +38,15 @@ class ChatService extends Service
     {
         $query = $this->parseQueryString($query, $params);
 
-        if (array_has($params, 'logika')) {
-            $query->logika();
-        }
-
-        if (array_has($params, 'desain')) {
-            $query->desain();
+        if (array_has($params, 'entry')) {
+            $query->ofEntry($params['entry']);
         }
 
         return $query->get();
     }
 
     /**
-     * Create a new entry and return it.
+     * Create a new chat and return it.
      *
      * @param  array  $data
      * @return Chat
@@ -59,11 +55,33 @@ class ChatService extends Service
     {
         $cleaned = $this->clean($data);
 
-        if (array_has($data, 'entry')) {
-            $cleaned['entry_id'] = $data['entry'];
-            $cleaned['channel'] = Entry::find($data['entry'])->activity_id;
-        }
+        $cleaned['entry_id'] = $data['entry'];
 
         return Chat::create($cleaned);
+    }
+
+    /**
+     * Read unread chats of specific entry.
+     *
+     * @param  int   $entry
+     * @param  bool  $committee
+     * @return this
+     */
+    public function read($entry, $committee)
+    {
+        $chats = Chat::ofEntry($entry)->unread();
+
+        if ($committee) {
+            $chats->fromCommittee();
+        } else {
+            $chats->fromEntrant();
+        }
+
+        $chats = $chats->get();
+
+        $chats->read_at = Carbon::now()->parse('Y-m-d H:i:s');
+        $chats->save();
+
+        return $this;
     }
 }

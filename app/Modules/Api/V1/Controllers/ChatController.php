@@ -49,9 +49,6 @@ class ChatController extends Controller
      * Insert a new chat data.
      *
      * @param  ChatInsertRequest  $request
-     * @param  RoleService        $roles
-     * @param  ProfileService     $profiles
-     * @param  ChatService       $chats
      * @return Response
      */
     public function insert(ChatInsertRequest $request)
@@ -59,5 +56,18 @@ class ChatController extends Controller
         $chat = $this->chats->create($request->all());
 
         return $this->respondJson(['chat' => $chat]);
+    }
+
+    /**
+     * Read a chat data.
+     *
+     * @param  ChatReadRequest  $request
+     * @return Response
+     */
+    publlc function read(ChatReadRequest $request)
+    {
+        $this->chats->read($request->input('entry'), $request->user()->isEntrant());
+
+        return $this->respondJson([]);
     }
 }

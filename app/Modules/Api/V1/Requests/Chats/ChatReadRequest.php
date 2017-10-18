@@ -4,7 +4,7 @@ namespace App\Modules\Api\V1\Requests\Chats;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChatInsertRequest extends FormRequest
+class ChatReadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,8 +15,8 @@ class ChatInsertRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $accessor->isAdmin() || $accessor->isCommittee() || 
-            ($accessor->isEntrant() && $accessor->entry_id == $this->input('entry', null));
+        return $user->isAdmin() || $user->isCommittee() ||
+            ($user->isEntrant() && $user->entry->id == $this->input('entry'));
     }
 
     /**
@@ -27,9 +27,7 @@ class ChatInsertRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'required|string',
             'entry' => 'required|int|exists:entries,id',
-            'committee' => 'required|int|in:0,1',
         ];
     }
 }
