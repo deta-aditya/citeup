@@ -175,6 +175,9 @@ Route::group([
 
     Route::get('/stages', 'StageController@index');
     Route::get('/stages/current', 'StageController@current');
+
+    Route::get('/chats', 'ChatController@index');
+    Route::post('/chats', 'ChatController@insert');
     
     /*
      * Storage Routes

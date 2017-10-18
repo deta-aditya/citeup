@@ -29,10 +29,6 @@
                         <i class="fa fa-fw fa-bullhorn"></i>
                         Acara
                     </router-link>
-                    <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('Pertanyaan Quiz') >= 0 }" :to="{ name: 'Pertanyaan Quiz' }">
-                        <i class="fa fa-fw fa-map-signs"></i>
-                        Pertanyaan Quiz
-                    </router-link>
                     <router-link :class="{'list-group-item': true, 'sidebar-nav-item': true, 'active': route.indexOf('FAQ') >= 0 }" :to="{ name: 'FAQ' }">
                         <i class="fa fa-fw fa-question-circle"></i>
                         FAQ
