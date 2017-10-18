@@ -56,12 +56,7 @@
                         moment().diff(moment(this.config.warming.finish)) < 0)
             },
             continueLink() {
-                switch (this.user.entry.activity.id) {
-                    case 1:
-                        return Citeup.appPath + '/elimination/'
-                    case 2:
-                        return Citeup.appPath + '/submission/'
-                }
+                return document.head.querySelector('meta[name="elim-path"]').content;
             },
         }),
 

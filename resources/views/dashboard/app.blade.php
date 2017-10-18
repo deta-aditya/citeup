@@ -11,6 +11,11 @@
     <!-- The App Root Path -->
     <meta name="app-path" content="{{ url('/') }}">
 
+    @if ($user->isEntrant()) 
+        <!-- The Elim Path -->
+        <meta name="elim-path" content="{{ $user->entry->activity_id === 1 ? route('elimination') : route('submission') }}/">
+    @endif
+
     <title>{{ config('app.name', 'CiteUP') }}</title>
 
     <!-- Styles -->
