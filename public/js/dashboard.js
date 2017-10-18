@@ -82858,12 +82858,7 @@ var states = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* map
             return this.user.elimination || this.config && __WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()(this.config.warming.start)) >= 0 && __WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()().diff(__WEBPACK_IMPORTED_MODULE_3_moment_timezone___default()(this.config.warming.finish)) < 0;
         },
         continueLink: function continueLink() {
-            switch (this.user.entry.activity.id) {
-                case 1:
-                    return __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].appPath + '/elimination/';
-                case 2:
-                    return __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].appPath + '/submission/';
-            }
+            return document.head.querySelector('meta[name="elim-path"]').content;
         }
     }),
 
