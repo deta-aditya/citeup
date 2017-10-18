@@ -33,15 +33,6 @@ export default {
         },
     },
     actions: {
-        persistFinish({ dispatch }, attemptId) {
-            return new Promise((resolve, reject) => {
-                Citeup.put('/attempts/' + attemptId, { 
-                    finished_at: moment().format('YYYY-MM-DD HH:mm:ss')
-                 }).then(response => {
-                    resolve(response.data.data.attempt)
-                })
-            })
-        },
         toFinish({ commit }) {
             commit('STAGE_STATUS_FINISH')
         },

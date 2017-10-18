@@ -6,13 +6,13 @@
             <template slot="header-control">
                 <router-link :to="{ name: 'Pertanyaan Quiz' }" class="btn btn-default">Kembali</router-link>
             </template>
-            <multiline-input name="content" :label-width="2" :control-width="10" v-model="question.content">
+            <multiline-input name="content" :label-width="2" :control-width="10" :maxlength="9999" v-model="question.content">
                 Pertanyaan
             </multiline-input>
             <file-input name="picture" :label-width="2" :control-width="10" :object-id="question.id" object-type="question" accept="image/*" :store-immediately="true" :crop="false" v-model="question.picture">
                 Gambar
             </file-input>
-            <multiline-input :name="'choice-' + index + 'content'" :label-width="2" :control-width="10" v-model="question.choices[index].content" v-for="(choice, index) in question.choices" :key="choice.id">
+            <multiline-input :name="'choice-' + index + 'content'" :label-width="2" :control-width="10" :maxlength="9999" v-model="question.choices[index].content" v-for="(choice, index) in question.choices" :key="choice.id">
                 Jawaban {{ index + 1 }}
             </multiline-input>
             <template slot="footer-control">

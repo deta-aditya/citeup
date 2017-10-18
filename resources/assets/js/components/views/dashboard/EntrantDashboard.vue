@@ -267,7 +267,7 @@
                 }
             },
             warmingUp() {
-                return this.config && this.user.entry.activity.id === 1 &&
+                return this.config &&
                         moment().diff(moment(this.config.warming.start)) >= 0 && 
                         moment().diff(moment(this.config.warming.finish)) < 0
             },

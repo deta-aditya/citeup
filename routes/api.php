@@ -194,6 +194,8 @@ Route::group([
     Route::get('/config', 'ConfigController@index');
     Route::post('/config', 'ConfigController@insert');
 
+    Route::post('/unicorn/generator', 'ConfigController@generator');
+
     /*
      * Bulk Routes
      */

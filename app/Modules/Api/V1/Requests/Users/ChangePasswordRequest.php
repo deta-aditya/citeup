@@ -13,7 +13,7 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id === $this->route('user')->id;
+        return $this->user()->isAdmin() || $this->user()->id === $this->route('user')->id;
     }
 
     /**

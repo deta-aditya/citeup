@@ -6,10 +6,10 @@
             <template slot="header-control">
                 <router-link :to="{ name: 'Pertanyaan Quiz' }" class="btn btn-default">Kembali</router-link>
             </template>
-            <multiline-input name="content" :required="true" :label-width="2" :control-width="10" v-model="question.content">
+            <multiline-input name="content" :required="true" :label-width="2" :control-width="10" v-model="question.content" :maxlength="9999">
                 Pertanyaan
             </multiline-input>
-            <multiline-input :name="'choice-' + (n - 1) + 'content'" :required="true" :label-width="2" :control-width="10" v-model="question.choices[n - 1].content" v-for="n in 5" :key="n + 'choice'">
+            <multiline-input :name="'choice-' + (n - 1) + 'content'" :required="true" :label-width="2" :control-width="10" :maxlength="9999" v-model="question.choices[n - 1].content" v-for="n in 5" :key="n + 'choice'">
                 Jawaban {{ n }}
             </multiline-input>
             <template slot="footer-control">

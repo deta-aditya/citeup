@@ -1,6 +1,6 @@
 
 <template>
-    <question-select v-if="working"></question-select>
+    <working-view v-if="working"></working-view>
     <finished-view v-else-if="finished"></finished-view>
     <countdown-view v-else></countdown-view>
 </template>
@@ -8,9 +8,9 @@
 <script>
 
     import { mapGetters } from 'vuex'
+    import WorkingView from './logika/WorkingView.vue'
     import FinishedView from './logika/FinishedView.vue'
     import CountdownView from './logika/CountdownView.vue'
-    import QuestionSelect from './logika/QuestionSelect.vue'
 
     const GETTERS_STAGE = ['working', 'finished']
     
@@ -19,7 +19,7 @@
         components: {
             'finished-view': FinishedView,
             'countdown-view': CountdownView,
-            'question-select': QuestionSelect,
+            'working-view': WorkingView,
         },
     }
 

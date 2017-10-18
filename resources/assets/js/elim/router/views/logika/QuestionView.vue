@@ -12,6 +12,7 @@
                     </div>
                     <div class="col-sm-3">
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - (-1) }}" v-if="id < questions.length">Selanjutnya &raquo;</router-link>
+                        <router-link class="btn btn-link question-navigate" :to="linkToQuestionSelect" v-else>Selesai</router-link>
                     </div>
                 </div>
                 <h1 class="question-title">Pertanyaan {{ id }}</h1>
@@ -38,6 +39,7 @@
                     </div>
                     <div class="col-sm-3">
                         <router-link class="btn btn-link question-navigate" :to="{ name: 'QuestionView', params: { id: id - (-1) }}" v-if="id < questions.length">Selanjutnya &raquo;</router-link>
+                        <router-link class="btn btn-link question-navigate" :to="linkToQuestionSelect" v-else>Selesai</router-link>
                     </div>
                 </div>
             </div>

@@ -23,6 +23,7 @@
             <ul>
                 <li>Dokumen Anda tidak diverifikasi oleh panitia.</li>
                 <li>Anda telah didiskualifikasi oleh panitia karena hal tertentu.</li>
+                <li>Jika sebelumnya Anda mengikuti sesi uji coba, maka sesi uji coba telah selesai sehingga Anda tidak dapat lagi mengakses fitur ini.</li>
             </ul>
             <p>Jika Anda merasa tidak berada pada salah satu situasi di atas, diskusikan dengan <i>contact person</i> kami: </p>
             <ul>
@@ -50,7 +51,7 @@
         computed: merge(states, {
             mayContinue() {
                 return this.user.elimination || 
-                    (this.config && this.user.entry.activity.id === 1 &&
+                    (this.config &&
                         moment().diff(moment(this.config.warming.start)) >= 0 && 
                         moment().diff(moment(this.config.warming.finish)) < 0)
             },

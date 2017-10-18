@@ -30,8 +30,8 @@ class SubmissionInsertRequest extends FormRequest
     {
         return [
             'entry' => 'required|int|exists:entries,id',
-            'description' => 'required|string',
-            'picture' => 'required|string|max:191',
+            'description' => 'string',
+            'picture' => 'string|max:191',
         ];
     }
 }

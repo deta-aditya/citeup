@@ -27,6 +27,8 @@ class SubmissionIndexRequest extends ApiIndexRequest
             $this->route('entry')->id :
             $this->input('entry', null);
 
+        // dd($this->input('entry'), $user->entry->id);
+
         return $user->isAdmin() || $user->hasKey('get-submissions') || 
             ($user->isEntrant() && $user->entry->id == $entry);
     }
