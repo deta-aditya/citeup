@@ -62,7 +62,7 @@
 
         created() {
             if (this.mayContinue) {
-                window.location.replace(this.continueLink)
+                window.location.href = this.continueLink
             }
 
             this.getContactPeople()
