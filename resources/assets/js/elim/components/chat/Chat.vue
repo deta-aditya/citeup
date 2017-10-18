@@ -46,7 +46,7 @@
 
         methods: {
             toggle() {
-                this.open = ! this.open
+                // this.open = ! this.open
             }
         },
     }
