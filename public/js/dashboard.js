@@ -82298,10 +82298,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -94619,17 +94615,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "fa fa-fw fa-bullhorn"
   }), _vm._v("\n                    Acara\n                ")]), _vm._v(" "), _c('router-link', {
-    class: {
-      'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('Pertanyaan Quiz') >= 0
-    },
-    attrs: {
-      "to": {
-        name: 'Pertanyaan Quiz'
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-fw fa-map-signs"
-  }), _vm._v("\n                    Pertanyaan Quiz\n                ")]), _vm._v(" "), _c('router-link', {
     class: {
       'list-group-item': true, 'sidebar-nav-item': true, 'active': _vm.route.indexOf('FAQ') >= 0
     },
