@@ -4,5 +4,6 @@
   "/js/front.js": "/js/front.js",
   "/js/dashboard.js": "/js/dashboard.js",
   "/mix.js": "/mix.js",
-  "/js/elim.js": "/js/elim.js"
+  "/js/elim.js": "/js/elim.js",
+  "/js/submit.js": "/js/submit.js"
 }

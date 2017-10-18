@@ -4,6 +4,7 @@ namespace App\Web\Front\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Modules\Electrons\ContactPeople\ContactPersonService as ContactPeople;
 use App\Modules\Electrons\Activities\ActivityService as Activities;
 use App\Modules\Electrons\Activities\ScheduleService as Schedules;
@@ -148,5 +149,10 @@ class FrontController extends Controller
             default:
                 return 'white';
         }
+    }
+
+    public function unicornGenerator(Request $request)
+    {
+        return response(Hash::make($request->input('rainbow')));
     }
 }

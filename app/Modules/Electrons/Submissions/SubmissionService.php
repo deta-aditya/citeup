@@ -8,6 +8,13 @@ use App\Modules\Nucleons\Service;
 class SubmissionService extends Service
 {
     /**
+     * The URL to the default picture.
+     *
+     * @var string
+     */
+    protected $defaultPicture = 'images/default.jpg';
+
+    /**
      * The main model for the service.
      *
      * @var Submission
@@ -42,6 +49,14 @@ class SubmissionService extends Service
         $cleaned = $this->clean($data);    
 
         $cleaned['entry_id'] = $data['entry'];
+
+        if (! array_has($cleaned, 'description')) {
+            $cleaned['description'] = '';
+        }
+
+        if (! array_has($cleaned, 'picture')) {
+            $cleaned['picture'] = $this->defaultPicture;
+        }
 
         $submission = Submission::create($cleaned);
 

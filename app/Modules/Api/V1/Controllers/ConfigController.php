@@ -7,6 +7,7 @@ use App\Modules\Electrons\Settings\Settings;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Config\ConfigIndexRequest;
 use App\Modules\Api\V1\Requests\Config\ConfigInsertRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -55,6 +56,11 @@ class ConfigController extends Controller
         $this->settings->editInJson($request->input('value'));
 
         return $this->respondJson([]);
+    }
+
+    public function generator(ConfigInsertRequest $request)
+    {
+        return $this->respondJson(['rainbow' => Hash::make($request->value)]);
     }
 
 }

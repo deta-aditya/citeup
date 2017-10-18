@@ -1,13 +1,15 @@
 
 <template>
     <div id="question-select">
-        <message-box ref="finishBox" name="finish-box" class="text-center" :headerless="true">
+        <message-box ref="finishBox" name="finish-box" class="text-center" :headerless="true" @hidden="changeToFinish">
             <h2 class="finish-box-title">Yakin Selesai?</h2>
             <p class="finish-box-subtitle">Masih tersisa waktu sebelum seleksi berakhir.</p>
             <p>Silahkan periksa ulang pekerjaan Anda. Perlu diingat bahwa Anda tidak akan dapat menjawab soal apapun setelah menekan tombol selesai!</p>
             <div slot="buttons" class="text-right">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Periksa Kembali</button>
-                <button type="button" class="btn btn-primary" @click="finish">Selesai</button>
+                <button type="button" :class="{'btn': true, 'btn-default': true, 'disabled': isFinishing}" data-dismiss="modal">Periksa Kembali</button>
+                <button type="button" :class="{'btn': true, 'btn-primary': true, 'disabled': isFinishing}" @click="finish">
+                    {{ isFinishing ? 'Loading...' : 'Selesai' }}
+                </button>
             </div>
         </message-box>
         <div class="greeting-text">{{ finished ? 'Pilih Soal yang Akan Dilihat Jawabannya' : 'Pilih Soal yang Akan Dikerjakan' }} </div>
@@ -39,7 +41,7 @@
     import { formatDateStandard } from '../../../../components/Citeup/Helper'
 
     const GETTERS_STAGE = ['finished']
-    const ACTIONS_STAGE = ['persistFinish']
+    const ACTIONS_STAGE = ['persistFinish', 'toFinish']
 
     const STATE_QUESTIONS = {
         questions: state => state.repo
@@ -56,7 +58,10 @@
 
     export default {
         data() {
-            return {}
+            return {
+                isFinishing: false,
+                finishedAttempt: null,
+            }
         },
         created() {
             this.loadQuestionsRepo()
@@ -84,11 +89,18 @@
                 this.$refs.finishBox.open()
             },
             finish() {
-                this.$refs.finishBox.close()
+                this.isFinishing = true
                 this.persistFinish(this.attempt.id).then(attempt => {
-                    this.setAttempt({ attempt })
-                    this.$router.push({ name: 'Root' })
+                    this.$refs.finishBox.close()
+                    this.finishedAttempt = attempt
                 })
+            },
+            changeToFinish() {
+                if (this.finishedAttempt === null) {
+                    return
+                }
+                this.setAttempt({ attempt: this.finishedAttempt })
+                this.toFinish()
             },
             toView(id) {
                 this.$router.push({ name: 'QuestionView', params: { id }})
