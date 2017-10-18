@@ -6,6 +6,22 @@
 
 @section('form')
 
+@if (! $stage->isOn(\App\Modules\Electrons\Stages\StageService::STAGE_REGISTRATION))
+
+<div class="text-center">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Pendaftaran Sudah Ditutup!</h2>
+            <p class="lead">Sampai jumpa di kesempatan selanjutnya!</p>
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-primary btn-lg btn-submit" href="{{ route('root') }}">Kembali</a>
+        </div>
+    </div>
+</div>
+
+@else
+
 <div id="lomba-logika-form" class="registration-form">
     <form ref="form" class="panel panel-default form-horizontal" method="post" action="{{ route('register.lomba-desain') }}">
         {{ csrf_field() }}
@@ -56,5 +72,7 @@
         </div>
     </form>
 </div>
+
+@endif
 
 @endsection
