@@ -82838,6 +82838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -82863,11 +82864,13 @@ var states = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* map
     }),
 
     created: function created() {
-        if (this.mayContinue) {
-            window.location.replace(this.continueLink);
-        }
 
         this.getContactPeople();
+    },
+    mounted: function mounted() {
+        if (this.mayContinue) {
+            return this.$refs.redirector.click();
+        }
     },
 
 
@@ -97129,7 +97132,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "elimination"
-  }, [(_vm.mayContinue) ? [_vm._m(0), _vm._v(" "), _c('p', {
+  }, [_c('a', {
+    ref: "redirector",
+    attrs: {
+      "href": _vm.continueLink
+    }
+  }), _vm._v(" "), (_vm.mayContinue) ? [_vm._m(0), _vm._v(" "), _c('p', {
     staticClass: "lead text-center"
   }, [_vm._v("Mengalihkan Anda...")])] : [_c('div', {
     staticClass: "text-center"
