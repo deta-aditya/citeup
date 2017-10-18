@@ -403,4 +403,24 @@ return [
 
     ],
 
+    'chats' => [
+
+        'selectable' => [
+            'message', 'channel',
+        ],
+
+        'sortable' => [
+            'channel',
+        ],
+
+        'comparable' => [
+            'channel',
+        ],
+
+        'loadable' => [
+            'entry',
+        ],
+
+    ],
+
 ];
