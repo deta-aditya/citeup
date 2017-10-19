@@ -134,7 +134,7 @@ return [
         ],
 
         'loadable' => [
-            'users', 'users.documents', 'activity', 'attempts', 'submissions', 'testimonials', 'chats',
+            'users', 'users.documents', 'activity', 'attempts', 'attempts.answers', 'submissions', 'testimonials', 'chats',
         ],
 
     ],

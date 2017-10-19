@@ -40,20 +40,14 @@
             </div>
             <timebar :start="timebarStart" :finish="timebarFinish"></timebar>
             <div id="app-main-view">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            Activity Monitor
-                            <div v-for="entrant in entrants">
-                                @{{ entrant.id }} | @{{ entrant.name }} | @{{ entrant.attempt !== null ? entrant.attempt.started_at : 'N/A' }} | @{{ entrant.chat }}
-                            </div>
-                        </div>
-                        <div class="col-sm-4">Chat Area</div>
-                    </div>
-                </div>
+                @if ((int)$channel === 1)
+                    @include('monitor.logika')
+                @elseif ((int)$channel === 2)
+                    @include('monitor.desain')
+                @endif
             </div>
             <div class="app-footer">
-                <div class="container">
+                <div class="container-fluid">
                     <div>&copy; {{ date('Y') }} Ilmu Komputer, Fakultas Sains &amp; Komputer, Universitas Pertamina.</div>
                     <p class="help-block"><small>{{ config('app.version') }}. This section is developed and maintained by <a href="https://github.com/purplebubblegum" style="color:#991e9b">purplebubblegum</a>.</small></p>
                 </div>

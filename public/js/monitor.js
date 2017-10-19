@@ -63142,7 +63142,7 @@ webpackContext.id = 185;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(453);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(454);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__citeup__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
@@ -63174,6 +63174,7 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     data: function data() {
         return {
+            selected: {},
             activity: null,
             isLoading: true
         };
@@ -63202,7 +63203,11 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
 
 
-    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageActions, entriesActions),
+    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageActions, entriesActions, {
+        selectEntrant: function selectEntrant(entrant) {
+            this.selected = entrant;
+        }
+    }),
 
     components: {
         'timebar': __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue___default.a
@@ -63428,10 +63433,85 @@ var EMPTY_DURATION = 'XX';
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+
+    state: {
+        entries: []
+    },
+
+    getters: {
+        list: function list(state) {
+            var list = state.entries.map(function (item) {
+                var newItem = item;
+                var elimObject = item.activity_id === 1 ? 'attempt' : 'submission';
+
+                if (item[elimObject + 's']) {
+                    newItem[elimObject] = null;
+
+                    if (item[elimObject + 's'].length > 0) {
+                        newItem[elimObject] = item[elimObject + 's'][0];
+                    }
+                }
+
+                newItem.chat = item.chats.filter(function (item) {
+                    return item.read_at === null && item.committee === 0;
+                }).length;
+
+                return newItem;
+            });
+
+            list.sort(function (a, b) {
+                return b.chat - a.chat;
+            });
+
+            return list;
+        }
+    },
+
+    mutations: {
+        'ENTRIES_SET_DATA': function ENTRIES_SET_DATA(state, _ref) {
+            var entries = _ref.entries;
+
+            state.entries = entries;
+        }
+    },
+
+    actions: {
+        getEntries: function getEntries(_ref2, activity) {
+            var state = _ref2.state,
+                commit = _ref2.commit;
+
+            return new Promise(function (resolve, reject) {
+                var params = { activity: activity, with: 'chats', eliminatable: true };
+
+                if (activity == 1) {
+                    params.with += ',attempts.answers';
+                } else if (activity == 2) {
+                    params.with += ',submissions';
+                }
+
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/entries', params).then(function (response) {
+                    commit('ENTRIES_SET_DATA', { entries: response.data.data.entries });
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 454 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(455);
 
 
 
@@ -63443,12 +63523,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
-/* 454 */
+/* 455 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(455);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entries__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(456);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entries__ = __webpack_require__(453);
 
 
 
@@ -63460,7 +63540,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 });
 
 /***/ }),
-/* 455 */
+/* 456 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63499,7 +63579,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 });
 
 /***/ }),
-/* 456 */,
 /* 457 */,
 /* 458 */,
 /* 459 */,
@@ -63771,85 +63850,6 @@ if (false) {
 
 module.exports = __webpack_require__(348);
 
-
-/***/ }),
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-
-    state: {
-        entries: []
-    },
-
-    getters: {
-        list: function list(state) {
-            var list = state.entries.map(function (item) {
-                var newItem = item;
-                var elimObject = item.activity_id === 1 ? 'attempt' : 'submission';
-
-                if (item[elimObject + 's']) {
-                    newItem[elimObject] = null;
-
-                    if (item[elimObject + 's'].length > 0) {
-                        newItem[elimObject] = item[elimObject + 's'][0];
-                    }
-                }
-
-                newItem.chat = item.chats.filter(function (item) {
-                    return item.read_at === null && item.committee === 0;
-                }).length;
-
-                return newItem;
-            });
-
-            list.sort(function (a, b) {
-                return b.chat - a.chat;
-            });
-
-            return list;
-        }
-    },
-
-    mutations: {
-        'ENTRIES_SET_DATA': function ENTRIES_SET_DATA(state, _ref) {
-            var entries = _ref.entries;
-
-            state.entries = entries;
-        }
-    },
-
-    actions: {
-        getEntries: function getEntries(_ref2, activity) {
-            var state = _ref2.state,
-                commit = _ref2.commit;
-
-            return new Promise(function (resolve, reject) {
-                var params = { activity: activity, with: 'chats' };
-
-                if (activity == 1) {
-                    params.with += ',attempts';
-                } else if (activity == 2) {
-                    params.with += ',submissions';
-                }
-
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/entries', params).then(function (response) {
-                    commit('ENTRIES_SET_DATA', { entries: response.data.data.entries });
-                });
-            });
-        }
-    }
-});
 
 /***/ })
 /******/ ]);

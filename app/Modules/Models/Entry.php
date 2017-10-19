@@ -95,6 +95,18 @@ class Entry extends Model
     }  
 
     /**
+     * Scope a query to only include entries with the given status.
+     *
+     * @param  Builder  $query
+     * @param  int      $status
+     * @return Builder
+     */
+    public function scopeOfStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }  
+
+    /**
      * Scope a query to only include entries who enter the given activity.
      *
      * @param  Builder  $query

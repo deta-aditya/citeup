@@ -46,10 +46,10 @@ export default {
     actions: {
         getEntries({ state, commit }, activity) {
             return new Promise((resolve, reject) => {
-                let params = { activity, with: 'chats' }
+                let params = { activity, with: 'chats', eliminatable: true }
 
                 if (activity == 1) {
-                    params.with += ',attempts'
+                    params.with += ',attempts.answers'
                 } else if (activity == 2) {
                     params.with += ',submissions'
                 }

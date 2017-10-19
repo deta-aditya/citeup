@@ -21,6 +21,7 @@ const vm = new Vue({
     
     data() {
         return {
+            selected: {},
             activity: null,
             isLoading: true,
         }
@@ -46,7 +47,11 @@ const vm = new Vue({
         this.getEntries(this.activity)
     },
 
-    methods: merge(stageActions, entriesActions),
+    methods: merge(stageActions, entriesActions, {
+        selectEntrant(entrant) {
+            this.selected = entrant
+        }
+    }),
 
     components: { 
         'timebar': Timebar,

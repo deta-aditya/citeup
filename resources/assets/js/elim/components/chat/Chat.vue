@@ -1,6 +1,6 @@
 
 <template>
-    <div class="sticky-chat" :class="{ 'open': open }">
+    <div :class="{ 'sticky-chat': true, 'chat-body-container': true, 'open': open }">
         <div class="chat-toggler" @click="toggle">
             Tanya Panitia
             <span :class="['glyphicon', 'pull-right', arrowClass]"></span>

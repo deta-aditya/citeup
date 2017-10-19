@@ -64,10 +64,14 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
                 background: #f0f0f0;
             }
         }
+    }
+
+    .chat-body-container {
 
         .chat-body {
             height: 400px;
             overflow-y: scroll;
+            background: linear-gradient(to bottom, $signature-lighter, lighten($signature-lighter, 20%));
         }
 
         .chat-message-text {
@@ -124,6 +128,7 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
 
             }
         }
+
     }
 
     #app-header {
@@ -400,5 +405,52 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
         font-family: $title-font-family;
         font-weight: 600;
         margin-bottom: 30px;
+    }
+
+    .entrant-list-container {
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+    .entrant-list {
+
+        .entrant-item {
+            font-family: $title-font-family;
+
+            &.has-unread-chat {
+                background-color: lighten($signature-lighter, 30%)
+            }
+
+            &.selected {
+                background-color: $signature-dark;
+                color: #fff;
+
+                h4 small {
+                    color: #ddd;
+                }
+            }
+
+            h4 {
+                margin: 0;
+                font-weight: 700;
+            }
+
+            .status-container {
+                margin-right: 10px;
+            }
+
+            .answers-count {
+                background-color: $signature-lighter;
+            }
+
+            .attempt-start-status.done, .attempt-finish-status.done {
+                background-color: $signature-light;
+            }
+        }
+
+    }
+
+    .chat-area {
+        // background: linear-gradient(to bottom, $signature-lighter, lighten($signature-lighter, 20%));        
     }
 }

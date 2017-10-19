@@ -76,6 +76,11 @@ class EntryService extends Service
             $query->ofActivity((int) $params['activity']);
         }
 
+        if (array_has($params, 'eliminatable')) {
+            $query->ofStage(EntryService::STAGE_APPROVED_ENTRANT)
+                ->ofStatus(EntryService::STATUS_ACTIVE);
+        }
+
         return $query->get();
     }
 
