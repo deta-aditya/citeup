@@ -31,6 +31,7 @@ const vm = new Vue({
             isLoading: true,
             loadingChat: false,
             sendingMessage: false,
+            defaultImage: Citeup.defaultImageClean,
         }
     },
     
@@ -59,10 +60,7 @@ const vm = new Vue({
 
     methods: merge(stageActions, entriesMutations, entriesActions, chatsActions, {
         getAllEntries() {
-            this.getEntries(this.activity).then(() => {
-                console.log(this.entrants)
-                setTimeout(this.getAllEntries, 5000)
-            })
+            this.getEntries(this.activity).then(() => setTimeout(this.getAllEntries, 5000))
         },
         selectEntrant(entrant) {
             this.loadingChat = true
