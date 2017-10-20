@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 658);
+/******/ 	return __webpack_require__(__webpack_require__.s = 661);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -66492,7 +66492,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(430),
   /* template */
-  __webpack_require__(607),
+  __webpack_require__(610),
   /* scopeId */
   null,
   /* cssModules */
@@ -66527,15 +66527,15 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(449);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_index__ = __webpack_require__(444);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment_timezone__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment_timezone__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue__ = __webpack_require__(545);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_chat_Chat_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue__ = __webpack_require__(543);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue__ = __webpack_require__(546);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_timebar_Timebar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_misc_Countdown_vue__);
@@ -66937,9 +66937,9 @@ var EMPTY_DURATION = 'XX';
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logika_FinishedView_vue__ = __webpack_require__(547);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logika_FinishedView_vue__ = __webpack_require__(550);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logika_FinishedView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__logika_FinishedView_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logika_CountdownView_vue__ = __webpack_require__(546);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logika_CountdownView_vue__ = __webpack_require__(549);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logika_CountdownView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__logika_CountdownView_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logika_QuestionSelect_vue__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logika_QuestionSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__logika_QuestionSelect_vue__);
@@ -66974,20 +66974,32 @@ var GETTERS_STAGE = ['working', 'finished'];
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__QuestionSelect_vue__ = __webpack_require__(344);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__QuestionSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__QuestionSelect_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__QuestionSelect_vue__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__QuestionSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__QuestionSelect_vue__);
 //
 //
 //
 //
 //
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('stage', ['countdown']),
+
+    created: function created() {
+        if (this.countdown) {
+            return this.$router.push({ name: 'Root' });
+        }
+    },
+
+
     components: {
-        'question-select': __WEBPACK_IMPORTED_MODULE_0__QuestionSelect_vue___default.a
+        'question-select': __WEBPACK_IMPORTED_MODULE_1__QuestionSelect_vue___default.a
     }
 });
 
@@ -67430,7 +67442,7 @@ var STATE_QUESTIONS = {
     }
 };
 
-var GETTERS_STAGE = ['finished'];
+var GETTERS_STAGE = ['countdown', 'finished'];
 
 var ACTIONS_QUESTIONS = ['setCurrent', 'loadQuestions'];
 
@@ -67474,7 +67486,8 @@ var ACTIONS_ANSWERS = ['answer', 'persistAnswers'];
     },
 
     created: function created() {
-        if (this.questions.length === 0) {
+
+        if (this.questions.length === 0 || this.countdown) {
             return this.$router.push({ name: 'Root' });
         }
 
@@ -67539,11 +67552,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_RootView_vue__ = __webpack_require__(544);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_RootView_vue__ = __webpack_require__(547);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_RootView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__views_RootView_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_logika_Answers_vue__ = __webpack_require__(545);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_logika_Answers_vue__ = __webpack_require__(548);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_logika_Answers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__views_logika_Answers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_logika_QuestionView_vue__ = __webpack_require__(548);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_logika_QuestionView_vue__ = __webpack_require__(551);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_logika_QuestionView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_logika_QuestionView_vue__);
 
 
@@ -67705,10 +67718,87 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+
+    state: {
+        data: []
+    },
+
+    getters: {
+        //
+    },
+
+    mutations: {
+        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
+            var chats = _ref.chats;
+
+            state.data = chats;
+        },
+        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
+            var chat = _ref2.chat;
+
+            state.data.push(chat);
+        },
+        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
+            var time = _ref3.time;
+
+            state.data.forEach(function (item) {
+                return item.read_at = time;
+            });
+        }
+    },
+
+    actions: {
+        getChats: function getChats(_ref4, entry) {
+            var state = _ref4.state,
+                commit = _ref4.commit;
+
+            return new Promise(function (resolve, reject) {
+                var params = { entry: entry, take: 50, order: 'created_at:desc' };
+
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
+                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
+                    resolve(state.data);
+                });
+            });
+        },
+        sendChat: function sendChat(_ref5, chat) {
+            var commit = _ref5.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
+                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
+                    resolve(response.data.data.chat);
+                });
+            });
+        },
+        readChats: function readChats(_ref6, entry) {
+            var commit = _ref6.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
+                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
+                    resolve();
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 449 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(450);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(451);
 
 
 
@@ -67720,7 +67810,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
-/* 449 */
+/* 450 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67807,15 +67897,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 450 */
+/* 451 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(451);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__questions__ = __webpack_require__(449);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__questions__ = __webpack_require__(450);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__answers__ = __webpack_require__(447);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chats__ = __webpack_require__(666);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chats__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(453);
 
 
 
@@ -67830,7 +67920,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 451 */
+/* 452 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67907,7 +67997,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 452 */
+/* 453 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67943,7 +68033,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 453 */,
 /* 454 */,
 /* 455 */,
 /* 456 */,
@@ -68032,14 +68121,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* 539 */,
 /* 540 */,
 /* 541 */,
-/* 542 */
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(424),
   /* template */
-  __webpack_require__(641),
+  __webpack_require__(644),
   /* scopeId */
   null,
   /* cssModules */
@@ -68066,14 +68158,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 543 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(425),
   /* template */
-  __webpack_require__(574),
+  __webpack_require__(577),
   /* scopeId */
   null,
   /* cssModules */
@@ -68100,14 +68192,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 544 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(426),
   /* template */
-  __webpack_require__(557),
+  __webpack_require__(560),
   /* scopeId */
   null,
   /* cssModules */
@@ -68134,14 +68226,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 545 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(427),
   /* template */
-  __webpack_require__(635),
+  __webpack_require__(638),
   /* scopeId */
   null,
   /* cssModules */
@@ -68168,14 +68260,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 546 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(428),
   /* template */
-  __webpack_require__(580),
+  __webpack_require__(583),
   /* scopeId */
   null,
   /* cssModules */
@@ -68202,14 +68294,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 547 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(429),
   /* template */
-  __webpack_require__(565),
+  __webpack_require__(568),
   /* scopeId */
   null,
   /* cssModules */
@@ -68236,14 +68328,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 548 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(431),
   /* template */
-  __webpack_require__(597),
+  __webpack_require__(600),
   /* scopeId */
   null,
   /* cssModules */
@@ -68270,15 +68362,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 549 */,
-/* 550 */,
-/* 551 */,
 /* 552 */,
 /* 553 */,
 /* 554 */,
 /* 555 */,
 /* 556 */,
-/* 557 */
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68293,14 +68385,14 @@ if (false) {
 }
 
 /***/ }),
-/* 558 */,
-/* 559 */,
-/* 560 */,
 /* 561 */,
 /* 562 */,
 /* 563 */,
 /* 564 */,
-/* 565 */
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68343,15 +68435,15 @@ if (false) {
 }
 
 /***/ }),
-/* 566 */,
-/* 567 */,
-/* 568 */,
 /* 569 */,
 /* 570 */,
 /* 571 */,
 /* 572 */,
 /* 573 */,
-/* 574 */
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68382,12 +68474,12 @@ if (false) {
 }
 
 /***/ }),
-/* 575 */,
-/* 576 */,
-/* 577 */,
 /* 578 */,
 /* 579 */,
-/* 580 */
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68574,9 +68666,6 @@ if (false) {
 }
 
 /***/ }),
-/* 581 */,
-/* 582 */,
-/* 583 */,
 /* 584 */,
 /* 585 */,
 /* 586 */,
@@ -68590,7 +68679,10 @@ if (false) {
 /* 594 */,
 /* 595 */,
 /* 596 */,
-/* 597 */
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68722,16 +68814,16 @@ if (false) {
 }
 
 /***/ }),
-/* 598 */,
-/* 599 */,
-/* 600 */,
 /* 601 */,
 /* 602 */,
 /* 603 */,
 /* 604 */,
 /* 605 */,
 /* 606 */,
-/* 607 */
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68835,9 +68927,6 @@ if (false) {
 }
 
 /***/ }),
-/* 608 */,
-/* 609 */,
-/* 610 */,
 /* 611 */,
 /* 612 */,
 /* 613 */,
@@ -68862,7 +68951,10 @@ if (false) {
 /* 632 */,
 /* 633 */,
 /* 634 */,
-/* 635 */
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68877,12 +68969,12 @@ if (false) {
 }
 
 /***/ }),
-/* 636 */,
-/* 637 */,
-/* 638 */,
 /* 639 */,
 /* 640 */,
-/* 641 */
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68954,9 +69046,6 @@ if (false) {
 }
 
 /***/ }),
-/* 642 */,
-/* 643 */,
-/* 644 */,
 /* 645 */,
 /* 646 */,
 /* 647 */,
@@ -68970,95 +69059,14 @@ if (false) {
 /* 655 */,
 /* 656 */,
 /* 657 */,
-/* 658 */
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(346);
 
-
-/***/ }),
-/* 659 */,
-/* 660 */,
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */,
-/* 666 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-
-    state: {
-        data: []
-    },
-
-    getters: {
-        //
-    },
-
-    mutations: {
-        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
-            var chats = _ref.chats;
-
-            state.data = chats;
-        },
-        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
-            var chat = _ref2.chat;
-
-            state.data.push(chat);
-        },
-        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
-            var time = _ref3.time;
-
-            state.data.forEach(function (item) {
-                return item.read_at = time;
-            });
-        }
-    },
-
-    actions: {
-        getChats: function getChats(_ref4, entry) {
-            var state = _ref4.state,
-                commit = _ref4.commit;
-
-            return new Promise(function (resolve, reject) {
-                var params = { entry: entry, take: 50, order: 'created_at:desc' };
-
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
-                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
-                    resolve(state.data);
-                });
-            });
-        },
-        sendChat: function sendChat(_ref5, chat) {
-            var commit = _ref5.commit;
-
-            return new Promise(function (resolve, reject) {
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
-                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
-                    resolve(response.data.data.chat);
-                });
-            });
-        },
-        readChats: function readChats(_ref6, entry) {
-            var commit = _ref6.commit;
-
-            return new Promise(function (resolve, reject) {
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
-                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
-                    resolve();
-                });
-            });
-        }
-    }
-});
 
 /***/ })
 /******/ ]);

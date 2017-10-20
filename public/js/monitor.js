@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 660);
+/******/ 	return __webpack_require__(__webpack_require__.s = 663);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -63146,13 +63146,13 @@ webpackContext.id = 185;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(456);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__citeup__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment_timezone__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment_timezone__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue__ = __webpack_require__(549);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue__ = __webpack_require__(552);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_timebar_Timebar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(6);
 
@@ -63494,7 +63494,85 @@ var EMPTY_DURATION = 'XX';
 /* 450 */,
 /* 451 */,
 /* 452 */,
-/* 453 */
+/* 453 */,
+/* 454 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+
+    state: {
+        data: []
+    },
+
+    getters: {
+        //
+    },
+
+    mutations: {
+        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
+            var chats = _ref.chats;
+
+            state.data = chats;
+        },
+        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
+            var chat = _ref2.chat;
+
+            state.data.push(chat);
+        },
+        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
+            var time = _ref3.time;
+
+            state.data.forEach(function (item) {
+                return item.read_at = time;
+            });
+        }
+    },
+
+    actions: {
+        getChats: function getChats(_ref4, entry) {
+            var state = _ref4.state,
+                commit = _ref4.commit;
+
+            return new Promise(function (resolve, reject) {
+                var params = { entry: entry, take: 50, order: 'created_at:desc' };
+
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
+                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
+                    resolve(state.data);
+                });
+            });
+        },
+        sendChat: function sendChat(_ref5, chat) {
+            var commit = _ref5.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
+                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
+                    resolve(response.data.data.chat);
+                });
+            });
+        },
+        readChats: function readChats(_ref6, entry) {
+            var commit = _ref6.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
+                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
+                    resolve();
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 455 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63579,14 +63657,14 @@ var EMPTY_DURATION = 'XX';
 });
 
 /***/ }),
-/* 454 */
+/* 456 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(455);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root__ = __webpack_require__(457);
 
 
 
@@ -63598,13 +63676,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
-/* 455 */
+/* 457 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(456);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entries__ = __webpack_require__(453);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chats__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entries__ = __webpack_require__(455);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chats__ = __webpack_require__(454);
 
 
 
@@ -63617,7 +63695,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 });
 
 /***/ }),
-/* 456 */
+/* 458 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63656,8 +63734,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 });
 
 /***/ }),
-/* 457 */,
-/* 458 */,
 /* 459 */,
 /* 460 */,
 /* 461 */,
@@ -63748,14 +63824,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* 546 */,
 /* 547 */,
 /* 548 */,
-/* 549 */
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(432),
   /* template */
-  __webpack_require__(636),
+  __webpack_require__(639),
   /* scopeId */
   null,
   /* cssModules */
@@ -63782,9 +63861,6 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 550 */,
-/* 551 */,
-/* 552 */,
 /* 553 */,
 /* 554 */,
 /* 555 */,
@@ -63868,7 +63944,10 @@ module.exports = Component.exports
 /* 633 */,
 /* 634 */,
 /* 635 */,
-/* 636 */
+/* 636 */,
+/* 637 */,
+/* 638 */,
+/* 639 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -63899,9 +63978,6 @@ if (false) {
 }
 
 /***/ }),
-/* 637 */,
-/* 638 */,
-/* 639 */,
 /* 640 */,
 /* 641 */,
 /* 642 */,
@@ -63922,92 +63998,14 @@ if (false) {
 /* 657 */,
 /* 658 */,
 /* 659 */,
-/* 660 */
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(348);
 
-
-/***/ }),
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-
-    state: {
-        data: []
-    },
-
-    getters: {
-        //
-    },
-
-    mutations: {
-        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
-            var chats = _ref.chats;
-
-            state.data = chats;
-        },
-        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
-            var chat = _ref2.chat;
-
-            state.data.push(chat);
-        },
-        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
-            var time = _ref3.time;
-
-            state.data.forEach(function (item) {
-                return item.read_at = time;
-            });
-        }
-    },
-
-    actions: {
-        getChats: function getChats(_ref4, entry) {
-            var state = _ref4.state,
-                commit = _ref4.commit;
-
-            return new Promise(function (resolve, reject) {
-                var params = { entry: entry, take: 50, order: 'created_at:desc' };
-
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
-                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
-                    resolve(state.data);
-                });
-            });
-        },
-        sendChat: function sendChat(_ref5, chat) {
-            var commit = _ref5.commit;
-
-            return new Promise(function (resolve, reject) {
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
-                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
-                    resolve(response.data.data.chat);
-                });
-            });
-        },
-        readChats: function readChats(_ref6, entry) {
-            var commit = _ref6.commit;
-
-            return new Promise(function (resolve, reject) {
-                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
-                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
-                    resolve();
-                });
-            });
-        }
-    }
-});
 
 /***/ })
 /******/ ]);
