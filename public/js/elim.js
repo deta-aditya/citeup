@@ -68611,7 +68611,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("6")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Peserta yang menjawab benar akan mendapatkan +4 poin, salah -1 poin, dan kosong 0 poin.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"

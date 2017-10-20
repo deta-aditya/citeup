@@ -51,7 +51,7 @@
                             <span>6</span>
                         </div>
                         <div class="super-list-content">
-                            Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.
+                            Peserta yang menjawab benar akan mendapatkan +4 poin, salah -1 poin, dan kosong 0 poin.
                         </div>
                     </div>
                     <div class="super-list-item">

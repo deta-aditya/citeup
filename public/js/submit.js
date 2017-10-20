@@ -72849,7 +72849,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       fontWeight: 700,
       paddingTop: '7px'
     })
-  }, [_vm._v("Coming Soon!")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("The collaboration of technology, humanity, and nature.")])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-2 control-label"

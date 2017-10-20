@@ -13,7 +13,7 @@
         <div class="form-panel form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Tema Poster</label>
-                <div class="col-sm-10" :style="{ fontFamily: 'Quicksand, Open Sans, sans-serif', fontWeight: 700, paddingTop: '7px' }">Coming Soon!</div>
+                <div class="col-sm-10" :style="{ fontFamily: 'Quicksand, Open Sans, sans-serif', fontWeight: 700, paddingTop: '7px' }">The collaboration of technology, humanity, and nature.</div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Palette Warna</label>
