@@ -7,6 +7,7 @@ use App\Modules\Electrons\Chats\ChatService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Chats\ChatIndexRequest;
 use App\Modules\Api\V1\Requests\Chats\ChatInsertRequest;
+use App\Modules\Api\V1\Requests\Chats\ChatReadRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,6 @@ class ChatController extends Controller
      * Insert a new chat data.
      *
      * @param  ChatInsertRequest  $request
-     * @param  RoleService        $roles
-     * @param  ProfileService     $profiles
-     * @param  ChatService       $chats
      * @return Response
      */
     public function insert(ChatInsertRequest $request)
@@ -59,5 +57,18 @@ class ChatController extends Controller
         $chat = $this->chats->create($request->all());
 
         return $this->respondJson(['chat' => $chat]);
+    }
+
+    /**
+     * Read a chat data.
+     *
+     * @param  ChatReadRequest  $request
+     * @return Response
+     */
+    public function read(ChatReadRequest $request)
+    {
+        $read = $this->chats->read($request->input('entry'), $request->user()->isEntrant());
+
+        return $this->respondJson([ 'read_at' => $read->format('Y-m-d h:i:s') ]);
     }
 }

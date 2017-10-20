@@ -58,7 +58,7 @@ const STATE_QUESTIONS = {
     questions: state => state.repo,
 }
 
-const GETTERS_STAGE = ['finished']
+const GETTERS_STAGE = ['countdown', 'finished']
 
 const ACTIONS_QUESTIONS = ['setCurrent', 'loadQuestions']
 
@@ -99,7 +99,8 @@ export default {
     },
 
     created() {
-        if (this.questions.length === 0) {
+
+        if (this.questions.length === 0 || this.countdown) {
             return this.$router.push({ name: 'Root' })
         }
 

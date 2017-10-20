@@ -73,6 +73,7 @@ Route::group(['namespace' => 'App\Web'], function () {
         Route::get('/panel/{vue?}', 'DashboardController@index')->name('dashboard')->where('vue', '[\/\w\.-]*');
         Route::get('/elimination', 'DashboardController@elimination')->name('elimination');
         Route::get('/submission', 'DashboardController@submission')->name('submission');
+        Route::get('/monitor/{channel}', 'DashboardController@monitor')->name('monitor');
         Route::get('/unicorn/generator/why', 'DashboardController@unicorn');
         
     });

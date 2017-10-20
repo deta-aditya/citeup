@@ -70,6 +70,16 @@ class Entry extends Model
     public function testimonials()
     {
         return $this->hasMany('App\Modules\Models\Testimonial');
+    }
+
+    /**
+     * Get the chats related to the entry.
+     *
+     * @return HasMany
+     */
+    public function chats()
+    {
+        return $this->hasMany('App\Modules\Models\Chat');
     }    
 
     /**
@@ -82,6 +92,18 @@ class Entry extends Model
     public function scopeOfStage($query, $stage)
     {
         return $query->where('stage', $stage);
+    }  
+
+    /**
+     * Scope a query to only include entries with the given status.
+     *
+     * @param  Builder  $query
+     * @param  int      $status
+     * @return Builder
+     */
+    public function scopeOfStatus($query, $status)
+    {
+        return $query->where('status', $status);
     }  
 
     /**
