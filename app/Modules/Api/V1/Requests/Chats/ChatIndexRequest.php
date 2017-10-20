@@ -28,7 +28,7 @@ class ChatIndexRequest extends ApiIndexRequest
         $accessor = $this->user();
 
         return $accessor->isAdmin() || $accessor->isCommittee() || 
-            ($accessor->isEntrant() && $accessor->entry->activity_id == $this->input('channel', null));
+            ($accessor->isEntrant() && $accessor->entry_id == $this->input('entry', null));
     }
 
     /**
@@ -39,7 +39,7 @@ class ChatIndexRequest extends ApiIndexRequest
     protected function additional()
     {
         return [
-            'channel' => 'int|in:1,2',
+            'entry' => 'int|exists:entries,id',
         ];
     }
 }

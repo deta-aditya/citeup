@@ -178,6 +178,7 @@ Route::group([
 
     Route::get('/chats', 'ChatController@index');
     Route::post('/chats', 'ChatController@insert');
+    Route::post('/chats/read', 'ChatController@read');
     
     /*
      * Storage Routes

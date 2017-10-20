@@ -7,77 +7,66 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {   
     /**
-     * The lomba logika channel.
-     */
-    const CHANNEL_LOGIKA = 1;
-
-    /**
-     * The lomba desain channel.
-     */
-    const CHANNEL_DESAIN = 2;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'entry_id', 'message', 'channel', 
+        'entry_id', 'message', 'committee', 
     ];
 
     /**
-     * Get the entry who sends the chat.
+     * Get the entry who is related the chat.
      *
-     * @return HasMany
+     * @return BelongsTO
      */
     public function entry()
     {
         return $this->belongsTo('App\Modules\Models\Entry');
-    }    
-
-    /**
-     * Scope a query to only include chats in lomba logika channel.
-     *
-     * @param  Builder  $query
-     * @return Builder
-     */
-    public function scopeLogika($query)
-    {
-        return $query->ofChannel(Chat::CHANNEL_LOGIKA);
-    }    
-
-    /**
-     * Scope a query to only include chats in lomba desain channel.
-     *
-     * @param  Builder  $query
-     * @return Builder
-     */
-    public function scopeDesain($query)
-    {
-        return $query->ofChannel(Chat::CHANNEL_DESAIN);
     }
 
     /**
-     * Scope a query to only include chats with the given channel.
+     * Scope a query to only include chats from entrant.
      *
      * @param  Builder  $query
-     * @param  int      $channel
      * @return Builder
      */
-    public function scopeOfChannel($query, $channel)
+    public function scopeFromEntrant($query)
     {
-        return $query->where('channel', $channel);
+        return $query->where('committee', 0);
     }
 
     /**
-     * Scope a query to only include chats from specific entry.
+     * Scope a query to only include chats from committee.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeFromCommittee($query)
+    {
+        return $query->where('committee', 1);
+    }
+
+    /**
+     * Scope a query to only include chats of specific entry.
      *
      * @param  Builder  $query
      * @param  int      $entryId
      * @return Builder
      */
-    public function scopeOfActivity($query, $entryId)
+    public function scopeOfEntry($query, $entryId)
     {
         return $query->where('entry_id', $entryId);
+    }
+
+    /**
+     * Scope a query to only include unread chats.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeUnread($query)
+    {
+        return $query->where('read_at', null);
     }
 }

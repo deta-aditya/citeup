@@ -14046,53 +14046,58 @@ trix-editor .attachment progress {
   background: #f0f0f0;
 }
 
-#app-elimination .sticky-chat .chat-body {
+#app-elimination .chat-body-container .chat-body {
   height: 400px;
   overflow-y: scroll;
+  background: linear-gradient(to bottom, #ffc533, #ffe299);
 }
 
-#app-elimination .sticky-chat .chat-message-text {
+#app-elimination .chat-body-container .chat-message-text {
   padding: 5px 7px;
   border-radius: 6px;
   max-width: 350px;
 }
 
-#app-elimination .sticky-chat .chat-caret {
+#app-elimination .chat-body-container .chat-caret {
   width: 0;
   height: 0;
   border-style: solid;
 }
 
-#app-elimination .sticky-chat .chat-sender {
+#app-elimination .chat-body-container .chat-sender {
   padding: 7px;
   background-color: #fff;
   border-top: 1px solid #d3e0e9;
 }
 
-#app-elimination .sticky-chat .chat-message {
+#app-elimination .chat-body-container .chat-sender textarea {
+  height: 73px;
+}
+
+#app-elimination .chat-body-container .chat-message {
   margin: 9px 7px;
 }
 
-#app-elimination .sticky-chat .chat-message.chat-message-me .chat-message-text {
+#app-elimination .chat-body-container .chat-message.chat-message-me .chat-message-text {
   background-color: #f49e26;
   border-top-right-radius: 0px;
   color: #fff;
   float: right;
 }
 
-#app-elimination .sticky-chat .chat-message.chat-message-me .chat-caret {
+#app-elimination .chat-body-container .chat-message.chat-message-me .chat-caret {
   border-width: 7px 7px 0 0;
   border-color: #f49e26 transparent transparent;
   float: right;
 }
 
-#app-elimination .sticky-chat .chat-message.chat-message-other .chat-message-text {
+#app-elimination .chat-body-container .chat-message.chat-message-other .chat-message-text {
   background-color: #fff;
   border-top-left-radius: 0px;
   float: left;
 }
 
-#app-elimination .sticky-chat .chat-message.chat-message-other .chat-caret {
+#app-elimination .chat-body-container .chat-message.chat-message-other .chat-caret {
   border-width: 0 7px 7px 0;
   border-color: transparent #fff transparent;
   float: left;
@@ -14355,6 +14360,53 @@ trix-editor .attachment progress {
   font-family: Quicksand, Open Sans, sans-serif;
   font-weight: 600;
   margin-bottom: 30px;
+}
+
+#app-elimination .entrant-list-container {
+  height: 500px;
+  overflow-y: scroll;
+}
+
+#app-elimination .entrant-list .entrant-item {
+  font-family: Quicksand, Open Sans, sans-serif;
+}
+
+#app-elimination .entrant-list .entrant-item.has-unread-chat {
+  background-color: #fff1cc;
+}
+
+#app-elimination .entrant-list .entrant-item.selected {
+  background-color: #dd7322;
+  color: #fff;
+}
+
+#app-elimination .entrant-list .entrant-item.selected h4 small {
+  color: #ddd;
+}
+
+#app-elimination .entrant-list .entrant-item h4 {
+  margin: 0;
+  font-weight: 700;
+}
+
+#app-elimination .entrant-list .entrant-item .status-container {
+  margin-right: 10px;
+}
+
+#app-elimination .entrant-list .entrant-item .attempt-start-status.done, #app-elimination .entrant-list .entrant-item .attempt-finish-status.done {
+  background-color: #f49e26;
+}
+
+#app-elimination .answers-count {
+  background-color: #ffc533;
+}
+
+#app-elimination .chat-area .chat-greeting {
+  color: #dd7322;
+  text-align: center;
+  font-weight: 700;
+  font-family: Quicksand, Open Sans, sans-serif;
+  padding-top: 200px;
 }
 
 #about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .nav-wrapper a, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {
