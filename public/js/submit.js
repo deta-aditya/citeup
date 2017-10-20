@@ -71627,23 +71627,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -72644,59 +72627,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "super-list-item"
   }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Klik pada tombol yang bertuliskan nomor soal untuk membukanya.\n                        "), _c('div', [_c('img', {
+  }, [_vm._v("\n                        Klik pada tombol \"Browse\" pada bagian Karya Poster untuk mengunggah karya Anda.\n                        "), _c('div', [_c('img', {
     staticClass: "img-rounded",
-    style: ({
-      width: '100%'
-    }),
     attrs: {
-      "src": _vm._f("assetify")('images/web/guide1.png')
+      "src": _vm._f("assetify")('images/web/guide0.png')
     }
   })])])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Untuk menjawab soal, klik pada pilihan yang tersedia.\n                        "), _c('div', [_c('img', {
+  }, [_vm._v("\n                        Kumpulkan karyamu sebelum waktu yang tersedia habis!\n                        "), _c('div', [_c('img', {
     staticClass: "img-rounded",
-    style: ({
-      width: '100%'
-    }),
-    attrs: {
-      "src": _vm._f("assetify")('images/web/guide2.png')
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "super-list-item"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "super-list-content"
-  }, [_vm._v("\n                        Kerjakan semua soal sebelum waktu yang tersedia habis!\n                        "), _c('div', [_c('img', {
-    staticClass: "img-rounded",
-    style: ({
-      width: '100%'
-    }),
     attrs: {
       "src": _vm._f("assetify")('images/web/guide3.png')
     }
   })])])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Sudah yakin dengan jawaban-jawaban Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.\n                        "), _c('div', [_c('img', {
+  }, [_vm._v("\n                        Sudah yakin dengan karya Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.\n                        "), _c('div', [_c('img', {
     staticClass: "img-rounded",
-    style: ({
-      width: '100%'
-    }),
     attrs: {
       "src": _vm._f("assetify")('images/web/guide4.png')
     }
   })])])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
-  }, [_vm._m(5), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
   }, [_vm._v("\n                        Kebingungan? Tanyakan kejelasan kepada panitia dengan mengklik tombol \"Tanya Panitia\", lalu ketik pertanyaan Anda.\n                        "), _c('div', [_c('img', {
     staticClass: "img-rounded",
-    style: ({
-      width: '100%'
-    }),
     attrs: {
       "src": _vm._f("assetify")('images/web/guide5.png')
     }
@@ -72724,7 +72683,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("1")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 11:00 WIB.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 22 Oktober 2017 pukul 09:00 WIB.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
@@ -72748,37 +72707,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("5")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta dapat menekan tombol “Selesai” atau menunggu hingga waktu selesai untuk mengakhiri seleksi.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Peserta diharuskan untuk membuat sebuah poster dengan tema yang akan diumumkan saat waktu seleksi dimulai.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("6")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Peserta diharuskan untuk menggunakan palette warna yang disediakan oleh panitia dalam pembuatan karyanya. Palette akan diumumkan bersama dengan tema poster.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("7")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta akan diberikan sebanyak 50 soal logika berbentuk pilihan ganda.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Peserta diharuskan untuk menulis deskripsi singkat mengenai karyanya pada tempat yang disediakan saat waktu seleksi.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("8")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Segala jenis aktifitas peserta seperti memilih soal, memilih jawaban, dan menyelesaikan seleksi terekam oleh panitia.\n                    ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Segala jenis aktifitas peserta seperti mengirimkan file poster terekam oleh panitia.\n                    ")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-item"
   }, [_c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("9")])]), _vm._v(" "), _c('div', {
     staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta yang bertanya kepada panitia diharuskan untuk menuliskan pertanyaannya dengan singkat dan jelas. \n                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "super-list-item"
-  }, [_c('div', {
-    staticClass: "super-list-number"
-  }, [_c('span', [_vm._v("10")])]), _vm._v(" "), _c('div', {
-    staticClass: "super-list-content"
-  }, [_vm._v("\n                        Peserta diperbolehkan untuk mengakses kembali soal-soal dan melihat jawabannya masing-masing setelah selesai melaksanakan tahap seleksi. \n                    ")])])])])
+  }, [_vm._v("\n                        Peserta yang bertanya kepada panitia diharuskan untuk menuliskan pertanyaannya dengan singkat dan jelas. \n                    ")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "super-list-number"
@@ -72795,10 +72748,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "super-list-number"
   }, [_c('span', [_vm._v("4")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "super-list-number"
-  }, [_c('span', [_vm._v("5")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

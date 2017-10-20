@@ -110,8 +110,8 @@
                             <span>1</span>
                         </div>
                         <div class="super-list-content">
-                            Klik pada tombol yang bertuliskan nomor soal untuk membukanya.
-                            <div><img src="{{ asset('images/web/guide1.png') }}" class="img-rounded"></div>
+                            Klik pada tombol "Browse" pada bagian Karya Poster untuk mengunggah karya Anda.
+                            <div><img src="{{ asset('images/web/guide0.png') }}" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -119,8 +119,8 @@
                             <span>2</span>
                         </div>
                         <div class="super-list-content">
-                            Untuk menjawab soal, klik pada pilihan yang tersedia.
-                            <div><img src="{{ asset('images/web/guide2.png') }}" class="img-rounded"></div>
+                            Kumpulkan karyamu sebelum waktu yang tersedia habis!
+                            <div><img src="{{ asset('images/web/guide3.png') }}" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -128,22 +128,13 @@
                             <span>3</span>
                         </div>
                         <div class="super-list-content">
-                            Kerjakan semua soal sebelum waktu yang tersedia habis!
-                            <div><img src="{{ asset('images/web/guide3.png') }}" class="img-rounded"></div>
-                        </div>
-                    </div>
-                    <div class="super-list-item">
-                        <div class="super-list-number">
-                            <span>4</span>
-                        </div>
-                        <div class="super-list-content">
-                            Sudah yakin dengan jawaban-jawaban Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.
+                            Sudah yakin dengan karya Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.
                             <div><img src="{{ asset('images/web/guide4.png') }}" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
                         <div class="super-list-number">
-                            <span>5</span>
+                            <span>4</span>
                         </div>
                         <div class="super-list-content">
                             Kebingungan? Tanyakan kejelasan kepada panitia dengan mengklik tombol "Tanya Panitia", lalu ketik pertanyaan Anda.

@@ -81,7 +81,7 @@
 
             getQuestions() {
                 Citeup.get('/questions', { 
-                    take: 15 
+                    take: 999
                 }).then(response => this.questions = response.data.data.questions)
             },
 

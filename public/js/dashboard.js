@@ -84653,7 +84653,7 @@ var states = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* map
             if (this.user.entry.activity_id === 1) {
                 return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].started_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asHours()) <= -2;
             } else if (this.user.entry.activity_id === 2) {
-                return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asDays()) <= 0;
+                return Math.floor(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default.a.duration(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(__WEBPACK_IMPORTED_MODULE_2_moment_timezone___default()())).asDays()) < 0;
             }
         },
         warmingUp: function warmingUp() {
@@ -86510,7 +86510,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].get('/questions', {
-                take: 15
+                take: 999
             }).then(function (response) {
                 return _this.questions = response.data.data.questions;
             });
