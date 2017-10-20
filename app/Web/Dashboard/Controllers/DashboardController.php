@@ -100,6 +100,10 @@ class DashboardController extends Controller
      */
     public function monitor($channel)
     {
+        if (! auth()->user()->isAdmin()) {
+            return redirect()->route('dashboard');
+        }
+
         return view('monitor.app', [
             'channel' => $channel
         ]);

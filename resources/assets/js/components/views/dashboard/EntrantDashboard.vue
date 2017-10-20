@@ -263,7 +263,7 @@
                 } else if (this.user.entry.activity_id === 2) {
                     return Math.floor(moment.duration(
                         moment(this.stageGetter[this.$options.STAGE_ELIMINATION].finished_at).diff(moment())
-                    ).asDays()) <= 0
+                    ).asDays()) < 0
                 }
             },
             warmingUp() {

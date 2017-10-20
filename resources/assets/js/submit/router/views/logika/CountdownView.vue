@@ -11,7 +11,7 @@
                             <span>1</span>
                         </div>
                         <div class="super-list-content">
-                            Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 11:00 WIB.
+                            Babak penyisihan dilakukan secara online pada 21 Oktober 2017 pukul 09:00 WIB hingga 22 Oktober 2017 pukul 09:00 WIB.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -43,7 +43,7 @@
                             <span>5</span>
                         </div>
                         <div class="super-list-content">
-                            Peserta dapat menekan tombol “Selesai” atau menunggu hingga waktu selesai untuk mengakhiri seleksi.
+                            Peserta diharuskan untuk membuat sebuah poster dengan tema yang akan diumumkan saat waktu seleksi dimulai.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -51,7 +51,7 @@
                             <span>6</span>
                         </div>
                         <div class="super-list-content">
-                            Peserta tidak diharuskan untuk mengisi semua soal untuk menyelesaikan tahap seleksi. Namun, diharapkan setiap peserta untuk mengisi semua soal yang tersedia sebelum waktu habis.
+                            Peserta diharuskan untuk menggunakan palette warna yang disediakan oleh panitia dalam pembuatan karyanya. Palette akan diumumkan bersama dengan tema poster.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -59,7 +59,7 @@
                             <span>7</span>
                         </div>
                         <div class="super-list-content">
-                            Peserta akan diberikan sebanyak 50 soal logika berbentuk pilihan ganda.
+                            Peserta diharuskan untuk menulis deskripsi singkat mengenai karyanya pada tempat yang disediakan saat waktu seleksi.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -67,7 +67,7 @@
                             <span>8</span>
                         </div>
                         <div class="super-list-content">
-                            Segala jenis aktifitas peserta seperti memilih soal, memilih jawaban, dan menyelesaikan seleksi terekam oleh panitia.
+                            Segala jenis aktifitas peserta seperti mengirimkan file poster terekam oleh panitia.
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -76,14 +76,6 @@
                         </div>
                         <div class="super-list-content">
                             Peserta yang bertanya kepada panitia diharuskan untuk menuliskan pertanyaannya dengan singkat dan jelas. 
-                        </div>
-                    </div>
-                    <div class="super-list-item">
-                        <div class="super-list-number">
-                            <span>10</span>
-                        </div>
-                        <div class="super-list-content">
-                            Peserta diperbolehkan untuk mengakses kembali soal-soal dan melihat jawabannya masing-masing setelah selesai melaksanakan tahap seleksi. 
                         </div>
                     </div>
                 </div>
@@ -96,8 +88,8 @@
                             <span>1</span>
                         </div>
                         <div class="super-list-content">
-                            Klik pada tombol yang bertuliskan nomor soal untuk membukanya.
-                            <div><img :src="'images/web/guide1.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                            Klik pada tombol "Browse" pada bagian Karya Poster untuk mengunggah karya Anda.
+                            <div><img :src="'images/web/guide0.png' | assetify" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -105,8 +97,8 @@
                             <span>2</span>
                         </div>
                         <div class="super-list-content">
-                            Untuk menjawab soal, klik pada pilihan yang tersedia.
-                            <div><img :src="'images/web/guide2.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                            Kumpulkan karyamu sebelum waktu yang tersedia habis!
+                            <div><img :src="'images/web/guide3.png' | assetify" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -114,8 +106,8 @@
                             <span>3</span>
                         </div>
                         <div class="super-list-content">
-                            Kerjakan semua soal sebelum waktu yang tersedia habis!
-                            <div><img :src="'images/web/guide3.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                            Sudah yakin dengan karya Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.
+                            <div><img :src="'images/web/guide4.png' | assetify" class="img-rounded"></div>
                         </div>
                     </div>
                     <div class="super-list-item">
@@ -123,17 +115,8 @@
                             <span>4</span>
                         </div>
                         <div class="super-list-content">
-                            Sudah yakin dengan jawaban-jawaban Anda? Klik tombol selesai, lalu konfirmasi dengan mengklik tombol selesai pada jendela.
-                            <div><img :src="'images/web/guide4.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
-                        </div>
-                    </div>
-                    <div class="super-list-item">
-                        <div class="super-list-number">
-                            <span>5</span>
-                        </div>
-                        <div class="super-list-content">
                             Kebingungan? Tanyakan kejelasan kepada panitia dengan mengklik tombol "Tanya Panitia", lalu ketik pertanyaan Anda.
-                            <div><img :src="'images/web/guide5.png' | assetify" class="img-rounded" :style="{ width: '100%' }"></div>
+                            <div><img :src="'images/web/guide5.png' | assetify" class="img-rounded"></div>
                         </div>
                     </div>
                 </div>
