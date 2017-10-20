@@ -31,6 +31,7 @@ const vm = new Vue({
             isLoading: true,
             loadingChat: false,
             sendingMessage: false,
+            defaultImage: Citeup.defaultImageClean,
         }
     },
     
