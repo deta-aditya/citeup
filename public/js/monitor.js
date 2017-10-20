@@ -63187,7 +63187,8 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             activity: null,
             isLoading: true,
             loadingChat: false,
-            sendingMessage: false
+            sendingMessage: false,
+            defaultImage: __WEBPACK_IMPORTED_MODULE_2__citeup__["a" /* default */].defaultImageClean
         };
     },
 
