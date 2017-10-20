@@ -41,12 +41,17 @@ export default {
         'ENTRIES_SET_DATA' (state, { entries }) {
             state.entries = entries
         },
+        'ENTRIES_READ_CHAT' (state, { entry }) {
+            let idx = state.entries.findIndex(item => entry === item.id)
+
+            state.entries[idx].chats = []
+        }
     },
 
     actions: {
         getEntries({ state, commit }, activity) {
             return new Promise((resolve, reject) => {
-                let params = { activity, with: 'chats', eliminatable: true }
+                let params = { activity, with: 'chats', eliminatable: true, take: 999 }
 
                 if (activity == 1) {
                     params.with += ',attempts.answers'
@@ -56,6 +61,7 @@ export default {
 
                 Citeup.get('/entries', params).then(response => {
                     commit('ENTRIES_SET_DATA', { entries: response.data.data.entries })
+                    resolve()
                 })  
             })
         },

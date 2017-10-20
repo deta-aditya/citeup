@@ -7,6 +7,7 @@ use App\Modules\Electrons\Chats\ChatService;
 use App\Modules\Electrons\Shared\Controllers\JsonApiController;
 use App\Modules\Api\V1\Requests\Chats\ChatIndexRequest;
 use App\Modules\Api\V1\Requests\Chats\ChatInsertRequest;
+use App\Modules\Api\V1\Requests\Chats\ChatReadRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -64,10 +65,10 @@ class ChatController extends Controller
      * @param  ChatReadRequest  $request
      * @return Response
      */
-    publlc function read(ChatReadRequest $request)
+    public function read(ChatReadRequest $request)
     {
-        $this->chats->read($request->input('entry'), $request->user()->isEntrant());
+        $read = $this->chats->read($request->input('entry'), $request->user()->isEntrant());
 
-        return $this->respondJson([]);
+        return $this->respondJson([ 'read_at' => $read->format('Y-m-d h:i:s') ]);
     }
 }

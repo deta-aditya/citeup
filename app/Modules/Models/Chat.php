@@ -65,7 +65,7 @@ class Chat extends Model
      * @param  Builder  $query
      * @return Builder
      */
-    public function unread($query)
+    public function scopeUnread($query)
     {
         return $query->where('read_at', null);
     }

@@ -14070,6 +14070,10 @@ trix-editor .attachment progress {
   border-top: 1px solid #d3e0e9;
 }
 
+#app-elimination .chat-body-container .chat-sender textarea {
+  height: 73px;
+}
+
 #app-elimination .chat-body-container .chat-message {
   margin: 9px 7px;
 }
@@ -14389,12 +14393,20 @@ trix-editor .attachment progress {
   margin-right: 10px;
 }
 
-#app-elimination .entrant-list .entrant-item .answers-count {
+#app-elimination .entrant-list .entrant-item .attempt-start-status.done, #app-elimination .entrant-list .entrant-item .attempt-finish-status.done {
+  background-color: #f49e26;
+}
+
+#app-elimination .answers-count {
   background-color: #ffc533;
 }
 
-#app-elimination .entrant-list .entrant-item .attempt-start-status.done, #app-elimination .entrant-list .entrant-item .attempt-finish-status.done {
-  background-color: #f49e26;
+#app-elimination .chat-area .chat-greeting {
+  color: #dd7322;
+  text-align: center;
+  font-weight: 700;
+  font-family: Quicksand, Open Sans, sans-serif;
+  padding-top: 200px;
 }
 
 #about-page .panel-content, #about-page .panel-content .panel-body, #activities-page .panel-content, #activities-page .panel-content > .panel-heading, #activities-page .activities-nav li a, #faqs-page .panel-content, #faqs-page .panel-content > .panel-heading, #news-page .panel-content, #news-page .panel-content > .panel-heading, #news-page .panel-content .panel-body, #app-topbar .loading-bar, .form-panel .panel, .form-panel .panel-body, .form-panel .btn, .form-panel .nav-wrapper a, .form-panel .form-control, .form-panel .input-group-addon, .data-panel .panel, .data-panel .panel-body, .data-panel .panel-control input.form-control, .data-panel .panel-control .btn, .message-box .modal-content, .message-box .modal-body, .message-box .btn, .draggable-list, .draggable-list .draggable-list-item, .check-list, .check-list .check-list-item, .file-uploader-group .file-uploader {

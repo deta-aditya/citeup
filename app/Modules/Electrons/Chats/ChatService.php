@@ -6,6 +6,7 @@ use App\User;
 use App\Modules\Models\Chat;
 use App\Modules\Models\Entry;
 use App\Modules\Nucleons\Service;
+use Carbon\Carbon;
 
 class ChatService extends Service
 {
@@ -65,11 +66,12 @@ class ChatService extends Service
      *
      * @param  int   $entry
      * @param  bool  $committee
-     * @return this
+     * @return Carbon
      */
     public function read($entry, $committee)
     {
         $chats = Chat::ofEntry($entry)->unread();
+        $now = Carbon::now();
 
         if ($committee) {
             $chats->fromCommittee();
@@ -77,11 +79,8 @@ class ChatService extends Service
             $chats->fromEntrant();
         }
 
-        $chats = $chats->get();
+        $chats->update(['read_at' => $now->format('Y-m-d H:i:s')]);
 
-        $chats->read_at = Carbon::now()->parse('Y-m-d H:i:s');
-        $chats->save();
-
-        return $this;
+        return $now;
     }
 }

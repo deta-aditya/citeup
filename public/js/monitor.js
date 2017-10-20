@@ -22067,7 +22067,7 @@ moment.tz.load(__webpack_require__(183));
 "use strict";
 /* unused harmony export Store */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return mapMutations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapGetters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
 /**
@@ -22870,7 +22870,7 @@ var index_esm = {
   mapActions: mapActions
 };
 
-/* harmony default export */ __webpack_exports__["d"] = (index_esm);
+/* harmony default export */ __webpack_exports__["e"] = (index_esm);
 
 
 /***/ }),
@@ -55558,11 +55558,15 @@ __webpack_require__(5).tz.setDefault('Asia/Jakarta');
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(17);
+    window.$ = window.jQuery = __webpack_require__(17);
 
-  __webpack_require__(179);
-  __webpack_require__(180);
-  __webpack_require__(181);
+    __webpack_require__(179);
+    __webpack_require__(180);
+    __webpack_require__(181);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 } catch (e) {}
 
 /**
@@ -55585,9 +55589,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -55597,9 +55601,9 @@ if (token) {
 var axiosRetry = __webpack_require__(158);
 
 axiosRetry(window.axios, {
-  retryCondition: function retryCondition(error) {
-    return error.response.status == 401 || error.response.status >= 500;
-  }
+    retryCondition: function retryCondition(error) {
+        return error.response.status == 401 || error.response.status >= 500;
+    }
 });
 
 /**
@@ -63167,7 +63171,11 @@ var stageState = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["a" /*
 var stageActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapActions */])('stage', ['getCurrentStage']);
 
 var entriesGetters = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["c" /* mapGetters */])('entries', { 'entrants': 'list' });
+var entriesMutations = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["d" /* mapMutations */])('entries', { 'readChatOfEntry': 'ENTRIES_READ_CHAT' });
 var entriesActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapActions */])('entries', ['getEntries']);
+
+var chatsState = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["a" /* mapState */])('chats', { 'chats': 'data' });
+var chatsActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapActions */])('chats', ['getChats', 'sendChat', 'readChats']);
 
 var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     store: __WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */],
@@ -63175,18 +63183,26 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     data: function data() {
         return {
             selected: {},
+            sendable: {},
             activity: null,
-            isLoading: true
+            isLoading: true,
+            loadingChat: false,
+            sendingMessage: false
         };
     },
 
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageState, entriesGetters, {
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageState, entriesGetters, chatsState, {
         timebarStart: function timebarStart() {
             return this.stage.started_at;
         },
         timebarFinish: function timebarFinish() {
             return this.activity === 1 ? __WEBPACK_IMPORTED_MODULE_4_moment_timezone___default()(this.stage.started_at).add(2, 'hours').format('YYYY-MM-DD HH:mm:ss') : this.stage.finished_at;
+        },
+        unread: function unread() {
+            return this.chats.filter(function (item) {
+                return item.read_at === null && item.committee === 0;
+            }).length;
         }
     }),
 
@@ -63199,13 +63215,62 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     mounted: function mounted() {
         this.activity = document.head.querySelector('meta[name="channel"]').content;
-        this.getEntries(this.activity);
+        this.getAllEntries();
     },
 
 
-    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageActions, entriesActions, {
+    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["merge"])(stageActions, entriesMutations, entriesActions, chatsActions, {
+        getAllEntries: function getAllEntries() {
+            var _this2 = this;
+
+            this.getEntries(this.activity).then(function () {
+                return setTimeout(_this2.getAllEntries, 5000);
+            });
+        },
         selectEntrant: function selectEntrant(entrant) {
+            this.loadingChat = true;
             this.selected = entrant;
+            this.sendable.entry = this.selected.id;
+            this.sendable.committee = 1;
+
+            this.getAllChats(entrant);
+        },
+        getAllChats: function getAllChats(entrant) {
+            var _this3 = this;
+
+            this.getChats(this.selected.id).then(function () {
+
+                if (_this3.unread > 0) {
+                    _this3.readChats(_this3.selected.id).then(function () {
+                        return _this3.readChatOfEntry({ entry: _this3.selected.id });
+                    });
+                }
+
+                _this3.loadingChat = false;
+                setTimeout(function () {
+                    return _this3.scrollToBottom(_this3.$refs.chatBody);
+                }, 100);
+
+                if (_this3.selected.id === entrant.id) {
+                    setTimeout(function () {
+                        return _this3.getAllChats(entrant);
+                    }, 10000);
+                }
+            });
+        },
+        sendChatMessage: function sendChatMessage() {
+            var _this4 = this;
+
+            this.sendingMessage = true;
+
+            this.sendChat(this.sendable).then(function () {
+                _this4.sendingMessage = false;
+                _this4.sendable.message = '';
+                _this4.scrollToBottom(_this4.$refs.chatBody);
+            });
+        },
+        scrollToBottom: function scrollToBottom(scrollable) {
+            scrollable.scrollTop = scrollable.scrollHeight;
         }
     }),
 
@@ -63478,16 +63543,25 @@ var EMPTY_DURATION = 'XX';
             var entries = _ref.entries;
 
             state.entries = entries;
+        },
+        'ENTRIES_READ_CHAT': function ENTRIES_READ_CHAT(state, _ref2) {
+            var entry = _ref2.entry;
+
+            var idx = state.entries.findIndex(function (item) {
+                return entry === item.id;
+            });
+
+            state.entries[idx].chats = [];
         }
     },
 
     actions: {
-        getEntries: function getEntries(_ref2, activity) {
-            var state = _ref2.state,
-                commit = _ref2.commit;
+        getEntries: function getEntries(_ref3, activity) {
+            var state = _ref3.state,
+                commit = _ref3.commit;
 
             return new Promise(function (resolve, reject) {
-                var params = { activity: activity, with: 'chats', eliminatable: true };
+                var params = { activity: activity, with: 'chats', eliminatable: true, take: 999 };
 
                 if (activity == 1) {
                     params.with += ',attempts.answers';
@@ -63497,6 +63571,7 @@ var EMPTY_DURATION = 'XX';
 
                 __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/entries', params).then(function (response) {
                     commit('ENTRIES_SET_DATA', { entries: response.data.data.entries });
+                    resolve();
                 });
             });
         }
@@ -63518,9 +63593,9 @@ var EMPTY_DURATION = 'XX';
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
 /* 455 */
@@ -63529,13 +63604,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(456);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entries__ = __webpack_require__(453);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chats__ = __webpack_require__(665);
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     modules: {
-        stage: __WEBPACK_IMPORTED_MODULE_0__stage__["a" /* default */], entries: __WEBPACK_IMPORTED_MODULE_1__entries__["a" /* default */]
+        stage: __WEBPACK_IMPORTED_MODULE_0__stage__["a" /* default */], entries: __WEBPACK_IMPORTED_MODULE_1__entries__["a" /* default */], chats: __WEBPACK_IMPORTED_MODULE_2__chats__["a" /* default */]
     }
 });
 
@@ -63850,6 +63927,87 @@ if (false) {
 
 module.exports = __webpack_require__(348);
 
+
+/***/ }),
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+
+    state: {
+        data: []
+    },
+
+    getters: {
+        //
+    },
+
+    mutations: {
+        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
+            var chats = _ref.chats;
+
+            state.data = chats;
+        },
+        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
+            var chat = _ref2.chat;
+
+            state.data.push(chat);
+        },
+        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
+            var time = _ref3.time;
+
+            state.data.forEach(function (item) {
+                return item.read_at = time;
+            });
+        }
+    },
+
+    actions: {
+        getChats: function getChats(_ref4, entry) {
+            var state = _ref4.state,
+                commit = _ref4.commit;
+
+            return new Promise(function (resolve, reject) {
+                var params = { entry: entry, take: 50, order: 'created_at:desc' };
+
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
+                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
+                    resolve(state.data);
+                });
+            });
+        },
+        sendChat: function sendChat(_ref5, chat) {
+            var commit = _ref5.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
+                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
+                    resolve(response.data.data.chat);
+                });
+            });
+        },
+        readChats: function readChats(_ref6, entry) {
+            var commit = _ref6.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
+                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
+                    resolve();
+                });
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

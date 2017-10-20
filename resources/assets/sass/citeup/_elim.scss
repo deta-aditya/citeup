@@ -90,6 +90,10 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
             padding: 7px;
             background-color: #fff;
             border-top: 1px solid $border-color;
+
+            textarea {
+                height: 73px;
+            }
         }
 
         .chat-message {
@@ -439,10 +443,6 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
                 margin-right: 10px;
             }
 
-            .answers-count {
-                background-color: $signature-lighter;
-            }
-
             .attempt-start-status.done, .attempt-finish-status.done {
                 background-color: $signature-light;
             }
@@ -450,7 +450,19 @@ $title-font-family: Quicksand, Open Sans, sans-serif;
 
     }
 
+    .answers-count {
+        background-color: $signature-lighter;
+    }
+
     .chat-area {
-        // background: linear-gradient(to bottom, $signature-lighter, lighten($signature-lighter, 20%));        
+        
+        .chat-greeting {
+            color: $signature-dark;
+            text-align: center;
+            font-weight: 700;
+            font-family: $title-font-family;
+            padding-top: 200px;
+        }
+
     }
 }

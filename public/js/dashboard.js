@@ -22067,7 +22067,7 @@ moment.tz.load(__webpack_require__(183));
 "use strict";
 /* unused harmony export Store */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return mapMutations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapGetters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
 /**
@@ -22870,7 +22870,7 @@ var index_esm = {
   mapActions: mapActions
 };
 
-/* harmony default export */ __webpack_exports__["d"] = (index_esm);
+/* harmony default export */ __webpack_exports__["e"] = (index_esm);
 
 
 /***/ }),
@@ -56635,11 +56635,15 @@ __webpack_require__(5).tz.setDefault('Asia/Jakarta');
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(17);
+    window.$ = window.jQuery = __webpack_require__(17);
 
-  __webpack_require__(179);
-  __webpack_require__(180);
-  __webpack_require__(181);
+    __webpack_require__(179);
+    __webpack_require__(180);
+    __webpack_require__(181);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 } catch (e) {}
 
 /**
@@ -56662,9 +56666,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -56674,9 +56678,9 @@ if (token) {
 var axiosRetry = __webpack_require__(158);
 
 axiosRetry(window.axios, {
-  retryCondition: function retryCondition(error) {
-    return error.response.status == 401 || error.response.status >= 500;
-  }
+    retryCondition: function retryCondition(error) {
+        return error.response.status == 401 || error.response.status >= 500;
+    }
 });
 
 /**
@@ -79944,7 +79948,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
 
 
-    computed: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapState(['topbarHeight']), __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapGetters({
+    computed: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapState(['topbarHeight']), __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapGetters({
 
         hasNav: 'routeHasNav',
         userUpdatable: 'routeWantsUserUpdation'
@@ -79989,7 +79993,7 @@ var dashboardViewModel = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
 
 
-    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapMutations(['updateUser', 'updateRoute', 'setViewScrollMaxed']), __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
+    methods: _.merge(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapMutations(['updateUser', 'updateRoute', 'setViewScrollMaxed']), __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].mapActions(['updateUserFromApi', 'updateConfigFromApi', 'loadStages']), {
 
         /**
          * Store the user information from server.
@@ -80095,7 +80099,7 @@ var MUTATIONS = ['setError', 'clearError'];
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(MUTATIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(MUTATIONS), {
         prepareComponent: function prepareComponent() {
             if (this.multipart) {
                 this.$refs.realForm.setAttribute('enctype', 'multipart/form-data');
@@ -82487,7 +82491,7 @@ var MUTATIONS = ['setTopbarHeight', 'loadSomething'];
     },
 
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(MUTATIONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(MUTATIONS), {
         prepareComponent: function prepareComponent() {
 
             this.setTopbarHeight(this.$refs.navbar.offsetHeight);
@@ -89250,7 +89254,7 @@ function listInfiniteScroll() {
     watch: {
         viewScrollMaxed: function viewScrollMaxed(newVal) {}
     },
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* mapMutations */])(['setViewScrollMaxed']), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])(['setViewScrollMaxed']), {
         onScrollMaxChange: function onScrollMaxChange(newVal) {
             //
         }
@@ -89458,9 +89462,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store({
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store({
 
     state: {
 

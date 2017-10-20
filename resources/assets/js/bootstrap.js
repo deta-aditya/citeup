@@ -18,6 +18,10 @@ try {
     require('bootstrap-sass');
     require('bootstrap-switch');
     require('eonasdan-bootstrap-datetimepicker');
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 } catch (e) {}
 
 /**

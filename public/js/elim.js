@@ -22067,7 +22067,7 @@ moment.tz.load(__webpack_require__(183));
 "use strict";
 /* unused harmony export Store */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return mapMutations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapGetters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
 /**
@@ -22870,7 +22870,7 @@ var index_esm = {
   mapActions: mapActions
 };
 
-/* harmony default export */ __webpack_exports__["d"] = (index_esm);
+/* harmony default export */ __webpack_exports__["e"] = (index_esm);
 
 
 /***/ }),
@@ -55939,11 +55939,15 @@ __webpack_require__(5).tz.setDefault('Asia/Jakarta');
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(17);
+    window.$ = window.jQuery = __webpack_require__(17);
 
-  __webpack_require__(179);
-  __webpack_require__(180);
-  __webpack_require__(181);
+    __webpack_require__(179);
+    __webpack_require__(180);
+    __webpack_require__(181);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 } catch (e) {}
 
 /**
@@ -55966,9 +55970,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -55978,9 +55982,9 @@ if (token) {
 var axiosRetry = __webpack_require__(158);
 
 axiosRetry(window.axios, {
-  retryCondition: function retryCondition(error) {
-    return error.response.status == 401 || error.response.status >= 500;
-  }
+    retryCondition: function retryCondition(error) {
+        return error.response.status == 401 || error.response.status >= 500;
+    }
 });
 
 /**
@@ -66588,7 +66592,7 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         });
     },
 
-    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["e" /* mapMutations */])('stage', MUTATIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["e" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('answers', ACTIONS_ANSWERS), {
+    methods: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('user', ACTIONS_USER), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9_vuex__["b" /* mapActions */])('answers', ACTIONS_ANSWERS), {
         prepareQuiz: function prepareQuiz(user) {
             var _this2 = this;
 
@@ -66710,6 +66714,9 @@ var vm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
 //
 //
 //
@@ -66731,37 +66738,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+
+var computed = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])('user', { 'user': 'data' }), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* mapState */])('chats', { 'chats': 'data' }));
+
+var methods = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('chats', ['getChats', 'sendChat', 'readChats']));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            open: false
+            sendable: {},
+            open: false,
+            sendingMessage: false
         };
     },
 
 
-    computed: {
+    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(computed, {
         arrowClass: function arrowClass() {
             return this.open ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up';
+        },
+        unread: function unread() {
+            return this.chats.filter(function (item) {
+                return item.read_at === null && item.committee === 1;
+            }).length;
         }
+    }),
+
+    mounted: function mounted() {
+        this.getAllChats();
+        this.sendable.entry = this.user.entry.id;
+        this.sendable.committee = 0;
     },
 
-    methods: {
+
+    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])(methods, {
         toggle: function toggle() {
-            // this.open = ! this.open
+            var _this = this;
+
+            this.open = !this.open;
+
+            if (this.open) {
+                this.readChats(this.user.entry.id);
+                setTimeout(function () {
+                    return _this.scrollToBottom(_this.$refs.chatBody);
+                }, 500);
+            }
+        },
+        getAllChats: function getAllChats() {
+            var _this2 = this;
+
+            this.getChats(this.user.entry.id).then(function () {
+                if (_this2.open) {
+
+                    if (_this2.unread > 0) {
+                        _this2.readChats(_this2.user.entry.id);
+                    }
+                    _this2.scrollToBottom(_this2.$refs.chatBody);
+                }
+
+                setTimeout(_this2.getAllChats, 5000);
+            });
+        },
+        sendChatMessage: function sendChatMessage() {
+            var _this3 = this;
+
+            this.sendingMessage = true;
+
+            this.sendChat(this.sendable).then(function () {
+                _this3.sendingMessage = false;
+                _this3.sendable.message = '';
+                _this3.scrollToBottom(_this3.$refs.chatBody);
+            });
+        },
+        scrollToBottom: function scrollToBottom(scrollable) {
+            scrollable.scrollTop = scrollable.scrollHeight;
         }
-    }
+    })
 });
 
 /***/ }),
@@ -67135,7 +67191,7 @@ var MUTATIONS_STAGE = {
         });
     },
 
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["e" /* mapMutations */])('stage', MUTATIONS_STAGE), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapMutations */])('stage', MUTATIONS_STAGE), {
         warmUp: function warmUp() {
             this.setStatus({ status: 1 });
             this.setTimebarInfo({
@@ -67267,7 +67323,7 @@ var MUTATIONS_ANSWERS = {
     filters: {
         formatDateStandard: __WEBPACK_IMPORTED_MODULE_3__components_Citeup_Helper__["b" /* formatDateStandard */]
     },
-    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["e" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('questions', ACTIONS_QUESTONS), {
+    methods: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('stage', ACTIONS_STAGE), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["d" /* mapMutations */])('answers', MUTATIONS_ANSWERS), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])('questions', ACTIONS_QUESTONS), {
         loadQuestionsRepo: function loadQuestionsRepo() {
             if (this.repoIsEmpty) {
                 this.loadQuestions();
@@ -67659,9 +67715,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["e" /* default */].Store(__WEBPACK_IMPORTED_MODULE_2__root__["a" /* default */]));
 
 /***/ }),
 /* 449 */
@@ -67758,7 +67814,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stage__ = __webpack_require__(451);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__questions__ = __webpack_require__(449);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__answers__ = __webpack_require__(447);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chats__ = __webpack_require__(666);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(452);
+
 
 
 
@@ -67767,7 +67825,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     modules: {
-        stage: __WEBPACK_IMPORTED_MODULE_0__stage__["a" /* default */], questions: __WEBPACK_IMPORTED_MODULE_1__questions__["a" /* default */], answers: __WEBPACK_IMPORTED_MODULE_2__answers__["a" /* default */], user: __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */]
+        stage: __WEBPACK_IMPORTED_MODULE_0__stage__["a" /* default */], questions: __WEBPACK_IMPORTED_MODULE_1__questions__["a" /* default */], answers: __WEBPACK_IMPORTED_MODULE_2__answers__["a" /* default */], chats: __WEBPACK_IMPORTED_MODULE_3__chats__["a" /* default */], user: __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */]
     }
 });
 
@@ -68837,47 +68895,56 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.toggle
     }
-  }, [_vm._v("\n        Tanya Panitia\n        "), _c('span', {
+  }, [_vm._v("\n        Tanya Panitia\n        "), (_vm.unread > 0) ? _c('span', {
+    staticClass: "badge answers-count pull-right"
+  }, [_vm._v(_vm._s(_vm.unread))]) : _c('span', {
     class: ['glyphicon', 'pull-right', _vm.arrowClass]
-  })]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  })]), _vm._v(" "), _c('div', {
+    ref: "chatBody",
     staticClass: "chat-body"
-  }, [_c('div', {
-    staticClass: "chat-message chat-message-me clearfix"
-  }, [_c('div', {
-    staticClass: "chat-caret"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "chat-message-text"
-  }, [_vm._v("Lorem ipsum dolor sit amet?")])]), _vm._v(" "), _c('div', {
-    staticClass: "chat-message chat-message-other clearfix"
-  }, [_c('div', {
-    staticClass: "chat-caret"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "chat-message-text"
-  }, [_vm._v("Consectetur adipiscing elit.")])]), _vm._v(" "), _c('div', {
-    staticClass: "chat-message chat-message-me clearfix"
-  }, [_c('div', {
-    staticClass: "chat-caret"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "chat-message-text"
-  }, [_vm._v("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.")])]), _vm._v(" "), _c('div', {
-    staticClass: "chat-message chat-message-other clearfix"
-  }, [_c('div', {
-    staticClass: "chat-caret"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "chat-message-text"
-  }, [_vm._v("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.\n            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, _vm._l((_vm.chats), function(chat) {
+    return _c('div', {
+      class: {
+        'chat-message': true, 'clearfix': true, 'chat-message-me': chat.committee === 0, 'chat-message-other': chat.committee === 1
+      }
+    }, [_c('div', {
+      staticClass: "chat-caret"
+    }), _vm._v(" "), _c('div', {
+      staticClass: "chat-message-text"
+    }, [_vm._v(_vm._s(chat.message))])])
+  })), _vm._v(" "), _c('div', {
     staticClass: "chat-sender"
   }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sendable.message),
+      expression: "sendable.message"
+    }],
     staticClass: "form-control",
     attrs: {
-      "placeholder": "Tekan Enter Untuk Mengirim Pesan..."
+      "placeholder": "Tekan Enter Untuk Mengirim Pesan...",
+      "disabled": _vm.sendingMessage
+    },
+    domProps: {
+      "value": (_vm.sendable.message)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.sendChatMessage($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.sendable.message = $event.target.value
+      }
     }
-  })])
-}]}
+  }), _vm._v(" "), (_vm.sendingMessage) ? _c('p', {
+    staticClass: "text-muted"
+  }, [_c('i', {
+    staticClass: "fa fa-pulse fa-spinner"
+  }), _vm._v(" Mengirim pesan")]) : _vm._e()])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -68908,6 +68975,90 @@ if (false) {
 
 module.exports = __webpack_require__(346);
 
+
+/***/ }),
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__citeup__ = __webpack_require__(2);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+
+    state: {
+        data: []
+    },
+
+    getters: {
+        //
+    },
+
+    mutations: {
+        'CHATS_SET_DATA': function CHATS_SET_DATA(state, _ref) {
+            var chats = _ref.chats;
+
+            state.data = chats;
+        },
+        'CHATS_PUSH_DATA': function CHATS_PUSH_DATA(state, _ref2) {
+            var chat = _ref2.chat;
+
+            state.data.push(chat);
+        },
+        'CHATS_READ_ALL_DATA': function CHATS_READ_ALL_DATA(state, _ref3) {
+            var time = _ref3.time;
+
+            state.data.forEach(function (item) {
+                return item.read_at = time;
+            });
+        }
+    },
+
+    actions: {
+        getChats: function getChats(_ref4, entry) {
+            var state = _ref4.state,
+                commit = _ref4.commit;
+
+            return new Promise(function (resolve, reject) {
+                var params = { entry: entry, take: 50, order: 'created_at:desc' };
+
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].get('/chats', params).then(function (response) {
+                    commit('CHATS_SET_DATA', { chats: response.data.data.chats });
+                    resolve(state.data);
+                });
+            });
+        },
+        sendChat: function sendChat(_ref5, chat) {
+            var commit = _ref5.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats', chat).then(function (response) {
+                    commit('CHATS_PUSH_DATA', { chat: response.data.data.chat });
+                    resolve(response.data.data.chat);
+                });
+            });
+        },
+        readChats: function readChats(_ref6, entry) {
+            var commit = _ref6.commit;
+
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__citeup__["a" /* default */].post('/chats/read', { entry: entry }).then(function (response) {
+                    commit('CHATS_READ_ALL_DATA', { time: response.data.data.read_at });
+                    resolve();
+                });
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

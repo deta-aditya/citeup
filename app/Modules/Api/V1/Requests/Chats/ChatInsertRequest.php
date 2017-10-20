@@ -13,7 +13,7 @@ class ChatInsertRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = $this->user();
+        $accessor = $this->user();
 
         return $accessor->isAdmin() || $accessor->isCommittee() || 
             ($accessor->isEntrant() && $accessor->entry_id == $this->input('entry', null));
